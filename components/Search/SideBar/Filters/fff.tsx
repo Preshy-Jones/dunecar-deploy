@@ -1,5 +1,5 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import { fetchFeatures } from "../../../../features/search/searchService";
 import {
   setFeatureOptions,
@@ -9,28 +9,23 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
 import { Spinner } from "../../../ui/others";
-import { Option } from "../../../../types/form";
 
 const Feature = () => {
   const dispatch = useAppDispatch();
-  const { selectedFeatures } = useAppSelector((state) => state.search);
-  const queryClient = useQueryClient();
+  const { selectedFeatures, featureOptions } = useAppSelector(
+    (state) => state.search
+  );
 
   const { status, isLoading, data, error } = useQuery({
     queryKey: ["features"],
     queryFn: () => fetchFeatures(),
   });
-
   let initialFeatureOptions = data?.map((feature) => ({
     value: feature.slug,
     label: feature.title,
   }));
 
-  // if (status === "success") {
-  //   setFeatureOptions(initialFeatureOptions);
-  // }
-
-  console.log(status);
+  dispatch(setFeatureOptions(initialFeatureOptions));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
@@ -56,25 +51,25 @@ const Feature = () => {
     }
   };
   const handleClose = () => {
+    dispatch(setFilter(""));
+    console.log(initialFeatureOptions);
 
-    queryClient.setQueryData(["features"], (prevData?: any) => {
-      let result = prevData.sort((a, b) => {
-        if (
-          selectedFeatures.includes(a.slug) &&
-          !selectedFeatures.includes(b.slug)
-        ) {
-          return -1;
-        } else if (
-          !selectedFeatures.includes(a.slug) &&
-          selectedFeatures.includes(b.slug)
-        ) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+    let result = initialFeatureOptions?.sort((a, b) => {
+      if (
+        selectedFeatures.includes(a.value) &&
+        !selectedFeatures.includes(b.value)
+      ) {
+        return -1;
+      } else if (
+        !selectedFeatures.includes(a.value) &&
+        selectedFeatures.includes(b.value)
+      ) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
-    return result;
+    dispatch(setSelectedFeatures(result));
   };
 
   return (
@@ -94,7 +89,7 @@ const Feature = () => {
         </div>
       ) : (
         <div>
-          {initialFeatureOptions?.map((item, index) => (
+          {featureOptions?.map((item, index) => (
             <div
               className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
               key={index}

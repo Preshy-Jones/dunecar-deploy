@@ -1,14 +1,16 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { getCars } from "../../../../features/car/carSlice";
-import { setFilter } from "../../../../features/search/searchSlice";
-import { useAppDispatch } from "../../../../store/hooks";
+import { setFilter, setSelectedInteriorColours } from "../../../../features/search/searchSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { FilterCustomSelect as Select } from "../../../ui/form/Select";
 import { CaretLeftIcon } from "../../../ui/icons";
 
 const InteriorColour = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const { selectedinteriorColours } = useAppSelector((state) => state.search);
   const handleClose = () => {
     dispatch(setFilter(""));
 
@@ -28,19 +30,91 @@ const InteriorColour = () => {
     // );
   };
 
-  const years = [
-    { value: "2021", label: "2021" },
-    { value: "2020", label: "2020" },
-    { value: "2019", label: "2019" },
-    { value: "2018", label: "2018" },
-    { value: "2017", label: "2017" },
-    { value: "2016", label: "2016" },
-    { value: "2015", label: "2015" },
-    { value: "2014", label: "2014" },
-    { value: "2013", label: "2013" },
-    { value: "2012", label: "2012" },
-    { value: "2011", label: "2011" },
+  const colors = [
+    "Black",
+    "Blue",
+    "Brown",
+    "Gold",
+    "Gray",
+    "Green",
+    "Orange",
+    "Purple",
+    "Red",
   ];
+
+  const coloursData = [
+    {
+      value: "black",
+      label: "Black",
+      colorCode: "#000000",
+    },
+    {
+      value: "blue",
+      label: "Blue",
+      colorCode: "#0000FF",
+    },
+    {
+      value: "brown",
+      label: "Brown",
+      colorCode: "#A52A2A",
+    },
+    {
+      value: "gold",
+      label: "Gold",
+      colorCode: "#FFD700",
+    },
+    {
+      value: "gray",
+      label: "Gray",
+      colorCode: "#808080",
+    },
+    {
+      value: "green",
+      label: "Green",
+      colorCode: "#008000",
+    },
+    {
+      value: "orange",
+      label: "Orange",
+      colorCode: "#FFA500",
+    },
+    {
+      value: "purple",
+      label: "Purple",
+      colorCode: "#800080",
+    },
+    {
+      value: "red",
+      label: "Red",
+      colorCode: "#FF0000",
+    },
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedinteriorColours.includes(e.target.value)) {
+      dispatch(
+        setSelectedInteriorColours(
+          selectedinteriorColours.filter((item) => item !== e.target.value)
+        )
+      );
+    } else {
+      dispatch(
+        setSelectedInteriorColours([...selectedinteriorColours, e.target.value])
+      );
+    }
+    console.log(selectedinteriorColours);
+  };
+  const handleLabelClick = (value) => {
+    if (selectedinteriorColours.includes(value)) {
+      dispatch(
+        setSelectedInteriorColours(
+          selectedinteriorColours.filter((item) => item !== value)
+        )
+      );
+    } else {
+      dispatch(setSelectedInteriorColours([...selectedinteriorColours, value]));
+    }
+  };
 
   return (
     <div className="">
@@ -50,17 +124,43 @@ const InteriorColour = () => {
       >
         <CaretLeftIcon className="mr-7 hover:text-specialRed fill-current" />
         <h1 className="leading-secondary text-secondary font-medium font-roboto ">
-          Year
+          Interior Colour
         </h1>
       </div>
 
-      <div className="w-full mt-8 px-6">
-        <div className="mb-4">
-          <Select options={years} label="From" placeHolder="From" />
-        </div>
-        <div>
-          <Select options={years} label="To"  placeHolder="To"/>
-        </div>
+      <div>
+        {coloursData?.map((item, index) => (
+          <div
+            className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+            key={index}
+            onClick={() => handleLabelClick(item.value)}
+          >
+            <input
+              type="checkbox"
+              className="border-specialRed border bg-go rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
+              value={item.value}
+              name="make"
+              checked={selectedinteriorColours.includes(item.value)}
+              onChange={handleChange}
+            />
+            <div
+            style={{ backgroundColor: item.colorCode }}
+            className={`h-[1.1875rem] w-[1.1875rem] rounded-secondary mr-3 ml-1`}
+            >
+
+            </div>
+            <label
+              className={`leading-primary text-secondary font-normal cursor-pointer ${
+                selectedinteriorColours.includes(item.value)
+                  ? "font-bold text-specialRed"
+                  : "text-lighterDark"
+              }`}
+              style={{ marginLeft: "5px" }}
+            >
+              {item.label}
+            </label>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -102,22 +102,22 @@ const MakeFilter = () => {
         value: make.slug,
         label: make.title,
       }));
-      let result = makeOptionsPayload?.sort((a, b) => {
-        if (
-          selectedMakes.includes(a.value) &&
-          !selectedMakes.includes(b.value)
-        ) {
-          return -1;
-        } else if (
-          !selectedMakes.includes(a.value) &&
-          selectedMakes.includes(b.value)
-        ) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      dispatch(setMakeOptions(result));
+      // let result = makeOptionsPayload?.sort((a, b) => {
+      //   if (
+      //     selectedMakes.includes(a.value) &&
+      //     !selectedMakes.includes(b.value)
+      //   ) {
+      //     return -1;
+      //   } else if (
+      //     !selectedMakes.includes(a.value) &&
+      //     selectedMakes.includes(b.value)
+      //   ) {
+      //     return 1;
+      //   } else {
+      //     return 0;
+      //   }
+      // });
+      dispatch(setMakeOptions(makeOptionsPayload));
     }
   }, [makes, dispatch]);
 

@@ -2,7 +2,7 @@ import React from "react";
 import { CaretLeftIcon } from "../../../ui/icons";
 import {
   setFilter,
-  setSelected,
+  setSelectedSort,
 } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
@@ -14,11 +14,11 @@ const SortBy = () => {
   const { selectedSort } = useAppSelector((state) => state.search);
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
-    dispatch(setSelected(e.target.value));
+    dispatch(setSelectedSort(e.target.value));
   };
 
   const handleLabelClick = (value) => {
-    dispatch(setSelected(value));
+    dispatch(setSelectedSort(value));
   };
   return (
     <div>
