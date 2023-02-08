@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useEffect } from "react";
 import BlogSection from "../components/Home/BlogSection";
 import { CarSelection } from "../components/Home/CarSelection";
 import Featured from "../components/Home/Featured";
@@ -7,11 +6,9 @@ import Hero from "../components/Home/Hero";
 import SelllYourCar from "../components/Home/SelllYourCar";
 import WhyChooseUs from "../components/Home/WhyChooseUs";
 import DefaultLayout from "../components/layouts/DefaultLayout";
-import { getCars } from "../features/car/carSlice";
-import { useAppDispatch } from "../store/hooks";
+
 
 const Home = () => {
-  const dispatch = useAppDispatch();
   // useEffect(() => {
   //   const makes = ["toyota", "bmw"];
   //   const models = ["corolla", "camry", "x5", "x6"];

@@ -71,7 +71,7 @@ const Hero = () => {
 
   useEffect(() => {
     dispatch(getMakes());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
