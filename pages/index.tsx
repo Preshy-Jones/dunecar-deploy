@@ -38,6 +38,8 @@ const Home = () => {
 
 Home.getLayout = (page) => <DefaultLayout>{page}</DefaultLayout>;
 
+Home.displayName = "Home";
+
 export default Home;
 
 {
