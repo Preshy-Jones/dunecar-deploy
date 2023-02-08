@@ -11,7 +11,7 @@ export const priceSplitter = (number: number): string => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-export const formatMultipleValueKeyQuery = (key: string, values: string[]) => {
+export const formatMultipleValueKeyQuery = (key: string, values: (string  | number)[]) => {
   return values.map((value) => `${key}=${value}`).join("&");
 };
 

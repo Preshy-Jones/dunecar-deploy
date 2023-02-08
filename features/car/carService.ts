@@ -2,7 +2,7 @@ import Api from "../../api";
 import client from "../../api/client";
 import { ENDPOINTS } from "../../utils/constants";
 
-export const fetchCars = async (models: string[], makes: string[]) => {
+export const fetchCars = async (models?: (string | number)[], makes?: (string | number)[]) => {
   const api = new Api();
   const response = await api.getCars(models, makes);
   console.log(response);
@@ -18,8 +18,9 @@ export const fetchMakes = async () => {
   return response.data;
 };
 
-export const fetchModels = async () => {
-  const response = await client().get(ENDPOINTS.GETMODELS);
+export const fetchModels = async (makes: (string | number)[]) => {
+  const api = new Api();
+  const response = await api.getModels(makes);
   console.log(response);
 
   return response.data;

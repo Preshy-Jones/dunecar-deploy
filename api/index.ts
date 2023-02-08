@@ -45,15 +45,15 @@ class Api {
     });
   };
 
-  getCars = (model: string[], make: string[]) => {
+  getCars = (model?: (string | number)[], make?: (string | number)[]) => {
     const url = `/v1/car?${
-      model.length > 1
+      model && model.length > 1
         ? formatMultipleValueKeyQuery("model", model)
-        : `model=${model[0]}`
+        : model && `model=${model[0]}`
     }&${
-      make.length > 1
+      make && make.length > 1
         ? formatMultipleValueKeyQuery("make", make)
-        : `make=${make[0]}`
+        : make && `make=${make[0]}`
     }`;
     console.log(url);
 
@@ -63,7 +63,16 @@ class Api {
   getMakes = () => {
     const url = "/v1/car/makes";
     return this.publicRequest(url, METHOD.GET, {});
-  }
+  };
+
+  getModels = (makes: (string | number)[]) => {
+    const url = `/v1/car/models?${
+      makes.length > 1
+        ? formatMultipleValueKeyQuery("make", makes)
+        : `make=${makes[0]}`
+    }`;
+    return this.publicRequest(url, METHOD.GET, {});
+  };
 }
 
 export default Api;

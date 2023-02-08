@@ -1,13 +1,28 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import Select, { StylesConfig } from "react-select";
+import { getCars, getMakes, getModels } from "../../features/car/carSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { CarModel } from "../../types/car";
 import { MultiSelect } from "../ui/form";
 import { Option } from "../ui/form/MultiSelect";
 
 // import heroImage from "../../assets/heroimage.svg";
 
 const Hero = () => {
+  const dispatch = useAppDispatch();
+  const { makes, models, cars, carFilter } = useAppSelector(
+    (state) => state.car
+  );
+  const makeOptions = makes.map((make) => ({
+    value: make.slug,
+    label: make.title,
+  }));
+  const modelOptions = models.map((model) => ({
+    value: model.slug,
+    label: model.title,
+  }));
   // const options = [
   //   { value: "blues", label: "Blues" },
   //   { value: "rock", label: "Rock" },
@@ -15,10 +30,36 @@ const Hero = () => {
   //   { value: "orchestra", label: "Orchestra" },
   // ];
 
-  const [optionSelected, setSelected] = useState<Option[] | null>();
-  const handleChange = (selected: Option[]) => {
-    setSelected(selected);
+  const [makesSelected, setMakesSelected] = useState<Option[] | null>();
+  const [modelsSelected, setModelsSelected] = useState<Option[] | null>();
+  const [locationSelected, setLocationSelected] = useState<Option[] | null>();
+
+  const [modelToggled, setModelToggled] = React.useState(false);
+
+  const makesHandleChange = (selected: Option[]) => {
+    setMakesSelected(selected);
+    const makes = selected.map((option) => option.value);
+    console.log(makes);
+
+    dispatch(getModels({ makes: makes }));
+
+    dispatch(getCars({ makes }));
+
+    setModelToggled(true);
+    console.log(selected);
   };
+
+  const modelsHandleChange = (selected: Option[]) => {
+    setModelsSelected(selected);
+
+    const models = selected.map((option) => option.value);
+    dispatch(getCars({ makes: carFilter.make, models }));
+  };
+
+  const locationsHandleChange = (selected: Option[]) => {
+    setLocationSelected(selected);
+  };
+
   const options = [
     { value: 0, label: "Goranboy" },
     { value: 1, label: "Safikurd" },
@@ -27,6 +68,11 @@ const Hero = () => {
     { value: 4, label: "Shusha" },
     { value: 5, label: "Agdam" },
   ];
+
+  useEffect(() => {
+    dispatch(getMakes());
+  }, []);
+
   return (
     <div>
       <div className="relative mb-10">
@@ -36,7 +82,7 @@ const Hero = () => {
             backgroundImage: `url("assets/heroimage.svg")`,
           }}
         >
-          <div className="flex text-white flex-col justify-start md:justify-center md:w-[40%] md:pt-0 pt-11">
+          <div className="flex text-white flex-col justify-start md:justify-center md:w-[40%] md:pt-0 pt-11 sm:mb-16">
             <h1 className="md:text-[3.6875rem] text-[1.75rem] font-extrabold leading-[1.9375rem] md:leading-[3.75rem] mb-6">
               Drive away in your dream car today
             </h1>
@@ -59,10 +105,10 @@ const Hero = () => {
             <div className="mb-3">
               <MultiSelect
                 className="w-full mr-4 text-[1rem] leading-[10px]"
-                key="example_id"
+                key="mobileMakes_id"
                 options={options}
-                onChange={handleChange}
-                value={optionSelected}
+                onChange={makesHandleChange}
+                value={makesSelected}
                 isSelectAll={true}
                 menuPlacement={"top"}
                 placeholder="Select Make"
@@ -71,10 +117,10 @@ const Hero = () => {
             <div className="mb-3">
               <MultiSelect
                 className="w-full mr-4"
-                key="example_id"
+                key="mobileModels_id"
                 options={options}
-                onChange={handleChange}
-                value={optionSelected}
+                onChange={modelsHandleChange}
+                value={modelsSelected}
                 isSelectAll={true}
                 menuPlacement={"top"}
                 placeholder="Select Make"
@@ -85,8 +131,8 @@ const Hero = () => {
                 className="w-full mr-4"
                 key="example_id"
                 options={options}
-                onChange={handleChange}
-                value={optionSelected}
+                onChange={locationsHandleChange}
+                value={locationSelected}
                 isSelectAll={true}
                 menuPlacement={"top"}
                 placeholder="Select Make"
@@ -107,30 +153,31 @@ const Hero = () => {
               <div className="flex justify-between mb-6">
                 <MultiSelect
                   className="w-full mr-4"
-                  key="example_id"
-                  options={options}
-                  onChange={handleChange}
-                  value={optionSelected}
+                  key="make_id"
+                  options={makeOptions}
+                  onChange={makesHandleChange}
+                  value={makesSelected}
                   isSelectAll={true}
                   menuPlacement={"top"}
                   placeholder="Select Make"
                 />
                 <MultiSelect
                   className="w-full mr-4"
-                  key="example_id"
-                  options={options}
-                  onChange={handleChange}
-                  value={optionSelected}
+                  key="model_id"
+                  options={modelOptions}
+                  onChange={modelsHandleChange}
+                  value={modelsSelected}
                   isSelectAll={true}
                   menuPlacement={"top"}
                   placeholder="Select Model"
+                  isDisabled={!modelToggled}
                 />
                 <MultiSelect
                   className="w-full mr-4"
-                  key="example_id"
+                  key="location_id"
                   options={options}
-                  onChange={handleChange}
-                  value={optionSelected}
+                  onChange={locationsHandleChange}
+                  value={locationSelected}
                   isSelectAll={true}
                   menuPlacement={"top"}
                   placeholder="Select Location"
@@ -138,7 +185,7 @@ const Hero = () => {
               </div>
               <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
                 <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-                Search all 22 cars
+                Search all {cars.length} cars
               </button>
             </div>
             <div className="flex-2">

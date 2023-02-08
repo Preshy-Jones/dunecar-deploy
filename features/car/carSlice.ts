@@ -7,13 +7,9 @@ export interface CarState {
   car: Car | null;
   cars: Car[];
   makes: CarMake[];
-  filter: {
-    model: string;
-    make: string;
-    minYear: string;
-    maxYear: string;
-    minPrice: number;
-    maxPrice: number;
+  carFilter: {
+    model: (string | number)[];
+    make: (string | number)[];
   };
   models: CarModel[];
   isLoading: boolean;
@@ -23,21 +19,21 @@ const initialState: CarState = {
   car: null,
   cars: [],
   makes: [],
-  filter: {
-    model: "",
-    make: "",
-    minYear: "",
-    maxYear: "",
-    minPrice: 0,
-    maxPrice: 0,
+  carFilter: {
+    model: [],
+    make: [],
   },
   models: [],
   isLoading: true,
 };
 
 interface CarPayload {
-  models: string[];
-  makes: string[];
+  models?: (string | number)[];
+  makes?: (string | number)[];
+}
+
+interface ModelPayload {
+  makes: (string | number)[];
 }
 
 export const getCars = createAsyncThunk(
@@ -65,9 +61,10 @@ export const getMakes = createAsyncThunk(
 
 export const getModels = createAsyncThunk(
   "car/getModels",
-  async (_, thunkAPI) => {
+  async (payload: ModelPayload, thunkAPI) => {
+    const { makes } = payload;
     try {
-      return await carService.fetchModels();
+      return await carService.fetchModels(makes);
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
     }
@@ -86,8 +83,8 @@ const carSlice = createSlice({
       .addCase(getCars.fulfilled, (state: CarState, action) => {
         console.log(action);
         state.isLoading = false;
-        // state.cars = action.payload.cars;
-        // state.filter = action.payload.filter;
+        state.cars = action.payload.data.cars;
+        state.carFilter = action.payload.data.filter;
       })
       .addCase(getCars.rejected, (state: CarState, action) => {
         console.log(action);
@@ -99,7 +96,7 @@ const carSlice = createSlice({
       .addCase(getMakes.fulfilled, (state: CarState, action) => {
         console.log(action);
         state.isLoading = false;
-        state.makes = action.payload.makes;
+        state.makes = action.payload.data;
       })
       .addCase(getMakes.rejected, (state: CarState, action) => {
         console.log(action);
@@ -111,7 +108,7 @@ const carSlice = createSlice({
       .addCase(getModels.fulfilled, (state: CarState, action) => {
         console.log(action);
         state.isLoading = false;
-        state.models = action.payload.models;
+        state.models = action.payload.data;
       })
       .addCase(getModels.rejected, (state: CarState, action) => {
         console.log(action);

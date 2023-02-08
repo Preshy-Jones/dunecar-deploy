@@ -188,6 +188,7 @@ const MultiSelect = (props: any) => {
     return (
       <ReactSelect
         {...props}
+        
         // className="  max-w-[300px]"
         inputValue={selectInput}
         onInputChange={onInputChange}

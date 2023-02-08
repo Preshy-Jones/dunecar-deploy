@@ -15,8 +15,8 @@ export interface Car {
 
 export interface CarModel {
   _id: string;
-  name: string;
-  makes: CarMake[];
+  title: string;
+  slug: string;
   createdAt: Date;
   updatedAt: Date;
 }
