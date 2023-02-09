@@ -1,8 +1,14 @@
 import Image from "next/image";
-import React from "react";
+import React, { forwardRef, ReactNode } from "react";
 import sampleImage from "../../public/assets/sample-car.svg";
 import dot from "../../public/assets/dot.svg";
-import Carousel from "react-elastic-carousel";
+import Carousel, { ReactElasticCarouselProps } from "react-elastic-carousel";
+
+
+const CustomCarousel = forwardRef<
+  any,
+  ReactElasticCarouselProps & { children: ReactNode[] }
+>((props, ref) => <Carousel ref={ref} {...props} />);
 
 const Featured = () => {
   const repeater = [0, 0, 0];
@@ -62,7 +68,7 @@ const MobileSection = () => {
   ];
   return (
     <div>
-      <Carousel itemPadding={[1, 30]} breakPoints={breakPoints}>
+      <CustomCarousel isRTL={true} itemPadding={[1, 30]} breakPoints={breakPoints}>
         {repeater.map((item, index) => {
           return (
             <div key={index} className=" border border-[#D1D1D1]">
@@ -89,7 +95,9 @@ const MobileSection = () => {
             </div>
           );
         })}
-      </Carousel>
+      </CustomCarousel>
     </div>
   );
 };
+
+
