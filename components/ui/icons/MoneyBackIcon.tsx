@@ -3,14 +3,15 @@ import React from "react";
 const MoneyBackIcon = () => {
   return (
     <svg
-      width="50"
-      height="50"
-      viewBox="0 0 50 50"
+      width="82"
+      height="82"
+      viewBox="0 0 82 82"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <circle cx="40.6923" cy="40.6154" r="40.6154" fill="white" />
       <path
-        d="M25 15.25V18.5"
+        d="M41 31.25V34.5"
         stroke="#D14532"
         strokeWidth="3.25"
         strokeMiterlimit="10"
@@ -18,7 +19,7 @@ const MoneyBackIcon = () => {
         strokeLinejoin="round"
       />
       <path
-        d="M25 31.5V34.75"
+        d="M41 47.5V50.75"
         stroke="#D14532"
         strokeWidth="3.25"
         strokeMiterlimit="10"
@@ -26,7 +27,7 @@ const MoneyBackIcon = () => {
         strokeLinejoin="round"
       />
       <path
-        d="M21.75 31.5H26.625C28.4125 31.5 29.875 30.0375 29.875 28.25C29.875 26.4625 28.4125 25 26.625 25H23.375C21.5875 25 20.125 23.5375 20.125 21.75C20.125 19.9625 21.5875 18.5 23.375 18.5H28.25"
+        d="M37.75 47.5H42.625C44.4125 47.5 45.875 46.0375 45.875 44.25C45.875 42.4625 44.4125 41 42.625 41H39.375C37.5875 41 36.125 39.5375 36.125 37.75C36.125 35.9625 37.5875 34.5 39.375 34.5H44.25"
         stroke="#D14532"
         strokeWidth="3.25"
         strokeMiterlimit="10"
@@ -34,25 +35,25 @@ const MoneyBackIcon = () => {
         strokeLinejoin="round"
       />
       <path
-        d="M25 8.75C33.9375 8.75 41.25 16.0625 41.25 25C41.25 33.9375 33.9375 41.25 25 41.25C16.0625 41.25 8.75 33.9375 8.75 25V20.125"
+        d="M41 24.75C49.9375 24.75 57.25 32.0625 57.25 41C57.25 49.9375 49.9375 57.25 41 57.25C32.0625 57.25 24.75 49.9375 24.75 41V36.125"
         stroke="#D14532"
-        strokeWidth="3.25"
+        stroke-width="3.25"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M15.25 26.625L8.75 20.125L2.25 26.625"
+        d="M31.25 42.625L24.75 36.125L18.25 42.625"
         stroke="#D14532"
-        strokeWidth="3.25"
+        stroke-width="3.25"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M25 2.25C37.5125 2.25 47.75 12.4875 47.75 25C47.75 37.5125 37.5125 47.75 25 47.75"
+        d="M41 18.25C53.5125 18.25 63.75 28.4875 63.75 41C63.75 53.5125 53.5125 63.75 41 63.75"
         stroke="#D14532"
-        strokeWidth="3.25"
+        stroke-width="3.25"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"

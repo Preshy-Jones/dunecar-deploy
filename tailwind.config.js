@@ -26,13 +26,14 @@ module.exports = {
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
         sme: ["0.875em", { lineHeight: "1.25em" }],
+        md: ["0.875em", { lineHeight: "1.25em" }],
         "3.5xl": ["2rem", { lineHeight: "2rem" }],
         "1.5xl": ["1.3125rem", { lineHeight: "1.75rem" }],
         "6.5xl": ["4rem", { lineHeight: "6rem" }],
       },
       boxShadow: {
         card: "inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
-        bigCard: "0px 4px 10px 5px rgba(219, 219, 219, 0.25)",
+        bigCard: "0px -1px 6px rgba(164, 164, 164, 0.25)",
         cardShadow:
           "rgb(0 0 0 / 16%) 0px 6px 12px 0px, rgb(202 202 202 / 26%) 0px 0px 6px 0px, rgb(202 202 202 / 16%) 0px -1px 4px 0px",
       },
