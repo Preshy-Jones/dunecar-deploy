@@ -18,6 +18,7 @@ module.exports = {
         sans2: ["roboto"],
         robotoserif: ["'Roboto Serif', serif"],
         roboto: ["'Roboto', sans-serif"],
+        outfit: ["'Outfit', sans-serif"],
       },
       backgroundImage: {
         heroImage: "url('/assets/threesixty.jpg')",

@@ -21,7 +21,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   const [isToggled, setIsToggled] = useState(false);
 
-  const [isChecked, setIsChecked] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
 
   const handleToggled = () => {
@@ -91,7 +90,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             {capitalizeFirstLetter(selected[1])}...
           </h2>
         ) : (
-          <h2 className="text-[#081314] text-opacity-70">{placeHolder}</h2>
+          <h2 className="">{placeHolder}</h2>
         )}
         <CaretDownIcon />
       </div>
