@@ -4,7 +4,6 @@ import sampleImage from "../../public/assets/sample-car.svg";
 import dot from "../../public/assets/dot.svg";
 import Carousel, { ReactElasticCarouselProps } from "react-elastic-carousel";
 
-
 const CustomCarousel = forwardRef<
   any,
   ReactElasticCarouselProps & { children: ReactNode[] }
@@ -13,7 +12,7 @@ const CustomCarousel = forwardRef<
 const Featured = () => {
   const repeater = [0, 0, 0];
   return (
-    <div className="mt-14 sm:flex sm:justify-center font-roboto mb-6 bg-white w-full">
+    <div className="py-[5rem] sm:flex sm:justify-center font-roboto mb-6 bg-white w-full">
       <div className="sm:w-[80%]">
         <h1 className="font-extrabold text-[2rem] mb-8">Featured Cars</h1>
         <div className="md:flex justify-around hidden">
@@ -68,7 +67,11 @@ const MobileSection = () => {
   ];
   return (
     <div>
-      <CustomCarousel isRTL={true} itemPadding={[1, 30]} breakPoints={breakPoints}>
+      <CustomCarousel
+        isRTL={true}
+        itemPadding={[1, 30]}
+        breakPoints={breakPoints}
+      >
         {repeater.map((item, index) => {
           return (
             <div key={index} className=" border border-[#D1D1D1]">
@@ -99,5 +102,3 @@ const MobileSection = () => {
     </div>
   );
 };
-
-

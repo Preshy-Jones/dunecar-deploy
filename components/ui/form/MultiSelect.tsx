@@ -1,237 +1,101 @@
-import { useState, useRef } from "react";
-import {
-  default as ReactSelect,
-  components,
-  InputAction,
-  MultiValueGenericProps,
-} from "react-select";
+import React, { useState } from "react";
+import { setFilterTotal } from "../../../features/car/carSlice";
+import { useAppDispatch } from "../../../store/hooks";
+import { MATHOPERATIONS } from "../../../types/methods";
+import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
+import { CaretDownIcon } from "../icons";
 
-export type Option = {
-  value: number | string;
-  label: string;
-};
+interface MultiSelectProps {
+  placeHolder?: string;
+  options?: { value: string; label: string }[];
+  handleOperation: (value: string[]) => void;
+}
 
-const MultiSelect = (props: any) => {
-  const [selectInput, setSelectInput] = useState<string>("");
-  const isAllSelected = useRef<boolean>(false);
-  const selectAllLabel = useRef<string>("Select all");
-  const allOption = { value: "*", label: selectAllLabel.current };
+const MultiSelect: React.FC<MultiSelectProps> = ({
+  placeHolder,
+  options,
+  handleOperation,
+  ...rest
+}) => {
+  const dispatch = useAppDispatch();
 
-  const filterOptions = (options: Option[], input: string) =>
-    options?.filter(({ label }: Option) =>
-      label.toLowerCase().includes(input.toLowerCase())
-    );
+  const [isToggled, setIsToggled] = useState(false);
 
-  const comparator = (v1: Option, v2: Option) =>
-    (v1.value as number) - (v2.value as number);
+  const [isChecked, setIsChecked] = useState(false);
+  const [selected, setSelected] = useState<string[]>([]);
 
-  let filteredOptions = filterOptions(props.options, selectInput);
-  let filteredSelectedOptions = filterOptions(props.value, selectInput);
+  const handleToggled = () => {
+    if (!isToggled) {
+      dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+    } else if (isToggled) {
+      dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
+      handleOperation(selected);
+    }
 
-  const MultiValueContainer = (props: MultiValueGenericProps) => {
-    return (
-      <components.MultiValueContainer {...props}>
-        <h1>hello</h1>
-      </components.MultiValueContainer>
-    );
+    setIsToggled(!isToggled);
   };
 
-  const Option = (props: any) => (
-    <components.Option {...props}>
-      {/* //indeterminate select all checkbox
-        <input
-          key={props.value}
-          type="checkbox"
-          ref={(input) => {
-            if (input) input.indeterminate = true;
-          }}
-        /> */}
-      {/* //regular checkbox */}
-      <input
-        key={props.value}
-        className="text-red-500 focus:ring-red-700 border-red-500 rounded-[2px]"
-        type="checkbox"
-        checked={props.isSelected || isAllSelected.current}
-        onChange={() => {}}
-      />
-      <label className="ml-10">{props.label}</label>
-    </components.Option>
-  );
+  //sort options and place checked options at the top
+  options?.sort((a, b) => {
+    if (selected.includes(a.value) && !selected.includes(b.value)) {
+      return -1;
+    } else if (!selected.includes(a.value) && selected.includes(b.value)) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
 
-  const Input = (props: any) => (
-    <>
-      {selectInput.length === 0 ? (
-        <components.Input autoFocus={props.selectProps.menuIsOpen} {...props}>
-          {props.children}
-        </components.Input>
-      ) : (
-        <div style={{ border: "1px dotted gray" }}>
-          <components.Input autoFocus={props.selectProps.menuIsOpen} {...props}>
-            {props.children}
-          </components.Input>
+  //handle checkbox onchange
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    if (selected.includes(e.target.value)) {
+      setSelected(selected.filter((item) => item !== e.target.value));
+    } else {
+      setSelected([...selected, e.target.value]);
+    }
+  };
+  return (
+    <div>
+      {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
+      {isToggled && (
+        <div className="relative bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
+          {options?.map((item, index) => (
+            <div className="flex items-center mb-5">
+              <input
+                type="checkbox"
+                className="border-specialRed border  mr-3 text-specialRed"
+                value={item.value}
+                name="make"
+                checked={selected.includes(item.value)}
+                onChange={handleChange}
+              />
+              <label style={{ marginLeft: "5px" }}>{item.label}</label>
+            </div>
+          ))}
         </div>
       )}
-    </>
-  );
-
-  const customFilterOption = ({ value, label }: Option, input: string) =>
-    (value !== "*" && label.toLowerCase().includes(input.toLowerCase())) ||
-    (value === "*" && filteredOptions?.length > 0);
-
-  const onInputChange = (
-    inputValue: string,
-    event: { action: InputAction }
-  ) => {
-    if (event.action === "input-change") setSelectInput(inputValue);
-    else if (event.action === "menu-close" && selectInput !== "")
-      setSelectInput("");
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
-    if ((e.key === " " || e.key === "Enter") && !selectInput)
-      e.preventDefault();
-  };
-
-  const handleChange = (selected: Option[]) => {
-    if (
-      selected.length > 0 &&
-      !isAllSelected.current &&
-      (selected[selected.length - 1].value === allOption.value ||
-        JSON.stringify(filteredOptions) ===
-          JSON.stringify(selected.sort(comparator)))
-    )
-      return props.onChange(
-        [
-          ...(props.value ?? []),
-          ...props.options.filter(
-            ({ label }: Option) =>
-              label.toLowerCase().includes(selectInput?.toLowerCase()) &&
-              (props.value ?? []).filter((opt: Option) => opt.label === label)
-                .length === 0
-          ),
-        ].sort(comparator)
-      );
-    else if (
-      selected.length > 0 &&
-      selected[selected.length - 1].value !== allOption.value &&
-      JSON.stringify(selected.sort(comparator)) !==
-        JSON.stringify(filteredOptions)
-    )
-      return props.onChange(selected);
-    else
-      return props.onChange([
-        ...props.value?.filter(
-          ({ label }: Option) =>
-            !label.toLowerCase().includes(selectInput?.toLowerCase())
-        ),
-      ]);
-  };
-
-  const customStyles = {
-    placeholder: (styles) => {
-      return {
-        ...styles,
-        color: "black",
-      };
-    },
-
-    dropdownIndicator: (styles) => {
-      return {
-        ...styles,
-        color: "black",
-      };
-    },
-    multiValueLabel: (def: any) => ({
-      ...def,
-      backgroundColor: "white",
-    }),
-    multiValueRemove: (def: any) => ({
-      ...def,
-      backgroundColor: "lightgray",
-    }),
-    valueContainer: (base: any) => ({
-      ...base,
-      maxHeight: "65px",
-      overflow: "auto",
-    }),
-    option: (styles: any, { isSelected, isFocused }: any) => {
-      return {
-        ...styles,
-        backgroundColor:
-          isSelected && !isFocused
-            ? null
-            : isFocused && !isSelected
-            ? styles.backgroundColor
-            : isFocused && isSelected
-            ? "#DEEBFF"
-            : null,
-        color: isSelected ? null : null,
-      };
-    },
-    menu: (def: any) => ({ ...def, zIndex: 9999 }),
-  };
-
-  if (props.isSelectAll && props.options.length !== 0) {
-    isAllSelected.current =
-      JSON.stringify(filteredSelectedOptions) ===
-      JSON.stringify(filteredOptions);
-
-    if (filteredSelectedOptions?.length > 0) {
-      if (filteredSelectedOptions?.length === filteredOptions?.length)
-        selectAllLabel.current = `All (${filteredOptions.length}) selected`;
-      else
-        selectAllLabel.current = `${filteredSelectedOptions?.length} / ${filteredOptions.length} selected`;
-    } else selectAllLabel.current = "Select all";
-
-    allOption.label = selectAllLabel.current;
-
-    return (
-      <ReactSelect
-        {...props}
-        
-        // className="  max-w-[300px]"
-        inputValue={selectInput}
-        onInputChange={onInputChange}
-        onKeyDown={onKeyDown}
-        options={[...props.options]}
-        onChange={handleChange}
-        components={{
-          Option: Option,
-          Input: Input,
-          IndicatorSeparator: () => null,
-          MultiValueRemove: () => null,
-          ...props.components,
-        }}
-        filterOption={customFilterOption}
-        menuPlacement={props.menuPlacement ?? "auto"}
-        styles={customStyles}
-        isMulti
-        closeMenuOnSelect={false}
-        tabSelectsValue={false}
-        backspaceRemovesValue={false}
-        hideSelectedOptions={false}
-        blurInputOnSelect={false}
-      />
-    );
-  }
-
-  return (
-    <ReactSelect
-      {...props}
-      inputValue={selectInput}
-      onInputChange={onInputChange}
-      filterOption={customFilterOption}
-      components={{
-        Input: Input,
-        ...props.components,
-      }}
-      menuPlacement={props.menuPlacement ?? "auto"}
-      onKeyDown={onKeyDown}
-      tabSelectsValue={false}
-      hideSelectedOptions={true}
-      backspaceRemovesValue={false}
-      blurInputOnSelect={true}
-    />
+      <div
+        {...rest}
+        onClick={() => handleToggled()}
+        className={` w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
+          !isToggled
+            ? "relative top-[10rem] justify-between"
+            : "justify-between relative bottom-[7.3rem]"
+        }`}
+      >
+        {selected.length > 1 ? (
+          <h2 className="text-[#081314] ">
+            {capitalizeFirstLetter(selected[0])}
+            {"   "} |{"   "}
+            {capitalizeFirstLetter(selected[1])}...
+          </h2>
+        ) : (
+          <h2 className="text-[#081314] text-opacity-70">{placeHolder}</h2>
+        )}
+        <CaretDownIcon />
+      </div>
+    </div>
   );
 };
 
