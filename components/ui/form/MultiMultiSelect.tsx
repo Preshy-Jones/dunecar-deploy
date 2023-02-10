@@ -6,39 +6,69 @@ import { CaretDownIcon } from "../icons";
 
 interface MultiSelectProps {
   placeHolder?: string;
-  options?: { value: string; label: string }[];
+  options: any;
   isDisabled?: boolean;
+  handleOperation: (value: string[]) => void;
 }
 
 const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   placeHolder,
   options,
   isDisabled,
+  handleOperation,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
 
   const [isToggled, setIsToggled] = useState(false);
-  const repeater = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  const [selected, setSelected] = useState<string[]>([]);
 
   const handleToggled = () => {
     if (!isToggled) {
       dispatch(setFilterTotal(MATHOPERATIONS.ADD));
     } else if (isToggled) {
       dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
+      handleOperation(selected);
     }
 
     setIsToggled(!isToggled);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    if (selected.includes(e.target.value)) {
+      setSelected(selected.filter((item) => item !== e.target.value));
+    } else {
+      setSelected([...selected, e.target.value]);
+    }
+  };
+
   return (
     <div>
       {isToggled && (
-        <div className="relative bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
-          {options?.map((item, index) => (
-            <div className="flex justify-between mb-3">
+        <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[11rem]">
+          <div className="flex pb-3 font-outfit font-medium justify-between">
+            <div className="w-[4.5625rem] border-b-[0.5px] pb-1.5 border-b-[#D5D5D5]">
+              <h2 className="text-black  text-[1.25rem]">
+                {options[0].collection_name}
+              </h2>
+            </div>
+            <div className="flex justify-end w-[4.5625rem] pb-1.5 border-b-[0.5px] border-b-[#D5D5D5]">
+              <h2 className="text-black  text-[1.25rem]">
+                {options[1].collection_name}
+              </h2>
+            </div>
+          </div>
+          {options[0].options.map((item, index) => (
+            <div className="flex items-center mb-5" key={index}>
               <input
                 type="checkbox"
-                className="border-specialRed focus:ring-red-700 "
+                className="border-specialRed border  mr-3 text-specialRed"
+                value={item.value}
+                name="make"
+                checked={selected.includes(item.value)}
+                onChange={handleChange}
               />
               <label style={{ marginLeft: "5px" }}>{item.label}</label>
             </div>

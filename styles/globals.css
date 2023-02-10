@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 .rec-arrow:disabled {
   visibility: hidden;
@@ -13,10 +13,10 @@
 }
 .rec.rec-arrow {
   color: #fff;
-  background: #D14532;
+  background: #d14532;
 }
 
 .rec.rec-arrow:hover {
-  color: #D14532 !important;
+  color: #d14532 !important;
   background: #fff !important;
 }
