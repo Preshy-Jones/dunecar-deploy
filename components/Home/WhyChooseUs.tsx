@@ -3,7 +3,7 @@ import { DoorDelivery, MoneyBackIcon, QualityAssurance } from "../ui/icons";
 
 const WhyChooseUs = () => {
   return (
-    <div className="sm:mt-28 mt-[20rem] flex justify-center font-roboto">
+    <div className="sm:mt-28 mt-[20rem] flex justify-center font-roboto pb-[4rem]">
       <div className="w-[80%]">
         <h1 className="font-extrabold text-[2rem] mb-8">Why Choose Us</h1>
         <div className="flex flex-col sm:flex-row sm:justify-between items-baseline">

@@ -23,21 +23,18 @@ const Hero = () => {
   }));
 
   const [modelToggled, setModelToggled] = React.useState(false);
-  // const options = [
-  //   { value: "blues", label: "Blues" },
-  //   { value: "rock", label: "Rock" },
-  //   { value: "jazz", label: "Jazz" },
-  //   { value: "orchestra", label: "Orchestra" },
-  // ];
 
-  const options = [
-    { value: 0, label: "Goranboy" },
-    { value: 1, label: "Safikurd" },
-    { value: 2, label: "Baku" },
-    { value: 3, label: "Ganja" },
-    { value: 4, label: "Shusha" },
-    { value: 5, label: "Agdam" },
-  ];
+  const makeHandleOperation = (makes: string[]) => {
+    dispatch(getCars({ makes }));
+  };
+
+  const modelHandleOperation = (models: string[]) => {
+    dispatch(getCars({ models }));
+  };
+
+  const locationHandleOperation = (locations: string[]) => {
+    // dispatch(getCars({ locations }));
+  };
 
   useEffect(() => {
     dispatch(getMakes());
@@ -101,12 +98,15 @@ const Hero = () => {
                   <MultiSelect
                     placeHolder="Select Make"
                     options={makeOptions}
+                    handleOperation={makeHandleOperation}
                   />
                   <MultiMultiSelect
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                   />
-                  <MultiSelect placeHolder="Select Location" />
+                  <MultiSelect placeHolder="Select Location" 
+                  handleOperation={locationHandleOperation}
+                  />
                 </div>
                 <button
                   className={`${
