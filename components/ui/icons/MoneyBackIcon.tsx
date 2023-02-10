@@ -37,7 +37,7 @@ const MoneyBackIcon = () => {
       <path
         d="M41 24.75C49.9375 24.75 57.25 32.0625 57.25 41C57.25 49.9375 49.9375 57.25 41 57.25C32.0625 57.25 24.75 49.9375 24.75 41V36.125"
         stroke="#D14532"
-        stroke-width="3.25"
+        strokeWidth="3.25"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -45,7 +45,7 @@ const MoneyBackIcon = () => {
       <path
         d="M31.25 42.625L24.75 36.125L18.25 42.625"
         stroke="#D14532"
-        stroke-width="3.25"
+        strokeWidth="3.25"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -53,7 +53,7 @@ const MoneyBackIcon = () => {
       <path
         d="M41 18.25C53.5125 18.25 63.75 28.4875 63.75 41C63.75 53.5125 53.5125 63.75 41 63.75"
         stroke="#D14532"
-        stroke-width="3.25"
+        strokeWidth="3.25"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"

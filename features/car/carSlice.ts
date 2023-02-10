@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Car, CarMake, CarModel } from "../../types/car";
+import { MathOperations } from "../../types/methods";
 import carService from "./carService";
 
 export interface CarState {
@@ -13,6 +14,8 @@ export interface CarState {
   };
   models: CarModel[];
   isLoading: boolean;
+  filterTotal: number;
+  aFilterToggled: boolean;
 }
 
 const initialState: CarState = {
@@ -25,6 +28,8 @@ const initialState: CarState = {
   },
   models: [],
   isLoading: true,
+  filterTotal: 0,
+  aFilterToggled: false,
 };
 
 interface CarPayload {
@@ -74,7 +79,21 @@ export const getModels = createAsyncThunk(
 const carSlice = createSlice({
   name: "car",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilterTotal: (state, action: PayloadAction<MathOperations>) => {
+      const { payload } = action;
+      if (payload === "add") {
+        state.filterTotal += 1;
+      } else if (payload === "subtract") {
+        state.filterTotal -= 1;
+      }
+    },
+
+    isAFilterToggled: (state, action: PayloadAction<boolean>) => {
+      const { payload } = action;
+      state.aFilterToggled = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCars.pending, (state) => {
@@ -117,6 +136,6 @@ const carSlice = createSlice({
   },
 });
 
-// export const {} = carSlice.actions;
+export const { setFilterTotal } = carSlice.actions;
 
 export default carSlice.reducer;

@@ -4,13 +4,13 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { getCars, getMakes, getModels } from "../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CarModel } from "../../types/car";
-import { MultiSelect } from "../ui/form";
+import { MultiMultiSelect, MultiSelect } from "../ui/form";
 
 // import heroImage from "../../assets/heroimage.svg";
 
 const Hero = () => {
   const dispatch = useAppDispatch();
-  const { makes, models, cars, carFilter } = useAppSelector(
+  const { makes, models, cars, carFilter, filterTotal } = useAppSelector(
     (state) => state.car
   );
   const makeOptions = makes.map((make) => ({
@@ -21,14 +21,14 @@ const Hero = () => {
     value: model.slug,
     label: model.title,
   }));
+
+  const [modelToggled, setModelToggled] = React.useState(false);
   // const options = [
   //   { value: "blues", label: "Blues" },
   //   { value: "rock", label: "Rock" },
   //   { value: "jazz", label: "Jazz" },
   //   { value: "orchestra", label: "Orchestra" },
   // ];
-
- 
 
   const options = [
     { value: 0, label: "Goranboy" },
@@ -90,19 +90,29 @@ const Hero = () => {
             </button>
           </div>
         </div>
-        <div className="absolute top-[21rem]  md:flex justify-center w-full hidden ">
+        <div className="absolute top-[21rem]  md:flex justify-center w-full hidden h-[13.25rem] ">
           <div className="  md:flex justify-center w-[70.97%] ">
             <div className="flex bg-white p-6 rounded-[3px] shadow-bigCard">
               <div className="flex-4 mr-8">
                 <h2 className="font-bold text text-[1.5rem] leading-[1.75rem] mb-4">
                   Buy car
                 </h2>
-                <div className="flex justify-between mb-6">
-                  <MultiSelect placeHolder="Select Make" />
-                  <MultiSelect placeHolder="Select Model" />
+                <div className="flex  relative bottom-[10rem] justify-between mb-6">
+                  <MultiSelect
+                    placeHolder="Select Make"
+                    options={makeOptions}
+                  />
+                  <MultiMultiSelect
+                    placeHolder="Select Model"
+                    isDisabled={!modelToggled}
+                  />
                   <MultiSelect placeHolder="Select Location" />
                 </div>
-                <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
+                <button
+                  className={`${
+                    filterTotal === 0 ? "" : "relative bottom-[17.35rem]"
+                  } bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]`}
+                >
                   <AiOutlineSearch className="mr-3 text-[1.5rem]" />
                   Search all {cars.length} cars
                 </button>

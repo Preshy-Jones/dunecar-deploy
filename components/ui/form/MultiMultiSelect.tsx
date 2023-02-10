@@ -7,11 +7,13 @@ import { CaretDownIcon } from "../icons";
 interface MultiSelectProps {
   placeHolder?: string;
   options?: { value: string; label: string }[];
+  isDisabled?: boolean;
 }
 
-const MultiSelect: React.FC<MultiSelectProps> = ({
+const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   placeHolder,
   options,
+  isDisabled,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
@@ -33,10 +35,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       {isToggled && (
         <div className="relative bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
           {options?.map((item, index) => (
-            <div className="flex items-center mb-5">
+            <div className="flex justify-between mb-3">
               <input
                 type="checkbox"
-                className="border-specialRed focus:ring-red-700 mr-3"
+                className="border-specialRed focus:ring-red-700 "
               />
               <label style={{ marginLeft: "5px" }}>{item.label}</label>
             </div>
@@ -45,7 +47,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       )}
       <div
         {...rest}
-        onClick={() => handleToggled()}
+        onClick={() => !isDisabled && handleToggled()}
         className={` w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
           !isToggled
             ? "relative top-[10rem] justify-between"
@@ -59,4 +61,4 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   );
 };
 
-export default MultiSelect;
+export default MultiMultiSelect;
