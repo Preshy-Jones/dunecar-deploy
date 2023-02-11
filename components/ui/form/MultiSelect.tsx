@@ -60,7 +60,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       {isToggled && (
         <div className="relative bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
           {options?.map((item, index) => (
-            <div className="flex items-center mb-5">
+            <div key={index} className="flex items-center mb-5">
               <input
                 type="checkbox"
                 className="border-specialRed border  mr-3 text-specialRed"

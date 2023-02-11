@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules":{
+    //disable Component definition is missing display name 
+    "react/display-name": "off"
+  }
 }
