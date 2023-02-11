@@ -12,7 +12,7 @@ import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 interface MultiSelectProps {
   placeHolder?: string;
   fieldOptions: any;
-  isDisabled?: boolean;
+  isDisabled: boolean;
   handleOperation: (value: string[]) => void;
 }
 
@@ -35,14 +35,16 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   const [endIndex, setEndIndex] = useState(2);
 
   const handleToggled = () => {
-    if (!isToggled) {
-      dispatch(setFilterTotal(MATHOPERATIONS.ADD));
-    } else if (isToggled) {
-      dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
-      handleOperation(selected);
-    }
+    if (!isDisabled) {
+      if (!isToggled) {
+        dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+      } else if (isToggled) {
+        dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
+        handleOperation(selected);
+      }
 
-    setIsToggled(!isToggled);
+      setIsToggled(!isToggled);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,23 +75,19 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   };
 
   //sort fieldOptions and place checked options at the top
-  
-
-
-
 
   return (
     <div>
-      {isToggled && (
+      {isToggled && isDisabled === false && (
         <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[12.4375rem]">
           <div className="flex pb-3 font-outfit font-medium justify-between">
             <div
               className="absolute left-0"
               onClick={() => handleSlide("left")}
             >
-              <BsFillArrowLeftCircleFill />
+              <BsFillArrowLeftCircleFill className="text-specialRed" />
             </div>
-            {fieldOptions.map(
+            {fieldOptions?.map(
               (item, index: number) =>
                 index >= startIndex &&
                 index < endIndex && (
@@ -106,7 +104,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
                           : "text-black font-medium"
                       }   text-[1.25rem] `}
                     >
-                      {fieldOptions[index].collection_name}
+                      {fieldOptions[index]?.collection_name}
                     </h2>
                   </div>
                 )
@@ -115,7 +113,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
               className="absolute right-0"
               onClick={() => handleSlide("right")}
             >
-              <BsFillArrowRightCircleFill />
+              <BsFillArrowRightCircleFill className="text-specialRed" />
             </div>
           </div>
           {fieldOptions[currentIndex].options.map((item, index) => (

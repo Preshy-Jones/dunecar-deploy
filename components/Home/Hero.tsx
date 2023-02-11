@@ -726,7 +726,7 @@ const Hero = () => {
   };
 
   const modelHandleOperation = (models: string[]) => {
-    dispatch(getCars({ models }));
+    dispatch(getCars({ models, makes: carFilter.makes }));
   };
 
   const locationHandleOperation = (locations: string[]) => {
@@ -800,7 +800,7 @@ const Hero = () => {
                   />
                   <MultiMultiSelect
                     placeHolder="Select Model"
-                    isDisabled={false}
+                    isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
                     handleOperation={modelHandleOperation}
                   />
