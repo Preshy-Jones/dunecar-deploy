@@ -801,7 +801,7 @@ const Hero = () => {
                   <MultiMultiSelect
                     placeHolder="Select Model"
                     isDisabled={false}
-                    options={modelOptions}
+                    fieldOptions={modelOptions}
                     handleOperation={modelHandleOperation}
                   />
                   <MultiSelect

@@ -83,11 +83,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             : "justify-between relative bottom-[7.3rem]"
         }`}
       >
-        {selected.length > 1 ? (
+        {selected.length >= 1 ? (
           <h2 className="text-[#081314] ">
             {capitalizeFirstLetter(selected[0])}
-            {"   "} |{"   "}
-            {capitalizeFirstLetter(selected[1])}...
+            {"   "} {"   "}
+            {selected.length > 1 && `| ${capitalizeFirstLetter(selected[1])}...`}
           </h2>
         ) : (
           <h2 className="">{placeHolder}</h2>
