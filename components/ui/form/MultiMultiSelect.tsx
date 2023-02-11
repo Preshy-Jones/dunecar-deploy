@@ -74,7 +74,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   return (
     <div>
       {isToggled && (
-        <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[11rem]">
+        <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[13rem]">
           <div className="flex pb-3 font-outfit font-medium justify-between">
             <div
               className="absolute left-0"
@@ -87,7 +87,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
                 index >= startIndex &&
                 index < endIndex && (
                   <div
-                    className="w-[4.5625rem] border-b-[0.5px] pb-1.5 border-b-[#D5D5D5] cursor-pointer"
+                    className={`w-[5.5625rem] border-b-[0.5px] pb-1.5 border-b-[#D5D5D5] cursor-pointer ${index===endIndex-1 && "flex justify-end"}`}
                     onClick={() => handleTabChange(index)}
                   >
                     <h2
