@@ -7,17 +7,18 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
+import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 
 interface MultiSelectProps {
   placeHolder?: string;
-  options: any;
-  isDisabled?: boolean;
+  fieldOptions: any;
+  isDisabled: boolean;
   handleOperation: (value: string[]) => void;
 }
 
 const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   placeHolder,
-  options,
+  fieldOptions,
   isDisabled,
   handleOperation,
   ...rest
@@ -34,14 +35,16 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   const [endIndex, setEndIndex] = useState(2);
 
   const handleToggled = () => {
-    if (!isToggled) {
-      dispatch(setFilterTotal(MATHOPERATIONS.ADD));
-    } else if (isToggled) {
-      dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
-      handleOperation(selected);
-    }
+    if (!isDisabled) {
+      if (!isToggled) {
+        dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+      } else if (isToggled) {
+        dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
+        handleOperation(selected);
+      }
 
-    setIsToggled(!isToggled);
+      setIsToggled(!isToggled);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,30 +67,34 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
         setEndIndex(endIndex - 1);
       }
     } else if (direction === "right") {
-      if (endIndex < options.length) {
+      if (endIndex < fieldOptions.length) {
         setStartIndex(startIndex + 1);
         setEndIndex(endIndex + 1);
       }
     }
   };
 
+  //sort fieldOptions and place checked options at the top
+
   return (
     <div>
-      {isToggled && (
-        <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[13rem]">
+      {isToggled && isDisabled === false && (
+        <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[12.4375rem]">
           <div className="flex pb-3 font-outfit font-medium justify-between">
             <div
               className="absolute left-0"
               onClick={() => handleSlide("left")}
             >
-              <BsFillArrowLeftCircleFill />
+              <BsFillArrowLeftCircleFill className="text-specialRed" />
             </div>
-            {options.map(
+            {fieldOptions?.map(
               (item, index: number) =>
                 index >= startIndex &&
                 index < endIndex && (
                   <div
-                    className={`w-[5.5625rem] border-b-[0.5px] pb-1.5 border-b-[#D5D5D5] cursor-pointer ${index===endIndex-1 && "flex justify-end"}`}
+                    className={`w-[6.21875rem] border-b-[0.5px] pb-1.5 border-b-[#D5D5D5] cursor-pointer ${
+                      index === endIndex - 1 && "flex justify-end"
+                    }`}
                     onClick={() => handleTabChange(index)}
                   >
                     <h2
@@ -97,7 +104,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
                           : "text-black font-medium"
                       }   text-[1.25rem] `}
                     >
-                      {options[index].collection_name}
+                      {fieldOptions[index]?.collection_name}
                     </h2>
                   </div>
                 )
@@ -106,10 +113,10 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
               className="absolute right-0"
               onClick={() => handleSlide("right")}
             >
-              <BsFillArrowRightCircleFill />
+              <BsFillArrowRightCircleFill className="text-specialRed" />
             </div>
           </div>
-          {options[currentIndex].options.map((item, index) => (
+          {fieldOptions[currentIndex].options.map((item, index) => (
             <div className="flex items-center mb-5" key={index}>
               <input
                 type="checkbox"
@@ -126,14 +133,23 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
       )}
       <div
         {...rest}
-        onClick={() => !isDisabled && handleToggled()}
+        onClick={() => handleToggled()}
         className={` w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
           !isToggled
             ? "relative top-[10rem] justify-between"
             : "justify-between relative bottom-[7.3rem]"
         }`}
       >
-        <h2>{placeHolder}</h2>
+        {selected.length >= 1 ? (
+          <h2 className="text-[#081314] ">
+            {capitalizeFirstLetter(selected[0])}
+            {"   "} {"   "}
+            {selected.length > 1 &&
+              `| ${capitalizeFirstLetter(selected[1])}...`}
+          </h2>
+        ) : (
+          <h2 className="">{placeHolder}</h2>
+        )}
         <CaretDownIcon />
       </div>
     </div>

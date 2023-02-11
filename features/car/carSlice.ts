@@ -9,8 +9,8 @@ export interface CarState {
   cars: Car[];
   makes: CarMake[];
   carFilter: {
-    model: (string | number)[];
-    make: (string | number)[];
+    models: (string )[];
+    makes: (string )[];
   };
   models: CarModel[];
   isLoading: boolean;
@@ -33,12 +33,12 @@ const initialState: CarState = {
 };
 
 interface CarPayload {
-  models?: (string | number)[];
-  makes?: (string | number)[];
+  models?: (string)[];
+  makes?: (string)[];
 }
 
 interface ModelPayload {
-  makes: (string | number)[];
+  makes: (string)[];
 }
 
 export const getCars = createAsyncThunk(
