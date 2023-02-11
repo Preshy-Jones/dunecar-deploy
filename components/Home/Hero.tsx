@@ -735,8 +735,8 @@ const Hero = () => {
 
   useEffect(() => {
     dispatch(getMakes());
-    console.log(modelOptions);
-  }, []);
+    // console.log(modelOptions);
+  }, [dispatch]);
 
   return (
     <div className="font-roboto">
