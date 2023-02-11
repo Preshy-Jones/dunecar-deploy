@@ -846,40 +846,9 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      {/* <div className="flex justify-center">
-        <div className="w-[30%]">
-          <MultiSelect
-            key="example_id"
-            options={options}
-            onChange={handleChange}
-            value={optionSelected}
-            isSelectAll={true}
-            menuPlacement={"top"}
-          />
-        </div>
-      </div> */}
+
     </div>
   );
 };
 
 export default Hero;
-
-// const selectOptions: StylesConfig = {
-//   option: (styles) => {
-//     return {
-//       ...styles,
-//     };
-//   },
-//   placeholder: (styles) => {
-//     return {
-//       ...styles,
-//       color: "black",
-//     };
-//   },
-//   dropdownIndicator: (styles) => {
-//     return {
-//       ...styles,
-//       color: "black",
-//     };
-//   },
-// };
