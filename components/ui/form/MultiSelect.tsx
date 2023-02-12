@@ -58,7 +58,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     <div>
       {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
       {isToggled && (
-        <div className="relative bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
+        <div className="md:relative md:bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
           {options?.map((item, index) => (
             <div className="flex items-center mb-5" key={index}>
               <input
@@ -77,9 +77,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       <div
         {...rest}
         onClick={() => handleToggled()}
-        className={` w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
+        className={` md:w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
           !isToggled
-            ? "relative top-[10rem] justify-between"
+            ? "md:relative md:top-[10rem] justify-between"
             : "justify-between relative bottom-[7.3rem]"
         }`}
       >

@@ -23,8 +23,8 @@ const initialState: CarState = {
   cars: [],
   makes: [],
   carFilter: {
-    model: [],
-    make: [],
+    models: [],
+    makes: [],
   },
   models: [],
   isLoading: true,

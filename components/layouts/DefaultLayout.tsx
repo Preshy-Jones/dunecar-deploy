@@ -6,8 +6,10 @@ import NavBar from "./NavBar";
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="">
-      <NavBar />
       <div>
+        <div className="hidden md:block">
+          <NavBar />
+        </div>
         <div className="md:hidden">
           <MobileNavBar />
         </div>
