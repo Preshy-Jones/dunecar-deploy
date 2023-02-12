@@ -5,7 +5,7 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-const animate = () => {
+const Animate = () => {
   const list = { hidden: { opacity: 0 } };
   const item = { hidden: { x: -10, opacity: 0 } };
 
@@ -56,4 +56,4 @@ const animate = () => {
   );
 };
 
-export default animate;
+export default Animate;
