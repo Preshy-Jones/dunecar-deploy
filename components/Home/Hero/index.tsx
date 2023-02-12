@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { getCars, getMakes, getModels } from "../../features/car/carSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { CarModel } from "../../types/car";
-import { MultiMultiSelect, MultiSelect } from "../ui/form";
+import { getCars, getMakes, getModels } from "../../../features/car/carSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { motion } from "framer-motion";
+import { MultiMultiSelect, MultiSelect } from "../../ui/form";
 
 // import heroImage from "../../assets/heroimage.svg";
 
@@ -697,6 +697,7 @@ const Hero = () => {
     },
   ];
 
+  const [active, setActive] = React.useState(0);
   const dispatch = useAppDispatch();
   const { makes, models, cars, carFilter, filterTotal } = useAppSelector(
     (state) => state.car
@@ -705,7 +706,7 @@ const Hero = () => {
     value: make.slug,
     label: make.title,
   }));
-  const modelOptions = models.map((model) => ({
+  const modelOptions = dummyModels.map((model) => ({
     collection_name: model.make_name,
     options: model.models.map((model) => ({
       value: model.slug,
@@ -713,7 +714,7 @@ const Hero = () => {
     })),
   }));
 
-  const [modelToggled, setModelToggled] = React.useState(false);
+  const [modelToggled, setModelToggled] = React.useState(true);
 
   const makeHandleOperation = (makes: string[]) => {
     dispatch(getModels({ makes: makes }));
@@ -761,28 +762,52 @@ const Hero = () => {
           </div>
         </div>
         <div className="absolute top-[19.5rem]  flex justify-center w-full md:hidden ">
-          <div className="bg-white px-4 pt-4 pb-8 shadow-card rounded-[4px]">
-            <div className="flex mb-4">
-              <div className="px-9 border-b border-b-[#D1D1D1] pb-3 ">
+          <div className="bg-white px-4 pt-4 pb-8 shadow-card rounded-[4px] w-[89.33%]">
+            <div className="flex mb-4 border-b border-b-[#D1D1D1]">
+              <div
+                className="px-9 pb-3 cursor-pointer"
+                onClick={() => setActive(0)}
+              >
                 <h2 className="text-[1.125rem] font-bold">Buy a Car</h2>
               </div>
-              <div className="px-9 border-b border-b-[#D1D1D1] pb-3">
+              <div
+                className="px-9 pb-3 cursor-pointer"
+                onClick={() => setActive(1)}
+              >
                 <h2 className="text-[1.125rem]">Sell a Car</h2>
               </div>
             </div>
-            <div className="mb-3">
-              <MultiSelect />
-            </div>
-            <div className="mb-3">
-              <MultiSelect />
-            </div>
-            <div className="mb-6">
-              <MultiSelect />
-            </div>
-            <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
-              <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-              Search all 22 cars
-            </button>
+            <motion.div
+              animate={{ x: active === 1 ? 160 : 0 }}
+              className="h-[2px] bg-red-700 w-[50%] relative bottom-[1.1rem] rounded-md"
+            ></motion.div>
+            {active === 0 ? (
+              <div>
+                <div className="mb-3">
+                  <MultiSelect />
+                </div>
+                <div className="mb-3">
+                  <MultiSelect />
+                </div>
+                <div className="mb-6">
+                  <MultiSelect />
+                </div>
+                <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
+                  <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                  Search all 22 cars
+                </button>
+              </div>
+            ) : (
+              <div>
+                <p className="mb-[1.1rem] mt-2 text-lg leading-[1.9375rem] font-light text-black tracking-[-0.01em]">
+                  Get an instant offer and a fast payment on handover day when
+                  you sell outright.
+                </p>
+                <button className="bg-black text-white h-[48px] px-4 rounded-[4px] w-full">
+                  Start Valuation
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="absolute top-[21rem]  md:flex justify-center w-full hidden h-[13.25rem] ">

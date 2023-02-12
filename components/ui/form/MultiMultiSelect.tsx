@@ -8,6 +8,7 @@ import {
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
+import { motion } from "framer-motion";
 
 interface MultiSelectProps {
   placeHolder?: string;
@@ -34,6 +35,8 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(2);
 
+  const [active, setActive] = React.useState(0);
+
   const handleToggled = () => {
     if (!isDisabled) {
       if (!isToggled) {
@@ -58,6 +61,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
 
   const handleTabChange = (index: number) => {
     setCurrentIndex(index);
+    setActive(1);
   };
 
   const handleSlide = (direction: string) => {
@@ -79,8 +83,8 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   return (
     <div>
       {isToggled && isDisabled === false && (
-        <div className="relative bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-3.5 w-[12.4375rem]">
-          <div className="flex pb-3 font-outfit font-medium justify-between">
+        <div className="md:relative md:bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]">
+          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5]">
             <div
               className="absolute left-0"
               onClick={() => handleSlide("left")}
@@ -92,7 +96,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
                 index >= startIndex &&
                 index < endIndex && (
                   <div
-                    className={`w-[6.21875rem] border-b-[0.5px] pb-1.5 border-b-[#D5D5D5] cursor-pointer ${
+                    className={`w-[6.21875rem]  pb-1.5  cursor-pointer ${
                       index === endIndex - 1 && "flex justify-end"
                     }`}
                     onClick={() => handleTabChange(index)}
@@ -100,8 +104,8 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
                     <h2
                       className={`${
                         index === currentIndex
-                          ? "text-[#081314] text-opacity-20 font-light"
-                          : "text-black font-medium"
+                          ? "text-black font-medium"
+                          : "text-[#081314] text-opacity-20 font-light"
                       }   text-[1.25rem] `}
                     >
                       {fieldOptions[index]?.collection_name}
@@ -116,19 +120,25 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
               <BsFillArrowRightCircleFill className="text-specialRed" />
             </div>
           </div>
-          {fieldOptions[currentIndex].options.map((item, index) => (
-            <div className="flex items-center mb-5" key={index}>
-              <input
-                type="checkbox"
-                className="border-specialRed border  mr-3 text-specialRed"
-                value={item.value}
-                name="make"
-                checked={selected.includes(item.value)}
-                onChange={handleChange}
-              />
-              <label style={{ marginLeft: "5px" }}>{item.label}</label>
-            </div>
-          ))}
+          <motion.div
+            animate={{ x: active === 1 ? 160 : 0 }}
+            className="h-[2px] bg-red-700 w-[50%] relative bottom-[0.05rem] rounded-md"
+          ></motion.div>
+          <div className="pt-3">
+            {fieldOptions[currentIndex].options.map((item, index) => (
+              <div className="flex items-center mb-5" key={index}>
+                <input
+                  type="checkbox"
+                  className="border-specialRed border  mr-3 text-specialRed"
+                  value={item.value}
+                  name="make"
+                  checked={selected.includes(item.value)}
+                  onChange={handleChange}
+                />
+                <label style={{ marginLeft: "5px" }}>{item.label}</label>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       <div
@@ -136,7 +146,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
         onClick={() => handleToggled()}
         className={` w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
           !isToggled
-            ? "relative top-[10rem] justify-between"
+            ? "md:relative md:top-[10rem] justify-between"
             : "justify-between relative bottom-[7.3rem]"
         }`}
       >
