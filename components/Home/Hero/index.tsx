@@ -784,13 +784,25 @@ const Hero = () => {
             {active === 0 ? (
               <div>
                 <div className="mb-3">
-                  <MultiSelect />
+                  <MultiSelect
+                    placeHolder="Select Make"
+                    options={makeOptions}
+                    handleOperation={makeHandleOperation}
+                  />
                 </div>
                 <div className="mb-3">
-                  <MultiSelect />
+                  <MultiSelect
+                    placeHolder="Select Model"
+                    options={makeOptions}
+                    handleOperation={makeHandleOperation}
+                  />
                 </div>
                 <div className="mb-6">
-                  <MultiSelect />
+                  <MultiSelect
+                    placeHolder="Select Location"
+                    options={makeOptions}
+                    handleOperation={makeHandleOperation}
+                  />
                 </div>
                 <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
                   <AiOutlineSearch className="mr-3 text-[1.5rem]" />
