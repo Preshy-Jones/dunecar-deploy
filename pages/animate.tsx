@@ -9,6 +9,7 @@ const Animate = () => {
   const list = { hidden: { opacity: 0 } };
   const item = { hidden: { x: -10, opacity: 0 } };
 
+  const [open, setOpen] = React.useState(false);
   const [move, setMove] = React.useState(false);
   return (
     <div>
@@ -47,13 +48,46 @@ const Animate = () => {
           </div>
           <motion.div
             className="h-[5rem] w-[5rem] bg-specialRed"
-            animate={{ x: 100, scale: 1 }}
-            initial={{ x: 0, scale: 0 }}
+            // whileHover={{
+            //   scale: 1.2,
+            //   transition: { duration: 1 },
+            // }}
+            animate={{ x: 100 }}
+            transition={{ delay: 1, default: { ease: "linear" } }}
+            // animate={{ x: 100, scale: 1 }}
+            // initial={{ x: 0, scale: 0 }}
           ></motion.div>
         </div>
       </div>
+      {/* <div className="h-[100vh] w-[100vw] flex justify-center items-center">
+        <div>
+          <button className="cursor-pointer" onClick={() => setOpen(!open)}>
+            Open
+          </button>
+          {open && <Modal close={setOpen} />}
+        </div>
+      </div> */}
     </div>
   );
 };
 
-export default Animate;
+export default animate;
+
+const Modal = ({ close }) => {
+  return (
+    <div
+      className="fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-20"
+      onClick={close()}
+    >
+      <div
+        className="absolute top-[5rem] bg-red-500 z-30 w-[10rem] h-[20rem] bg-opacity-10 flex justify-center"
+        onClick={(e) => {
+          // do not close modal if anything inside modal content is clicked
+          e.stopPropagation();
+        }}
+      >
+        <h1 className="text-black">hello</h1>
+      </div>
+    </div>
+  );
+};

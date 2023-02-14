@@ -1,9 +1,9 @@
 import Head from "next/head";
 import BlogSection from "../components/Home/BlogSection";
 import { CarSelection } from "../components/Home/CarSelection";
-import Featured from "../components/Home/Featured";
+import Featured from "../components/Home/Featured/index";
 import Hero from "../components/Home/Hero";
-import SelllYourCar from "../components/Home/SelllYourCar";
+import SellYourCar from "../components/Home/SellYourCar";
 import WhyChooseUs from "../components/Home/WhyChooseUs";
 import DefaultLayout from "../components/layouts/DefaultLayout";
 
@@ -29,7 +29,7 @@ const Home = () => {
         <WhyChooseUs />
         <Featured />
         <CarSelection />
-        <SelllYourCar />
+        <SellYourCar />
         <BlogSection />
       </main>
     </DefaultLayout>

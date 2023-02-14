@@ -3,7 +3,7 @@ import React from "react";
 export const CarSelection = () => {
   return (
     <div className="mt-14 flex justify-center font-roboto mb-6">
-      <div className="w-[80%]">
+      <div className="w-[86.1111111%]">
         <h1 className="font-extrabold text-[2rem] mb-8">
           Selection of our Cars
         </h1>

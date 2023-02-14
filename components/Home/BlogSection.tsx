@@ -9,7 +9,7 @@ import image4 from "../../public/assets/article-image-4.svg";
 const BlogSection = () => {
   return (
     <div className="mt-14 flex justify-center font-roboto mb-20">
-      <div className="w-[80%]">
+      <div className="w-[86.1111111%]">
         <div className="flex justify-between items-center">
           <h1 className="font-extrabold text-[2rem] mb-8">Articles on Cars</h1>
           <Link className="text-specialRed underline hidden sm:block" href="#">

@@ -1,8 +1,10 @@
 import Image from "next/image";
-import React, { forwardRef, ReactNode } from "react";
-import sampleImage from "../../public/assets/sample-car.svg";
-import dot from "../../public/assets/dot.svg";
+import React, { forwardRef, ReactNode, useState } from "react";
+import dot from "../../../public/assets/dot.svg";
 import Carousel, { ReactElasticCarouselProps } from "react-elastic-carousel";
+import ToggleLike from "./ToggleLike";
+import { ToggleButtonIcon } from "../../ui/icons";
+import ImageSlider from "./ImageSlider";
 
 const CustomCarousel = forwardRef<
   any,
@@ -29,8 +31,11 @@ const MobileSection = () => {
         {repeater.map((item, index) => {
           return (
             <div key={index} className=" border border-[#D1D1D1]">
-              <Image src={sampleImage} alt="car-image1" />
+              <ImageSlider />
               <div className="px-2">
+                <h2 className="text-[#414141] tracking-primary leading-primary text-[15.8519px] mb-4">
+                  DUNE CERTIFIED
+                </h2>
                 <div className="flex">
                   <h2 className="text-[25.5856px] text-[#D14532]">
                     2019 Chysler 300s

@@ -2,10 +2,10 @@ import Image from "next/image";
 import React from "react";
 import PromoCar from "../../public/assets/promo-car.svg";
 
-const SelllYourCar = () => {
+const SellYourCar = () => {
   return (
-    <div className="font-roboto flex justify-center bg-white sm:mt-0 mt-24" >
-      <div className="flex items-center w-[80%] justify-between sm:flex-row flex-col">
+    <div className="font-roboto flex justify-center bg-white sm:mt-0 mt-24">
+      <div className="flex items-center w-[86.1111111%] justify-between sm:flex-row flex-col">
         <div className="flex-2 sm:mb-0 mb-10 mr-8">
           <h1 className="text-[2rem] text-[#081314] font-extrabold">
             Sell your Car
@@ -33,4 +33,4 @@ const SelllYourCar = () => {
   );
 };
 
-export default SelllYourCar;
+export default SellYourCar;
