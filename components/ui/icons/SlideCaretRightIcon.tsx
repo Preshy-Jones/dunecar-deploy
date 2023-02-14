@@ -1,10 +1,9 @@
 import React from "react";
 
-const SlideCaretRightIcon = () => {
+const SlideCaretRightIcon = ({ ...rest }) => {
   return (
     <svg
-      width="15"
-      height="23"
+      {...rest}
       viewBox="0 0 15 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

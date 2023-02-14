@@ -15,7 +15,7 @@ const Featured = () => {
   const repeater = [0, 0, 0];
 
   return (
-    <div className="py-[5rem] sm:flex sm:justify-center font-roboto mb-6 bg-black w-full">
+    <div className="py-[5rem] sm:flex sm:justify-center font-roboto mb-6 bg-white w-full">
       <div className="sm:w-[86.1111111%]">
         <h1 className="font-extrabold text-[2rem] mb-8">Featured Cars</h1>
         <div className="md:flex justify-between hidden">

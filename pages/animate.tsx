@@ -33,7 +33,7 @@ const animate = () => {
         <motion.li variants={item}>Item 2</motion.li>
         <motion.li variants={item}>Item 3</motion.li>
       </motion.ul> */}
-      {/* <div className="flex justify-center items-center w-[100vw] h-[100vh]">
+      <div className="flex justify-center items-center w-[100vw] h-[100vh]">
         <div>
           <div className="flex justify-between mb-5 text-specialRed text-[3rem]">
             <BsFillArrowLeftCircleFill onClick={() => setMove(false)} />
@@ -48,19 +48,25 @@ const animate = () => {
           </div>
           <motion.div
             className="h-[5rem] w-[5rem] bg-specialRed"
-            animate={{ x: 100, scale: 1 }}
-            initial={{ x: 0, scale: 0 }}
+            // whileHover={{
+            //   scale: 1.2,
+            //   transition: { duration: 1 },
+            // }}
+            animate={{ x: 100 }}
+            transition={{ delay: 1, default: { ease: "linear" } }}
+            // animate={{ x: 100, scale: 1 }}
+            // initial={{ x: 0, scale: 0 }}
           ></motion.div>
         </div>
-      </div> */}
-      <div className="h-[100vh] w-[100vw] flex justify-center items-center">
+      </div>
+      {/* <div className="h-[100vh] w-[100vw] flex justify-center items-center">
         <div>
           <button className="cursor-pointer" onClick={() => setOpen(!open)}>
             Open
           </button>
           {open && <Modal close={setOpen} />}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
