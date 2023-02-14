@@ -5,7 +5,7 @@ const ProductCatalogue = () => {
   const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className="bg-pageBg">
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 px-[1.5rem]">
         <h2 className="text-secondaryBlack">Used Cars for sale</h2>
         <div className="w-[1px] bg-dividerGray h-[24px] mx-4"></div>
         <h2 className="text-secondaryGray text-[0.875rem] leading-secondary">

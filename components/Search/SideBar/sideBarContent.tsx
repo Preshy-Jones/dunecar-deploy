@@ -4,43 +4,40 @@ import Year from "./Filters/Year";
 
 const SideBarContent = [
   {
-    title: "Make & Model",
+    title: "Distance & Shipping",
     filterComponent: <MakeModel />,
   },
   {
-    title: "Price",
+    title: "Make",
     filterComponent: <Price />,
   },
   {
-    title: "Fuel & Efficiency",
-  },
-  {
-    title: "Year",
-    filterComponent: <Year />,
-  },
-  {
-    title: "Mileasge",
-  },
-  {
-    title: "Gearbox & Engine",
-  },
-  {
-    title: "Colour",
+    title: "Model",
   },
   {
     title: "Body Type",
+    filterComponent: <Year />,
   },
   {
-    title: "Drive Type",
+    title: "Fuel Type",
   },
   {
-    title: "Doors & Seats",
+    title: "Year",
+  },
+  {
+    title: "Price",
+  },
+  {
+    title: "Mileage",
   },
   {
     title: "Features",
   },
   {
-    title: "CO2 Emissions",
+    title: "Exterior Color",
+  },
+  {
+    title: "Interior Color",
   },
 ];
 

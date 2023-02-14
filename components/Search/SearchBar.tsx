@@ -3,7 +3,7 @@ import { SearchIcon } from "../ui/icons";
 
 const SearchBar = () => {
   return (
-    <div className="justify-center flex relative pb-4">
+    <div className="justify-center flex relative pb-4 shadow-primary">
       <div className="relative w-[85.1267992%]">
         <input
           type="text"
