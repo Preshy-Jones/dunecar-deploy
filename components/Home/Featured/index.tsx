@@ -3,8 +3,8 @@ import React, { forwardRef, ReactNode, useState } from "react";
 import dot from "../../../public/assets/dot.svg";
 import Carousel, { ReactElasticCarouselProps } from "react-elastic-carousel";
 import ToggleLike from "./ToggleLike";
-import sampleImage from "../../../public/assets/sample-car.svg";
 import { ToggleButtonIcon } from "../../ui/icons";
+import ImageSlider from "./ImageSlider";
 
 const CustomCarousel = forwardRef<
   any,
@@ -15,18 +15,14 @@ const Featured = () => {
   const repeater = [0, 0, 0];
 
   return (
-    <div className="py-[5rem] sm:flex sm:justify-center font-roboto mb-6 bg-white w-full">
+    <div className="py-[5rem] sm:flex sm:justify-center font-roboto mb-6 bg-black w-full">
       <div className="sm:w-[86.1111111%]">
         <h1 className="font-extrabold text-[2rem] mb-8">Featured Cars</h1>
         <div className="md:flex justify-between hidden">
           {repeater.map((item, index) => {
             return (
               <div key={index} className="w-[30%] ">
-                <div className="relative">
-                  <Image src={sampleImage} alt="car-image1" />
-                  <ToggleLike />
-                  <ToggleButtonIcon className="absolute top-[12rem] right-[1rem]" />
-                </div>
+                <ImageSlider />
                 <div className="px-3 border-b border-r border-l border-[#D1D1D1] -mt-2">
                   <div className="py-3">
                     <h2 className="text-[#414141] tracking-primary leading-primary text-[15.8519px] mb-4">
@@ -87,10 +83,7 @@ const MobileSection = () => {
         {repeater.map((item, index) => {
           return (
             <div key={index} className=" border border-[#D1D1D1]">
-              <div className="relative">
-                <Image src={sampleImage} alt="car-image1" />
-                <ToggleLike />
-              </div>
+              <ImageSlider />
               <div className="px-2">
                 <h2 className="text-[#414141] tracking-primary leading-primary text-[15.8519px] mb-4">
                   DUNE CERTIFIED

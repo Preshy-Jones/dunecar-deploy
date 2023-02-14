@@ -8,3 +8,5 @@ export { default as CaretDownIcon } from "./CaretDown";
 export { default as HeartIcon } from "./HeartIcon";
 export { default as HeartIconRed } from "./HeartIconRed";
 export { default as ToggleButtonIcon } from "./ToggleButtonIcon";
+export { default as SlideCaretLeftIcon } from "./SlideCaretLeftIcon";
+export { default as SlideCaretRightIcon } from "./SlideCaretRightIcon";
