@@ -706,7 +706,7 @@ const Hero = () => {
     value: make.slug,
     label: make.title,
   }));
-  const modelOptions = dummyModels.map((model) => ({
+  const modelOptions = models.map((model) => ({
     collection_name: model.make_name,
     options: model.models.map((model) => ({
       value: model.slug,

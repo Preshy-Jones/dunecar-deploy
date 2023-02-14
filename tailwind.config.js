@@ -15,6 +15,7 @@ module.exports = {
         pageBg: "#FAFAFA",
         borderDark: "rgba(203, 203, 203, 0.5)",
         secondaryGray: "rgba(34, 17, 33, 0.7)",
+        tertiaryGray: "rgba(34, 17, 33, 0.8)",
         dividerGray: "#D1D1D1",
       },
       fontFamily: {
@@ -46,6 +47,7 @@ module.exports = {
         "6.5xl": ["4rem", { lineHeight: "6rem" }],
       },
       boxShadow: {
+        primary: "0px 10px 46px rgba(190, 190, 190, 0.25)",
         card: "inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
         bigCard: "0px -1px 6px rgba(164, 164, 164, 0.25)",
         cardShadow:
