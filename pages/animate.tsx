@@ -71,23 +71,4 @@ const Animate = () => {
   );
 };
 
-export default animate;
-
-const Modal = ({ close }) => {
-  return (
-    <div
-      className="fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-20"
-      onClick={close()}
-    >
-      <div
-        className="absolute top-[5rem] bg-red-500 z-30 w-[10rem] h-[20rem] bg-opacity-10 flex justify-center"
-        onClick={(e) => {
-          // do not close modal if anything inside modal content is clicked
-          e.stopPropagation();
-        }}
-      >
-        <h1 className="text-black">hello</h1>
-      </div>
-    </div>
-  );
-};
+export default Animate;
