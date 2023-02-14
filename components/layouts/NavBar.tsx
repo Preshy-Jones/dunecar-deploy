@@ -4,7 +4,7 @@ import Logo from "../../public/assets/logo.svg";
 
 const NavBar = () => {
   return (
-    <div className=" py-5 px-[7.5rem] font-roboto w-full z-40 bg-white top-0 sticky">
+    <div className=" py-5 px-[7.5rem] font-roboto w-full z-40 bg-white top-0 sticky hidden md:block">
       <div className="flex justify-between relative items-center ">
         <div className="flex-3">
           <Image src={Logo} alt="logo" />

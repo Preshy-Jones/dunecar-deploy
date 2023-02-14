@@ -5,3 +5,6 @@ export { default as HamburgerIcon } from "./HamburgerIcon";
 export { default as CancelIcon } from "./CancelIcon";
 export { default as CaretRightIcon } from "./CaretRightIcon";
 export { default as CaretDownIcon } from "./CaretDown";
+export { default as HeartIcon } from "./HeartIcon";
+export { default as HeartIconRed } from "./HeartIconRed";
+export { default as ToggleButtonIcon } from "./ToggleButtonIcon";

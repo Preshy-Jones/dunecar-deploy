@@ -55,7 +55,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     }
   };
   return (
-    <div>
+    <div className="font-roboto">
       {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
       {isToggled && (
         <div className="md:relative md:bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
@@ -69,7 +69,12 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 checked={selected.includes(item.value)}
                 onChange={handleChange}
               />
-              <label style={{ marginLeft: "5px" }}>{item.label}</label>
+              <label
+                className="leading-[19px] text-black font-normal"
+                style={{ marginLeft: "5px" }}
+              >
+                {item.label}
+              </label>
             </div>
           ))}
         </div>
@@ -84,13 +89,14 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         }`}
       >
         {selected.length >= 1 ? (
-          <h2 className="text-[#081314] ">
+          <h2 className="leading-[19px] text-black ">
             {capitalizeFirstLetter(selected[0])}
             {"   "} {"   "}
-            {selected.length > 1 && `| ${capitalizeFirstLetter(selected[1])}...`}
+            {selected.length > 1 &&
+              `| ${capitalizeFirstLetter(selected[1])}...`}
           </h2>
         ) : (
-          <h2 className="">{placeHolder}</h2>
+          <h2 className=" leading-[19px] text-black">{placeHolder}</h2>
         )}
         <CaretDownIcon />
       </div>

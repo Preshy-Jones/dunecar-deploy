@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         lightDark: "rgba(33, 33, 33, 0.9)",
         specialRed: "#D14532",
+        specialBlack: "#081314",
         pageBg: "#FAFAFA",
         borderDark: "rgba(203, 203, 203, 0.5)",
       },
@@ -19,6 +20,12 @@ module.exports = {
         robotoserif: ["'Roboto Serif', serif"],
         roboto: ["'Roboto', sans-serif"],
         outfit: ["'Outfit', sans-serif"],
+      },
+      lineHeight: {
+        primary: "1.1875rem",
+      },
+      letterSpacing: {
+        primary: "0.04em",
       },
       backgroundImage: {
         heroImage: "url('/assets/threesixty.jpg')",

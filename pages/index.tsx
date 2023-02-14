@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect } from "react";
 import BlogSection from "../components/Home/BlogSection";
 import { CarSelection } from "../components/Home/CarSelection";
-import Featured from "../components/Home/Featured";
+import Featured from "../components/Home/Featured/index";
 import Hero from "../components/Home/Hero";
 import SelllYourCar from "../components/Home/SelllYourCar";
 import WhyChooseUs from "../components/Home/WhyChooseUs";

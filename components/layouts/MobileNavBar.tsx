@@ -7,7 +7,11 @@ import { CancelIcon, CaretRightIcon, HamburgerIcon } from "../ui/icons";
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <div className={`${isOpen ? "top-0 absolute z-30" : ""} w-full bg-white`}>
+    <div
+      className={`${
+        isOpen ? "top-0 absolute z-30" : ""
+      } w-full bg-white md:hidden`}
+    >
       <div
         className={`flex justify-between py-5 px-[2rem] mb-3 ${
           isOpen ? "border-b border-b-borderDark" : ""

@@ -4,7 +4,7 @@ import { DoorDelivery, MoneyBackIcon, QualityAssurance } from "../ui/icons";
 const WhyChooseUs = () => {
   return (
     <div className="sm:mt-28 mt-[20rem] flex justify-center font-roboto pb-[4rem]">
-      <div className="w-[80%]">
+      <div className="w-[86.1111111%]">
         <h1 className="font-extrabold text-[2rem] mb-8">Why Choose Us</h1>
         <div className="flex flex-col sm:flex-row sm:justify-between items-baseline">
           {content.map((item, index) => {
@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
                 <p className="font-light text-[1.125rem] mb-8 text-center text-[#221121] leading-[2rem]">
                   {item.description}
                 </p>
-                <button className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.25rem]">
+                <button className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.25rem] font-semibold">
                   {item.linkText}
                 </button>
               </div>

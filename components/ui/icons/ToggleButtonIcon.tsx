@@ -1,0 +1,28 @@
+import React from "react";
+
+const ToggleButtonIcon = ({ ...rest }) => {
+  return (
+    <svg
+      {...rest}
+      width="52"
+      height="53"
+      viewBox="0 0 52 53"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="26.0812"
+        cy="26.572"
+        r="24.946"
+        fill="white"
+        stroke="#ABAFB3"
+        strokeWidth="1.27928"
+      />
+      <circle cx="26.0812" cy="26.5721" r="2.55856" fill="#CFCFCF" />
+      <circle cx="26.0812" cy="35.527" r="2.55856" fill="#CFCFCF" />
+      <circle cx="26.0812" cy="17.617" r="2.55856" fill="#CFCFCF" />
+    </svg>
+  );
+};
+
+export default ToggleButtonIcon;
