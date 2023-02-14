@@ -10,3 +10,5 @@ export { default as HeartIconRed } from "./HeartIconRed";
 export { default as ToggleButtonIcon } from "./ToggleButtonIcon";
 export { default as SlideCaretLeftIcon } from "./SlideCaretLeftIcon";
 export { default as SlideCaretRightIcon } from "./SlideCaretRightIcon";
+export { default as SearchIcon } from "./SearchIcon";
+

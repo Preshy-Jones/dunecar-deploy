@@ -43,20 +43,20 @@ const ImageSlider = () => {
           src={images[currentIndex]}
           alt="car-image1"
           className="z-0"
-          width="391.46px"
-          height="232.83px"
+          width="246.95px"
+          height="146.88px"
         />
         <ToggleLike />
-        <ToggleButtonIcon className="absolute top-[12rem] right-[1rem] z-0 w-[3.198125rem]" />
+        <ToggleButtonIcon className="absolute top-[8rem] right-[0.5rem] z-0 w-[2.0175rem]" />
       </div>
       <motion.div className="flex justify-between w-full  bottom-[5rem] absolute px-4">
         <motion.div
-          className="w-[1.5rem]"
+          className="w-[1rem]"
           whileHover={{
             x: 0,
             // transition: { duration: 1 },
           }}
-          initial={{ x: 50 }}
+          initial={{ x: 20 }}
         >
           <SlideCaretLeftIcon
             className="cursor-pointer"
@@ -65,12 +65,12 @@ const ImageSlider = () => {
         </motion.div>
 
         <motion.div
-          className="w-[1.5rem]"
+          className="w-[1rem]"
           whileHover={{
             x: 0,
             // transition: { duration: 1 },
           }}
-          initial={{ x: -50 }}
+          initial={{ x: -20 }}
         >
           <SlideCaretRightIcon
             className="cursor-pointer"
