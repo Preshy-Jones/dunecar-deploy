@@ -63,7 +63,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             <div key={index} className="flex items-center mb-5">
               <input
                 type="checkbox"
-                className="border-specialRed border  mr-3 text-specialRed"
+                className="border-specialRed border  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed"
                 value={item.value}
                 name="make"
                 checked={selected.includes(item.value)}
