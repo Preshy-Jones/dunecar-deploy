@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { setFilterTotal } from "../../../features/car/carSlice";
-import { useAppDispatch } from "../../../store/hooks";
+import { setFilterTotal, setMakeOptions } from "../../../features/car/carSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { Option } from "../../../types/form";
 import { MATHOPERATIONS } from "../../../types/methods";
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 import { CaretDownIcon } from "../icons";
 
 interface MultiSelectProps {
   placeHolder?: string;
-  options?: { value: string; label: string }[];
+  options?: Option[] | undefined;
   handleOperation: (value: string[]) => void;
 }
 
-interface Option {
-  value: string;
-  label: string;
-}
 const MultiSelect: React.FC<MultiSelectProps> = ({
   placeHolder,
   options,
@@ -23,6 +20,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  const { makeOptions } = useAppSelector((state) => state.car);
   const [isToggled, setIsToggled] = useState(false);
 
   const [selected, setSelected] = useState<string[]>([]);
@@ -46,12 +44,12 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           return 0;
         }
       });
-      setOptionsUpdated(result);
+      setOptionsUpdated(optionsUpdated);
       console.log(optionsUpdated);
-      
+
       handleOperation(selected);
     }
-
+    setOptionsUpdated(options);
     setIsToggled(!isToggled);
   };
 
@@ -67,15 +65,17 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     }
   };
 
-  useEffect(() => {
-    setOptionsUpdated(options);
-  }, []);
+  // useEffect(() => {
+  //   // setOptionsUpdated(options);
+  //   // dispatch(setMakeOptions(options));
+  //   console.log("hello");
+  // }, []);
   return (
     <div className="font-roboto">
       {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
       {isToggled && (
         <div className="md:relative md:bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
-          {optionsUpdated?.map((item, index) => (
+          {makeOptions?.map((item, index) => (
             <div key={index} className="flex items-center mb-5">
               <input
                 type="checkbox"
