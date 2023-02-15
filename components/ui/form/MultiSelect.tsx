@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { setFilterTotal, setMakeOptions } from "../../../features/car/carSlice";
+import { setFilterTotal } from "../../../features/car/carSlice";
+import { setMakeOptions } from "../../../features/make/makeSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Option } from "../../../types/form";
 import { MATHOPERATIONS } from "../../../types/methods";
@@ -9,18 +10,23 @@ import { CaretDownIcon } from "../icons";
 interface MultiSelectProps {
   placeHolder?: string;
   options?: Option[] | undefined;
-  handleOperation: (value: string[]) => void;
+  payloadOptions?: Option[] | undefined;
+  isDisabled?: boolean;
+  handleCloseOperation: (value: string[]) => void;
+  handleOpenOperation: (setState: ) => void;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
   placeHolder,
   options,
-  handleOperation,
+  payloadOptions,
+  isDisabled,
+  handleOpenOperation,
+  handleCloseOperation,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
 
-  const { makeOptions } = useAppSelector((state) => state.car);
   const [isToggled, setIsToggled] = useState(false);
 
   const [selected, setSelected] = useState<string[]>([]);
@@ -30,28 +36,34 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   );
 
   const handleToggled = () => {
-    if (!isToggled) {
-      dispatch(setFilterTotal(MATHOPERATIONS.ADD));
-    } else if (isToggled) {
-      dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
+    if (!isDisabled) {
+      if (!isToggled) {
+        dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+        handleOpenOperation()
+      } else if (isToggled) {
+        dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
 
-      let result = options?.sort((a, b) => {
-        if (selected.includes(a.value) && !selected.includes(b.value)) {
-          return -1;
-        } else if (!selected.includes(a.value) && selected.includes(b.value)) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      // setOptionsUpdated(optionsUpdated);
-      // console.log(optionsUpdated);
+        let result = payloadOptions?.sort((a, b) => {
+          if (selected.includes(a.value) && !selected.includes(b.value)) {
+            return -1;
+          } else if (
+            !selected.includes(a.value) &&
+            selected.includes(b.value)
+          ) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        // setOptionsUpdated(optionsUpdated);
+        // console.log(optionsUpdated);
 
-      dispatch(setMakeOptions(result));
-      handleOperation(selected);
+        dispatch(setMakeOptions(result));
+        handleCloseOperation(selected);
+      }
+
+      setIsToggled(!isToggled);
     }
-
-    setIsToggled(!isToggled);
   };
 
   //sort options and place checked options at the top
@@ -74,9 +86,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   return (
     <div className="font-roboto">
       {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
-      {isToggled && (
+      {isToggled && isDisabled === false && (
         <div className="md:relative md:bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
-          {makeOptions?.map((item, index) => (
+          {options?.map((item, index) => (
             <div key={index} className="flex items-center mb-5">
               <input
                 type="checkbox"

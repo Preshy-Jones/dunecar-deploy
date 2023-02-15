@@ -1,15 +1,13 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import {
-  getCars,
-  getMakes,
-  getModels,
-  setMakeOptions,
-} from "../../../features/car/carSlice";
+import { getCars } from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
+import { Spinner } from "../../ui/others";
+import { getModels } from "../../../features/model/modelSlice";
+import { getMakes, setMakeOptions } from "../../../features/make/makeSlice";
 
 // import heroImage from "../../assets/heroimage.svg";
 
@@ -704,8 +702,13 @@ const Hero = () => {
 
   const [active, setActive] = React.useState(0);
   const dispatch = useAppDispatch();
-  let { makes, models, cars, carFilter, filterTotal, makeOptions } =
-    useAppSelector((state) => state.car);
+  let { cars, carFilter, filterTotal, isLoading } = useAppSelector(
+    (state) => state.car
+  );
+
+  let { models } = useAppSelector((state) => state.model);
+
+  let { makes, makeOptions } = useAppSelector((state) => state.make);
 
   let makeOptionsPayload = makes.map((make) => ({
     value: make.slug,
@@ -720,9 +723,10 @@ const Hero = () => {
     })),
   }));
 
-  const [modelToggled, setModelToggled] = React.useState(true);
+  const [makeToggled, setMakeToggled] = React.useState(true);
+  const [modelToggled, setModelToggled] = React.useState(false);
 
-  const makeHandleOperation = (makes: string[]) => {
+  const makeCloseHandleOperation = (makes: string[]) => {
     dispatch(getModels({ makes: makes }));
     dispatch(getCars({ makes }));
     if (makes.length > 0) {
@@ -732,10 +736,18 @@ const Hero = () => {
     }
   };
 
-  const modelHandleOperation = (models: string[]) => {
-    dispatch(getCars({ models, makes: carFilter.makes }));
+  const makeOpenHandleOperation = () => {
+    setModelToggled(false);
   };
 
+  const modelCloseHandleOperation = (models: string[]) => {
+    dispatch(getCars({ models, makes: carFilter.makes }));
+    setMakeToggled(true);
+  };
+
+  const modelOpenHandleOperation = () => {
+    setMakeToggled(false);
+  };
   const locationHandleOperation = (locations: string[]) => {
     // dispatch(getCars({ locations }));
   };
@@ -800,22 +812,26 @@ const Hero = () => {
                 <div className="mb-3">
                   <MultiSelect
                     placeHolder="Select Make"
-                    options={makeOptionsPayload}
-                    handleOperation={makeHandleOperation}
+                    payloadOptions={makeOptionsPayload}
+                    options={makeOptions}
+                    handleOpenOperation={makeOpenHandleOperation}
+                    handleCloseOperation={makeCloseHandleOperation}
                   />
                 </div>
                 <div className="mb-3">
-                  <MultiSelect
+                  <MultiMultiSelect
                     placeHolder="Select Model"
-                    options={makeOptions}
-                    handleOperation={makeHandleOperation}
+                    isDisabled={!modelToggled}
+                    fieldOptions={modelOptions}
+                    handleCloseOperation={modelCloseHandleOperation}
+                    handleOpenOperation={modelOpenHandleOperation}
                   />
                 </div>
                 <div className="mb-6">
                   <MultiSelect
                     placeHolder="Select Location"
                     options={makeOptions}
-                    handleOperation={makeHandleOperation}
+                    handleCloseOperation={makeCloseHandleOperation}
                   />
                 </div>
                 <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
@@ -846,18 +862,26 @@ const Hero = () => {
                 <div className="flex  relative bottom-[10rem] justify-between mb-6">
                   <MultiSelect
                     placeHolder="Select Make"
-                    options={makeOptionsPayload}
-                    handleOperation={makeHandleOperation}
+                    payloadOptions={makeOptionsPayload}
+                    options={makeOptions}
+                    isDisabled={!makeToggled}
+                    handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                   <MultiMultiSelect
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
-                    handleOperation={modelHandleOperation}
+                    handleCloseOperation={modelCloseHandleOperation}
+                    handleOpenOperation={modelOpenHandleOperation}
                   />
                   <MultiSelect
                     placeHolder="Select Location"
-                    handleOperation={locationHandleOperation}
+                    payloadOptions={makeOptionsPayload}
+                    options={makeOptions}
+                    isDisabled={!makeToggled}
+                    handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                 </div>
                 <button
@@ -865,7 +889,11 @@ const Hero = () => {
                     filterTotal === 0 ? "" : "relative bottom-[17.35rem]"
                   } bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]`}
                 >
-                  <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                  {!isLoading ? (
+                    <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                  ) : (
+                    <Spinner />
+                  )}
                   Search all {cars.length} cars
                 </button>
               </div>

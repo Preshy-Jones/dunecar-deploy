@@ -14,14 +14,16 @@ interface MultiSelectProps {
   placeHolder?: string;
   fieldOptions: any;
   isDisabled: boolean;
-  handleOperation: (value: string[]) => void;
+  handleCloseOperation: (value: string[]) => void;
+  handleOpenOperation: () => void;
 }
 
 const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   placeHolder,
   fieldOptions,
   isDisabled,
-  handleOperation,
+  handleCloseOperation,
+  handleOpenOperation,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
@@ -41,9 +43,10 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
     if (!isDisabled) {
       if (!isToggled) {
         dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+        handleOpenOperation();
       } else if (isToggled) {
         dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
-        handleOperation(selected);
+        handleCloseOperation(selected);
       }
 
       setIsToggled(!isToggled);
