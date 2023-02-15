@@ -43,7 +43,7 @@ const SideBar = () => {
           SAVE SEARCH
         </button>
       </div>
-      <div className="flex items-center justify-between px-6 border-t-dividerGray border-t border-b py-[1.25rem]">
+      <div className="flex items-center justify-between px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[6rem]">
         <div className="flex justify-between items-center">
           <SortIcon />
           <h2 className="ml-4">Sort by</h2>
