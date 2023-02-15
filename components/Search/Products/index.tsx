@@ -2,7 +2,7 @@ import React from "react";
 import Product from "./Product";
 
 const ProductCatalogue = () => {
-  const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
   return (
     <div className="bg-pageBg">
       <div className="flex items-center py-4 px-[1.5rem]">
