@@ -736,8 +736,9 @@ const Hero = () => {
     }
   };
 
-  const makeOpenHandleOperation = () => {
+  const makeOpenHandleOperation = (setSelect) => {
     setModelToggled(false);
+    setSelect([]);
   };
 
   const modelCloseHandleOperation = (models: string[]) => {
