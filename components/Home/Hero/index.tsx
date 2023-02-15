@@ -1,7 +1,12 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { getCars, getMakes, getModels } from "../../../features/car/carSlice";
+import {
+  getCars,
+  getMakes,
+  getModels,
+  setMakeOptions,
+} from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
@@ -699,13 +704,14 @@ const Hero = () => {
 
   const [active, setActive] = React.useState(0);
   const dispatch = useAppDispatch();
-  const { makes, models, cars, carFilter, filterTotal } = useAppSelector(
-    (state) => state.car
-  );
-  const makeOptions = makes.map((make) => ({
+  let { makes, models, cars, carFilter, filterTotal, makeOptions } =
+    useAppSelector((state) => state.car);
+
+  let makeOptionsPayload = makes.map((make) => ({
     value: make.slug,
     label: make.title,
   }));
+
   const modelOptions = models.map((model) => ({
     collection_name: model.make_name,
     options: model.models.map((model) => ({
@@ -738,6 +744,14 @@ const Hero = () => {
     dispatch(getMakes());
     // console.log(modelOptions);
   }, [dispatch]);
+
+  useEffect(() => {
+    let makeOptionsPayload = makes.map((make) => ({
+      value: make.slug,
+      label: make.title,
+    }));
+    dispatch(setMakeOptions(makeOptionsPayload));
+  }, [makes]);
 
   return (
     <div className="font-roboto">
@@ -786,7 +800,7 @@ const Hero = () => {
                 <div className="mb-3">
                   <MultiSelect
                     placeHolder="Select Make"
-                    options={makeOptions}
+                    options={makeOptionsPayload}
                     handleOperation={makeHandleOperation}
                   />
                 </div>
@@ -832,7 +846,7 @@ const Hero = () => {
                 <div className="flex  relative bottom-[10rem] justify-between mb-6">
                   <MultiSelect
                     placeHolder="Select Make"
-                    options={makeOptions}
+                    options={makeOptionsPayload}
                     handleOperation={makeHandleOperation}
                   />
                   <MultiMultiSelect

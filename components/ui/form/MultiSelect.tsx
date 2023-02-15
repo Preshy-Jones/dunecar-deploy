@@ -35,7 +35,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     } else if (isToggled) {
       dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
 
-      let result = optionsUpdated?.sort((a, b) => {
+      let result = options?.sort((a, b) => {
         if (selected.includes(a.value) && !selected.includes(b.value)) {
           return -1;
         } else if (!selected.includes(a.value) && selected.includes(b.value)) {
@@ -44,12 +44,13 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           return 0;
         }
       });
-      setOptionsUpdated(optionsUpdated);
-      console.log(optionsUpdated);
+      // setOptionsUpdated(optionsUpdated);
+      // console.log(optionsUpdated);
 
+      dispatch(setMakeOptions(result));
       handleOperation(selected);
     }
-    setOptionsUpdated(options);
+
     setIsToggled(!isToggled);
   };
 
