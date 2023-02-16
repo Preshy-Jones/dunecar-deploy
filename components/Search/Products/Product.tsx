@@ -3,7 +3,7 @@ import React from "react";
 import dot from "../../../public/assets/dot.svg";
 import ImageSlider from "./ImageSlider";
 
-const Product = () => {
+const Product = ({ car }) => {
   return (
     <div>
       <ImageSlider />
@@ -14,7 +14,7 @@ const Product = () => {
           </h2>
           <div className="flex  mb-4">
             <h2 className="text-[16.1404px] text-specialRed w-[50%] leading-primary font-normal">
-              2019 Chysler 300s
+              {car.title}
             </h2>
             <div></div>
           </div>

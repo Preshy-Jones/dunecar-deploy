@@ -31,3 +31,8 @@ export interface CarMake {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CarPayload {
+  models?: string[];
+  makes?: string[];
+}

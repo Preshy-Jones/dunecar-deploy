@@ -6,8 +6,13 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
 import { Spinner } from "../../ui/others";
-import { getModels } from "../../../features/model/modelSlice";
+import {
+  getModels,
+  setModelsSelected,
+} from "../../../features/model/modelSlice";
 import { getMakes, setMakeOptions } from "../../../features/make/makeSlice";
+import { useRouter } from "next/router";
+import { formatMultipleValueKeyQuery } from "../../../utils/utilityFunctions";
 
 // import heroImage from "../../assets/heroimage.svg";
 
@@ -701,12 +706,13 @@ const Hero = () => {
   ];
 
   const [active, setActive] = React.useState(0);
+  const router = useRouter();
   const dispatch = useAppDispatch();
   let { cars, carFilter, filterTotal, isLoading } = useAppSelector(
     (state) => state.car
   );
 
-  let { models } = useAppSelector((state) => state.model);
+  let { models, modelsSelected } = useAppSelector((state) => state.model);
 
   let { makes, makeOptions } = useAppSelector((state) => state.make);
 
@@ -736,9 +742,9 @@ const Hero = () => {
     }
   };
 
-  const makeOpenHandleOperation = (setSelect) => {
+  const makeOpenHandleOperation = () => {
     setModelToggled(false);
-    setSelect([]);
+    dispatch(setModelsSelected([]));
   };
 
   const modelCloseHandleOperation = (models: string[]) => {
@@ -753,6 +759,35 @@ const Hero = () => {
     // dispatch(getCars({ locations }));
   };
 
+  const handleSearchCars = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("hello");
+
+    let { makes, models } = carFilter;
+    const makesPayload = makes
+      ? typeof makes === "string"
+        ? [makes]
+        : makes
+      : [""];
+    const modelsPayload = models
+      ? typeof models === "string"
+        ? [models]
+        : models
+      : [""];
+
+    const url = `/search?${
+      models && models.length > 1
+        ? formatMultipleValueKeyQuery("model", modelsPayload)
+        : models && `model=${models[0]}`
+    }&${
+      makes && makes.length > 1
+        ? formatMultipleValueKeyQuery("make", makesPayload)
+        : makes && `make=${makes[0]}`
+    }`;
+    console.log(url);
+
+    router.push(url);
+  };
   useEffect(() => {
     dispatch(getMakes());
     // console.log(modelOptions);
@@ -824,6 +859,8 @@ const Hero = () => {
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
+                    selected={modelsSelected}
+                    setSelected={setModelsSelected}
                     handleCloseOperation={modelCloseHandleOperation}
                     handleOpenOperation={modelOpenHandleOperation}
                   />
@@ -835,7 +872,10 @@ const Hero = () => {
                     handleCloseOperation={makeCloseHandleOperation}
                   />
                 </div>
-                <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
+                <button
+                  onClick={handleSearchCars}
+                  className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]"
+                >
                   <AiOutlineSearch className="mr-3 text-[1.5rem]" />
                   Search all 22 cars
                 </button>
@@ -873,6 +913,8 @@ const Hero = () => {
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
+                    selected={modelsSelected}
+                    setSelected={setModelsSelected}
                     handleCloseOperation={modelCloseHandleOperation}
                     handleOpenOperation={modelOpenHandleOperation}
                   />
@@ -886,6 +928,7 @@ const Hero = () => {
                   />
                 </div>
                 <button
+                  onClick={handleSearchCars}
                   className={`${
                     filterTotal === 0 ? "" : "relative bottom-[17.35rem]"
                   } bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]`}

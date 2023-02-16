@@ -13,7 +13,7 @@ interface MultiSelectProps {
   payloadOptions?: Option[] | undefined;
   isDisabled?: boolean;
   handleCloseOperation: (value: string[]) => void;
-  handleOpenOperation: (setState: any) => void;
+  handleOpenOperation: () => void;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -39,7 +39,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     if (!isDisabled) {
       if (!isToggled) {
         dispatch(setFilterTotal(MATHOPERATIONS.ADD));
-        handleOpenOperation(setSelected);
+        handleOpenOperation();
       } else if (isToggled) {
         dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
 

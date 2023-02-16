@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import { CarPayload } from "../types/car";
 import { METHOD } from "../types/methods";
 import { formatMultipleValueKeyQuery } from "../utils/utilityFunctions";
 
@@ -45,15 +46,16 @@ class Api {
     });
   };
 
-  getCars = (model?: (string | number)[], make?: (string | number)[]) => {
+  getCars = (query: CarPayload) => {
+    let { models, makes } = query;
     const url = `/v1/car?${
-      model && model.length > 1
-        ? formatMultipleValueKeyQuery("model", model)
-        : model && `model=${model[0]}`
+      models && models.length > 1
+        ? formatMultipleValueKeyQuery("model", models)
+        : models && `model=${models[0]}`
     }&${
-      make && make.length > 1
-        ? formatMultipleValueKeyQuery("make", make)
-        : make && `make=${make[0]}`
+      makes && makes.length > 1
+        ? formatMultipleValueKeyQuery("make", makes)
+        : makes && `make=${makes[0]}`
     }`;
     console.log(url);
 

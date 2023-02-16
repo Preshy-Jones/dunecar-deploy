@@ -73,13 +73,13 @@ const carSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCars.fulfilled, (state: CarState, action) => {
-        console.log(action);
+        // console.log(action);
         state.isLoading = false;
         state.cars = action.payload.data.cars;
         state.carFilter = action.payload.data.filter;
       })
       .addCase(getCars.rejected, (state: CarState, action) => {
-        console.log(action);
+        // console.log(action);
         state.isLoading = false;
       });
   },

@@ -7,11 +7,13 @@ import modelService from "./modelService";
 
 export interface CarState {
   models: CarModel[];
+  modelsSelected: string[];
   isLoading: boolean;
 }
 
 const initialState: CarState = {
   models: [],
+  modelsSelected: [],
   isLoading: true,
 };
 
@@ -34,7 +36,11 @@ export const getModels = createAsyncThunk(
 const modelSlice = createSlice({
   name: "car",
   initialState,
-  reducers: {},
+  reducers: {
+    setModelsSelected: (state, action: PayloadAction<string[]>) => {
+      state.modelsSelected = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getModels.pending, (state) => {
@@ -51,5 +57,7 @@ const modelSlice = createSlice({
       });
   },
 });
+
+export const { setModelsSelected } = modelSlice.actions;
 
 export default modelSlice.reducer;
