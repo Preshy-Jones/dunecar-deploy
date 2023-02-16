@@ -10,25 +10,29 @@ import {
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 import { motion } from "framer-motion";
 
-interface MultiSelectProps {
+interface MultiMultiSelectProps {
   placeHolder?: string;
   fieldOptions: any;
   isDisabled: boolean;
-  handleOperation: (value: string[]) => void;
+  selected: string[];
+  setSelected(selected: string[]): void;
+  handleCloseOperation: (value: string[]) => void;
+  handleOpenOperation: () => void;
 }
 
-const MultiMultiSelect: React.FC<MultiSelectProps> = ({
+const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   placeHolder,
   fieldOptions,
   isDisabled,
-  handleOperation,
+  selected,
+  setSelected,
+  handleCloseOperation,
+  handleOpenOperation,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
 
   const [isToggled, setIsToggled] = useState(false);
-
-  const [selected, setSelected] = useState<string[]>([]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -41,9 +45,10 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
     if (!isDisabled) {
       if (!isToggled) {
         dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+        handleOpenOperation();
       } else if (isToggled) {
         dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
-        handleOperation(selected);
+        handleCloseOperation(selected);
       }
 
       setIsToggled(!isToggled);
@@ -53,9 +58,9 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     if (selected.includes(e.target.value)) {
-      setSelected(selected.filter((item) => item !== e.target.value));
+      dispatch(setSelected(selected.filter((item) => item !== e.target.value)));
     } else {
-      setSelected([...selected, e.target.value]);
+      dispatch(setSelected([...selected, e.target.value]));
     }
   };
 
@@ -89,7 +94,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
               className="absolute left-0"
               onClick={() => handleSlide("left")}
             >
-              <BsFillArrowLeftCircleFill className="text-specialRed" />
+
             </div>
             {fieldOptions?.map(
               (item, index: number) =>
@@ -117,7 +122,7 @@ const MultiMultiSelect: React.FC<MultiSelectProps> = ({
               className="absolute right-0"
               onClick={() => handleSlide("right")}
             >
-              <BsFillArrowRightCircleFill className="text-specialRed" />
+
             </div>
           </div>
           <motion.div

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getCars } from "../../../features/car/carSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import Product from "./Product";
+import { useRouter } from "next/router";
 
-const ProductCatalogue = () => {
-  const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
+const ProductCatalogue = ({ cars }) => {
+  const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <div className="bg-pageBg">
       <div className="flex items-center py-4 px-[1.5rem]">
@@ -13,8 +16,8 @@ const ProductCatalogue = () => {
         </h2>
       </div>
       <div className="grid grid-cols-4 gap-x-[1rem] gap-y-[1rem] px-[1.6rem]">
-        {repeater.map((item, index) => {
-          return <Product key={index} />;
+        {cars.map((item, index) => {
+          return <Product key={index} car={item} />;
         })}
       </div>
 

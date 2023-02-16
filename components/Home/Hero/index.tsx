@@ -1,10 +1,18 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { getCars, getMakes, getModels } from "../../../features/car/carSlice";
+import { getCars } from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
+import { Spinner } from "../../ui/others";
+import {
+  getModels,
+  setModelsSelected,
+} from "../../../features/model/modelSlice";
+import { getMakes, setMakeOptions } from "../../../features/make/makeSlice";
+import { useRouter } from "next/router";
+import { formatMultipleValueKeyQuery } from "../../../utils/utilityFunctions";
 
 // import heroImage from "../../assets/heroimage.svg";
 
@@ -698,14 +706,21 @@ const Hero = () => {
   ];
 
   const [active, setActive] = React.useState(0);
+  const router = useRouter();
   const dispatch = useAppDispatch();
-  const { makes, models, cars, carFilter, filterTotal } = useAppSelector(
+  let { cars, carFilter, filterTotal, isLoading } = useAppSelector(
     (state) => state.car
   );
-  const makeOptions = makes.map((make) => ({
+
+  let { models, modelsSelected } = useAppSelector((state) => state.model);
+
+  let { makes, makeOptions } = useAppSelector((state) => state.make);
+
+  let makeOptionsPayload = makes.map((make) => ({
     value: make.slug,
     label: make.title,
   }));
+
   const modelOptions = models.map((model) => ({
     collection_name: model.make_name,
     options: model.models.map((model) => ({
@@ -714,9 +729,10 @@ const Hero = () => {
     })),
   }));
 
-  const [modelToggled, setModelToggled] = React.useState(true);
+  const [makeToggled, setMakeToggled] = React.useState(true);
+  const [modelToggled, setModelToggled] = React.useState(false);
 
-  const makeHandleOperation = (makes: string[]) => {
+  const makeCloseHandleOperation = (makes: string[]) => {
     dispatch(getModels({ makes: makes }));
     dispatch(getCars({ makes }));
     if (makes.length > 0) {
@@ -726,18 +742,64 @@ const Hero = () => {
     }
   };
 
-  const modelHandleOperation = (models: string[]) => {
-    dispatch(getCars({ models, makes: carFilter.makes }));
+  const makeOpenHandleOperation = () => {
+    setModelToggled(false);
+    dispatch(setModelsSelected([]));
   };
 
+  const modelCloseHandleOperation = (models: string[]) => {
+    dispatch(getCars({ models, makes: carFilter.makes }));
+    setMakeToggled(true);
+  };
+
+  const modelOpenHandleOperation = () => {
+    setMakeToggled(false);
+  };
   const locationHandleOperation = (locations: string[]) => {
     // dispatch(getCars({ locations }));
   };
 
+  const handleSearchCars = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("hello");
+
+    let { makes, models } = carFilter;
+    const makesPayload = makes
+      ? typeof makes === "string"
+        ? [makes]
+        : makes
+      : [""];
+    const modelsPayload = models
+      ? typeof models === "string"
+        ? [models]
+        : models
+      : [""];
+
+    const url = `/search?${
+      models && models.length > 1
+        ? formatMultipleValueKeyQuery("model", modelsPayload)
+        : models && `model=${models[0]}`
+    }&${
+      makes && makes.length > 1
+        ? formatMultipleValueKeyQuery("make", makesPayload)
+        : makes && `make=${makes[0]}`
+    }`;
+    console.log(url);
+
+    router.push(url);
+  };
   useEffect(() => {
     dispatch(getMakes());
     // console.log(modelOptions);
   }, [dispatch]);
+
+  useEffect(() => {
+    let makeOptionsPayload = makes.map((make) => ({
+      value: make.slug,
+      label: make.title,
+    }));
+    dispatch(setMakeOptions(makeOptionsPayload));
+  }, [makes]);
 
   return (
     <div className="font-roboto">
@@ -786,25 +848,34 @@ const Hero = () => {
                 <div className="mb-3">
                   <MultiSelect
                     placeHolder="Select Make"
+                    payloadOptions={makeOptionsPayload}
                     options={makeOptions}
-                    handleOperation={makeHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
+                    handleCloseOperation={makeCloseHandleOperation}
                   />
                 </div>
                 <div className="mb-3">
-                  <MultiSelect
+                  <MultiMultiSelect
                     placeHolder="Select Model"
-                    options={makeOptions}
-                    handleOperation={makeHandleOperation}
+                    isDisabled={!modelToggled}
+                    fieldOptions={modelOptions}
+                    selected={modelsSelected}
+                    setSelected={setModelsSelected}
+                    handleCloseOperation={modelCloseHandleOperation}
+                    handleOpenOperation={modelOpenHandleOperation}
                   />
                 </div>
                 <div className="mb-6">
                   <MultiSelect
                     placeHolder="Select Location"
                     options={makeOptions}
-                    handleOperation={makeHandleOperation}
+                    handleCloseOperation={makeCloseHandleOperation}
                   />
                 </div>
-                <button className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]">
+                <button
+                  onClick={handleSearchCars}
+                  className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]"
+                >
                   <AiOutlineSearch className="mr-3 text-[1.5rem]" />
                   Search all 22 cars
                 </button>
@@ -832,26 +903,41 @@ const Hero = () => {
                 <div className="flex  relative bottom-[10rem] justify-between mb-6">
                   <MultiSelect
                     placeHolder="Select Make"
+                    payloadOptions={makeOptionsPayload}
                     options={makeOptions}
-                    handleOperation={makeHandleOperation}
+                    isDisabled={!makeToggled}
+                    handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                   <MultiMultiSelect
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
-                    handleOperation={modelHandleOperation}
+                    selected={modelsSelected}
+                    setSelected={setModelsSelected}
+                    handleCloseOperation={modelCloseHandleOperation}
+                    handleOpenOperation={modelOpenHandleOperation}
                   />
                   <MultiSelect
                     placeHolder="Select Location"
-                    handleOperation={locationHandleOperation}
+                    payloadOptions={makeOptionsPayload}
+                    options={makeOptions}
+                    isDisabled={!makeToggled}
+                    handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                 </div>
                 <button
+                  onClick={handleSearchCars}
                   className={`${
                     filterTotal === 0 ? "" : "relative bottom-[17.35rem]"
                   } bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]`}
                 >
-                  <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                  {!isLoading ? (
+                    <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                  ) : (
+                    <Spinner />
+                  )}
                   Search all {cars.length} cars
                 </button>
               </div>

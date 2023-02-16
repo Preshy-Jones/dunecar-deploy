@@ -5,8 +5,9 @@ import Filter from "./Filter";
 import FilterIcon from "../../ui/icons/FilterIcon";
 import SortIcon from "../../ui/icons/SortIcon";
 import { Cancel } from "../../ui/icons";
+import FilterIndicator from "./FilterIndicator";
 
-const SideBar = () => {
+const SideBar = ({ filters }) => {
   return (
     <div className="font-roboto border-r-[0.1rem] border-r-dividerGray">
       <div>
@@ -21,15 +22,21 @@ const SideBar = () => {
             Clear filter
           </h2>
         </div>
-        <div className="flex px-6 text-white pb-4">
-          <div className="flex bg-specialRed mr-2 h-[2.25rem] items-center rounded-[6.25rem] px-2 text-[0.875rem] leading-[20px] font-normal">
-            <h2 className="mr-4">Toyota</h2>
-            <Cancel />
-          </div>
-          <div className="flex bg-specialRed h-[2.25rem] items-center rounded-[6.25rem] px-2">
-            <h2 className="mr-4">Kia</h2>
-            <Cancel />
-          </div>
+        <div className="flex flex-wrap w-full px-6 text-white pb-4">
+          {filters &&
+            filters.makes &&
+            filters.makes.length > 0 &&
+            filters.makes[0] !== "" &&
+            filters.makes.map((make, index) => (
+              <FilterIndicator label={make} />
+            ))}
+
+          {filters &&
+            filters.models.length > 0 &&
+            filters.models[0] !== "" &&
+            filters.models.map((model, index) => (
+              <FilterIndicator label={model} />
+            ))}
         </div>
       </div>
       <div className="border-t-dividerGray  border-t py-[1.6rem] flex flex-col items-center bg-white">

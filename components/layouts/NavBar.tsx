@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Logo from "../../public/assets/logo.svg";
 
@@ -7,7 +8,9 @@ const NavBar = () => {
     <div className=" py-5 px-[7.5rem] font-roboto w-full z-40 bg-white top-0 sticky hidden md:block">
       <div className="flex justify-between relative items-center ">
         <div className="flex-3">
-          <Image src={Logo} alt="logo" />
+          <Link href="/">
+            <Image src={Logo} alt="logo" className="cursor-pointer" />
+          </Link>
         </div>
         <div className="flex-4">
           <ul className="flex justify-around ">

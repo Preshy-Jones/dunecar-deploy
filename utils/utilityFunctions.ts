@@ -17,8 +17,8 @@ export const formatMultipleValueKeyQuery = (key: string, values: (string  | numb
 
 
 
-const makes = ["toyota", "bmw"];
-const models = ["corolla", "camry", "x5", "x6"];
+// const makes = ["toyota", "bmw"];
+// const models = ["corolla", "camry", "x5", "x6"];
 
-console.log(formatMultipleValueKeyQuery("make", makes));
+// console.log(formatMultipleValueKeyQuery("make", makes));
 
