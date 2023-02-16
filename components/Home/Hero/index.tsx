@@ -866,10 +866,13 @@ const Hero = () => {
                   />
                 </div>
                 <div className="mb-6">
-                  <MultiSelect
+                <MultiSelect
                     placeHolder="Select Location"
+                    payloadOptions={makeOptionsPayload}
                     options={makeOptions}
+                    isDisabled={!makeToggled}
                     handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                 </div>
                 <button
