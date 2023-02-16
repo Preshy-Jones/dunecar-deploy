@@ -799,7 +799,7 @@ const Hero = () => {
       label: make.title,
     }));
     dispatch(setMakeOptions(makeOptionsPayload));
-  }, [makes]);
+  }, [makes, dispatch]);
 
   return (
     <div className="font-roboto">
