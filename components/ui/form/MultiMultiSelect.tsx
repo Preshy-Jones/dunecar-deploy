@@ -95,7 +95,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                onClick={() => handleSlide("left")}
             ></div> */}
             {fieldOptions?.map((item, index: number) => (
-              <div
+              <div key={index}
                 className={`w-[6.21875rem]  pb-1.5  ${
                   index === currentIndex - 1 && "flex justify-end"
                 }`}

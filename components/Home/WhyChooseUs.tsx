@@ -37,14 +37,14 @@ const WhyChooseUs = () => {
           </div>
           <div className="flex justify-between">
             {contentReversed.title.value.map((item, index) => (
-              <div className="flex flex-col items-center w-[30%]">
+              <div key={index} className="flex flex-col items-center w-[30%]">
                 <h2 className="font-semibold text-center text-[1.5rem] mt-8">{item}</h2>
               </div>
             ))}
           </div>
           <div className="flex justify-between">
             {contentReversed.description.value.map((item, index) => (
-              <div className="flex flex-col items-center w-[30%]">
+              <div key={index} className="flex flex-col items-center w-[30%]">
                 <p className="font-light text-[1.125rem] mb-8 text-center text-[#221121] leading-[2rem]">
                   {item}
                 </p>
@@ -54,7 +54,7 @@ const WhyChooseUs = () => {
           <div>
             <div className="flex justify-between">
               {contentReversed.linkText.value.map((item, index) => (
-                <div className="flex flex-col items-center w-[30%]">
+                <div key={index} className="flex flex-col items-center w-[30%]">
                   <button className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.25rem] font-semibold">
                     {item}
                   </button>
