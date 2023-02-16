@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getCars, getModels } from "../../../../features/car/carSlice";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { CarMake, CarModel } from "../../../../types/car";
 
 const MakeModel = () => {
   return (

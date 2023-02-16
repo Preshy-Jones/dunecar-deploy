@@ -1,6 +1,4 @@
 import React from "react";
-import { getCars } from "../../../../features/car/carSlice";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
 const Year = () => {
   return (
