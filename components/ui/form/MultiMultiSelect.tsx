@@ -15,7 +15,7 @@ interface MultiMultiSelectProps {
   fieldOptions: any;
   isDisabled: boolean;
   selected: string[];
-  setSelected(selected: string[]): void;
+  setSelected(selected: string[]): any;
   handleCloseOperation: (value: string[]) => void;
   handleOpenOperation: () => void;
 }
