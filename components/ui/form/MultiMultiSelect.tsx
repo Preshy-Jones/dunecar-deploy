@@ -88,53 +88,45 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   return (
     <div>
       {isToggled && isDisabled === false && (
-        <div className="md:relative md:bottom-[7.7rem] overflow-y-auto overflow-x-hidden h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]">
-          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5]">
-            <div
+        <div className="md:relative md:bottom-[7.7rem]   z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]">
+          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-x-auto no-scrollbar">
+            {/* <div
               className="absolute left-0"
-              onClick={() => handleSlide("left")}
-            >
-
-            </div>
-            {fieldOptions?.map(
-              (item, index: number) =>
-                index >= startIndex &&
-                index < endIndex && (
-                  <div
-                    className={`w-[6.21875rem]  pb-1.5  cursor-pointer ${
-                      index === endIndex - 1 && "flex justify-end"
-                    }`}
-                    onClick={() => handleTabChange(index)}
-                  >
-                    <h2
-                      className={`${
-                        index === currentIndex
-                          ? "text-black font-medium"
-                          : "text-[#081314] text-opacity-20 font-light"
-                      }   text-[1.25rem] `}
-                    >
-                      {fieldOptions[index]?.collection_name}
-                    </h2>
-                  </div>
-                )
-            )}
-            <div
+               onClick={() => handleSlide("left")}
+            ></div> */}
+            {fieldOptions?.map((item, index: number) => (
+              <div
+                className={`w-[6.21875rem]  pb-1.5  cursor-pointer ${
+                  index === endIndex - 1 && "flex justify-end"
+                }`}
+                onClick={() => handleTabChange(index)}
+              >
+                <h2
+                  className={`${
+                    index === currentIndex
+                      ? "text-black font-medium"
+                      : "text-[#081314] text-opacity-20 font-light"
+                  }   text-[1.25rem] `}
+                >
+                  {fieldOptions[index]?.collection_name}
+                </h2>
+              </div>
+            ))}
+            {/* <div
               className="absolute right-0"
               onClick={() => handleSlide("right")}
-            >
-
-            </div>
+            ></div> */}
           </div>
-          <motion.div
+          {/* <motion.div
             animate={{ x: active === 1 ? 160 : 0 }}
             className="h-[2px] bg-red-700 w-[50%] relative bottom-[0.05rem] rounded-md"
-          ></motion.div>
-          <div className="pt-3">
+          ></motion.div> */}
+          <div className="pt-3 overflow-y-scroll h-[13.55rem]">
             {fieldOptions[currentIndex].options.map((item, index) => (
               <div className="flex items-center mb-5" key={index}>
                 <input
                   type="checkbox"
-                  className="border-specialRed border  mr-3 text-specialRed"
+                  className="border-specialRed border  mr-3 text-specialRed focus:ring-0"
                   value={item.value}
                   name="make"
                   checked={selected.includes(item.value)}

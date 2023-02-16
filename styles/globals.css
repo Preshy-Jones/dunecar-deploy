@@ -20,3 +20,8 @@
   color: #d14532 !important;
   background: #fff !important;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
