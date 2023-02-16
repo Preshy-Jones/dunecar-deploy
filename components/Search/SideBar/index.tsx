@@ -28,14 +28,14 @@ const SideBar = ({ filters }) => {
             filters.makes.length > 0 &&
             filters.makes[0] !== "" &&
             filters.makes.map((make, index) => (
-              <FilterIndicator label={make} />
+              <FilterIndicator key={index} label={make} />
             ))}
 
           {filters &&
             filters.models.length > 0 &&
             filters.models[0] !== "" &&
             filters.models.map((model, index) => (
-              <FilterIndicator label={model} />
+              <FilterIndicator key={index} label={model} />
             ))}
         </div>
       </div>
