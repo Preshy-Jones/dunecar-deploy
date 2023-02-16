@@ -44,10 +44,10 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   const handleToggled = () => {
     if (!isDisabled) {
       if (!isToggled) {
-        dispatch(setFilterTotal(MATHOPERATIONS.ADD));
+        // dispatch(setFilterTotal(MATHOPERATIONS.ADD));
         handleOpenOperation();
       } else if (isToggled) {
-        dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
+        // dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
         handleCloseOperation(selected);
       }
 
@@ -88,16 +88,16 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   return (
     <div>
       {isToggled && isDisabled === false && (
-        <div className="md:relative md:bottom-[7.7rem]   z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]">
-          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-x-auto no-scrollbar">
+        <div className="bg-white rounded-[4px] absolute z-30 bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]">
+          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-x-scroll">
             {/* <div
               className="absolute left-0"
                onClick={() => handleSlide("left")}
             ></div> */}
             {fieldOptions?.map((item, index: number) => (
               <div
-                className={`w-[6.21875rem]  pb-1.5  cursor-pointer ${
-                  index === endIndex - 1 && "flex justify-end"
+                className={`w-[6.21875rem]  pb-1.5  ${
+                  index === currentIndex - 1 && "flex justify-end"
                 }`}
                 onClick={() => handleTabChange(index)}
               >
@@ -141,10 +141,8 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
       <div
         {...rest}
         onClick={() => handleToggled()}
-        className={` w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
-          !isToggled
-            ? "md:relative md:top-[10rem] justify-between"
-            : "justify-between relative bottom-[7.3rem]"
+        className={` xl:w-[12.4375rem] h-[3rem] bg-white border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
+          !isToggled ? " justify-between" : "justify-between "
         }`}
       >
         {selected.length >= 1 ? (

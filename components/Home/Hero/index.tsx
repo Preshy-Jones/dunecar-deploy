@@ -730,7 +730,7 @@ const Hero = () => {
   }));
 
   const [makeToggled, setMakeToggled] = React.useState(true);
-  const [modelToggled, setModelToggled] = React.useState(false);
+  const [modelToggled, setModelToggled] = React.useState(true);
 
   const makeCloseHandleOperation = (makes: string[]) => {
     dispatch(getModels({ makes: makes }));
@@ -823,7 +823,7 @@ const Hero = () => {
             <div></div>
           </div>
         </div>
-        <div className="absolute top-[19.5rem]  flex justify-center w-full md:hidden ">
+        <div className="absolute top-[19.5rem]  flex justify-center w-full lg:hidden ">
           <div className="bg-white px-4 pt-4 pb-8 shadow-card rounded-[4px] w-[89.33%]">
             <div className="flex mb-4 border-b border-b-[#D1D1D1]">
               <div
@@ -866,7 +866,7 @@ const Hero = () => {
                   />
                 </div>
                 <div className="mb-6">
-                <MultiSelect
+                  <MultiSelect
                     placeHolder="Select Location"
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
@@ -896,14 +896,14 @@ const Hero = () => {
             )}
           </div>
         </div>
-        <div className="absolute top-[21rem]  md:flex justify-center w-full hidden h-[13.25rem] ">
+        <div className="absolute top-[21rem]  lg:flex justify-center w-full hidden h-[13.25rem] ">
           <div className="  md:flex justify-center w-[70.97%] ">
-            <div className="flex bg-white p-6 rounded-[3px] shadow-bigCard">
-              <div className="flex-4 mr-8">
+            <div className="flex bg-white p-6 rounded-[3px] shadow-bigCard w-full">
+              <div className="flex-4 mr-8 flex flex-col justify-between">
                 <h2 className="font-bold text text-[1.5rem] leading-[1.75rem] mb-4">
                   Buy car
                 </h2>
-                <div className="flex  relative bottom-[10rem] justify-between mb-6">
+                <div className="flex  justify-between mb-6">
                   <MultiSelect
                     placeHolder="Select Make"
                     payloadOptions={makeOptionsPayload}
@@ -932,8 +932,7 @@ const Hero = () => {
                 </div>
                 <button
                   onClick={handleSearchCars}
-                  className={`${
-                    filterTotal === 0 ? "" : "relative bottom-[17.35rem]"
+                  className={`"
                   } bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]`}
                 >
                   {!isLoading ? (
@@ -948,7 +947,7 @@ const Hero = () => {
                 <h2 className="font-bold text text-[1.5rem] leading-[1.75rem] tracking-[-0.01em]">
                   Sell car
                 </h2>
-                <p className="mb-[1.1rem] mt-2 text-lg leading-[1.9375rem] font-light text-black tracking-[-0.01em]">
+                <p className="sm:mb-3 1.5xl:mb-[1.1rem] lg:mb-[1.7rem] xs: mt-2 text-lg leading-[1.1rem] 1.5xl:leading-[1.9375rem] font-light text-black tracking-[-0.01em]">
                   Get an instant offer and a fast payment on handover day when
                   you sell outright.
                 </p>

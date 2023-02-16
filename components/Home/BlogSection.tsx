@@ -10,56 +10,55 @@ const BlogSection = () => {
   return (
     <div className="mt-14 flex justify-center font-roboto mb-20">
       <div className="w-[86.1111111%]">
-        <div className="flex justify-between items-center">
-          <h1 className="font-extrabold text-[2rem] mb-8">Articles on Cars</h1>
-          <Link className="text-specialRed underline hidden sm:block" href="#">
-            SEE MORE ARTICLES
-          </Link>
-        </div>
-        <div className="flex flex-col sm:flex-row">
-          <div className="mb-8 mr-6">
-            <Image src={image4} alt="image1" />
-            <div className="px-2">
-              <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
-                Tempor erat non turpis dictum sapien faucibus{" "}
-              </h2>
-              <button className="bg-black text-white px-4 py-2 rounded-sm">
-                Read Article
-              </button>
-            </div>
-          </div>
-          <div className="mb-8 mr-6">
-            <Image src={image3} alt="image1" />
-            <div className="px-2">
-              <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
-                Tempor erat non turpis dictum sapien faucibus{" "}
-              </h2>
-              <button className="bg-black text-white px-4 py-2 rounded-sm">
-                Read Article
-              </button>
-            </div>
-          </div>
+        <div className="flex justify-between items-center w-full">
+          <h1 className="font-extrabold text-[2rem] mb-8 w-full">Articles on Cars</h1>
 
-          <div className="mb-8 mr-6">
-            <Image src={image2} alt="image1" />
-            <div className="px-2">
-              <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
-                Tempor erat non turpis dictum sapien faucibus{" "}
-              </h2>
-              <button className="bg-black text-white px-4 py-2 rounded-sm">
-                Read Article
-              </button>
+        </div>
+        <div className="xs:flex xs:justify-center sm:block w-full">
+          <div className="flex flex-col sm:flex-row sm:w-full xs:w-[20.875rem]">
+            <div className="mb-8 mr-6">
+              <Image src={image4} alt="image1" />
+              <div className="px-2">
+                <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
+                  Tempor erat non turpis dictum sapien faucibus{" "}
+                </h2>
+                <button className="bg-black text-white px-4 py-2 rounded-sm">
+                  Read Article
+                </button>
+              </div>
             </div>
-          </div>
-          <div>
-            <Image src={image1} alt="image1" />
-            <div className="px-2">
-              <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
-                Tempor erat non turpis dictum sapien faucibus{" "}
-              </h2>
-              <button className="bg-black text-white px-4 py-2 rounded-sm">
-                Read Article
-              </button>
+            <div className="mb-8 mr-6">
+              <Image src={image3} alt="image1" />
+              <div className="px-2">
+                <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
+                  Tempor erat non turpis dictum sapien faucibus{" "}
+                </h2>
+                <button className="bg-black text-white px-4 py-2 rounded-sm">
+                  Read Article
+                </button>
+              </div>
+            </div>
+            <div className="mb-8 mr-6">
+              <Image src={image2} alt="image1" />
+              <div className="px-2">
+                <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
+                  Tempor erat non turpis dictum sapien faucibus{" "}
+                </h2>
+                <button className="bg-black text-white px-4 py-2 rounded-sm">
+                  Read Article
+                </button>
+              </div>
+            </div>
+            <div>
+              <Image src={image1} alt="image1" />
+              <div className="px-2">
+                <h2 className="mt-2 sm:mb-8 font-light text-[18px] mb-3">
+                  Tempor erat non turpis dictum sapien faucibus{" "}
+                </h2>
+                <button className="bg-black text-white px-4 py-2 rounded-sm">
+                  Read Article
+                </button>
+              </div>
             </div>
           </div>
         </div>

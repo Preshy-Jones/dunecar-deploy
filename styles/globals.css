@@ -25,3 +25,16 @@
   display: none;
 }
 
+.customscroll::-webkit-scrollbar {
+  width: thin !important;
+}
+
+/* Set the height of the scrollbar thumb to 8 pixels */
+.customscroll::-webkit-scrollbar-thumb {
+  height: 5px !important;
+}
+
+/* Set the color of the scrollbar thumb to blue */
+/* .customscroll::-webkit-scrollbar-thumb {
+  background-color: blue;
+} */
