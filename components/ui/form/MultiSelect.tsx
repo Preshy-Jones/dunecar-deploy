@@ -87,12 +87,12 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     <div className="font-roboto">
       {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
       {isToggled && isDisabled === false && (
-        <div className="md:relative md:bottom-[7.7rem] overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] bottom-50 border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
+        <div className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
           {options?.map((item, index) => (
             <div className="flex items-center mb-5" key={index}>
               <input
                 type="checkbox"
-                className="border-specialRed border  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed"
+                className="border-specialRed border rounded-sm  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
                 value={item.value}
                 name="make"
                 checked={selected.includes(item.value)}
@@ -111,10 +111,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       <div
         {...rest}
         onClick={() => handleToggled()}
-        className={` md:w-[12.4375rem] h-[3rem] border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
-          !isToggled
-            ? "md:relative md:top-[10rem] justify-between"
-            : "justify-between relative bottom-[7.3rem]"
+        className={` xl:w-[12.4375rem] h-[3rem]  bg-white border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
+          !isToggled ? " justify-between" : "justify-between "
         }`}
       >
         {selected.length >= 1 ? (
