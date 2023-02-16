@@ -30,7 +30,7 @@ const WhyChooseUs = () => {
         <div className="hidden sm:block">
           <div className="flex justify-between">
             {contentReversed.icons.value.map((item, index) => (
-              <div className="flex justify-center w-[30%]">
+              <div key={index} className="flex justify-center w-[30%]">
                 <div>{item}</div>
               </div>
             ))}
@@ -114,6 +114,6 @@ const contentReversed = {
     value: ["Quality Assurance", "Money Back Policy", "Delivery Policy"],
   },
   icons: {
-    value: [<QualityAssurance />, <MoneyBackIcon />, <DoorDelivery />],
+    value: [<QualityAssurance key={1} />, <MoneyBackIcon key={2} />, <DoorDelivery key={3} />],
   },
 };
