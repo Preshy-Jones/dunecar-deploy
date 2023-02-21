@@ -705,6 +705,41 @@ const Hero = () => {
     },
   ];
 
+  const locations = [
+    "Lagos",
+    "Abuja",
+    "Port Harcourt",
+    "Ibadan",
+    "Kano",
+    "Akure",
+    "Ibadan",
+    "Jos",
+    "Owerri",
+    "Enugu",
+    "Benin",
+    "Aba",
+    "Kaduna",
+    "Uyo",
+    "Ilorin",
+    "Abeokuta",
+    "Onitsha",
+    "Sokoto",
+    "Katsina",
+    "Maiduguri",
+    "Zaria",
+    "Ogbomosho",
+    "Iwo",
+    "Ife",
+    "Ilesha",
+    "Ila Orangun",
+    "Ikerre",
+  ];
+
+  const locationOptions = locations.map((location) => ({
+    value: location,
+    label: location,
+  }));
+
   const [active, setActive] = React.useState(0);
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -775,14 +810,20 @@ const Hero = () => {
         : models
       : [""];
 
+    console.log({ makesPayload, modelsPayload, makes, models });
+
     const url = `/search?${
-      models && models.length > 1
-        ? formatMultipleValueKeyQuery("model", modelsPayload)
-        : models && `model=${models[0]}`
+      models
+        ? models.length > 1
+          ? formatMultipleValueKeyQuery("model", modelsPayload)
+          : `model=${models[0]}`
+        : ""
     }&${
-      makes && makes.length > 1
-        ? formatMultipleValueKeyQuery("make", makesPayload)
-        : makes && `make=${makes[0]}`
+      makes
+        ? makes.length > 1
+          ? formatMultipleValueKeyQuery("make", makesPayload)
+          : `make=${makes[0]}`
+        : ""
     }`;
     console.log(url);
 

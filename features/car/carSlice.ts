@@ -12,7 +12,8 @@ export interface CarState {
     models: string[];
     makes: string[];
   };
-
+  count: number;
+  limit: number | null;
   isLoading: boolean;
   filterTotal: number;
   aFilterToggled: boolean;
@@ -21,7 +22,8 @@ export interface CarState {
 const initialState: CarState = {
   car: null,
   cars: [],
-
+  count: 0,
+  limit: null,
   carFilter: {
     models: [],
     makes: [],
@@ -75,7 +77,7 @@ const carSlice = createSlice({
       .addCase(getCars.fulfilled, (state: CarState, action) => {
         // console.log(action);
         state.isLoading = false;
-        state.cars = action.payload.data.cars;
+        state.cars = action.payload.data.results.cars;
         state.carFilter = action.payload.data.filter;
       })
       .addCase(getCars.rejected, (state: CarState, action) => {

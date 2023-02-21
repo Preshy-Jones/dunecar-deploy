@@ -4,7 +4,7 @@ import Year from "./Filters/Year";
 
 const SideBarContent = [
   {
-    title: "Distance & Shipping",
+    title: "Location",
     filterComponent: <MakeModel />,
   },
   {
