@@ -117,7 +117,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       {isToggled && isDisabled === false && (
         <div
           ref={domNode1}
-          className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]"
+          className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-4 px-4 w-[80%] sm:w-[10rem]"
         >
           {options?.map((item, index) => (
             <div key={index} className="flex items-center mb-5">
