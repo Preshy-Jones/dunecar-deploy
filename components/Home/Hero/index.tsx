@@ -5,7 +5,7 @@ import { getCars } from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
-import { Spinner } from "../../ui/others";
+import { DotLoader, Spinner } from "../../ui/others";
 import {
   getModels,
   setModelsSelected,
@@ -730,7 +730,7 @@ const Hero = () => {
   }));
 
   const [makeToggled, setMakeToggled] = React.useState(true);
-  const [modelToggled, setModelToggled] = React.useState(true);
+  const [modelToggled, setModelToggled] = React.useState(false);
 
   const makeCloseHandleOperation = (makes: string[]) => {
     dispatch(getModels({ makes: makes }));
@@ -841,6 +841,7 @@ const Hero = () => {
             </div>
             <motion.div
               animate={{ x: active === 1 ? 160 : 0 }}
+              transition={{ type: "tween" }}
               className="h-[2px] bg-red-700 w-[50%] relative bottom-[1.1rem] rounded-md"
             ></motion.div>
             {active === 0 ? (
@@ -850,8 +851,9 @@ const Hero = () => {
                     placeHolder="Select Make"
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
-                    handleOpenOperation={makeOpenHandleOperation}
+                    isDisabled={!makeToggled}
                     handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                 </div>
                 <div className="mb-3">
@@ -867,7 +869,7 @@ const Hero = () => {
                 </div>
                 <div className="mb-6">
                   <MultiSelect
-                    placeHolder="Select Location"
+                    placeHolder="Select Loction"
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
                     isDisabled={!makeToggled}
@@ -879,8 +881,14 @@ const Hero = () => {
                   onClick={handleSearchCars}
                   className="bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]"
                 >
-                  <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-                  Search all 22 cars
+                  {!isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                      Search all {cars.length} cars
+                    </div>
+                  ) : (
+                    <DotLoader />
+                  )}
                 </button>
               </div>
             ) : (
@@ -936,11 +944,13 @@ const Hero = () => {
                   } bg-specialRed w-full text-white font-semibold rounded-[4px] flex items-center justify-center h-[3rem]`}
                 >
                   {!isLoading ? (
-                    <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                    <div className="flex items-center justify-center">
+                      <AiOutlineSearch className="mr-3 text-[1.5rem]" />
+                      Search all {cars.length} cars
+                    </div>
                   ) : (
-                    <Spinner />
+                    <DotLoader />
                   )}
-                  Search all {cars.length} cars
                 </button>
               </div>
               <div className="flex-2 text-[#212121] ">

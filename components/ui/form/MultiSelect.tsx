@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { setFilterTotal } from "../../../features/car/carSlice";
 import { setMakeOptions } from "../../../features/make/makeSlice";
+import useClickOutside from "../../../hooks/ClickOutside";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Option } from "../../../types/form";
 import { MATHOPERATIONS } from "../../../types/methods";
@@ -21,6 +22,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   options,
   payloadOptions,
   isDisabled,
+  // selected,
+  // updateSelected,
   handleOpenOperation,
   handleCloseOperation,
   ...rest
@@ -31,18 +34,21 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   const [selected, setSelected] = useState<string[]>([]);
 
+  // const selected = useRef<string[]>([]);
+
   const [optionsUpdated, setOptionsUpdated] = useState<Option[] | undefined>(
     []
   );
 
+  let modalRef = useRef<HTMLDivElement>(null);
+
+  let togglerRef = useRef<HTMLDivElement>(null);
+
   const handleToggled = () => {
     if (!isDisabled) {
       if (!isToggled) {
-        dispatch(setFilterTotal(MATHOPERATIONS.ADD));
         handleOpenOperation();
       } else if (isToggled) {
-        dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
-
         let result = payloadOptions?.sort((a, b) => {
           if (selected.includes(a.value) && !selected.includes(b.value)) {
             return -1;
@@ -66,6 +72,26 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     }
   };
 
+  const handleCloseModal = () => {
+    let result = payloadOptions?.sort((a, b) => {
+      if (selected.includes(a.value) && !selected.includes(b.value)) {
+        return -1;
+      } else if (!selected.includes(a.value) && selected.includes(b.value)) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    // setOptionsUpdated(optionsUpdated);
+    // console.log(optionsUpdated);
+
+    dispatch(setMakeOptions(result));
+    console.log(selected);
+
+    handleCloseOperation(selected);
+
+    setIsToggled(false);
+  };
   //sort options and place checked options at the top
 
   //handle checkbox onchange
@@ -76,18 +102,23 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     } else {
       setSelected([...selected, e.target.value]);
     }
+    console.log(selected);
   };
 
-  // useEffect(() => {
-  //   // setOptionsUpdated(options);
-  //   // dispatch(setMakeOptions(options));
-  //   console.log("hello");
-  // }, []);
+
+
+  let { domNode1, domNode2 } = useClickOutside(() => {
+    handleCloseModal();
+  });
+
   return (
     <div className="font-roboto">
-      {/* <pre className="text-white relative bottom-[10rem]">{selected}</pre> */}
+      {/* <pre className="text-white relative bottom-[20rem]">{selected}</pre> */}
       {isToggled && isDisabled === false && (
-        <div className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] border border-[#081314] border-opacity-10 py-4 px-4 w-[10rem]">
+        <div
+          ref={domNode1}
+          className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-4 px-4 w-[80%] sm:w-[10rem]"
+        >
           {options?.map((item, index) => (
             <div className="flex items-center mb-5" key={index}>
               <input
@@ -109,6 +140,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         </div>
       )}
       <div
+        ref={domNode2}
         {...rest}
         onClick={() => handleToggled()}
         className={` xl:w-[12.4375rem] h-[3rem]  bg-white border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
