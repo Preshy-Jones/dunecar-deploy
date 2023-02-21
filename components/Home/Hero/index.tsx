@@ -911,8 +911,8 @@ const Hero = () => {
                 <div className="mb-6">
                   <MultiSelect
                     placeHolder="Select Loction"
-                    payloadOptions={makeOptionsPayload}
-                    options={makeOptions}
+                    payloadOptions={locationOptions}
+                    options={locationOptions}
                     isDisabled={!makeToggled}
                     handleCloseOperation={makeCloseHandleOperation}
                     handleOpenOperation={makeOpenHandleOperation}
@@ -972,9 +972,9 @@ const Hero = () => {
                   />
                   <MultiSelect
                     placeHolder="Select Location"
-                    payloadOptions={makeOptionsPayload}
-                    options={makeOptions}
-                    isDisabled={!makeToggled}
+                    payloadOptions={locationOptions}
+                    options={locationOptions}
+                    isDisabled={false}
                     handleCloseOperation={makeCloseHandleOperation}
                     handleOpenOperation={makeOpenHandleOperation}
                   />

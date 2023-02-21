@@ -26,7 +26,7 @@ export const getMakes = createAsyncThunk(
   }
 );
 
-const makeSlice = createSlice({
+const locationSlice = createSlice({
   name: "car",
   initialState,
   reducers: {
@@ -52,6 +52,6 @@ const makeSlice = createSlice({
   },
 });
 
-export const { setMakeOptions } = makeSlice.actions;
+export const { setMakeOptions } = locationSlice.actions;
 
-export default makeSlice.reducer;
+export default locationSlice.reducer;

@@ -1,8 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
 import { Car, CarMake, CarModel } from "../../types/car";
-import { Option } from "../../types/form";
-import { MathOperations } from "../../types/methods";
 import modelService from "./modelService";
 
 export interface CarState {
