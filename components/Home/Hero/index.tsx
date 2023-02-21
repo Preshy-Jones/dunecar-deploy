@@ -841,6 +841,7 @@ const Hero = () => {
             </div>
             <motion.div
               animate={{ x: active === 1 ? 160 : 0 }}
+              transition={{ type: "tween" }}
               className="h-[2px] bg-red-700 w-[50%] relative bottom-[1.1rem] rounded-md"
             ></motion.div>
             {active === 0 ? (
@@ -850,8 +851,9 @@ const Hero = () => {
                     placeHolder="Select Make"
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
-                    handleOpenOperation={makeOpenHandleOperation}
+                    isDisabled={!makeToggled}
                     handleCloseOperation={makeCloseHandleOperation}
+                    handleOpenOperation={makeOpenHandleOperation}
                   />
                 </div>
                 <div className="mb-3">
@@ -867,7 +869,7 @@ const Hero = () => {
                 </div>
                 <div className="mb-6">
                   <MultiSelect
-                    placeHolder="Select Location"
+                    placeHolder="Select Loction"
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
                     isDisabled={!makeToggled}

@@ -7,7 +7,6 @@ import makeService from "./makeService";
 
 export interface CarState {
   makes: CarMake[];
-
   makeOptions: Option[] | undefined;
   isLoading: boolean;
 }
@@ -15,7 +14,6 @@ export interface CarState {
 const initialState: CarState = {
   makes: [],
   makeOptions: [],
-
   isLoading: true,
 };
 

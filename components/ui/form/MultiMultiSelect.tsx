@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 import { motion } from "framer-motion";
+import useClickOutside from "../../../hooks/ClickOutside";
 
 interface MultiMultiSelectProps {
   placeHolder?: string;
@@ -55,6 +56,11 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
     }
   };
 
+  const handleCloseModal = () => {
+    handleCloseOperation(selected);
+    setIsToggled(false);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     if (selected.includes(e.target.value)) {
@@ -82,20 +88,26 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
       }
     }
   };
-
+  let { domNode1, domNode2 } = useClickOutside(() => {
+    handleCloseModal();
+  });
   //sort fieldOptions and place checked options at the top
 
   return (
     <div>
       {isToggled && isDisabled === false && (
-        <div className="bg-white rounded-[4px] absolute z-30 bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]">
+        <div
+          ref={domNode1}
+          className="bg-white rounded-[4px] absolute z-30 bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5 w-[12.4375rem]"
+        >
           <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-x-scroll">
             {/* <div
               className="absolute left-0"
                onClick={() => handleSlide("left")}
             ></div> */}
             {fieldOptions?.map((item, index: number) => (
-              <div key={index}
+              <div
+                key={index}
                 className={`w-[6.21875rem]  pb-1.5  ${
                   index === currentIndex - 1 && "flex justify-end"
                 }`}
@@ -140,6 +152,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
       )}
       <div
         {...rest}
+        ref={domNode2}
         onClick={() => handleToggled()}
         className={` xl:w-[12.4375rem] h-[3rem] bg-white border border-[#081314] border-opacity-10 rounded-[4px] flex items-center px-4 cursor-pointer ${
           !isToggled ? " justify-between" : "justify-between "
