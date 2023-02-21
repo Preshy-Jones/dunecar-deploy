@@ -35,4 +35,5 @@ export interface CarMake {
 export interface CarPayload {
   models?: string[];
   makes?: string[];
+  limit?: number;
 }

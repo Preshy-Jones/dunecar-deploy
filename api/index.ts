@@ -47,16 +47,23 @@ class Api {
   };
 
   getCars = (query: CarPayload) => {
-    let { models, makes } = query;
+    let { models, makes, limit } = query;
+    console.log(limit);
+
     const url = `/v1/car?${
-      models && models.length > 1
-        ? formatMultipleValueKeyQuery("model", models)
-        : models && `model=${models[0]}`
+      models
+        ? models.length > 1
+          ? formatMultipleValueKeyQuery("model", models)
+          : `model=${models[0]}`
+        : ""
     }&${
-      makes && makes.length > 1
-        ? formatMultipleValueKeyQuery("make", makes)
-        : makes && `make=${makes[0]}`
-    }`;
+      makes
+        ? makes.length > 1
+          ? formatMultipleValueKeyQuery("make", makes)
+          : `make=${makes[0]}`
+        : ""
+    }${limit ? `&limit=${limit}` : ""}
+    `;
     console.log(url);
 
     return this.publicRequest(url, METHOD.GET, {});

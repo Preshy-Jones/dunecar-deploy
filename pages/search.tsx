@@ -8,10 +8,10 @@ import { getCars } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Api from "../api";
 
-const Search = ({ cars, filters }) => {
+const Search = ({ cars, filters, count, limit }) => {
   const dispatch = useAppDispatch();
 
-  // const { cars } = useAppSelector((state) => state.car);
+  const { cars: clientSideCars } = useAppSelector((state) => state.car);
 
   // const router = useRouter();
   // const { makes, models } = router.query;
@@ -30,7 +30,9 @@ const Search = ({ cars, filters }) => {
           <SideBar filters={filters} />
         </div>
         <div className="col-start-2 col-end-3">
-          {cars && <ProductCatalogue cars={cars} />}
+          {cars && (
+            <ProductCatalogue cars={cars} count={count} filters={filters} />
+          )}
         </div>
       </div>
     </div>
@@ -49,8 +51,9 @@ export async function getServerSideProps({ query }: any) {
       : query.model
     : [""];
 
+  const limit = query.limit ? query.limit : 20;
   const api = new Api();
-  const { data } = await api.getCars({ makes, models });
+  const { data } = await api.getCars({ makes, models, limit });
 
   console.log({
     makes,
@@ -63,10 +66,13 @@ export async function getServerSideProps({ query }: any) {
 
   return {
     props: {
-      cars: data.data.cars,
+      cars: data.data.results.cars,
+      count: data.data.results.count,
       filters: {
         makes,
         models,
+        limit: data.data.filter.limit,
+        displayedCount: data.data.filter.displayedCount,
       },
     },
   };
