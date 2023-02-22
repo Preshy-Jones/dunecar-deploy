@@ -16,7 +16,7 @@ const initialState: CarState = {
 };
 
 export const getMakes = createAsyncThunk(
-  "car/getMakes",
+  "make/getMakes",
   async (_, thunkAPI) => {
     try {
       return await makeService.fetchMakes();
@@ -27,7 +27,7 @@ export const getMakes = createAsyncThunk(
 );
 
 const makeSlice = createSlice({
-  name: "car",
+  name: "make",
   initialState,
   reducers: {
     setMakeOptions: (state, action: PayloadAction<Option[] | undefined>) => {

@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import carReducer from "../features/car/carSlice";
 import modelReducer from "../features/model/modelSlice";
 import makeReducer from "../features/make/makeSlice";
+import searchReducer from "../features/search/searchSlice";
 
 export const store = configureStore({
   reducer: {
     car: carReducer,
     model: modelReducer,
     make: makeReducer,
+    search: searchReducer,
   },
 
   //  middleware;getDefaultMiddleware => getDefaultMiddleware().concat(),

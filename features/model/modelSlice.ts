@@ -19,7 +19,7 @@ interface ModelPayload {
 }
 
 export const getModels = createAsyncThunk(
-  "car/getModels",
+  "model/getModels",
   async (payload: ModelPayload, thunkAPI) => {
     const { makes } = payload;
     try {
@@ -31,7 +31,7 @@ export const getModels = createAsyncThunk(
 );
 
 const modelSlice = createSlice({
-  name: "car",
+  name: "model",
   initialState,
   reducers: {
     setModelsSelected: (state, action: PayloadAction<string[]>) => {

@@ -7,19 +7,39 @@ import SideBar from "../components/Search/SideBar";
 import { getCars } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Api from "../api";
+import { Spinner } from "../components/ui/others";
 
-const Search = ({ cars, filters, count, limit }) => {
+const Search = () => {
   const dispatch = useAppDispatch();
 
-  const { cars: clientSideCars } = useAppSelector((state) => state.car);
+  const {
+    cars,
+    carFilter: filters,
+    isLoading,
+    moreCarsLoading,
+    count,
+  } = useAppSelector((state) => state.car);
 
-  // const router = useRouter();
-  // const { makes, models } = router.query;
-  // console.log(router.query);
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   dispatch(getCars({ makes: makes, models: models }));
-  // }, [dispatch]);
+  useEffect(() => {
+    if(!router.isReady) return;
+    const { query } = router;
+    const makes = query.make
+      ? typeof query.make === "string"
+        ? [query.make]
+        : query.make
+      : [""];
+    const models = query.model
+      ? typeof query.model === "string"
+        ? [query.model]
+        : query.model
+      : [""];
+
+    const limit = (query.limit as string) ? (query.limit as string) : "20";
+    console.log(query);
+    dispatch(getCars({ makes: makes, models: models, limit: limit }));
+  }, [router]);
 
   return (
     <div className="font-roboto">
@@ -30,7 +50,11 @@ const Search = ({ cars, filters, count, limit }) => {
           <SideBar filters={filters} />
         </div>
         <div className="col-start-2 col-end-3">
-          {cars && (
+          {isLoading ? (
+            <div className="flex justify-center items-center pt-[6rem]">
+              <Spinner />
+            </div>
+          ) : (
             <ProductCatalogue cars={cars} count={count} filters={filters} />
           )}
         </div>
@@ -39,44 +63,44 @@ const Search = ({ cars, filters, count, limit }) => {
   );
 };
 
-export async function getServerSideProps({ query }: any) {
-  const makes = query.make
-    ? typeof query.make === "string"
-      ? [query.make]
-      : query.make
-    : [""];
-  const models = query.model
-    ? typeof query.model === "string"
-      ? [query.model]
-      : query.model
-    : [""];
+// export async function getServerSideProps({ query }: any) {
+//   const makes = query.make
+//     ? typeof query.make === "string"
+//       ? [query.make]
+//       : query.make
+//     : [""];
+//   const models = query.model
+//     ? typeof query.model === "string"
+//       ? [query.model]
+//       : query.model
+//     : [""];
 
-  const limit = query.limit ? query.limit : 20;
-  const api = new Api();
-  const { data } = await api.getCars({ makes, models, limit });
+//   const limit = query.limit ? query.limit : 20;
+//   const api = new Api();
+//   const { data } = await api.getCars({ makes, models, limit });
 
-  console.log({
-    makes,
-    models,
-  });
+//   console.log({
+//     makes,
+//     models,
+//   });
 
-  // const data = await fetchApi(
-  //   `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`
-  // );
+//   // const data = await fetchApi(
+//   //   `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`
+//   // );
 
-  return {
-    props: {
-      cars: data.data.results.cars,
-      count: data.data.results.count,
-      filters: {
-        makes,
-        models,
-        limit: data.data.filter.limit,
-        displayedCount: data.data.filter.displayedCount,
-      },
-    },
-  };
-}
+//   return {
+//     props: {
+//       cars: data.data.results.cars,
+//       count: data.data.results.count,
+//       filters: {
+//         makes,
+//         models,
+//         limit: data.data.filter.limit,
+//         displayedCount: data.data.filter.displayedCount,
+//       },
+//     },
+//   };
+// }
 
 Search.getLayout = (page) => <DefaultLayout>{page}</DefaultLayout>;
 

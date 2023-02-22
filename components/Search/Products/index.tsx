@@ -1,22 +1,49 @@
 import React, { useEffect } from "react";
-import { getCars } from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import Product from "./Product";
 import { useRouter } from "next/router";
+import { getMoreCarsPagination } from "../../../features/car/carSlice";
+import { Spinner } from "../../ui/others";
 
 const ProductCatalogue = ({ cars, count, filters }) => {
   const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const router = useRouter();
 
+  const dispatch = useAppDispatch();
+  const { moreCarsLoading } = useAppSelector((state) => state.car);
+
   const getMoreCars = () => {
     const path = router.pathname;
     const { query } = router;
+    const makes = query.make
+      ? typeof query.make === "string"
+        ? [query.make]
+        : query.make
+      : [""];
+    const models = query.model
+      ? typeof query.model === "string"
+        ? [query.model]
+        : query.model
+      : [""];
     console.log({ path, query });
 
-    router.push({
-      pathname: path,
-      query: { ...query, limit: Number(filters.limit) + 20 },
-    });
+    dispatch(
+      getMoreCarsPagination({
+        makes: makes,
+        models: models,
+        limit: (Number(filters.limit) + 20).toString(),
+      })
+    );
+
+    // router.push(
+    //   {
+    //     pathname: path,
+    //     query: { ...query, limit: Number(filters.limit) + 20 },
+    //   },
+    //   {
+    //     shallow: true,
+    //   }
+    // );
   };
 
   return (
@@ -34,18 +61,24 @@ const ProductCatalogue = ({ cars, count, filters }) => {
         })}
       </div>
 
-      <div className="flex justify-center items-center flex-col my-8">
-        <p className="text-secondaryGray mb-4">
-          Currently viewing {filters.displayedCount} out of {count} Matches
-        </p>
+      {moreCarsLoading ? (
+        <div className="flex justify-center items-center py-8">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="flex justify-center items-center flex-col my-8">
+          <p className="text-secondaryGray mb-4">
+            Currently viewing {filters.displayedCount} out of {count} Matches
+          </p>
 
-        <button
-          className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.1875rem]"
-          onClick={getMoreCars}
-        >
-          See More Matches
-        </button>
-      </div>
+          <button
+            className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.1875rem]"
+            onClick={getMoreCars}
+          >
+            See More Matches
+          </button>
+        </div>
+      )}
     </div>
   );
 };
