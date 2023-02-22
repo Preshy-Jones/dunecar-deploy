@@ -1,44 +1,61 @@
-import MakeModel from "./Filters/MakeModel";
+import MakeFilter from "./Filters/Make";
+import Model from "./Filters/Model";
 import Price from "./Filters/Price";
 import Year from "./Filters/Year";
 
-const SideBarContent = [
+export const SideBarContent = [
   {
     title: "Location",
-    filterComponent: <MakeModel />,
+    filterComponentKey: "location",
   },
   {
     title: "Make",
-    filterComponent: <Price />,
+    filterComponentKey: "make",
   },
   {
     title: "Model",
+    filterComponentKey: "model",
   },
   {
     title: "Body Type",
-    filterComponent: <Year />,
+    filterComponentKey: "bodyType",
   },
   {
     title: "Fuel Type",
+    filterComponentKey: "fuelType",
   },
   {
     title: "Year",
+    filterComponentKey: "year",
   },
   {
     title: "Price",
+    filterComponentKey: "price",
   },
   {
     title: "Mileage",
+    filterCompomentKey: "mileage",
   },
   {
     title: "Features",
+    filterComponentKey: "features",
   },
   {
     title: "Exterior Color",
+    filterComponentKey: "exteriorColor",
   },
   {
     title: "Interior Color",
+    filterComponentKey: "interiorColor",
   },
 ];
 
-export default SideBarContent;
+export const sideBarContentFilters = {
+  make: <MakeFilter />,
+
+  price: <Price />,
+
+  year: <Year />,
+
+  model: <Model/>
+};

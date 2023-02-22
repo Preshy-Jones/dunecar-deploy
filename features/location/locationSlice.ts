@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Car, CarMake, CarModel } from "../../types/car";
 import { Option } from "../../types/form";
-import makeService from "./makeService";
+import locationService from "./locationService";
 
 export interface CarState {
   makes: CarMake[];
@@ -19,7 +19,7 @@ export const getMakes = createAsyncThunk(
   "car/getMakes",
   async (_, thunkAPI) => {
     try {
-      return await makeService.fetchMakes();
+      return await locationService.fetchMakes();
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
     }

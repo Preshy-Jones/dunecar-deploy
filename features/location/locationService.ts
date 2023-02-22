@@ -9,8 +9,8 @@ export const fetchMakes = async () => {
   return response.data;
 };
 
-const carService = {
+const locationService = {
   fetchMakes,
 };
 
-export default carService;
+export default locationService;

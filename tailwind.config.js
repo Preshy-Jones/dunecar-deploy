@@ -13,6 +13,7 @@ module.exports = {
         specialRed: "#D14532",
         specialBlack: "#081314",
         secondaryBlack: "#221121",
+        tertiaryBlack: "#212121",
         specialGray: "#F0F1F2",
         pageBg: "#FAFAFA",
         borderDark: "rgba(203, 203, 203, 0.5)",
@@ -32,6 +33,8 @@ module.exports = {
         primary: "1.1875rem",
         secondary: "2rem",
         tertiary: "1.4375rem",
+        fourth: "1.625rem",
+        fifth:"1.6875rem"
       },
       letterSpacing: {
         primary: "0.04em",
@@ -40,6 +43,8 @@ module.exports = {
         heroImage: "url('/assets/threesixty.jpg')",
       },
       fontSize: {
+        primary:"1.375rem",
+        secondary:"1.125rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
         sme: ["0.875em", { lineHeight: "1.25em" }],
@@ -50,6 +55,7 @@ module.exports = {
       },
       boxShadow: {
         primary: "0px 10px 46px rgba(190, 190, 190, 0.25)",
+        secondary:"0px 0px 79px rgba(203, 203, 203, 0.25)",
         card: "inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
         bigCard: "0px -1px 6px rgba(164, 164, 164, 0.25)",
         cardShadow:

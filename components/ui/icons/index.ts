@@ -12,3 +12,4 @@ export { default as SlideCaretLeftIcon } from "./SlideCaretLeftIcon";
 export { default as SlideCaretRightIcon } from "./SlideCaretRightIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as Cancel } from "./Cancel";
+export { default as CaretLeftIcon } from "./CaretLeftIcon";

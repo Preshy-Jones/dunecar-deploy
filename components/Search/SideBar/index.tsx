@@ -1,13 +1,22 @@
-import React from "react";
-import SideBarContent from "./sideBarContent";
-
+import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
 import FilterIcon from "../../ui/icons/FilterIcon";
 import SortIcon from "../../ui/icons/SortIcon";
-import { Cancel } from "../../ui/icons";
+import { Cancel, CaretLeftIcon } from "../../ui/icons";
 import FilterIndicator from "./FilterIndicator";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { getMakes } from "../../../features/make/makeSlice";
+import MakeFilter from "./Filters/Make";
+import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
+import { setFilter } from "../../../features/search/searchSlice";
 
 const SideBar = ({ filters }) => {
+  const [isFilter, setIsFilter] = React.useState(false);
+
+  const { filter } = useAppSelector((state) => state.search);
+
+  const dispatch = useAppDispatch();
+
   return (
     <div className="font-roboto border-r-[0.1rem] border-r-dividerGray">
       <div>
@@ -50,22 +59,40 @@ const SideBar = ({ filters }) => {
           SAVE SEARCH
         </button>
       </div>
-      <div className="flex items-center justify-between px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[6rem]">
-        <div className="flex justify-between items-center">
-          <SortIcon />
-          <h2 className="ml-4">Sort by</h2>
-        </div>
-        <h2 className="text-specialRed leading-secondary">Best match</h2>
-      </div>
-      <div className="  ">
+      {!filter ? (
         <div>
-          <div>
-            {SideBarContent.map((item, index) => (
-              <Filter key={index} item={item} />
-            ))}
+          <div className="flex items-center justify-between px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem]">
+            <div className="flex justify-between items-center">
+              <SortIcon />
+              <h2 className="ml-4">Sort by</h2>
+            </div>
+            <h2 className="text-specialRed leading-secondary">Best match</h2>
+          </div>
+          <div className="  ">
+            <div>
+              <div>
+                {SideBarContent.map((item: any, index) => (
+                  <Filter key={index} item={item} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>
+          <div
+            className="flex px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center"
+            onClick={() => dispatch(setFilter(""))}
+          >
+            <CaretLeftIcon className="mr-7" />
+            <h1 className="leading-secondary text-secondary font-medium">
+              Make
+            </h1>
+          </div>
+
+          {filter && sideBarContentFilters[filter]}
+        </div>
+      )}
     </div>
   );
 };
