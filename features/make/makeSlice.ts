@@ -7,12 +7,14 @@ export interface CarState {
   makes: CarMake[];
   makeOptions: Option[] | undefined;
   isLoading: boolean;
+  selectedMakes: string[];
 }
 
 const initialState: CarState = {
   makes: [],
   makeOptions: [],
   isLoading: true,
+  selectedMakes: [],
 };
 
 export const getMakes = createAsyncThunk(
@@ -34,6 +36,10 @@ const makeSlice = createSlice({
       const { payload } = action;
       state.makeOptions = payload;
     },
+    setSelectedMakes: (state, action: PayloadAction<string[]>) => {
+      const { payload } = action;
+      state.selectedMakes = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,6 +58,6 @@ const makeSlice = createSlice({
   },
 });
 
-export const { setMakeOptions } = makeSlice.actions;
+export const { setMakeOptions, setSelectedMakes } = makeSlice.actions;
 
 export default makeSlice.reducer;
