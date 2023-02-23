@@ -59,7 +59,7 @@ const MakeFilter = () => {
     // console.log(optionsUpdated);
 
     dispatch(setMakeOptions(result));
-    dispatch(getCars({ makes: selectedMakes }));
+    dispatch(getCars({ makes: selectedMakes, limit: 20 }));
 
     //update the query strings but don't reload the page
     router.push(
