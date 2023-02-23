@@ -41,6 +41,7 @@ const SideBar = ({ filters }) => {
             ))}
 
           {filters &&
+            filters.models &&
             filters.models.length > 0 &&
             filters.models[0] !== "" &&
             filters.models.map((model, index) => (
@@ -79,19 +80,7 @@ const SideBar = ({ filters }) => {
           </div>
         </div>
       ) : (
-        <div>
-          <div
-            className="flex px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center"
-            onClick={() => dispatch(setFilter(""))}
-          >
-            <CaretLeftIcon className="mr-7" />
-            <h1 className="leading-secondary text-secondary font-medium">
-              Make
-            </h1>
-          </div>
-
-          {filter && sideBarContentFilters[filter]}
-        </div>
+        <div>{filter && sideBarContentFilters[filter]}</div>
       )}
     </div>
   );

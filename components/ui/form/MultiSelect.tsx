@@ -36,9 +36,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   // const selected = useRef<string[]>([]);
 
-  const [optionsUpdated, setOptionsUpdated] = useState<Option[] | undefined>(
-    []
-  );
+
 
   let modalRef = useRef<HTMLDivElement>(null);
 
