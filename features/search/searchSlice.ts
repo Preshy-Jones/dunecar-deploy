@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Option } from "../../types/form";
 
 export interface SearchState {
-  filter: string | undefined;
+  toggledFilter: string | undefined;
 }
 
 const initialState: SearchState = {
-  filter: undefined,
+  toggledFilter: undefined,
 };
 
 const searchSlice = createSlice({
@@ -15,7 +15,7 @@ const searchSlice = createSlice({
   reducers: {
     setFilter: (state, action: PayloadAction<string>) => {
       const { payload } = action;
-      state.filter = payload;
+      state.toggledFilter = payload;
     },
   },
 });

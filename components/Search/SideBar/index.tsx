@@ -5,7 +5,7 @@ import SortIcon from "../../ui/icons/SortIcon";
 import { Cancel, CaretLeftIcon } from "../../ui/icons";
 import FilterIndicator from "./FilterIndicator";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getMakes } from "../../../features/make/makeSlice";
+import { getMakes, setSelectedMakes } from "../../../features/make/makeSlice";
 import MakeFilter from "./Filters/Make";
 import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
 import { setFilter } from "../../../features/search/searchSlice";
@@ -13,9 +13,12 @@ import { setFilter } from "../../../features/search/searchSlice";
 const SideBar = ({ filters }) => {
   const [isFilter, setIsFilter] = React.useState(false);
 
-  const { filter } = useAppSelector((state) => state.search);
+  const { toggledFilter } = useAppSelector((state) => state.search);
 
   const dispatch = useAppDispatch();
+
+  const { selectedMakes } = useAppSelector((state) => state.make);
+  const { modelsSelected } = useAppSelector((state) => state.model);
 
   return (
     <div className="font-roboto border-r-[0.1rem] border-r-dividerGray">
@@ -32,19 +35,19 @@ const SideBar = ({ filters }) => {
           </h2>
         </div>
         <div className="flex flex-wrap w-full px-6 text-white pb-4">
-          {filters &&
-            filters.makes &&
-            filters.makes.length > 0 &&
-            filters.makes[0] !== "" &&
-            filters.makes.map((make, index) => (
+          {selectedMakes &&
+            selectedMakes &&
+            selectedMakes.length > 0 &&
+            selectedMakes[0] !== "" &&
+            selectedMakes.map((make, index) => (
               <FilterIndicator key={index} label={make} />
             ))}
 
-          {filters &&
-            filters.models &&
-            filters.models.length > 0 &&
-            filters.models[0] !== "" &&
-            filters.models.map((model, index) => (
+          {modelsSelected &&
+            modelsSelected &&
+            modelsSelected.length > 0 &&
+            modelsSelected[0] !== "" &&
+            modelsSelected.map((model, index) => (
               <FilterIndicator key={index} label={model} />
             ))}
         </div>
@@ -60,7 +63,7 @@ const SideBar = ({ filters }) => {
           SAVE SEARCH
         </button>
       </div>
-      {!filter ? (
+      {!toggledFilter ? (
         <div>
           <div className="flex items-center justify-between px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem]">
             <div className="flex justify-between items-center">
@@ -80,7 +83,7 @@ const SideBar = ({ filters }) => {
           </div>
         </div>
       ) : (
-        <div>{filter && sideBarContentFilters[filter]}</div>
+        <div>{toggledFilter && sideBarContentFilters[toggledFilter]}</div>
       )}
     </div>
   );

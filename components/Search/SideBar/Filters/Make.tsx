@@ -6,6 +6,7 @@ import {
   setMakeOptions,
   setSelectedMakes,
 } from "../../../../features/make/makeSlice";
+import { getModels } from "../../../../features/model/modelSlice";
 import { setFilter } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
@@ -60,6 +61,7 @@ const MakeFilter = () => {
 
     dispatch(setMakeOptions(result));
     dispatch(getCars({ makes: selectedMakes, limit: "20" }));
+    dispatch(getModels({ makes: selectedMakes }));
 
     //update the query strings but don't reload the page
     router.push(
@@ -74,7 +76,6 @@ const MakeFilter = () => {
 
   useEffect(() => {
     dispatch(getMakes());
-    dispatch(setSelectedMakes(filters.makes));
     // console.log(modelOptions);
   }, [dispatch]);
 
