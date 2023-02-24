@@ -9,6 +9,8 @@ import { getMakes, setSelectedMakes } from "../../../features/make/makeSlice";
 import MakeFilter from "./Filters/Make";
 import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
 import { setFilter } from "../../../features/search/searchSlice";
+import MakesIndicator from "./MakesIndicator";
+import ModelsIndicator from "./ModelsIndicator";
 
 const SideBar = ({ filters }) => {
   const [isFilter, setIsFilter] = React.useState(false);
@@ -40,7 +42,9 @@ const SideBar = ({ filters }) => {
             selectedMakes.length > 0 &&
             selectedMakes[0] !== "" &&
             selectedMakes.map((make, index) => (
-              <FilterIndicator key={index} label={make} />
+              <div>
+                <MakesIndicator key={index} label={make} />
+              </div>
             ))}
 
           {modelsSelected &&
@@ -48,7 +52,9 @@ const SideBar = ({ filters }) => {
             modelsSelected.length > 0 &&
             modelsSelected[0] !== "" &&
             modelsSelected.map((model, index) => (
-              <FilterIndicator key={index} label={model} />
+              <div>
+                <ModelsIndicator key={index} label={model} />
+              </div>
             ))}
         </div>
       </div>

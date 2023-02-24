@@ -1,8 +1,14 @@
 import React from "react";
 
-const Cancel = () => {
+interface Props {
+  onClick: () => void;
+}
+
+const Cancel: React.FC<Props> = ({ onClick, ...rest }) => {
   return (
     <svg
+      {...rest}
+      onClick={onClick}
       width="18"
       height="18"
       viewBox="0 0 18 18"
