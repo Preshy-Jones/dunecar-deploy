@@ -42,7 +42,7 @@ const SideBar = ({ filters }) => {
             selectedMakes.length > 0 &&
             selectedMakes[0] !== "" &&
             selectedMakes.map((make, index) => (
-              <div>
+              <div key={index}>
                 <MakesIndicator key={index} label={make} />
               </div>
             ))}
@@ -52,7 +52,7 @@ const SideBar = ({ filters }) => {
             modelsSelected.length > 0 &&
             modelsSelected[0] !== "" &&
             modelsSelected.map((model, index) => (
-              <div>
+              <div key={index}>
                 <ModelsIndicator key={index} label={model} />
               </div>
             ))}

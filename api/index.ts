@@ -6,7 +6,7 @@ import { formatMultipleValueKeyQuery } from "../utils/utilityFunctions";
 class Api {
   baseURL: string;
   constructor() {
-    this.baseURL = process.env.NEXT_PUBLIC_BASE_URL as string;
+    this.baseURL = process.env.NEXT_PUBLIC_BASE_UR as string;
   }
 
   initializeInstance = () => {

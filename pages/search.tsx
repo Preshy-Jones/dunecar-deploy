@@ -47,7 +47,7 @@ const Search = () => {
     dispatch(getCars({ makes: makes, models: models, limit: limit }));
     dispatch(setSelectedMakes(makes));
     dispatch(setModelsSelected(models));
-  }, [router]);
+  }, [router,dispatch]);
 
   useEffect(() => {
     console.log("hello there");
