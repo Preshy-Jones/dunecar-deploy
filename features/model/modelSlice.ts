@@ -17,6 +17,10 @@ const initialState: CarState = {
 interface ModelPayload {
   makes: string[];
 }
+export interface DeleteModelsofMakePayload {
+  make: string;
+  models: string[];
+}
 
 export const getModels = createAsyncThunk(
   "model/getModels",
@@ -30,12 +34,29 @@ export const getModels = createAsyncThunk(
   }
 );
 
+export const deleteModelsofMake = createAsyncThunk(
+  "model/deleteModelsofMake",
+  async (payload: DeleteModelsofMakePayload, thunkAPI) => {
+    const { make, models } = payload;
+    try {
+      return await modelService.deleteModelsofMakehandler({ make, models });
+    } catch (error) {
+      return thunkAPI.rejectWithValue("something went wrong");
+    }
+  }
+);
+
 const modelSlice = createSlice({
   name: "model",
   initialState,
   reducers: {
     setModelsSelected: (state, action: PayloadAction<string[]>) => {
       state.modelsSelected = action.payload;
+    },
+    deleteSelectedModel: (state, action: PayloadAction<string>) => {
+      state.modelsSelected = state.modelsSelected.filter(
+        (model) => model !== action.payload
+      );
     },
   },
   extraReducers: (builder) => {
@@ -51,10 +72,22 @@ const modelSlice = createSlice({
       .addCase(getModels.rejected, (state: CarState, action) => {
         console.log(action);
         state.isLoading = false;
+      })
+      .addCase(deleteModelsofMake.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteModelsofMake.fulfilled, (state: CarState, action) => {
+        console.log(action);
+        state.isLoading = false;
+        state.modelsSelected = action.payload.data;
+      })
+      .addCase(deleteModelsofMake.rejected, (state: CarState, action) => {
+        console.log(action);
+        state.isLoading = false;
       });
   },
 });
 
-export const { setModelsSelected } = modelSlice.actions;
+export const { setModelsSelected, deleteSelectedModel } = modelSlice.actions;
 
 export default modelSlice.reducer;

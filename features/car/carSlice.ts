@@ -18,6 +18,7 @@ export interface CarState {
   moreCarsLoading: boolean;
   filterTotal: number;
   aFilterToggled: boolean;
+  optionDeleted: boolean;
 }
 
 const initialState: CarState = {
@@ -30,7 +31,7 @@ const initialState: CarState = {
     models: [],
     makes: [],
   },
-
+  optionDeleted: false,
   isLoading: false,
   filterTotal: 0,
   aFilterToggled: false,
@@ -45,8 +46,6 @@ interface CarPayload {
 export const getCars = createAsyncThunk(
   "car/getCars",
   async (payload: CarPayload, thunkAPI) => {
-    console.log(payload);
-
     const { models, makes, limit } = payload;
     try {
       return await carService.fetchCars({ models, makes, limit });
@@ -59,8 +58,6 @@ export const getCars = createAsyncThunk(
 export const getMoreCarsPagination = createAsyncThunk(
   "car/getMoreCars",
   async (payload: CarPayload, thunkAPI) => {
-    console.log(payload);
-
     const { models, makes, limit } = payload;
     try {
       return await carService.fetchCars({ models, makes, limit });
@@ -86,6 +83,10 @@ const carSlice = createSlice({
     isAFilterToggled: (state, action: PayloadAction<boolean>) => {
       const { payload } = action;
       state.aFilterToggled = payload;
+    },
+    setOptionDeleted: (state, action: PayloadAction<boolean>) => {
+      const { payload } = action;
+      state.optionDeleted = payload;
     },
   },
   extraReducers: (builder) => {
@@ -121,6 +122,6 @@ const carSlice = createSlice({
   },
 });
 
-export const { setFilterTotal } = carSlice.actions;
+export const { setFilterTotal, setOptionDeleted } = carSlice.actions;
 
 export default carSlice.reducer;

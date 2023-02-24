@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import Product from "./Product";
 import { useRouter } from "next/router";
-import { getMoreCarsPagination } from "../../../features/car/carSlice";
+import { getCars, getMoreCarsPagination } from "../../../features/car/carSlice";
 import { Spinner } from "../../ui/others";
 
 const ProductCatalogue = ({ cars, count, filters }) => {
@@ -11,6 +11,8 @@ const ProductCatalogue = ({ cars, count, filters }) => {
 
   const dispatch = useAppDispatch();
   const { moreCarsLoading } = useAppSelector((state) => state.car);
+  const { selectedMakes } = useAppSelector((state) => state.make);
+  const { modelsSelected } = useAppSelector((state) => state.model);
 
   const getMoreCars = () => {
     const path = router.pathname;

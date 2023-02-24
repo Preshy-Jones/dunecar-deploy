@@ -4,7 +4,7 @@ import DefaultLayout from "../components/layouts/DefaultLayout";
 import ProductCatalogue from "../components/Search/Products";
 import SearchBar from "../components/Search/SearchBar";
 import SideBar from "../components/Search/SideBar";
-import { getCars } from "../features/car/carSlice";
+import { getCars, setOptionDeleted } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Api from "../api";
 import { Spinner } from "../components/ui/others";
@@ -18,9 +18,13 @@ const Search = () => {
     cars,
     carFilter: filters,
     isLoading,
+    optionDeleted,
     moreCarsLoading,
     count,
   } = useAppSelector((state) => state.car);
+
+  const { selectedMakes } = useAppSelector((state) => state.make);
+  const { modelsSelected } = useAppSelector((state) => state.model);
 
   const router = useRouter();
 
@@ -31,12 +35,12 @@ const Search = () => {
       ? typeof query.make === "string"
         ? [query.make]
         : query.make
-      : [""];
+      : [];
     const models = query.model
       ? typeof query.model === "string"
         ? [query.model]
         : query.model
-      : [""];
+      : [];
 
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
@@ -44,6 +48,22 @@ const Search = () => {
     dispatch(setSelectedMakes(makes));
     dispatch(setModelsSelected(models));
   }, [router]);
+
+  useEffect(() => {
+    console.log("hello there");
+    if (optionDeleted) {
+      console.log({ selectedMakes, modelsSelected });
+
+      dispatch(
+        getCars({
+          makes: selectedMakes,
+          models: modelsSelected,
+          limit: "20",
+        })
+      );
+      dispatch(setOptionDeleted(false));
+    }
+  }, [optionDeleted]);
 
   return (
     <div className="font-roboto">

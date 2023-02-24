@@ -51,13 +51,13 @@ class Api {
     console.log(limit);
 
     const url = `/v1/car?${
-      models
+      models && models.length > 0
         ? models.length > 1
           ? formatMultipleValueKeyQuery("model", models)
           : `model=${models[0]}`
         : ""
     }&${
-      makes
+      makes && makes.length > 0
         ? makes.length > 1
           ? formatMultipleValueKeyQuery("make", makes)
           : `make=${makes[0]}`
@@ -81,6 +81,20 @@ class Api {
         : `make=${makes[0]}`
     }`;
     return this.publicRequest(url, METHOD.GET, {});
+  };
+
+  getFilteredModelsByMake = ({
+    make,
+    models,
+  }: {
+    make: string;
+    models: string[];
+  }) => {
+    const url = `/v1/car/models/filter`;
+    return this.publicRequest(url, METHOD.POST, {
+      make,
+      models,
+    });
   };
 }
 
