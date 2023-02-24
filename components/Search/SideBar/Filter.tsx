@@ -11,9 +11,9 @@ interface Props {
 }
 
 const Filter: React.FC<Props> = ({ item }) => {
-  const [filterOpen, setFilterOpen] = useState<Boolean>(false);
+
   const dispatch = useAppDispatch();
-  const { filter } = useAppSelector((state) => state.search);
+  
 
   const handleFilterOpen = (filterKey: string) => {
     dispatch(setFilter(filterKey));

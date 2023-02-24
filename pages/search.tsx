@@ -8,6 +8,8 @@ import { getCars } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Api from "../api";
 import { Spinner } from "../components/ui/others";
+import { setSelectedMakes } from "../features/make/makeSlice";
+import { setModelsSelected } from "../features/model/modelSlice";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +25,7 @@ const Search = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if(!router.isReady) return;
+    if (!router.isReady) return;
     const { query } = router;
     const makes = query.make
       ? typeof query.make === "string"
@@ -39,6 +41,8 @@ const Search = () => {
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
     dispatch(getCars({ makes: makes, models: models, limit: limit }));
+    dispatch(setSelectedMakes(makes));
+    dispatch(setModelsSelected(models));
   }, [router]);
 
   return (
