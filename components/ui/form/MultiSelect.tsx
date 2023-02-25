@@ -36,8 +36,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   // const selected = useRef<string[]>([]);
 
-
-
   let modalRef = useRef<HTMLDivElement>(null);
 
   let togglerRef = useRef<HTMLDivElement>(null);
@@ -103,8 +101,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     console.log(selected);
   };
 
-
-
   let { domNode1, domNode2 } = useClickOutside(() => {
     handleCloseModal();
   });
@@ -153,7 +149,13 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
               `| ${capitalizeFirstLetter(selected[1])}...`}
           </h2>
         ) : (
-          <h2 className=" leading-[19px] text-black">{placeHolder}</h2>
+          <h2
+            className={`${
+              isDisabled ? "text-[#081314] text-opacity-30" : " text-black"
+            } leading-[19px]`}
+          >
+            {placeHolder}
+          </h2>
         )}
         <CaretDownIcon />
       </div>

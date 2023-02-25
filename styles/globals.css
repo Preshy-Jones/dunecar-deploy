@@ -39,6 +39,9 @@
   background-color: blue;
 } */
 
+#nprogress .bar {
+  background: #d14532; /* Change this to your desired color */
+}
 /* bouncing balls */
 .bouncer {
   display: flex;

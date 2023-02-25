@@ -39,7 +39,9 @@ const NavBar = () => {
         <div className="flex justify-between relative items-center ">
           <div className="flex-3">
             <Link href="/">
-              <Image src={Logo} alt="logo" className="cursor-pointer" />
+              <a>
+                <Image src={Logo} alt="logo" className="cursor-pointer" />
+              </a>
             </Link>
           </div>
           <div className="flex-4">

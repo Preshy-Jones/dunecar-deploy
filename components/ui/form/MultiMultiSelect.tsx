@@ -159,14 +159,20 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
         }`}
       >
         {selected.length >= 1 ? (
-          <h2 className="text-[#081314] ">
+          <h2 className={`text-[#081314] `}>
             {capitalizeFirstLetter(selected[0])}
             {"   "} {"   "}
             {selected.length > 1 &&
               `| ${capitalizeFirstLetter(selected[1])}...`}
           </h2>
         ) : (
-          <h2 className="">{placeHolder}</h2>
+          <h2
+            className={`${
+              isDisabled ? "text-[#081314] text-opacity-30" : " text-black"
+            } leading-[19px]`}
+          >
+            {placeHolder}
+          </h2>
         )}
         <CaretDownIcon />
       </div>

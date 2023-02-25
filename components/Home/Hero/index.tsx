@@ -143,6 +143,7 @@ const Hero = () => {
   };
   useEffect(() => {
     dispatch(getMakes());
+    dispatch(getCars({ makes: [], models: [] }));
     // console.log(modelOptions);
   }, [dispatch]);
 
