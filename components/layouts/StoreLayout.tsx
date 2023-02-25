@@ -2,7 +2,7 @@ import React from "react";
 import SideBar from "../Search/SideBar";
 import Footer from "./Footer";
 import MobileNavBar from "./MobileNavBar";
-import NavBar from "./NavBar";
+import NavBar from "./NavBar/NavBar";
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {
   return (

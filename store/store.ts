@@ -3,6 +3,7 @@ import carReducer from "../features/car/carSlice";
 import modelReducer from "../features/model/modelSlice";
 import makeReducer from "../features/make/makeSlice";
 import searchReducer from "../features/search/searchSlice";
+import uiReducer from "../features/ui/uiSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     model: modelReducer,
     make: makeReducer,
     search: searchReducer,
+    ui: uiReducer,
   },
 
   //  middleware;getDefaultMiddleware => getDefaultMiddleware().concat(),
