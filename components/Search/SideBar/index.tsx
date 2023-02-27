@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
 import FilterIcon from "../../ui/icons/FilterIcon";
 import SortIcon from "../../ui/icons/SortIcon";
-import { Cancel, CaretLeftIcon } from "../../ui/icons";
-import FilterIndicator from "./FilterIndicator";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getMakes, setSelectedMakes } from "../../../features/make/makeSlice";
-import MakeFilter from "./Filters/Make";
+
 import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
 import { setFilter } from "../../../features/search/searchSlice";
 import MakesIndicator from "./MakesIndicator";
