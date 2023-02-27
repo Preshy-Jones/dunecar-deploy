@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "../Search/SideBar";
 import Footer from "./Footer";
-import MobileNavBar from "./MobileNavBar";
+import MobileNavBar from "./MobileNavBar/MobileNavBar";
 import NavBar from "./NavBar/NavBar";
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {

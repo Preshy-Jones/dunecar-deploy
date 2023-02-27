@@ -1,7 +1,6 @@
 import React from "react";
-import { useAppSelector } from "../../store/hooks";
 import Footer from "./Footer";
-import MobileNavBar from "./MobileNavBar";
+import MobileNavBar from "./MobileNavBar/MobileNavBar";
 import NavBar from "./NavBar/NavBar";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
