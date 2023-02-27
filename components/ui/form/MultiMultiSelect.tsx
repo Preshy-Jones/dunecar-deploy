@@ -98,9 +98,9 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
       {isToggled && isDisabled === false && (
         <div
           ref={domNode1}
-          className="bg-white rounded-[4px]  z-30 absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5 w-[80%] sm:w-[12.4375rem]"
+          className="bg-white rounded-[4px]  z-30 absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5"
         >
-          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-x-scroll">
+          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-scroll w-[80%] sm:w-[12.4375rem]">
             {/* <div
               className="absolute left-0"
                onClick={() => handleSlide("left")}
@@ -108,7 +108,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             {fieldOptions?.map((item, index: number) => (
               <div
                 key={index}
-                className={`w-[6.21875rem]  pb-1.5  ${
+                className={`w-[6rem]  pb-1.5 mr-9  ${
                   index === currentIndex - 1 && "flex justify-end"
                 }`}
                 onClick={() => handleTabChange(index)}
@@ -118,7 +118,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                     index === currentIndex
                       ? "text-black font-medium"
                       : "text-[#081314] text-opacity-20 font-light"
-                  }   text-[1.25rem] `}
+                  }   text-[1.25rem] w-full`}
                 >
                   {fieldOptions[index]?.collection_name}
                 </h2>
@@ -133,7 +133,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             animate={{ x: active === 1 ? 160 : 0 }}
             className="h-[2px] bg-red-700 w-[50%] relative bottom-[0.05rem] rounded-md"
           ></motion.div> */}
-          <div className="pt-3 overflow-y-scroll h-[13.55rem]">
+          <div className="pt-3 overflow-y-scroll h-[13.55rem] w-[80%] sm:w-[12.4375rem]">
             {fieldOptions[currentIndex].options.map((item, index) => (
               <div className="flex items-center mb-5" key={index}>
                 <input
