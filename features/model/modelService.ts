@@ -1,7 +1,7 @@
 import Api from "../../api";
 import { DeleteModelsofMakePayload } from "./modelSlice";
 
-export const fetchModels = async (makes: (string | number)[]) => {
+export const fetchModels = async (makes: string[]) => {
   const api = new Api();
   const response = await api.getModels(makes);
   console.log(response);

@@ -13,7 +13,7 @@ export interface CarState {
 const initialState: CarState = {
   makes: [],
   makeOptions: [],
-  isLoading: true,
+  isLoading: false,
   selectedMakes: [],
 };
 

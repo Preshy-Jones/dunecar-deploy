@@ -32,8 +32,19 @@ export interface CarMake {
   updatedAt: Date;
 }
 
+export interface CarBodyType {
+  _id: string;
+  title: string;
+  slug: string;
+}
+
 export interface CarPayload {
   models?: string[];
   makes?: string[];
   limit?: string;
 }
+
+export type BodyTypesPayload = {
+  makes?: string[];
+  models?: string[];
+};

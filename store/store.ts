@@ -4,6 +4,7 @@ import modelReducer from "../features/model/modelSlice";
 import makeReducer from "../features/make/makeSlice";
 import searchReducer from "../features/search/searchSlice";
 import uiReducer from "../features/ui/uiSlice";
+import bodyTypeReducer from "../features/bodyType/bodyTypeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     make: makeReducer,
     search: searchReducer,
     ui: uiReducer,
+    bodyType: bodyTypeReducer,
   },
 
   //  middleware;getDefaultMiddleware => getDefaultMiddleware().concat(),

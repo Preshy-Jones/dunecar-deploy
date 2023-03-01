@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { CarPayload } from "../types/car";
+import { BodyTypesPayload, CarPayload } from "../types/car";
 import { METHOD } from "../types/methods";
 import { formatMultipleValueKeyQuery } from "../utils/utilityFunctions";
 
@@ -50,17 +50,18 @@ class Api {
     let { models, makes, limit } = query;
     console.log(limit);
 
+    const queryExists = !models || !makes || !limit;
     const url = `/v1/car?${
       models && models.length > 0
         ? models.length > 1
           ? formatMultipleValueKeyQuery("model", models)
           : `model=${models[0]}`
         : ""
-    }&${
+    }${
       makes && makes.length > 0
         ? makes.length > 1
-          ? formatMultipleValueKeyQuery("make", makes)
-          : `make=${makes[0]}`
+          ? `&${formatMultipleValueKeyQuery("make", makes)}`
+          : `&make=${makes[0]}`
         : ""
     }${limit ? `&limit=${limit}` : ""}
     `;
@@ -70,12 +71,12 @@ class Api {
   };
 
   getMakes = () => {
-    const url = "/v1/car/makes";
+    const url = "/v1/make";
     return this.publicRequest(url, METHOD.GET, {});
   };
 
-  getModels = (makes: (string | number)[]) => {
-    const url = `/v1/car/models?${
+  getModels = (makes: string[]) => {
+    const url = `/v1/model?${
       makes.length > 1
         ? formatMultipleValueKeyQuery("make", makes)
         : `make=${makes[0]}`
@@ -95,6 +96,19 @@ class Api {
       make,
       models,
     });
+  };
+
+  getBodyTypes = (query: BodyTypesPayload) => {
+    let { makes } = query;
+
+    const url = `/v1/body_type?${
+      makes && makes.length > 0
+        ? makes.length > 1
+          ? formatMultipleValueKeyQuery("make", makes)
+          : `make=${makes[0]}`
+        : ""
+    }`;
+    return this.publicRequest(url, METHOD.GET, {});
   };
 }
 
