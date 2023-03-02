@@ -11,14 +11,11 @@ export const priceSplitter = (number: number): string => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-export const formatMultipleValueKeyQuery = (key: string, values: (string  | number)[]) => {
+export const formatMultipleValueKeyQuery = (key: string, values: string[]) => {
   return values.map((value) => `${key}=${value}`).join("&");
 };
-
-
 
 // const makes = ["toyota", "bmw"];
 // const models = ["corolla", "camry", "x5", "x6"];
 
 // console.log(formatMultipleValueKeyQuery("make", makes));
-

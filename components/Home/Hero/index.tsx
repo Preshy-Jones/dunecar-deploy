@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
 import { DotLoader, Spinner } from "../../ui/others";
+import Loader from "../../../public/assets/Loader.json";
+import Lottie from "lottie-react";
 import {
   getModels,
   setModelsSelected,
@@ -13,6 +15,7 @@ import {
 import { getMakes, setMakeOptions } from "../../../features/make/makeSlice";
 import { useRouter } from "next/router";
 import { formatMultipleValueKeyQuery } from "../../../utils/utilityFunctions";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 // import heroImage from "../../assets/heroimage.svg";
 
@@ -241,7 +244,7 @@ const Hero = () => {
                       Search all {cars.length} cars
                     </div>
                   ) : (
-                    <DotLoader />
+                    <Lottie animationData={Loader} />
                   )}
                 </button>
               </div>
@@ -303,7 +306,16 @@ const Hero = () => {
                       Search all {cars.length} cars
                     </div>
                   ) : (
-                    <DotLoader />
+                    <Player
+                      src={Loader}
+                      autoplay
+                      loop
+                      style={{
+                        height: "300px",
+                        width: "300px",
+                        color: "#fff",
+                      }}
+                    />
                   )}
                 </button>
               </div>

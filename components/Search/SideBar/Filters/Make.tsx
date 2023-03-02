@@ -10,9 +10,10 @@ import { getModels } from "../../../../features/model/modelSlice";
 import { setFilter } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
+import { Spinner } from "../../../ui/others";
 
 const MakeFilter = () => {
-  let { makes, makeOptions, selectedMakes } = useAppSelector(
+  let { makes, makeOptions, selectedMakes, isLoading } = useAppSelector(
     (state) => state.make
   );
 
@@ -97,26 +98,32 @@ const MakeFilter = () => {
         <CaretLeftIcon className="mr-7" />
         <h1 className="leading-secondary text-secondary font-medium">Make</h1>
       </div>
-      <div>
-        {makeOptions?.map((item, index) => (
-          <div key={index} className="flex items-center mt-5">
-            <input
-              type="checkbox"
-              className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
-              value={item.value}
-              name="make"
-              checked={selectedMakes.includes(item.value)}
-              onChange={handleChange}
-            />
-            <label
-              className="leading-primary text-secondary text-lighterDark font-normal"
-              style={{ marginLeft: "5px" }}
-            >
-              {item.label}
-            </label>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="flex justify-center items-center h-[50vh]">
+          <Spinner />
+        </div>
+      ) : (
+        <div>
+          {makeOptions?.map((item, index) => (
+            <div key={index} className="flex items-center mt-5">
+              <input
+                type="checkbox"
+                className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
+                value={item.value}
+                name="make"
+                checked={selectedMakes.includes(item.value)}
+                onChange={handleChange}
+              />
+              <label
+                className="leading-primary text-secondary text-lighterDark font-normal"
+                style={{ marginLeft: "5px" }}
+              >
+                {item.label}
+              </label>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

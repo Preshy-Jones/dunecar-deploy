@@ -8,11 +8,11 @@ const Product = ({ car }) => {
     <div>
       <ImageSlider />
       <div className="px-3 border-b border-r border-l border-[#D1D1D1] -mt-2">
-        <div className="py-3">
-          <h2 className="text-[#414141] tracking-primary leading-primary text-[15.8519px] mb-4">
+        <div className="pt-3 pb-1">
+          <h2 className="text-[#414141] tracking-primary leading-primary text-[10px] mb-2">
             DUNE CERTIFIED
           </h2>
-          <div className="flex  mb-4">
+          <div className="flex  mb-2">
             <h2 className="text-[16.1404px] text-specialRed w-[50%] leading-primary font-normal">
               {car.title}
             </h2>

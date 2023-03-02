@@ -11,7 +11,7 @@ export interface CarState {
 const initialState: CarState = {
   models: [],
   modelsSelected: [],
-  isLoading: true,
+  isLoading: false,
 };
 
 interface ModelPayload {

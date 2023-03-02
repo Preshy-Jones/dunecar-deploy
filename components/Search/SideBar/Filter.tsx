@@ -3,6 +3,7 @@ import { RxChevronDown, RxChevronUp } from "react-icons/rx";
 import { setFilter } from "../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { CaretRightIcon } from "../../ui/icons";
+import { Spinner } from "../../ui/others";
 interface Props {
   item: {
     title: string;
@@ -11,9 +12,29 @@ interface Props {
 }
 
 const Filter: React.FC<Props> = ({ item }) => {
-
   const dispatch = useAppDispatch();
-  
+
+  // const { isLoading: makeIsLoading } = useAppSelector((state) => state.make);
+  // const { isLoading: modelIsLoading } = useAppSelector((state) => state.model);
+
+  // const { isLoading: bodyTypeIsLoading } = useAppSelector(
+  //   (state) => state.bodyType
+  // );
+
+  // let loading;
+  // switch (item.slug) {
+  //   case "make":
+  //     loading = makeIsLoading;
+  //     break;
+  //   case "model":
+  //     loading = modelIsLoading;
+  //     break;
+  //   case "body-type":
+  //     loading = bodyTypeIsLoading;
+  //     break;
+  //   default:
+  //     break;
+  // }
 
   const handleFilterOpen = (filterKey: string) => {
     dispatch(setFilter(filterKey));
@@ -22,7 +43,7 @@ const Filter: React.FC<Props> = ({ item }) => {
   return (
     <div className=" border-b border-b-dividerGray">
       <div
-        className="flex py-[1.25rem] px-[2rem] justify-between "
+        className="flex h-[3.9375rem] items-center px-[2rem] justify-between "
         onClick={() => handleFilterOpen(item.filterComponentKey)}
       >
         <h1 className=" font-normal">{item.title}</h1>

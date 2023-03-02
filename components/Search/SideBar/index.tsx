@@ -68,18 +68,18 @@ const SideBar = ({ filters }) => {
       </div>
       {!toggledFilter ? (
         <div>
-          <div className="flex items-center justify-between px-6 border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem]">
+          <div className="flex items-end justify-between px-6 border-t-dividerGray border-t border-b h-[5.0625rem] leading-secondary pb-3">
             <div className="flex justify-between items-center">
               <SortIcon />
               <h2 className="ml-4">Sort by</h2>
             </div>
-            <h2 className="text-specialRed leading-secondary">Best match</h2>
+            <h2 className="text-specialRed">Best match</h2>
           </div>
           <div className="  ">
             <div>
               <div>
                 {SideBarContent.map((item: any, index) => (
-                  <Filter key={index} item={item} />
+                  <Filter key={index} item={item}  />
                 ))}
               </div>
             </div>
