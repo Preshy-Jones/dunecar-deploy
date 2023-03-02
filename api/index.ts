@@ -62,9 +62,13 @@ class Api {
           ? formatMultipleValueKeyQuery("make", makes)
           : `make=${makes[0]}`
         : ""
-    }&${body_types ? `body_type=${body_types}` : ""}${
-      limit ? `&limit=${limit}` : ""
-    }
+    }&${
+      body_types && body_types.length > 0
+        ? body_types.length > 1
+          ? formatMultipleValueKeyQuery("body_type", body_types)
+          : `body_type=${body_types[0]}`
+        : ""
+    }${limit ? `&limit=${limit}` : ""}
     `;
 
     console.log(url);

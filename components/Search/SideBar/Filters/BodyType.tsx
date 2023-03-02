@@ -85,7 +85,7 @@ const BodyType = () => {
         makes: selectedMakes,
       })
     );
-  }, [dispatch]);
+  }, [dispatch, selectedMakes]);
 
   useEffect(() => {
     let bodyTypeOptionsPayload = bodyTypes.map((make) => ({

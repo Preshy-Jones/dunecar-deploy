@@ -66,7 +66,7 @@ const Model = () => {
   useEffect(() => {
     //get models
     dispatch(getModels({ makes: selectedMakes }));
-  }, [dispatch]);
+  }, [dispatch, selectedMakes]);
 
   return (
     <div className="px-6">
