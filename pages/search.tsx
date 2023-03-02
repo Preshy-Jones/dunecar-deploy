@@ -47,7 +47,7 @@ const Search = () => {
     dispatch(getCars({ makes: makes, models: models, limit: limit }));
     dispatch(setSelectedMakes(makes));
     dispatch(setModelsSelected(models));
-  }, [router,dispatch]);
+  }, [router, dispatch]);
 
   useEffect(() => {
     console.log("hello there");
@@ -63,7 +63,7 @@ const Search = () => {
       );
       dispatch(setOptionDeleted(false));
     }
-  }, [optionDeleted]);
+  }, [optionDeleted, dispatch, selectedMakes, modelsSelected]);
 
   return (
     <div className="font-roboto">
