@@ -47,24 +47,26 @@ class Api {
   };
 
   getCars = (query: CarPayload) => {
-    let { models, makes, limit } = query;
+    let { models, makes, body_types, limit } = query;
     console.log(limit);
 
-    const queryExists = !models || !makes || !limit;
     const url = `/v1/car?${
       models && models.length > 0
         ? models.length > 1
           ? formatMultipleValueKeyQuery("model", models)
           : `model=${models[0]}`
         : ""
-    }${
+    }&${
       makes && makes.length > 0
         ? makes.length > 1
-          ? `&${formatMultipleValueKeyQuery("make", makes)}`
-          : `&make=${makes[0]}`
+          ? formatMultipleValueKeyQuery("make", makes)
+          : `make=${makes[0]}`
         : ""
-    }${limit ? `&limit=${limit}` : ""}
+    }&${body_types ? `body_type=${body_types}` : ""}${
+      limit ? `&limit=${limit}` : ""
+    }
     `;
+
     console.log(url);
 
     return this.publicRequest(url, METHOD.GET, {});

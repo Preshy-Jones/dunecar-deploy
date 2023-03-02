@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Car, CarMake, CarModel } from "../../types/car";
+import { Car, CarMake, CarModel, CarPayload } from "../../types/car";
 import { Option } from "../../types/form";
 import { MathOperations } from "../../types/methods";
 import carService from "./carService";
@@ -37,18 +37,14 @@ const initialState: CarState = {
   aFilterToggled: false,
 };
 
-interface CarPayload {
-  models?: string[];
-  makes?: string[];
-  limit?: string;
-}
+
 
 export const getCars = createAsyncThunk(
   "car/getCars",
   async (payload: CarPayload, thunkAPI) => {
-    const { models, makes, limit } = payload;
+    const { models, makes, limit, body_types } = payload;
     try {
-      return await carService.fetchCars({ models, makes, limit });
+      return await carService.fetchCars({ models, makes, limit, body_types });
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
     }

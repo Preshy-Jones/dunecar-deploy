@@ -59,7 +59,14 @@ const BodyType = () => {
     // console.log(optionsUpdated);
 
     dispatch(setBodyTypeOptions(result));
-    dispatch(getCars({ makes: selectedMakes, models: modelsSelected }));
+    dispatch(
+      getCars({
+        makes: selectedMakes,
+        models: modelsSelected,
+        body_types: selectedBodyTypes,
+        limit: "20",
+      })
+    );
   };
   //update the query strings but don't reload the page
   //   router.push(
