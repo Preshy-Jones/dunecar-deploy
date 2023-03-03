@@ -21,6 +21,8 @@ module.exports = {
         secondaryGray: "rgba(34, 17, 33, 0.7)",
         tertiaryGray: "rgba(34, 17, 33, 0.8)",
         dividerGray: "#D1D1D1",
+        primaryGreen: "#16AB25",
+        lightRed: "rgba(255, 222, 218, 0.37)",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -38,6 +40,7 @@ module.exports = {
         fifth: "1.6875rem",
         sixth: "3.8125rem",
         seventh: "1.25rem",
+        eighth: "1.75rem",
       },
       letterSpacing: {
         primary: "0.04em",
@@ -59,6 +62,7 @@ module.exports = {
       },
       boxShadow: {
         primary: "0px 10px 46px rgba(190, 190, 190, 0.25)",
+        primaryCard: "0px 0px 18px rgba(165, 165, 165, 0.25)",
         secondary: "0px 0px 79px rgba(203, 203, 203, 0.25)",
         card: "inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
         bigCard: "0px -1px 6px rgba(164, 164, 164, 0.25)",

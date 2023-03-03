@@ -17,3 +17,5 @@ export { default as LeftArrowIcon } from "./LeftArrow";
 export { default as GalleryIcon } from "./GalleryIcon";
 export { default as CarWheelIcon } from "./CarWheelIcon";
 export { default as CheckIcon } from "./CheckIcon";
+export { default as AlertIcon } from "./AlertIcon"; 
+export {default as TickIcon} from "./TickIcon";

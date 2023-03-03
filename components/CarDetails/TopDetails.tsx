@@ -5,7 +5,7 @@ import { LeftArrowIcon } from "../ui/icons";
 const TopDetails = () => {
   return (
     <div className="flex justify-center">
-      <div className="w-[90%]">
+      <div className="w-[85.1267992%]">
         <div className="flex items-center">
           <div className="mr-2">
             <LeftArrowIcon />

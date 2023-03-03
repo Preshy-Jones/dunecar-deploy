@@ -23,7 +23,7 @@ const Gallery = () => {
         </div>
       </div>
       <div className="flex justify-center my-2">
-        <div className="w-[90%] grid grid-cols-3 gap-x-2 text-white justify-evenly mt-2">
+        <div className="w-[85.1267992%] grid grid-cols-3 gap-x-2 text-white justify-evenly mt-2">
           <button className="w-full bg-specialBlack px-5 h-[3rem] rounded-tertiary flex items-center justify-center text-white">
             <div className="mr-3">
               <GalleryIcon />
