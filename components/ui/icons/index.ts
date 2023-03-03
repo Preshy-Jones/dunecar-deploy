@@ -13,3 +13,7 @@ export { default as SlideCaretRightIcon } from "./SlideCaretRightIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as Cancel } from "./Cancel";
 export { default as CaretLeftIcon } from "./CaretLeftIcon";
+export { default as LeftArrowIcon } from "./LeftArrow";
+export { default as GalleryIcon } from "./GalleryIcon";
+export { default as CarWheelIcon } from "./CarWheelIcon";
+export { default as CheckIcon } from "./CheckIcon";

@@ -34,6 +34,17 @@
   height: 5px !important;
 }
 
+.my-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.my-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.my-scrollbar::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
 /* Set the color of the scrollbar thumb to blue */
 /* .customscroll::-webkit-scrollbar-thumb {
   background-color: blue;

@@ -14,6 +14,7 @@ module.exports = {
         specialBlack: "#081314",
         secondaryBlack: "#221121",
         tertiaryBlack: "#212121",
+        thirdBlack: "#081314",
         specialGray: "#F0F1F2",
         pageBg: "#FAFAFA",
         borderDark: "rgba(203, 203, 203, 0.5)",
@@ -34,7 +35,9 @@ module.exports = {
         secondary: "2rem",
         tertiary: "1.4375rem",
         fourth: "1.625rem",
-        fifth:"1.6875rem"
+        fifth: "1.6875rem",
+        sixth: "3.8125rem",
+        seventh: "1.25rem",
       },
       letterSpacing: {
         primary: "0.04em",
@@ -43,8 +46,9 @@ module.exports = {
         heroImage: "url('/assets/threesixty.jpg')",
       },
       fontSize: {
-        primary:"1.375rem",
-        secondary:"1.125rem",
+        primary: "1.375rem",
+        secondary: "1.125rem",
+        tertiary: "1.5rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
         sme: ["0.875em", { lineHeight: "1.25em" }],
@@ -55,15 +59,17 @@ module.exports = {
       },
       boxShadow: {
         primary: "0px 10px 46px rgba(190, 190, 190, 0.25)",
-        secondary:"0px 0px 79px rgba(203, 203, 203, 0.25)",
+        secondary: "0px 0px 79px rgba(203, 203, 203, 0.25)",
         card: "inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
         bigCard: "0px -1px 6px rgba(164, 164, 164, 0.25)",
         cardShadow:
           "rgb(0 0 0 / 16%) 0px 6px 12px 0px, rgb(202 202 202 / 26%) 0px 0px 6px 0px, rgb(202 202 202 / 16%) 0px -1px 4px 0px",
+        cardShadow2: "0px 9px 20px rgba(216, 216, 216, 0.25)",
       },
       borderRadius: {
         primary: "1.875rem",
         secondary: "50%",
+        tertiary: "0.25rem",
         lgx: "0.625rem",
         third: "0.3125rem",
       },
@@ -137,6 +143,10 @@ module.exports = {
         "13s": "repeat(13, 1fr)",
         "14s": "repeat(14, 1fr)",
       },
+      gridTemplateRows: {
+        "7a": "repeat(7, 1fr)",
+        "8a": "repeat(8, minmax(0, auto))",
+      },
       gridColumnEnd: {
         13: "13",
         14: "14",
@@ -151,5 +161,5 @@ module.exports = {
       ...defaultTheme.screens,
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar")],
 };
