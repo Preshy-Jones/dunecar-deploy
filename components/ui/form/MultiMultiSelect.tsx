@@ -100,7 +100,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
           ref={domNode1}
           className="bg-white rounded-[4px]  z-30 absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5"
         >
-          <div className="flex pb-1 font-outfit font-medium justify-between border-b-[0.5px] border-b-[#D5D5D5] overflow-scroll w-[80%] sm:w-[12.4375rem]">
+          <div className="flex pb-1 font-outfit font-medium border-b-[0.5px] border-b-[#D5D5D5] overflow-scroll no-scrollbar w-[80%] sm:w-[12.4375rem]">
             {/* <div
               className="absolute left-0"
                onClick={() => handleSlide("left")}

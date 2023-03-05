@@ -1,9 +1,20 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export const BuyDropDown = () => {
   return (
-    <div className="text-tertiaryBlack absolute z-50 md:left-[3rem] lg:left-[7rem]  xl:left-[11rem] top-8 flex justify-center w-[55.1388889vw]">
-      <div className=" bg-white w-full flex justify-center rounded-[8px] py-[2rem] shadow-secondary mt-10">
+    <motion.div
+      initial={{ y: -800 }}
+      animate={{ y: -10 }}
+      transition={{
+        delay: 0,
+        duration: 0.5,
+        type: "tween",
+        // stiffness: 120,
+      }}
+      className="text-tertiaryBlack absolute z-50 md:left-[3rem] lg:left-[7rem]  xl:left-[11rem] top-[4.31rem] flex justify-center w-[55.1388889vw]"
+    >
+      <div className=" bg-white w-full flex justify-center rounded-[8px] py-[2rem] shadow-secondary">
         <div className="flex w-[95%] justify-between">
           <div className="flex-1 mr-[3rem]">
             <p className="leading-fifth text-tertiaryBlack font-medium mb-4">
@@ -71,7 +82,7 @@ export const BuyDropDown = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

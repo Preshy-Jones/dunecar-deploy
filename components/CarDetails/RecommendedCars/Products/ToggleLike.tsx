@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { HeartIcon, HeartIconRed } from "../../ui/icons";
+import { HeartIcon, HeartIconRed } from "../../../ui/icons";
 
 const ToggleLike = () => {
   const [liked, setLiked] = useState(false);
@@ -9,12 +9,12 @@ const ToggleLike = () => {
       {!liked ? (
         <HeartIcon
           color="#053361"
-          className="absolute top-[1rem] left-[1rem] w-[1.99875rem] h-[1.75875rem]"
+          className="absolute top-[1rem] left-[0.8rem] w-[1.26125rem]"
           onClick={() => setLiked(!liked)}
         />
       ) : (
         <HeartIconRed
-          className="absolute top-[1.2rem] left-[1.25rem] w-[1.99875rem] h-[1.75875rem]"
+          className="absolute top-[0.8rem] left-[0.9rem] w-[1.109375rem]"
           onClick={() => setLiked(!liked)}
         />
       )}

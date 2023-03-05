@@ -69,11 +69,11 @@ const Search = () => {
     <div className="font-roboto">
       {/* <pre>{JSON.stringify(router.query, null, 2)}</pre> */}
       <SearchBar />
-      <div className="grid grid-cols-store bg-pageBg">
-        <div className=" col-start-1 col-end-2 ">
+      <div className="grid grid-cols-store bg-pageBg ">
+        <div className=" col-start-1 col-end-2">
           <SideBar filters={filters} />
         </div>
-        <div className="col-start-2 col-end-3">
+        <div className="co-start-2 col-end-3">
           {isLoading ? (
             <div className="flex justify-center items-center pt-[6rem]">
               <Spinner />
@@ -87,44 +87,6 @@ const Search = () => {
   );
 };
 
-// export async function getServerSideProps({ query }: any) {
-//   const makes = query.make
-//     ? typeof query.make === "string"
-//       ? [query.make]
-//       : query.make
-//     : [""];
-//   const models = query.model
-//     ? typeof query.model === "string"
-//       ? [query.model]
-//       : query.model
-//     : [""];
-
-//   const limit = query.limit ? query.limit : 20;
-//   const api = new Api();
-//   const { data } = await api.getCars({ makes, models, limit });
-
-//   console.log({
-//     makes,
-//     models,
-//   });
-
-//   // const data = await fetchApi(
-//   //   `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`
-//   // );
-
-//   return {
-//     props: {
-//       cars: data.data.results.cars,
-//       count: data.data.results.count,
-//       filters: {
-//         makes,
-//         models,
-//         limit: data.data.filter.limit,
-//         displayedCount: data.data.filter.displayedCount,
-//       },
-//     },
-//   };
-// }
 
 Search.getLayout = (page) => <DefaultLayout>{page}</DefaultLayout>;
 
