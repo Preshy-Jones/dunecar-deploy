@@ -8,6 +8,7 @@ const ToggleLike = () => {
     <div>
       {!liked ? (
         <HeartIcon
+          color="#053361"
           className="absolute top-[1rem] left-[0.8rem] w-[1.26125rem]"
           onClick={() => setLiked(!liked)}
         />
