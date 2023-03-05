@@ -13,12 +13,12 @@ const CarSpecs = () => {
           <h2>Warranty</h2>
           <h2>Ratings & Reviews</h2>
         </div>
-        <div className="flex justify-between">
+        <div className="flex sm:flex-row flex-col sm:justify-between">
           <div>
             <h2 className="text-specialBlack font-extrabold text-[2rem] leading-[38px] mb-2">
               Overview
             </h2>
-            <div className="flex">
+            <div className="flex sm:flex-row flex-col">
               <div className="grid grid-cols-1 gap-y-1 divide-dividerGray divide-y gap-x-8 mr-4">
                 {specsData.slice(0, 8).map((data, index) => (
                   <div key={index} className="flex py-4 pr-[10rem]">
@@ -91,7 +91,7 @@ const CarSpecs = () => {
             <h2 className="text-specialBlack font-extrabold text-[2rem] leading-[38px] mb-2">
               Features & Specs
             </h2>
-            <div className="border-b border-dividerGray pb-2 mb-6">
+            <div className="border-b border-dividerGray pb-2 mb-6 flex">
               <div className="bg-lightRed flex items-center font-light justify-between px-4 py-2 ">
                 <h2 className="mr-[0.7rem] font-light ">Installed Upgrade</h2>
                 <AlertIcon />

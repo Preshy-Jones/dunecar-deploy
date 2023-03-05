@@ -38,6 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        <link rel="icon" href="/assets/logo.svg" />
       </Head>
       <Provider store={store}>
         <Component {...pageProps} />

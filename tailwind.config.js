@@ -15,14 +15,17 @@ module.exports = {
         secondaryBlack: "#221121",
         tertiaryBlack: "#212121",
         thirdBlack: "#081314",
+        fourthBlack: "rgba(8, 19, 20, 0.9)",
         specialGray: "#F0F1F2",
         pageBg: "#FAFAFA",
+        pageBg2:"#F5F6F7",
         borderDark: "rgba(203, 203, 203, 0.5)",
         secondaryGray: "rgba(34, 17, 33, 0.7)",
         tertiaryGray: "rgba(34, 17, 33, 0.8)",
         dividerGray: "#D1D1D1",
         primaryGreen: "#16AB25",
         lightRed: "rgba(255, 222, 218, 0.37)",
+        lighterRed:"#FFF3F2"
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -41,6 +44,7 @@ module.exports = {
         sixth: "3.8125rem",
         seventh: "1.25rem",
         eighth: "1.75rem",
+        ninth: "1.8125rem",
       },
       letterSpacing: {
         primary: "0.04em",
@@ -52,6 +56,7 @@ module.exports = {
         primary: "1.375rem",
         secondary: "1.125rem",
         tertiary: "1.5rem",
+        fourth:"1.5625rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
         sme: ["0.875em", { lineHeight: "1.25em" }],
@@ -109,7 +114,7 @@ module.exports = {
         10: "10 1 0%",
       },
       width: {
-        primary: "18%",
+        primary: "85.1267992%",
         secondary: "60%",
         third: "24%",
         fourth: "48%",
