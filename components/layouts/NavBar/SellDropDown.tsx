@@ -8,7 +8,7 @@ const SellDropDown = () => {
       initial={{ y: -800 }}
       animate={{ y: -10 }}
       transition={{
-        delay: 0,
+        // delay: 0,
         duration: 0.5,
         type: "tween",
         // stiffness: 120,
