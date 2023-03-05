@@ -5,11 +5,12 @@ import Logo from "../../../public/assets/logo.svg";
 import { BuyDropDown } from "./BuyDropDown";
 import FinanceDropDown from "./FinanceDropDown";
 import SellDropDown from "./SellDropDown";
+import { motion } from "framer-motion";
 
 const NavBar = () => {
   const [dropDownOpen, setDropDownOpen] = React.useState({
     buy: false,
-    sell: false,
+    sell: true,
     finance: false,
     about: false,
   });
