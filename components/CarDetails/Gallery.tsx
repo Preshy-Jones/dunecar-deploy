@@ -9,12 +9,12 @@ import samplecarSmall from "../../public/assets/sample-car-small.svg";
 const Gallery = () => {
   const repeater = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   return (
-    <div className="overflow-x-scroll">
-      <div className="flex">
-        <div className="min-w-[41.375rem] h-[31.5625rem]">
+    <div className="">
+      <div className="flex overflow-x-scroll">
+        <div className="min-w-[41.375rem] min-h-[31.5625rem]">
           <Image src={sampleCarBig} alt="big-car" />
         </div>
-        <div className="grid grid-cols-6 grid-rows-2">
+        <div className="grid grid-cols-primary grid-rows-2">
           {repeater.map((item, index) => (
             <div key={index} className="min-w-[20.9375rem] min-h-[15.59375rem]">
               <Image
