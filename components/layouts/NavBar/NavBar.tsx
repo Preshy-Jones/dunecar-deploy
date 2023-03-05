@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 const NavBar = () => {
   const [dropDownOpen, setDropDownOpen] = React.useState({
     buy: false,
-    sell: true,
+    sell: false,
     finance: false,
     about: false,
   });
