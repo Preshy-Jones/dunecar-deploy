@@ -12,10 +12,10 @@ const Gallery = () => {
     <div className="">
       <div className="flex overflow-x-scroll">
         <div className="relative">
-          <div className="min-w-[41.375rem] min-h-[31.5625rem] z-20">
+          <div className="min-w-[41.375rem] min-h-[31.5625rem] absolute z-20">
             <Image src={sampleCarBig} alt="big-car" />
           </div>
-          <div className="absolute w-full z-30 bottom-[2rem] left-[15rem] rounded-[5px]">
+          <div className="absolute w-full z-30 bottom-[2rem] left-[15rem]">
             <div className=" text-[#081314] flex items-center justify-center bg-btnGallery w-[10.3125rem] h-[2.75rem] ">
               <Md360 className=" text-[1.6rem] mr-3" />
               <span className="leading-primary">Exterior 360°</span>
@@ -37,14 +37,12 @@ const Gallery = () => {
                   className="min-w-[20.9375rem] min-h-[15.59375rem]"
                 />
               </div>
-              {index === 0 && (
-                <div className="absolute w-full z-40 bottom-[2rem] left-[5.5rem] rounded-[5px]">
-                  <div className=" text-[#081314] flex items-center justify-center bg-btnGallery w-[10.3125rem] h-[2.75rem] ">
-                    <Md360 className=" text-[1.6rem] mr-3" />
-                    <span className="leading-primary">Interior 360°</span>
-                  </div>
+              <div className="absolute w-full z-40 top-0">
+                <div className=" text-[#081314] flex items-center justify-center bg-btnGallery w-[10.3125rem] h-[2.75rem] ">
+                  <Md360 className=" text-[1.6rem] mr-3" />
+                  <span className="leading-primary">Exterior 360°</span>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>

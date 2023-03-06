@@ -23,8 +23,8 @@ const NavBar = () => {
     switch (type) {
       case "buy":
         setDropDownOpen({
-          buy: true,
-          sell: false,
+          buy: false,
+          sell: true,
           finance: false,
           about: false,
         });

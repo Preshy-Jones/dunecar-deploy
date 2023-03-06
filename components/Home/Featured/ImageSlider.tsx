@@ -19,7 +19,7 @@ const ImageSlider = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [navigatorOpen, setnavigatorOpen] = React.useState(true);
+  const [navigatorOpen, setnavigatorOpen] = React.useState(false);
 
   const handleSlide = (direction: string) => {
     if (direction === "left") {
