@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 const NavBar = () => {
   const [dropDownOpen, setDropDownOpen] = React.useState({
     buy: false,
-    sell: true,
+    sell: false,
     finance: false,
     about: false,
   });
@@ -23,8 +23,8 @@ const NavBar = () => {
     switch (type) {
       case "buy":
         setDropDownOpen({
-          buy: true,
-          sell: false,
+          buy: false,
+          sell: true,
           finance: false,
           about: false,
         });

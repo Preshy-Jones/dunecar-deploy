@@ -16,6 +16,8 @@ const SellDropDown = () => {
       className="text-tertiaryBlack absolute z-50  top-[4.31rem] flex justify-center w-[22.375rem] font-roboto"
     >
       <div className=" bg-white w-full flex justify-center rounded-[8px] py-[1.5rem] shadow-secondary">
+      {/* <div className="text-tertiaryBlack absolute z-50  top-8 flex justify-center w-[22.375rem] font-roboto">
+      <div className=" bg-white w-full flex justify-center rounded-[8px] py-[1.5rem] shadow-secondary mt-10"> */}
         <div className="w-[90%]">
           <p className="mb-2 w-full tracking-[-0.01em] leading-fifth font-medium">
             Get an instant offer and a fast payment on handover day when you

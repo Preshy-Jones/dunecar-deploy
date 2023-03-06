@@ -26,6 +26,7 @@ module.exports = {
         primaryGreen: "#16AB25",
         lightRed: "rgba(255, 222, 218, 0.37)",
         lighterRed: "#FFF3F2",
+        btnGallery:"rgba(255, 255, 255, 0.68)"
       },
       fontFamily: {
         body: ["Montserrat"],
