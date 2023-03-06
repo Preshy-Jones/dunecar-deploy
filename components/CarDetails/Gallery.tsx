@@ -24,7 +24,7 @@ const Gallery = () => {
         </div>
         <div className="grid grid-cols-primary grid-rows-2">
           {repeater.map((item, index) => (
-            <div className="relative">
+            <div key={index} className="relative">
               <div
                 key={index}
                 className=" z-20 min-w-[20.9375rem] min-h-[15.59375rem]"
