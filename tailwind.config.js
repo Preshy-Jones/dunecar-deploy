@@ -18,14 +18,14 @@ module.exports = {
         fourthBlack: "rgba(8, 19, 20, 0.9)",
         specialGray: "#F0F1F2",
         pageBg: "#FAFAFA",
-        pageBg2:"#F5F6F7",
+        pageBg2: "#F5F6F7",
         borderDark: "rgba(203, 203, 203, 0.5)",
         secondaryGray: "rgba(34, 17, 33, 0.7)",
         tertiaryGray: "rgba(34, 17, 33, 0.8)",
         dividerGray: "#D1D1D1",
         primaryGreen: "#16AB25",
         lightRed: "rgba(255, 222, 218, 0.37)",
-        lighterRed:"#FFF3F2"
+        lighterRed: "#FFF3F2",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -56,7 +56,7 @@ module.exports = {
         primary: "1.375rem",
         secondary: "1.125rem",
         tertiary: "1.5rem",
-        fourth:"1.5625rem",
+        fourth: "1.5625rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
         sme: ["0.875em", { lineHeight: "1.25em" }],
@@ -139,6 +139,7 @@ module.exports = {
         primary: "28% 0",
       },
       gridTemplateColumns: {
+        primary: "repeat(6, 20.9375rem)",
         store: "24.6744345% 75.3255655%",
         13: "repeat(13, minmax(0, 1fr))",
         14: "repeat(14, minmax(0, 1fr))",

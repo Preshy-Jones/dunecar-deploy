@@ -19,6 +19,7 @@ const ImageSlider = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [navigatorOpen, setnavigatorOpen] = React.useState(false);
 
   const handleSlide = (direction: string) => {
     if (direction === "left") {
@@ -49,35 +50,36 @@ const ImageSlider = () => {
         <ToggleLike />
         <ToggleButtonIcon className="absolute top-[8rem] right-[0.5rem] z-0 w-[2.0175rem]" />
       </div>
-      <motion.div className="flex justify-between w-full  bottom-[5rem] absolute px-4">
+      {navigatorOpen && (
         <motion.div
-          className="w-[1rem]"
-          // whileHover={{
-          //   x: 0,
-          //   // transition: { duration: 1 },
-          // }}
-          // initial={{ x: 20 }}
+          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex justify-between w-full  bottom-[6rem] absolute px-4 z-50"
         >
-          <SlideCaretLeftIcon
-            className="cursor-pointer"
-            onClick={() => handleSlide("left")}
-          />
-        </motion.div>
+          <div className="w-[1.5rem]">
+            <SlideCaretLeftIcon
+              className="cursor-pointer"
+              onClick={() => handleSlide("left")}
+            />
+          </div>
 
-        <motion.div
-          className="w-[1rem]"
-          // whileHover={{
-          //   x: 0,
-          //   // transition: { duration: 1 },
-          // }}
-          // initial={{ x: -20 }}
-        >
-          <SlideCaretRightIcon
-            className="cursor-pointer"
-            onClick={() => handleSlide("right")}
-          />
+          <div className="w-[1.5rem]">
+            <SlideCaretRightIcon
+              className="cursor-pointer"
+              onClick={() => handleSlide("right")}
+            />
+          </div>
         </motion.div>
-      </motion.div>
+      )}
+      {navigatorOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7 }}
+          className="w-[24.46625rem] h-[14.551875rem] absolute hello z-40 top-0"
+        ></motion.div>
+      )}
     </div>
   );
 };
