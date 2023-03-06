@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 export const BuyDropDown = () => {
   return (
     <motion.div
-      initial={{ y: -800 }}
-      animate={{ y: -10 }}
+      initial={{ opacity:0 }}
+      animate={{ opacity:1 }}
       transition={{
         // delay: 0,
         duration: 0.5,
