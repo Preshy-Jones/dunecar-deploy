@@ -24,6 +24,7 @@ const Category = ({ categoryData, title }) => {
           {categoryData.map((feature, index) => {
             return (
               <FeatureComponent
+                key={index}
                 installedUpgrade={feature.installedUpgrade}
                 title={feature.feature.title}
               />
