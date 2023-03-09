@@ -6,25 +6,36 @@ export interface Car {
   name: string;
   title: string;
   description: string;
-  model: string;
-  make: string;
-  milleage: number;
+  model: CarModel;
+  make: CarMake;
+  mileage: number;
   price: number;
   installment: number;
+  carFeatures: {
+    feature: {
+      title: string;
+      category: string;
+    };
+    installedUpgrade: boolean;
+  }[];
 }
 
-export interface CarModel {
+export interface CarModels {
   _id: string;
   make_name: string;
-  models: {
-    title: string;
-    slug: string;
-  }[];
+  models: CarModel[];
   createdAt: Date;
   updatedAt: Date;
 }
 
 export type CarMake = {
+  _id: string;
+  title: string;
+  slug: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+export type CarModel = {
   _id: string;
   title: string;
   slug: string;

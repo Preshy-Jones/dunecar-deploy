@@ -10,8 +10,8 @@ const useClickOutside = (handler) => {
       if (
         domNode1.current &&
         !domNode1.current.contains(event.target) &&
-        domNode2.current &&
-        !domNode2.current.contains(event.target)
+        // domNode2.current &&
+        !domNode2?.current?.contains(event.target)
       ) {
         handler();
       }

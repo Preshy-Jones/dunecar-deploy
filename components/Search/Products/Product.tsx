@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import dot from "../../../public/assets/dot.svg";
 import ImageSlider from "./ImageSlider";
@@ -13,9 +14,11 @@ const Product = ({ car }) => {
             DUNE CERTIFIED
           </h2>
           <div className="flex  mb-2">
-            <h2 className="text-[16.1404px] text-specialRed w-[50%] leading-primary font-normal">
-              {car.title}
-            </h2>
+            <Link href={`car-details/${car._id}`}>
+              <h2 className="text-[16.1404px] text-specialRed w-[50%] leading-primary font-normal cursor-pointer">
+                {car.title}
+              </h2>
+            </Link>
             <div></div>
           </div>
           <div className="flex text-[19.3684px] justify-start text-specialBlack font-semibold leading-tertiary">
