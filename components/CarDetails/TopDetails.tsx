@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
+import { formatAmount, priceSplitter } from "../../utils/utilityFunctions";
 import { DirectLinkIcon, HeartIcon, LeftArrowIcon } from "../ui/icons";
 
 const TopDetails = () => {
@@ -21,8 +22,12 @@ const TopDetails = () => {
             {car?.year} {car?.make?.title} {car?.model?.title}
           </h1>
           <div className="flex text-[25px] justify-start text-specialBlack font-semibold leading-[29px] mt-2 mb-3">
-            <h3 className="mr-3">$23,500</h3>
-            <h3 className="ml-3">61k mi</h3>
+            <h3 className="mr-3">
+              $ {car?.price && priceSplitter(car?.price)}
+            </h3>
+            <h3 className="ml-3">
+              {car?.mileage && formatAmount(car?.mileage)} mi
+            </h3>
           </div>
           <h2 className="font-light text-[#221121] mt-2">
             VIN 1VB7MDNY2J292NSJM20

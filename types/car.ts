@@ -8,7 +8,7 @@ export interface Car {
   description: string;
   model: CarModel;
   make: CarMake;
-  milleage: number;
+  mileage: number;
   price: number;
   installment: number;
   carFeatures: {

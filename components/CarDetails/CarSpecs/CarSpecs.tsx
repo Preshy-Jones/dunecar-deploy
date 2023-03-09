@@ -37,7 +37,7 @@ const CarSpecs = () => {
                 {specsData.slice(0, 8).map((data, index) => (
                   <div key={index} className="flex py-4 pr-[10rem]">
                     <h2 className="mr-3">{data.title}</h2>
-                    <h2 className="font-semibold">{data.value}</h2>
+                    <h2 className="font-semibold">{data.keyFunc(car)}</h2>
                   </div>
                 ))}
               </div>
@@ -45,7 +45,7 @@ const CarSpecs = () => {
                 {specsData.slice(8, 11).map((data, index) => (
                   <div key={index} className="flex py-4 pr-[10rem]">
                     <h2 className="mr-3">{data.title}</h2>
-                    <h2 className="font-semibold">{data.value}</h2>
+                    <h2 className="font-semibold">{data.keyFunc(car)}</h2>
                   </div>
                 ))}
               </div>
@@ -137,4 +137,3 @@ const CarSpecs = () => {
 };
 
 export default CarSpecs;
-
