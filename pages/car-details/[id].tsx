@@ -21,7 +21,7 @@ const CarDetails = () => {
   useEffect(() => {
     if (!router.isReady) return;
     dispatch(getCar(id));
-  }, [dispatch, router]);
+  }, [dispatch, router, id]);
 
   return (
     <div className="font-roboto">
