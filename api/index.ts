@@ -46,11 +46,16 @@ class Api {
     });
   };
 
+  getCar = (id: string) => {
+    const url = `/v1/cars/car/${id}`;
+    return this.publicRequest(url, METHOD.GET, {});
+  };
+
   getCars = (query: CarPayload) => {
     let { models, makes, body_types, limit } = query;
     console.log(limit);
 
-    const url = `/v1/car?${
+    const url = `/v1/cars?${
       models && models.length > 0
         ? models.length > 1
           ? formatMultipleValueKeyQuery("model", models)

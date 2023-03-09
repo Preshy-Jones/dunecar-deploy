@@ -1,8 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import { useAppSelector } from "../../store/hooks";
 import { DirectLinkIcon, HeartIcon, LeftArrowIcon } from "../ui/icons";
 
 const TopDetails = () => {
+  const { car } = useAppSelector((state) => state.car);
   return (
     <div className="flex justify-center mb-7">
       <div className="w-[85.1267992%] flex justify-between items-center">
@@ -16,7 +18,7 @@ const TopDetails = () => {
             </h2>
           </div>
           <h1 className="text-[3.25rem] font-extrabold text-specialRed leading-sixth mt-3">
-            2019 Chrysler 300s
+            {car?.year} {car?.make?.title} {car?.model?.title}
           </h1>
           <div className="flex text-[25px] justify-start text-specialBlack font-semibold leading-[29px] mt-2 mb-3">
             <h3 className="mr-3">$23,500</h3>

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Car, CarMake, CarModel } from "../../types/car";
+import { Car, CarMake, CarModels } from "../../types/car";
 import modelService from "./modelService";
 
 export interface CarState {
-  models: CarModel[];
+  models: CarModels[];
   modelsSelected: string[];
   isLoading: boolean;
 }

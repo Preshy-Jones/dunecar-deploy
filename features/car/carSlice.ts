@@ -37,7 +37,16 @@ const initialState: CarState = {
   aFilterToggled: false,
 };
 
-
+export const getCar = createAsyncThunk(
+  "car/getCar",
+  async (payload: string, thunkAPI) => {
+    try {
+      return await carService.fetchCar(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue("something went wrong");
+    }
+  }
+);
 
 export const getCars = createAsyncThunk(
   "car/getCars",
@@ -112,6 +121,18 @@ const carSlice = createSlice({
         state.count = action.payload.data.results.count;
       })
       .addCase(getMoreCarsPagination.rejected, (state: CarState, action) => {
+        // console.log(action);
+        state.isLoading = false;
+      })
+      .addCase(getCar.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCar.fulfilled, (state: CarState, action) => {
+        // console.log(action);
+        state.isLoading = false;
+        state.car = action.payload.data;
+      })
+      .addCase(getCar.rejected, (state: CarState, action) => {
         // console.log(action);
         state.isLoading = false;
       });
