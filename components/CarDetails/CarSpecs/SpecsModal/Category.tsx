@@ -5,10 +5,7 @@ import { useEffect } from "react";
 const Category = ({ categoryData, title }) => {
   console.log(categoryData);
 
-  useEffect(() => {
-    console.log(categoryData);
-  }, []);
-
+ 
   return (
     <div className="mb-[4rem]">
       <div className="flex items-center justify-between">
