@@ -38,7 +38,11 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setnavigatorOpen(true)}
+      onMouseLeave={() => setnavigatorOpen(false)}
+    >
       <div className="relative">
         <Image
           src={images[currentIndex]}
@@ -77,7 +81,7 @@ const ImageSlider = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="w-[24.46625rem] h-[14.551875rem] absolute hello z-40 top-0"
+          className="w-[19.120625rem] h-[11.3725rem] absolute hello z-40 top-0"
         ></motion.div>
       )}
     </div>

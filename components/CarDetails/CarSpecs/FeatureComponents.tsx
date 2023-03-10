@@ -8,12 +8,12 @@ const FeatureComponents = ({ installedUpgrade, feature }) => {
         <div className="flex items-center">
           <div className="bg-lightRed flex items-center font-light justify-between px-4 py-2 ">
             <h2 className="mr-[0.7rem] font-light ">{feature.title}</h2>
-            <AlertIcon />
+            {/* <AlertIcon /> */}
           </div>
         </div>
       )}
       {!installedUpgrade && (
-        <h2 className="font-light leading-primary text-secondaryBlack">
+        <h2 className="font-light leading-primary text-secondaryBlack px-4">
           {feature.title}
         </h2>
       )}
