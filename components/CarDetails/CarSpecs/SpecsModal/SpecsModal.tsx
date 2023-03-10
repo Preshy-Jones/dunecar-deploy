@@ -14,6 +14,17 @@ const SpecsModal = ({ setOpen }) => {
   let { domNode1, domNode2 } = useClickOutside(() => {
     setOpen(false);
   });
+  const [active, setActive] = React.useState(0);
+  const handleTabChange = (tab) => {
+    if (tab === "features") {
+      setActive(0);
+      setTab("features");
+    } else {
+      setActive(1);
+      setTab("specifications");
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -28,17 +39,28 @@ const SpecsModal = ({ setOpen }) => {
           className="bg-white w-[61.111111111vw] h-[44rem] px-[2rem] py-[2rem] overflow-y-scroll"
         >
           <div className="flex justify-between">
-            <div className="flex text-secondaryBlack font-light cursor-pointer">
-              <div className="px-2" onClick={() => setTab("features")}>
-                <h2>Features</h2>
+            <div>
+              <div className="flex text-secondaryBlack leading-primary font-light cursor-pointer border-b-[0.5px]  border-borderLight">
+                <div
+                  className="px-8 pb-4"
+                  onClick={() => handleTabChange("features")}
+                >
+                  <h2>Features</h2>
+                </div>
+                <div
+                  className="px-8 pb-4 cursor-pointer"
+                  onClick={() => handleTabChange("specifications")}
+                >
+                  <h2>Specifications</h2>
+                </div>
               </div>
-              <div
-                className="px-2 cursor-pointer"
-                onClick={() => setTab("specifications")}
-              >
-                <h2>Specifications</h2>
-              </div>
+              <motion.div
+                animate={{ x: active === 1 ? "100%" : 0 }}
+                transition={{ type: "tween", duration: 0.4 }}
+                className="h-[3px] bg-specialRed w-[50%] bottom-0.5 relative rounded-md"
+              ></motion.div>
             </div>
+
             <div onClick={() => setOpen(false)} className="cursor-pointer">
               <CancelIcon />
             </div>

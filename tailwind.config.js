@@ -20,6 +20,7 @@ module.exports = {
         pageBg: "#FAFAFA",
         pageBg2: "#F5F6F7",
         borderDark: "rgba(203, 203, 203, 0.5)",
+        borderLight:"#D5D5D5",
         secondaryGray: "rgba(34, 17, 33, 0.7)",
         tertiaryGray: "rgba(34, 17, 33, 0.8)",
         dividerGray: "#D1D1D1",

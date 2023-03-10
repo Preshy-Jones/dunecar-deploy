@@ -9,7 +9,7 @@ export const specsData = [
     },
   },
   {
-    title: "Transmmission",
+    title: "Transmission",
     value: "Manual",
     keyFunc: (payload) => {
       return payload?.transmission?.type;
