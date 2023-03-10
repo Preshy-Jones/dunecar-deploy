@@ -35,8 +35,8 @@ const CarSpecs = () => {
             <div className="flex sm:flex-row flex-col">
               <div className="grid grid-cols-1 gap-y-1 divide-dividerGray divide-y gap-x-8 mr-4">
                 {specsData.slice(0, 8).map((data, index) => (
-                  <div key={index} className="flex py-4 pr-[10rem]">
-                    <h2 className="mr-3">{data.title}</h2>
+                  <div key={index} className="flex py-4 pr-[10rem] leading-primary text-secondaryBlack">
+                    <h2 className="mr-3 font-light">{data.title}</h2>
                     <h2 className="font-semibold">{data.keyFunc(car)}</h2>
                   </div>
                 ))}

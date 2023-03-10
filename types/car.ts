@@ -11,6 +11,8 @@ export interface Car {
   mileage: number;
   price: number;
   installment: number;
+  performance: any;
+  measurement: any;
   carFeatures: {
     feature: {
       title: string;
