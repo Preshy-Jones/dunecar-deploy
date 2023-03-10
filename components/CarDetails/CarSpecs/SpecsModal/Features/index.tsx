@@ -1,6 +1,6 @@
 import React from "react";
-import { useAppSelector } from "../../../../store/hooks";
-import { AlertIcon, PlayIcon } from "../../../ui/icons";
+import { useAppSelector } from "../../../../../store/hooks";
+import { AlertIcon, PlayIcon } from "../../../../ui/icons";
 import Category from "./Category";
 
 const Features = () => {

@@ -28,11 +28,14 @@ const SpecsModal = ({ setOpen }) => {
           className="bg-white w-[61.111111111vw] h-[44rem] px-[2rem] py-[2rem] overflow-y-scroll"
         >
           <div className="flex justify-between">
-            <div className="flex text-secondaryBlack font-light">
-              <div className="px-2">
+            <div className="flex text-secondaryBlack font-light cursor-pointer">
+              <div className="px-2" onClick={() => setTab("features")}>
                 <h2>Features</h2>
               </div>
-              <div className="px-2">
+              <div
+                className="px-2 cursor-pointer"
+                onClick={() => setTab("specifications")}
+              >
                 <h2>Specifications</h2>
               </div>
             </div>
@@ -50,10 +53,6 @@ const SpecsModal = ({ setOpen }) => {
 };
 
 export default SpecsModal;
-
-
-
-
 
 const content = {
   features: {

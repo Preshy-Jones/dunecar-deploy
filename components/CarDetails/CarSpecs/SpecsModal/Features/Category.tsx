@@ -1,5 +1,5 @@
 import React from "react";
-import { AlertIcon, PlayIcon } from "../../../ui/icons";
+import { AlertIcon, PlayIcon } from "../../../../ui/icons";
 import { useEffect } from "react";
 
 const Category = ({ categoryData, title }) => {
