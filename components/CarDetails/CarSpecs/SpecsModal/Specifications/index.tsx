@@ -10,12 +10,12 @@ const Specifications = () => {
         Specifications
       </h1>
       <Category
-        data={car.performance}
+        data={car?.performance}
         title="Performance"
         keys={performanceKeys}
       />
       <Category
-        data={car.measurement}
+        data={car?.measurement}
         title="Measurements"
         keys={measurementKeys}
       />
