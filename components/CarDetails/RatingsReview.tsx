@@ -6,7 +6,10 @@ import ThumbsDown from "../ui/icons/ThumbsDown";
 
 const RatingsReview = () => {
   return (
-    <div className="flex justify-center mt-[4rem] font-roboto bg-white">
+    <div
+      className="flex justify-center mt-[4rem] font-roboto bg-white ratings"
+      id="ratings"
+    >
       <div className="w-primary grid grid-cols-2">
         <div>
           <h1 className="font-extrabold text-thirdBlack text-[2rem] leading-[2.375rem] w-primary">

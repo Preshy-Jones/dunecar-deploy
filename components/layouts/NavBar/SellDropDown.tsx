@@ -13,10 +13,10 @@ const SellDropDown = () => {
         type: "tween",
         // stiffness: 120,
       }}
-      className="text-tertiaryBlack absolute z-50  top-[4.31rem] flex justify-center w-[22.375rem] font-roboto"
+      className="text-tertiaryBlack absolute z-50  top-8 flex justify-center w-[22.375rem] font-roboto"
     >
-      <div className=" bg-white w-full flex justify-center rounded-[8px] py-[1.5rem] shadow-secondary">
-      {/* <div className="text-tertiaryBlack absolute z-50  top-8 flex justify-center w-[22.375rem] font-roboto">
+      <div className=" bg-white w-full flex justify-center rounded-[8px] mt-[2.3rem] py-[1.5rem] shadow-secondary">
+        {/* <div className="text-tertiaryBlack absolute z-50  top-8 flex justify-center w-[22.375rem] font-roboto">
       <div className=" bg-white w-full flex justify-center rounded-[8px] py-[1.5rem] shadow-secondary mt-10"> */}
         <div className="w-[90%]">
           <p className="mb-2 w-full tracking-[-0.01em] leading-fifth font-medium">
@@ -28,7 +28,7 @@ const SellDropDown = () => {
             Get a Free valuation
           </h1>
           <div className="bg-borderDark h-[1px] w-[7.125rem]"></div>
-          <div className="mt-4">
+          <div className="mt-4 px-3 cursor-pointer hover:bg-black hover:bg-opacity-20 py-3">
             <h2 className="text-secondary mb-1 tracking-[-0.01em] font-medium">
               Value my car
             </h2>

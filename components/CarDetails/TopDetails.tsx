@@ -18,12 +18,12 @@ const TopDetails = () => {
               SEARCH
             </h2>
           </div>
-          <h1 className="text-[3.25rem] font-extrabold text-specialRed leading-sixth mt-3">
+          <h1 className="text-[1.75rem] leading-[2.0625rem] sm:text-[3.25rem] font-extrabold text-specialRed sm:leading-sixth mt-3">
             {car?.year} {car?.make?.title} {car?.model?.title}
           </h1>
-          <div className="flex text-[25px] justify-start text-specialBlack font-semibold leading-[29px] mt-2 mb-3">
+          <div className="flex text-secondary sm:text-[25px] justify-start text-specialBlack font-semibold leading-[21px] sm:leading-[29px] mt-2 mb-3">
             <h3 className="mr-3">
-              $ {car?.price && priceSplitter(car?.price)}
+              ${car?.price && priceSplitter(car?.price)}
             </h3>
             <h3 className="ml-3">
               {car?.mileage && formatAmount(car?.mileage)} mi
@@ -33,7 +33,7 @@ const TopDetails = () => {
             VIN 1VB7MDNY2J292NSJM20
           </h2>
         </div>
-        <div>
+        <div className="hidden sm:block">
           <div className="flex items-center ">
             <HeartIcon
               color="#D14532"

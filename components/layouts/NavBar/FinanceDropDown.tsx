@@ -13,9 +13,9 @@ const FinanceDropDown = () => {
         type: "tween",
         // stiffness: 120,
       }}
-      className="text-tertiaryBlack absolute z-50  top-[4.31rem] flex justify-center w-[21.875rem]"
+      className="text-tertiaryBlack absolute z-50  top-8 flex justify-center w-[21.875rem]"
     >
-      <div className=" bg-white w-full flex justify-center rounded-[8px] py-[1.5rem] shadow-secondary">
+      <div className=" bg-white w-full flex justify-center rounded-[8px] mt-[2.3rem] py-[1.5rem] shadow-secondary">
         <div className="w-[90%]">
           <p className="mb-2">
             Get an instant offer and a fast payment on handover day when you
@@ -26,7 +26,7 @@ const FinanceDropDown = () => {
             Finance Options
           </h1>
           <div className="bg-borderDark h-[1px] w-[7.125rem]"></div>
-          <div className="mt-4">
+          <div className="mt-4 px-3 cursor-pointer hover:bg-black hover:bg-opacity-20 py-3">
             <h2 className="text-secondary mb-1 tracking-[-0.01em] font-medium">
               Hire Purchase
             </h2>
@@ -34,7 +34,7 @@ const FinanceDropDown = () => {
               Learn how to spread the cost of your Cazoo car with HP finance.
             </p>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 px-3 cursor-pointer hover:bg-black hover:bg-opacity-20 py-3">
             <h2 className="text-secondary mb-1 tracking-[-0.01em] font-medium">
               Car Finance
             </h2>

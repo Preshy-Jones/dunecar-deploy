@@ -91,12 +91,13 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   //sort options and place checked options at the top
 
   //handle checkbox onchange
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    if (selected.includes(e.target.value)) {
-      setSelected(selected.filter((item) => item !== e.target.value));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
+
+  const handleLabelClick = (value) => {
+    if (selected.includes(value)) {
+      setSelected(selected.filter((item) => item !== value));
     } else {
-      setSelected([...selected, e.target.value]);
+      setSelected([...selected, value]);
     }
     console.log(selected);
   };
@@ -124,8 +125,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 onChange={handleChange}
               />
               <label
-                className="leading-[19px] text-black font-normal"
+                className="leading-[19px] text-black font-normal cursor-pointer"
                 style={{ marginLeft: "5px" }}
+                onClick={() => handleLabelClick(item.value)}
               >
                 {item.label}
               </label>

@@ -4,8 +4,8 @@ import { ChatIcon, DollarIcon } from "../ui/icons";
 const ExtraLinks = () => {
   return (
     <div className="flex justify-center mt-[5rem] bg-pageBg2 py-[3.5rem]">
-      <div className="flex justify-between w-primary">
-        <div className="border border-dividerGray px-4 pt-4 rounded-[20px] w-[32.4%] pb-[6rem]">
+      <div className="flex justify-between w-primary sm:flex-row flex-col">
+        <div className="border border-dividerGray px-4 pt-4 rounded-[20px] sm:w-[32.4%] pb-[6rem]">
           <DollarIcon />
           <p className="text-fourthBlack leading-ninth text-fourth mt-3 mb-2.5">
             Get an Offer on Your Car
@@ -17,7 +17,7 @@ const ExtraLinks = () => {
             Get your offer.
           </h2>
         </div>
-        <div className="border border-dividerGray px-4 pt-4 rounded-[20px] w-[32.4%] pb-[6rem]">
+        <div className="border border-dividerGray px-4 pt-4 rounded-[20px] sm:w-[32.4%] pb-[6rem]">
           <ChatIcon />
           <p className="text-fourthBlack leading-ninth text-fourth mt-3 mb-2.5">
             Have a Question? Just Ask
@@ -27,7 +27,7 @@ const ExtraLinks = () => {
             Get your offer.
           </h2>
         </div>
-        <div className="border border-dividerGray px-4 pt-4 rounded-[20px] w-[32.4%] pb-[6rem]">
+        <div className="border border-dividerGray px-4 pt-4 rounded-[20px] sm:w-[32.4%] pb-[6rem]">
           <DollarIcon />
           <p className="text-fourthBlack leading-ninth text-fourth mt-3 mb-2.5">
             Need Financing?

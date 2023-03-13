@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import CarSpecs from "../../components/CarDetails/CarSpecs/CarSpecs";
+import FeaturesSpecs from "../../components/CarDetails/FeaturesSpecs";
+import CarSummary from "../../components/CarDetails/CarSummary";
 import ExtraLinks from "../../components/CarDetails/ExtraLinks";
 import Gallery from "../../components/CarDetails/Gallery";
 import HistoryInspection from "../../components/CarDetails/HistoryInspection";
@@ -16,7 +17,6 @@ const CarDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { id } = router.query as { id: string };
-
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -33,7 +33,8 @@ const CarDetails = () => {
       </Head>
       <TopDetails />
       <Gallery />
-      <CarSpecs />
+      <CarSummary />
+      <FeaturesSpecs />
       <HistoryInspection />
       <RecommendedCars />
       <RatingsReview />
