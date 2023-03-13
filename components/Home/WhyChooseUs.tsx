@@ -1,7 +1,19 @@
 import React from "react";
 import { DoorDelivery, MoneyBackIcon, QualityAssurance } from "../ui/icons";
+import { motion } from "framer-motion";
 
 const WhyChooseUs = () => {
+  const buttonVariants = {
+    hover: {
+      scale: 1.1,
+      textShadow: "0px 0px 8px rgb(255,255,255)",
+      boxShadow: "0px 0px 8px rgb(255,255,255)",
+      transition: {
+        duration: 0.3,
+        yoyo: 5,
+      },
+    },
+  };
   return (
     <div className="sm:mt-28 mt-[20rem] flex justify-center font-roboto pb-[4rem]">
       <div className="w-[86.1111111%]">
@@ -20,9 +32,17 @@ const WhyChooseUs = () => {
                 <p className="font-light text-[1.125rem] mb-8 text-center text-[#221121] leading-[2rem]">
                   {item.description}
                 </p>
-                <button className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.25rem] font-semibold">
+                <motion.button
+                  // variants={buttonVariants}
+                  whileTap={{
+                    textShadow: "0px 0px 8px rgb(255,255,255)",
+                    boxShadow: "0px 0px 8px rgb(255,255,255)",
+                  }}
+                  whileHover="hover"
+                  className="bg-black text-white h-[48px] px-4 rounded-[4px] w-[12.25rem] font-semibold"
+                >
                   {item.linkText}
-                </button>
+                </motion.button>
               </div>
             );
           })}
@@ -38,7 +58,9 @@ const WhyChooseUs = () => {
           <div className="flex justify-between">
             {contentReversed.title.value.map((item, index) => (
               <div key={index} className="flex flex-col items-center w-[30%]">
-                <h2 className="font-semibold text-center text-[1.5rem] mt-8">{item}</h2>
+                <h2 className="font-semibold text-center text-[1.5rem] mt-8">
+                  {item}
+                </h2>
               </div>
             ))}
           </div>
@@ -114,6 +136,10 @@ const contentReversed = {
     value: ["Quality Assurance", "Money Back Policy", "Delivery Policy"],
   },
   icons: {
-    value: [<QualityAssurance key={1} />, <MoneyBackIcon key={2} />, <DoorDelivery key={3} />],
+    value: [
+      <QualityAssurance key={1} />,
+      <MoneyBackIcon key={2} />,
+      <DoorDelivery key={3} />,
+    ],
   },
 };

@@ -9,25 +9,79 @@ import {
 } from "../../ui/icons";
 import { specsData } from "./../DetailsContent";
 import FeatureComponents from "./FeatureComponents";
+import { div } from "react-scroll";
+import { motion } from "framer-motion";
 
-import SpecsModal from "./SpecsModal/SpecsModal";
-
-const CarSpecs = () => {
+const CarSummary = () => {
   const [open, setOpen] = React.useState(false);
 
   const { car } = useAppSelector((state) => state.car);
+  const [active, setActive] = React.useState(0);
 
   return (
     <div className="flex justify-center font-roboto">
       <div className="w-[85.1267992%]">
-        <div className="flex text-tertiaryBlack leading-seventh justify-evenly shadow-cardShadow2 mb-8 pt-9 pb-5">
-          <h2>Overview</h2>
-          <h2>Features & Specs</h2>
-          <h2>History & Inspection</h2>
-          <h2>Warranty</h2>
-          <h2>Ratings & Reviews</h2>
+        <div className="grid grid-cols-5 justify-items-center text-tertiaryBlack leading-seventh  shadow-cardShadow2 mb-[4rem] pt-9">
+          <div className="cursor-pointer  flex flex-col items-center justify-between h-[3rem] w-full" onClick={() => setActive(0)}>
+            <h2 className="">Overview</h2>
+            {active === 0 && (
+              <motion.div
+                // animate={{ x: active === 1 ? "100%" : 0 }}
+                // transition={{ type: "tween", duration: 0.4 }}
+                layoutId="navbar"
+                className="h-[4px] bg-specialRed w-[10.875rem] rounded-md"
+              ></motion.div>
+            )}
+          </div>
+          <div className="cursor-pointer flex flex-col items-center justify-between h-[3rem] w-full" onClick={() => setActive(1)}>
+            <h2 className="">Features & Specs</h2>
+            {active === 1 && (
+              <motion.div
+                // animate={{ x: active === 1 ? "100%" : 0 }}
+                // transition={{ type: "tween", duration: 0.4 }}
+                layoutId="navbar"
+                className="h-[4px] bg-specialRed w-[10.875rem] rounded-md"
+              ></motion.div>
+            )}
+          </div>
+          <div className="cursor-pointer flex flex-col items-center justify-between h-[3rem] w-full" onClick={() => setActive(2)}>
+            <h2 className="">History & Inspection</h2>
+            {active === 2 && (
+              <motion.div
+                // animate={{ x: active === 1 ? "100%" : 0 }}
+                // transition={{ type: "tween", duration: 0.4 }}
+                layoutId="navbar"
+                className="h-[4px] bg-specialRed w-[10.875rem] rounded-md"
+              ></motion.div>
+            )}
+          </div>
+          <div className="cursor-pointer flex flex-col items-center justify-between h-[3rem] w-full" onClick={() => setActive(3)}>
+            <h2 className="">Warranty</h2>
+            {active === 3 && (
+              <motion.div
+                // animate={{ x: active === 1 ? "100%" : 0 }}
+                // transition={{ type: "tween", duration: 0.4 }}
+                layoutId="navbar"
+                className="h-[4px] bg-specialRed w-[10.875rem] rounded-md"
+              ></motion.div>
+            )}
+          </div>
+          <div className="cursor-pointer flex flex-col items-center justify-between h-[3rem] w-full" onClick={() => setActive(4)}>
+            <h2 className="">Ratings & Reviews</h2>
+            {active === 4 && (
+              <motion.div
+                // animate={{ x: active === 1 ? "100%" : 0 }}
+                // transition={{ type: "tween", duration: 0.4 }}
+                layoutId="navbar"
+                className="h-[4px] bg-specialRed w-[10.875rem] rounded-md"
+              ></motion.div>
+            )}
+          </div>
         </div>
-        <div className="flex sm:flex-row flex-col sm:justify-between">
+        <div
+          className="flex sm:flex-row flex-col-reverse sm:justify-between"
+          id="overview"
+        >
           <div>
             <h2 className="text-specialBlack font-extrabold text-[2rem] leading-[38px] mb-2">
               Overview
@@ -57,7 +111,7 @@ const CarSpecs = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-primaryCard bg-white p-4 h-[20rem]">
+          <div className="shadow-primaryCard bg-white p-4 h-[20rem] mb-[5rem] sm:mb-0">
             <div className="flex ">
               <div className="rounded-tertiary border border-dividerGray p-3 mr-3">
                 <div className="flex justify-between">
@@ -106,40 +160,9 @@ const CarSpecs = () => {
             </button>
           </div>
         </div>
-        <div className="mt-8 relative">
-          <div>
-            <h2 className="text-specialBlack font-extrabold text-[2rem] leading-[38px] mb-5">
-              Features & Specs
-            </h2>
-            <div className="border-b border-dividerGray pb-2 mb-6 flex">
-              <div className="bg-lightRed flex items-center font-light justify-between px-4 py-2 ">
-                <h2 className="mr-[0.7rem] font-light ">Installed Upgrade</h2>
-                <AlertIcon />
-              </div>
-            </div>
-            <div className="w-[50%] mb-[3rem]">
-              <div className="grid grid-cols-2 gap-x-[5rem] gap-y-[2rem] items-center">
-                {car?.carFeatures.slice(0, 12).map((feature, index) => (
-                  <FeatureComponents
-                    feature={feature.feature}
-                    installedUpgrade={feature.installedUpgrade}
-                    key={index}
-                  />
-                ))}
-              </div>
-            </div>
-            <button
-              onClick={() => setOpen(true)}
-              className="border-2 rounded-tertiary border-specialRed text-specialRed h-[3rem] font-semibold w-[25.5625rem]"
-            >
-              View all Features & Specs
-            </button>
-          </div>
-          {open && <SpecsModal setOpen={setOpen} />}
-        </div>
       </div>
     </div>
   );
 };
 
-export default CarSpecs;
+export default CarSummary;
