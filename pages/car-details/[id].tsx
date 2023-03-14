@@ -4,19 +4,24 @@ import React, { useEffect } from "react";
 import FeaturesSpecs from "../../components/CarDetails/FeaturesSpecs";
 import CarSummary from "../../components/CarDetails/CarSummary";
 import ExtraLinks from "../../components/CarDetails/ExtraLinks";
-import Gallery from "../../components/CarDetails/Gallery";
+import GalleryNavigation from "../../components/CarDetails/Gallery/GalleryNavigation";
 import HistoryInspection from "../../components/CarDetails/HistoryInspection";
 import RatingsReview from "../../components/CarDetails/RatingsReview";
 import RecommendedCars from "../../components/CarDetails/RecommendedCars/RecommendedCars";
 import TopDetails from "../../components/CarDetails/TopDetails";
 import DefaultLayout from "../../components/layouts/DefaultLayout";
 import { getCar } from "../../features/car/carSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import Gallery from "../../components/CarDetails/Gallery/Gallery";
+import ExteriorThreeSixty from "../../components/CarDetails/Gallery/ExteriorThreeSixty";
+import InteriorThreeSixty from "../../components/CarDetails/Gallery/InteriorThreeSixty";
 
 const CarDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { id } = router.query as { id: string };
+
+  const { carDetailsActiveTab } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -31,14 +36,24 @@ const CarDetails = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <TopDetails />
-      <Gallery />
-      <CarSummary />
-      <FeaturesSpecs />
-      <HistoryInspection />
-      <RecommendedCars />
-      <RatingsReview />
-      <ExtraLinks />
+      {carDetailsActiveTab === 0 ? (
+        <div>
+          <TopDetails />
+          <GalleryNavigation />
+          <CarSummary />
+          <FeaturesSpecs />
+          <HistoryInspection />
+          <RecommendedCars />
+          <RatingsReview />
+          <ExtraLinks />
+        </div>
+      ) : carDetailsActiveTab === 1 ? (
+        <Gallery />
+      ) : carDetailsActiveTab === 2 ? (
+        <ExteriorThreeSixty />
+      ) : carDetailsActiveTab === 3 ? (
+        <InteriorThreeSixty />
+      ) : null}
     </div>
   );
 };
