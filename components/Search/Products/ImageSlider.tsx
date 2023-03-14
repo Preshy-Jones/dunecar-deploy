@@ -70,7 +70,7 @@ const ImageSlider = () => {
             initial={{ x: 20 }}
           >
             <SlideCaretLeftIcon
-              className="cursor-pointer"
+              className="cursor-pointer z-50"
               onClick={() => handleSlide("left")}
             />
           </motion.div>
@@ -84,7 +84,7 @@ const ImageSlider = () => {
             initial={{ x: -20 }}
           >
             <SlideCaretRightIcon
-              className="cursor-pointer"
+              className="cursor-pointer z-50"
               onClick={() => handleSlide("right")}
             />
           </motion.div>

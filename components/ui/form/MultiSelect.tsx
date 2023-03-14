@@ -151,6 +151,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
               `| ${capitalizeFirstLetter(selected[1])}...`}
           </h2>
         ) : (
+          
           <h2
             className={`${
               isDisabled ? "text-[#081314] text-opacity-30" : " text-black"

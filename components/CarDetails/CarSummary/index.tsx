@@ -5,12 +5,15 @@ import {
   CancelIcon,
   CarWheelIcon,
   CheckIcon,
+  DirectLinkIcon,
+  HeartIcon,
   PlayIcon,
 } from "../../ui/icons";
 import { specsData } from "./../DetailsContent";
 import FeatureComponents from "./FeatureComponents";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
+import { CustomSelect } from "../../ui/form/Select";
 
 const CarSummary = () => {
   const [open, setOpen] = React.useState(false);
@@ -18,9 +21,17 @@ const CarSummary = () => {
   const { car } = useAppSelector((state) => state.car);
   const [active, setActive] = React.useState(0);
 
+  const options = [
+    { value: "overview", label: "Overview" },
+    { value: "features", label: "Features & Specs" },
+    { value: "history", label: "History & Inspection" },
+    { value: "warranty", label: "Warranty" },
+    { value: "ratings", label: "Ratings & Reviews" },
+  ];
+
   return (
-    <div className="flex justify-center font-roboto">
-      <div className="w-[85.1267992%]">
+    <div className="flex flex-col  items-center justify-center font-roboto">
+      <div className="w-[85.1267992%] hidden sm:block">
         <div className="grid grid-cols-5 justify-items-center text-tertiaryBlack leading-seventh  shadow-cardShadow2 mb-[4rem] pt-9">
           <Link
             to="overview"
@@ -118,6 +129,27 @@ const CarSummary = () => {
             )}
           </Link>
         </div>
+      </div>
+      <div className="shadow-cardShadow2 sm:hidden flex justify-center my-8 border-t border-dividerGray w-full">
+        <div className="flex items-center justify-between w-[85.1267992%]">
+          <div className="w-full">
+            <CustomSelect placeHolder="Overview" options={options} />
+          </div>
+          <div className="sm:hidden w-full flex justify-end h-[3rem] border-l border-dividerGray">
+            <div className="flex items-center ">
+              <HeartIcon
+                color="#D14532"
+                className="w-[1.125rem] h-[1.125rem] mr-2"
+              />
+              <h2 className="leading-primary text-specialRed text-[0.875rem] mr-8">
+                72
+              </h2>
+              <DirectLinkIcon />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-[85.1267992%]">
         <div
           className="flex sm:flex-row flex-col-reverse sm:justify-between"
           id="overview"

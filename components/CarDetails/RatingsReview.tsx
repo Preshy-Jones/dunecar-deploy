@@ -10,9 +10,9 @@ const RatingsReview = () => {
       className="flex justify-center mt-[4rem] font-roboto bg-white ratings"
       id="ratings"
     >
-      <div className="w-primary grid grid-cols-2">
-        <div>
-          <h1 className="font-extrabold text-thirdBlack text-[2rem] leading-[2.375rem] w-primary">
+      <div className="w-primary grid grid-cols-1 sm:grid-cols-2">
+        <div className="mb-8">
+          <h1 className="font-extrabold text-thirdBlack text-[2rem] leading-[2.375rem] sm:w-primary">
             Ratings & Reviews
           </h1>
           <div className="flex items-center mt-[1.5rem]">
@@ -38,7 +38,7 @@ const RatingsReview = () => {
             <RatingBar percentage="50%" starNumber="2" count="2" />
             <RatingBar percentage="30%" starNumber="1" count="3" />
           </div>
-          <button className="border-[1.5px] rounded-tertiary border-specialRed text-specialRed h-[3rem] font-semibold w-[25.5625rem]">
+          <button className="border-[1.5px] rounded-tertiary border-specialRed text-specialRed h-[3rem] font-semibold w-full sm:w-[25.5625rem]">
             View all Ratings & Reviews
           </button>
         </div>

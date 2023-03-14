@@ -28,12 +28,12 @@ export default Specifications;
 const performanceKeys = [
   {
     title: "Torque (ft-lbs)",
-    keyFunc: (payload) => payload?.torque?.value + " " + payload?.torque?.unit,
+    keyFunc: (payload) => payload?.torque?.value + " " + payload?.torque?.unit + " @ " + payload?.torque?.rpm + " rpm",
   },
   {
     title: "Horsepower",
     keyFunc: (payload) =>
-      payload?.horsePower?.value + " " + payload?.horsePower?.unit,
+      payload?.horsePower?.value + " " + payload?.horsePower?.unit + " @ " + payload?.horsePower?.rpm + " rpm",
   },
   {
     title: "Fuel Capacity",

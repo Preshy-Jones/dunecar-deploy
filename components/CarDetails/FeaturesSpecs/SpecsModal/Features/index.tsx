@@ -28,7 +28,7 @@ const Features = () => {
 
   return (
     <div>
-      <h1 className="text-specialRed font-extrabold text-[2rem] leading-[37.5px] mt-4 mb-[1rem]">
+      <h1 className="text-specialRed font-extrabold text-[2rem] leading-[37.5px] mt-4 mb-[2rem] sm:mb-[1rem]">
         Features
       </h1>
       <Category categoryData={exteriorData} title="Exterior & Mechanical" />
