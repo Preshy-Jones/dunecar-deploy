@@ -13,14 +13,14 @@ const Category = ({ categoryData, title }) => {
           {title}
         </h2>
         {title === "Exterior & Mechanical" && (
-          <div className="bg-lightRed flex items-center font-light justify-between px-4 py-2 ">
+          <div className="bg-lightRed hidden sm:flex items-center font-light justify-between px-4 py-2 ">
             <h2 className="mr-[0.7rem] font-light ">Installed Upgrade</h2>
             <AlertIcon />
           </div>
         )}
       </div>
-      <div className="w-[60%] mt-4">
-        <div className="grid grid-cols-2 gap-y-7 items-center">
+      <div className="w-full sm:w-[60%] mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-7 items-center">
           {categoryData.map((feature, index) => {
             return (
               <FeatureComponent
@@ -45,12 +45,12 @@ const FeatureComponent = ({ installedUpgrade, title }) => {
         <div className="flex justify-start">
           <div className="bg-lightRed flex items-center font-light justify-start px-4 py-2">
             <h2 className="mr-[0.7rem] font-light ">{title}</h2>
-            <PlayIcon />
+            {/* <PlayIcon /> */}
           </div>
         </div>
       )}
       {!installedUpgrade && (
-        <h2 className="font-light leading-primary text-secondaryBlack">
+        <h2 className="font-light leading-primary text-secondaryBlack px-4">
           {title}
         </h2>
       )}

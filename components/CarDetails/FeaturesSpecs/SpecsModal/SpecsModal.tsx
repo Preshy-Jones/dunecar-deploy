@@ -36,7 +36,7 @@ const SpecsModal = ({ setOpen }) => {
           // initial={{ opacity: 0, y: 700 }}
           // animate={{ opacity: 1, y: 0 }}`
           ref={domNode1}
-          className="bg-white w-[61.111111111vw] h-[44rem] px-[2rem] py-[2rem] overflow-y-scroll"
+          className="bg-white w-[85vw] sm:w-[61.111111111vw] h-[44rem] px-[2rem] py-[2rem] overflow-y-scroll"
         >
           <div className="flex justify-between">
             <div>
