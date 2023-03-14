@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
 import { formatAmount, priceSplitter } from "../../utils/utilityFunctions";
@@ -10,21 +11,21 @@ const TopDetails = () => {
     <div className="flex justify-center mb-7">
       <div className="w-[85.1267992%] flex justify-between items-center">
         <div>
-          <div className="flex items-center">
-            <div className="mr-2">
-              <LeftArrowIcon />
+          <Link href="/search" >
+            <div className="flex items-center cursor-pointer">
+              <div className="mr-2">
+                <LeftArrowIcon />
+              </div>
+              <h2 className="uppercase leading-primary text-specialRed ">
+                SEARCH
+              </h2>
             </div>
-            <h2 className="uppercase leading-primary text-specialRed ">
-              SEARCH
-            </h2>
-          </div>
+          </Link>
           <h1 className="text-[1.75rem] leading-[2.0625rem] sm:text-[3.25rem] font-extrabold text-specialRed sm:leading-sixth mt-3">
             {car?.year} {car?.make?.title} {car?.model?.title}
           </h1>
           <div className="flex text-secondary sm:text-[25px] justify-start text-specialBlack font-semibold leading-[21px] sm:leading-[29px] mt-2 mb-3">
-            <h3 className="mr-3">
-              ${car?.price && priceSplitter(car?.price)}
-            </h3>
+            <h3 className="mr-3">${car?.price && priceSplitter(car?.price)}</h3>
             <h3 className="ml-3">
               {car?.mileage && formatAmount(car?.mileage)} mi
             </h3>

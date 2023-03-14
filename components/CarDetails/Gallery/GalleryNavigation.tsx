@@ -2,12 +2,15 @@ import Image from "next/image";
 import React from "react";
 import { Md360 } from "react-icons/md";
 import { TbAlertCircle } from "react-icons/tb";
-import { GalleryIcon } from "../ui/icons";
-import sampleCarBig from "../../public/assets/sample-car-big.svg";
-import samplecarSmall from "../../public/assets/sample-car-small.svg";
+import { GalleryIcon } from "../../ui/icons";
+import sampleCarBig from "../../../public/assets/sample-car-big.svg";
+import samplecarSmall from "../../../public/assets/sample-car-small.svg";
+import { useAppDispatch } from "../../../store/hooks";
+import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
 
-const Gallery = () => {
+const GalleryNavigation = () => {
   const repeater = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const dispatch = useAppDispatch();
   return (
     <div className="">
       <div className="flex overflow-x-scroll">
@@ -18,7 +21,7 @@ const Gallery = () => {
           <div className="absolute w-full z-30 left-[5rem] bottom-[1rem] sm:bottom-[2rem] sm:left-[15rem] rounded-[5px]">
             <div className=" text-[#081314] flex items-center justify-center bg-btnGallery h-[1.988125rem] w-[6.30875rem] sm:w-[10.3125rem] sm:h-[2.75rem] ">
               <Md360 className="text-[0.88375rem] sm:text-[1.6rem] mr-3" />
-              <span className="text-[0.66279375rem] leading-primary">
+              <span className="sm:text-[1rem] text-[0.66279375rem] leading-primary">
                 Exterior 360°
               </span>
             </div>
@@ -29,7 +32,7 @@ const Gallery = () => {
             <div key={index} className="relative">
               <div
                 key={index}
-                className=" z-20 sm:min-w-[20.9375rem] sm:min-h-[15.59375rem] w-[7.8775rem] h-[5.866875rem]"
+                className="z-20 sm:min-w-[20.9375rem] sm:min-h-[15.59375rem] w-[7.8775rem] h-[5.866875rem]"
               >
                 <Image src={samplecarSmall} alt={`car-${index}`} />
               </div>
@@ -37,7 +40,7 @@ const Gallery = () => {
                 <div className="absolute w-full z-40 left-[1rem] bottom-[0.7rem] sm:bottom-[2rem] sm:left-[5.5rem] rounded-[5px]">
                   <div className=" text-[#081314] flex items-center justify-center bg-btnGallery h-[1.988125rem] w-[6.30875rem] sm:w-[10.3125rem] sm:h-[2.75rem]">
                     <Md360 className="text-[0.88375rem] sm:text-[1.6rem] mr-3" />
-                    <span className="text-[0.66279375rem] leading-primary">
+                    <span className="sm:text-[1rem] text-[0.66279375rem] leading-primary ">
                       Interior 360°
                     </span>
                   </div>
@@ -49,8 +52,11 @@ const Gallery = () => {
       </div>
       <div className="flex justify-center sm:my-2">
         <div className="w-[85.1267992%] grid-cols-2 grid sm:grid-cols-3 sm:gap-x-2 text-white justify-evenly mt-2">
-          <button className="w-full   rounded-tertiary flex items-center sm:justify-center text-white">
-            <div className="w-[98%] flex items-center bg-specialBlack px-5 h-[3rem] rounded-tertiary ">
+          <button
+            className="w-full rounded-tertiary flex items-center sm:justify-center text-white"
+            onClick={() => dispatch(setCarDetailsActiveTab(1))}
+          >
+          <div className="w-[98%] flex items-center sm:justify-center bg-specialBlack px-5 h-[3rem] rounded-tertiary">
               <div className="mr-3">
                 <GalleryIcon />
               </div>
@@ -58,7 +64,7 @@ const Gallery = () => {
             </div>
           </button>
           <button className="w-full  flex items-center justify-end sm:justify-center">
-            <div className="w-[98%] flex items-center bg-specialBlack px-5 h-[3rem] rounded-tertiary">
+            <div className="w-[98%] flex items-center sm:justify-center bg-specialBlack px-5 h-[3rem] rounded-tertiary">
               <Md360 className="text-[1.6rem] mr-3" />
               <span className="leading-primary">View 360</span>
             </div>
@@ -73,4 +79,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default GalleryNavigation;

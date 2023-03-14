@@ -32,7 +32,7 @@ const CarSpecs = () => {
               </div>
             </div>
             <div className="w-[50%] mb-[3rem]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[5rem] gap-y-[2rem] items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[5rem] gap-y-[1rem] items-center">
                 {car?.carFeatures.slice(0, 12).map((feature, index) => (
                   <FeatureComponents
                     feature={feature.feature}

@@ -6,7 +6,7 @@ const FeatureComponents = ({ installedUpgrade, feature }) => {
     <div>
       {installedUpgrade && (
         <div className="flex items-center">
-          <div className="bg-lightRed flex items-center font-light justify-between px-4 py-2 ">
+          <div className="bg-lightRed flex items-center font-light justify-between px-4 py-1 ">
             <h2 className="mr-[0.7rem] font-light ">{feature.title}</h2>
             {/* <AlertIcon /> */}
           </div>
