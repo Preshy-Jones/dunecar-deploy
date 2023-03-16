@@ -149,6 +149,7 @@ module.exports = {
         primary: "repeat(6, 20.9375rem)",
         secondary: "repeat(6, 7.877rem)",
         store: "24.6744345% 75.3255655%",
+        gallery:"390px repeat(5, minmax(0, 1fr))",
         13: "repeat(13, minmax(0, 1fr))",
         14: "repeat(14, minmax(0, 1fr))",
         "3a": "repeat(3, minmax(0, auto))",
