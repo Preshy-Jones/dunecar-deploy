@@ -20,14 +20,14 @@ module.exports = {
         pageBg: "#FAFAFA",
         pageBg2: "#F5F6F7",
         borderDark: "rgba(203, 203, 203, 0.5)",
-        borderLight:"#D5D5D5",
+        borderLight: "#D5D5D5",
         secondaryGray: "rgba(34, 17, 33, 0.7)",
         tertiaryGray: "rgba(34, 17, 33, 0.8)",
         dividerGray: "#D1D1D1",
         primaryGreen: "#16AB25",
         lightRed: "rgba(255, 222, 218, 0.37)",
         lighterRed: "#FFF3F2",
-        btnGallery:"rgba(255, 255, 255, 0.68)"
+        btnGallery: "rgba(255, 255, 255, 0.68)",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -103,6 +103,11 @@ module.exports = {
       },
       zIndex: {
         1: "1",
+        60: "60",
+        70: "70",
+        80: "80",
+        90: "90",
+        100: "100",
       },
       flex: {
         2: "2 1 0%",

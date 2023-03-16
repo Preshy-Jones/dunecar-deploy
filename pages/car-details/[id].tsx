@@ -21,6 +21,8 @@ const CarDetails = () => {
   const router = useRouter();
   const { id } = router.query as { id: string };
 
+  
+
   const { carDetailsActiveTab } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
