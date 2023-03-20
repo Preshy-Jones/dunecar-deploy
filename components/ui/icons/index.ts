@@ -27,3 +27,4 @@ export { default as DollarIcon } from "./Dollar";
 export { default as ChatIcon } from "./Chat";
 export { default as DirectLinkIcon } from "./DirectLink";
 export { default as PlayIcon } from "./Play";
+export {default as WhiteCancelIcon} from "./WhiteCancelIcon";

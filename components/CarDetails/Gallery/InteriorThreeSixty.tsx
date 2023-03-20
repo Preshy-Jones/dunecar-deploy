@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const InteriorThreeSixty = () => {
-  return (
-    <div>InteriorThreeSixty</div>
-  )
-}
+  return <div>InteriorThreeSixty</div>;
+};
 
-export default InteriorThreeSixty
+export default InteriorThreeSixty;

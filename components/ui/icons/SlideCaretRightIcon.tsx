@@ -1,6 +1,16 @@
 import React from "react";
 
-const SlideCaretRightIcon = ({ ...rest }) => {
+const SlideCaretRightIcon = ({
+  colour,
+  className,
+  onClick,
+  ...rest
+}: {
+  colour?: string;
+  className?: string;
+  onClick?: () => void;
+  rest?: any;
+}) => {
   return (
     <svg
       {...rest}
@@ -10,7 +20,7 @@ const SlideCaretRightIcon = ({ ...rest }) => {
     >
       <path
         d="M2.61999 0.00587034L14.0527 11.4386L2.61999 22.8714L0.590673 20.8421L9.99411 11.4386L0.590673 2.03518L2.61999 0.00587034Z"
-        fill="white"
+        fill={colour ? colour : "white"}
       />
     </svg>
   );
