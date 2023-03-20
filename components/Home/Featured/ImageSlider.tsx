@@ -47,7 +47,7 @@ const ImageSlider = () => {
         <Image
           src={images[currentIndex]}
           alt="car-image1"
-          className="z-0"
+          className="z-0  rounded-t-md"
           width="391.46px"
           height="232.83px"
         />
