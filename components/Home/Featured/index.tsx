@@ -21,9 +21,9 @@ const Featured = () => {
         <div className="md:flex justify-between hidden">
           {repeater.map((item, index) => {
             return (
-              <div key={index} className="w-[24.46625rem] rounded- ">
+              <div key={index} className="w-[24.46625rem]">
                 <ImageSlider />
-                <div className="px-3 border-b border-r border-l border-[#D1D1D1] -mt-2">
+                <div className="px-3 border-b border-r border-l border-[#D1D1D1] rounded-b-md -mt-2">
                   <div className="py-3">
                     <h2 className="text-[#414141] tracking-primary leading-primary text-[15.8519px] mb-4">
                       DUNE CERTIFIED

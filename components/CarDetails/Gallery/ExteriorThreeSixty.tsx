@@ -13,8 +13,10 @@ const ExteriorThreeSixty = () => {
             fileName="output_{index}.jpeg"
           />
         </div>
+        {/* <div className="bg-black h-[4rem] absolute top-0">
+          <h1>helllo</h1>
+        </div> */}
       </div>
-      <div className="bg-black fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-40"></div>
     </div>
   );
 };
