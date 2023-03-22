@@ -5,7 +5,7 @@ import { WhiteCancelIcon } from "../../ui/icons";
 import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
 import { useAppDispatch } from "../../../store/hooks";
 
-const ExteriorThreeSixty = () => {
+const ClosedDoorSixty = () => {
   const dispatch = useAppDispatch();
   const basePath = "/assets/360";
   // const basePath = "https://fastly-production.24c.in/webin/360";
@@ -70,7 +70,7 @@ const ExteriorThreeSixty = () => {
   );
 };
 
-export default ExteriorThreeSixty;
+export default ClosedDoorSixty;
 
 const ThreeSixty = dynamic(() => import("react-360-view"), {
   ssr: false,

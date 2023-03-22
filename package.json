@@ -31,6 +31,7 @@
     "react-dom": "18.2.0",
     "react-elastic-carousel": "^0.11.5",
     "react-icons": "^4.7.1",
+    "react-image-turntable": "^3.0.2",
     "react-pannellum": "^0.2.13",
     "react-photo-sphere-viewer": "^3.3.3-psv5.1.1",
     "react-redux": "^8.0.5",

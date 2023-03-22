@@ -10,12 +10,16 @@ const ThreesixtyPage = () => {
   const basePath = "https://fastly-production.24c.in/webin/360";
   return (
     <div className="relative">
-      <ThreeSixty
-      // @ts-ignore
-        amount={75}
-        imagePath={basePath}
-        fileName="output_{index}.jpeg"
-      />
+      <div className="bg-black">
+
+          <ThreeSixty
+          // @ts-ignore
+            amount={75}
+            imagePath={basePath}
+            fileName="output_{index}.jpeg"
+          />
+
+      </div>
 
       {/* <ReactPhotoSphereViewer
         src="https://res.cloudinary.com/xxolcare/image/upload/v1678889232/threesixty_lijzkq.jpg"

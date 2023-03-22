@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+canvas {
+  height: 550px !important;
+  width: 1300px !important;
+}
 .rec-arrow:disabled {
   visibility: hidden;
 }
