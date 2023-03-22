@@ -5,7 +5,7 @@ const ExteriorThreeSixty = () => {
   const basePath = "/assets/360";
   return (
     <div className="font-roboto">
-      <div className=" fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-50">
+      <div className=" fixed top-[10vh] left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-50">
         <div>
           <ThreeSixty
            // @ts-ignore
