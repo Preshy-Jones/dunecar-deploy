@@ -28,7 +28,7 @@ const ExteriorThreeSixty = () => {
           src="https://res.cloudinary.com/xxolcare/image/upload/v1679435104/photo_2023-03-21_22-43-23_uhrmhm.jpg"
           height={"80vh"}
           width={"80vw"}
-          containerClass={"customcontainer"}
+          container={"customcontainer"}
         ></ReactPhotoSphereViewer>
         <div className=" absolute flex justify-center w-full bottom-[0.5rem] z-40 ">
           <div className="flex text-white leading-primary">
