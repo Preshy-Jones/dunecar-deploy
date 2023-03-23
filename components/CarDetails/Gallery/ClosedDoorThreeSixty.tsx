@@ -5,7 +5,7 @@ import { WhiteCancelIcon } from "../../ui/icons";
 import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
 import { useAppDispatch } from "../../../store/hooks";
 
-const ClosedDoorSixty = () => {
+const ExteriorThreeSixty = () => {
   const dispatch = useAppDispatch();
   const basePath = "/assets/360";
   // const basePath = "https://fastly-production.24c.in/webin/360";
@@ -20,7 +20,7 @@ const ClosedDoorSixty = () => {
   return (
     <div className="font-roboto">
       <div className=" fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-60 bg-black flex flex-col justify-center items-center">
-        <div className="absolute top-[1rem]  flex justify-center w-full z-40 ">
+        <div className="absolute top-[1.5rem]  flex justify-center w-full z-40 ">
           <div className="flex justify-between w-full items-center">
             <div className=""></div>
             <div className=" ">
@@ -34,7 +34,7 @@ const ClosedDoorSixty = () => {
             </div>
           </div>
         </div>
-        <div className="relative">
+        <div className="absolute top-[4.5rem]">
           <div className="flex items-center justify-center">
             <ThreeSixty
               // @ts-ignore
@@ -44,23 +44,23 @@ const ClosedDoorSixty = () => {
             />
             {/* <ReactImageTurntable images={images} /> */}
           </div>
-          <div className=" absolute flex justify-center w-full">
-            <div className="flex text-white leading-primary">
-              <div
-                className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center"
-                onClick={() => dispatch(setCarDetailsActiveTab(2))}
-              >
-                <h2>Exterior</h2>
-              </div>
-              <div className="bg-[#282842] h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer">
-                <h2>Opened doors</h2>
-              </div>
-              <div
-                className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer"
-                onClick={() => dispatch(setCarDetailsActiveTab(3))}
-              >
-                <h2>Interior</h2>
-              </div>
+        </div>
+        <div className=" absolute z-40 bottom-[0.5rem] flex justify-center w-full">
+          <div className="flex text-white leading-primary">
+            <div
+              className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center"
+              onClick={() => dispatch(setCarDetailsActiveTab(2))}
+            >
+              <h2>Exterior</h2>
+            </div>
+            <div className="bg-[#282842] h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer">
+              <h2>Opened doors</h2>
+            </div>
+            <div
+              className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer"
+              onClick={() => dispatch(setCarDetailsActiveTab(3))}
+            >
+              <h2>Interior</h2>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ const ClosedDoorSixty = () => {
   );
 };
 
-export default ClosedDoorSixty;
+export default ExteriorThreeSixty;
 
 const ThreeSixty = dynamic(() => import("react-360-view"), {
   ssr: false,
