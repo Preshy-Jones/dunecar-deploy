@@ -51,7 +51,7 @@ const ExteriorThreeSixty = () => {
               </div>
               <div
                 className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer"
-                onClick={() => dispatch(setCarDetailsActiveTab(0))}
+                onClick={() => dispatch(setCarDetailsActiveTab(4))}
               >
                 <h2>Opened doors</h2>
               </div>
