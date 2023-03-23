@@ -15,13 +15,12 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Gallery from "../../components/CarDetails/Gallery/Gallery";
 import ExteriorThreeSixty from "../../components/CarDetails/Gallery/ExteriorThreeSixty";
 import InteriorThreeSixty from "../../components/CarDetails/Gallery/InteriorThreeSixty";
+import ClosedDoorSixty from "../../components/CarDetails/Gallery/ClosedDoorThreeSixty";
 
 const CarDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { id } = router.query as { id: string };
-
-  
 
   const { carDetailsActiveTab } = useAppSelector((state) => state.ui);
 
@@ -55,6 +54,8 @@ const CarDetails = () => {
         <ExteriorThreeSixty />
       ) : carDetailsActiveTab === 3 ? (
         <InteriorThreeSixty />
+      ) : carDetailsActiveTab === 4 ? (
+        <ClosedDoorSixty />
       ) : null}
     </div>
   );

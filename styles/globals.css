@@ -5,6 +5,24 @@
 @tailwind components;
 @tailwind utilities;
 
+#container {
+  height: 550px !important;
+  width: 1300px !important;
+}
+.v360-viewport canvas {
+  height: 550px !important;
+  width: 1300px !important;
+}
+/* .psv-canvas-container canvas {
+  height: 550px !important;
+  width: 1300px !important;
+} */
+
+.customcontainer{
+  display: flex !important;
+  justify-content: center !important;
+}
+.rec-
 .rec-arrow:disabled {
   visibility: hidden;
 }

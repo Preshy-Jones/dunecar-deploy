@@ -47,13 +47,13 @@ const ExteriorThreeSixty = () => {
         </div>
         <div className=" absolute z-40 bottom-[0.5rem] flex justify-center w-full">
           <div className="flex text-white leading-primary">
-            <div className="bg-[#282842] h-[3.6875rem] px-[2rem]  flex justify-center items-center">
+            <div
+              className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center"
+              onClick={() => dispatch(setCarDetailsActiveTab(2))}
+            >
               <h2>Exterior</h2>
             </div>
-            <div
-              className=" h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer"
-              onClick={() => dispatch(setCarDetailsActiveTab(4))}
-            >
+            <div className="bg-[#282842] h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer">
               <h2>Opened doors</h2>
             </div>
             <div
