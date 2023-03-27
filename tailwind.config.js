@@ -28,7 +28,7 @@ module.exports = {
         lightRed: "rgba(255, 222, 218, 0.37)",
         lighterRed: "#FFF3F2",
         btnGallery: "rgba(255, 255, 255, 0.68)",
-        greyText:"rgba(255, 255, 255, 0.7)"
+        greyText: "rgba(255, 255, 255, 0.7)",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -150,7 +150,7 @@ module.exports = {
         primary: "repeat(6, 20.9375rem)",
         secondary: "repeat(6, 7.877rem)",
         store: "24.6744345% 75.3255655%",
-        gallery:"390px repeat(5, minmax(0, 1fr))",
+        gallery: "390px repeat(5, minmax(0, 1fr))",
         13: "repeat(13, minmax(0, 1fr))",
         14: "repeat(14, minmax(0, 1fr))",
         "3a": "repeat(3, minmax(0, auto))",
@@ -178,6 +178,7 @@ module.exports = {
     screens: {
       xs: "375px",
       "1.5xl": "1400px",
+      tablet: "850px",
       ...defaultTheme.screens,
     },
   },
