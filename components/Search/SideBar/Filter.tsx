@@ -46,7 +46,7 @@ const Filter: React.FC<Props> = ({ item }) => {
         className="flex h-[3.9375rem] items-center px-[2rem] justify-between "
         onClick={() => handleFilterOpen(item.filterComponentKey)}
       >
-        <h1 className=" font-normal">{item.title}</h1>
+        <h1 className="font-normal">{item.title}</h1>
         <CaretRightIcon />
       </div>
     </div>

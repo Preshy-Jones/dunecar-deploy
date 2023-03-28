@@ -63,7 +63,7 @@ const SideBar = ({ filters }) => {
               arrives.
             </p>
           </div>
-          <button className="font-bold text-specialRed text-[0.875rem] border border-specialRed h-[1.875rem] w-[7rem]">
+          <button className="font-bold text-specialRed leading-seventh text-[0.875rem] border border-specialRed h-[1.875rem] w-[7rem] rounded-tertiary">
             SAVE SEARCH
           </button>
         </div>

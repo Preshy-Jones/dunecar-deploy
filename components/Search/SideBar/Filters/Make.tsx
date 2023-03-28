@@ -42,7 +42,15 @@ const MakeFilter = () => {
     }
     console.log(selectedMakes);
   };
-
+  const handleLabelClick = (value) => {
+    if (selectedMakes.includes(value)) {
+      dispatch(
+        setSelectedMakes(selectedMakes.filter((item) => item !== value))
+      );
+    } else {
+      dispatch(setSelectedMakes([...selectedMakes, value]));
+    }
+  };
   const handleClose = () => {
     dispatch(setFilter(""));
     let result = initialMakeOptions?.sort((a, b) => {
@@ -57,6 +65,9 @@ const MakeFilter = () => {
         return 0;
       }
     });
+
+    console.log(result);
+
     // setOptionsUpdated(optionsUpdated);
     // console.log(optionsUpdated);
 
@@ -81,12 +92,29 @@ const MakeFilter = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    let makeOptionsPayload = makes.map((make) => ({
-      value: make.slug,
-      label: make.title,
-    }));
-
-    dispatch(setMakeOptions(makeOptionsPayload));
+    //when there are no makeOptions loaded yet
+    if (!makeOptions || makeOptions.length === 0) {
+      let makeOptionsPayload = makes.map((make) => ({
+        value: make.slug,
+        label: make.title,
+      }));
+      let result = makeOptionsPayload?.sort((a, b) => {
+        if (
+          selectedMakes.includes(a.value) &&
+          !selectedMakes.includes(b.value)
+        ) {
+          return -1;
+        } else if (
+          !selectedMakes.includes(a.value) &&
+          selectedMakes.includes(b.value)
+        ) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      dispatch(setMakeOptions(result));
+    }
   }, [makes, dispatch]);
 
   return (
@@ -115,8 +143,9 @@ const MakeFilter = () => {
                 onChange={handleChange}
               />
               <label
-                className="leading-primary text-secondary text-lighterDark font-normal"
+                className="leading-primary text-secondary text-lighterDark font-normal cursor-pointer"
                 style={{ marginLeft: "5px" }}
+                onClick={() => handleLabelClick(item.value)}
               >
                 {item.label}
               </label>

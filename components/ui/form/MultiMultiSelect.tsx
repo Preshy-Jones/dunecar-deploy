@@ -70,6 +70,15 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
     }
   };
 
+  const handleLabelClick = (value) => {
+    console.log(value);
+    if (selected.includes(value)) {
+      dispatch(setSelected(selected.filter((item) => item !== value)));
+    } else {
+      dispatch(setSelected([...selected, value]));
+    }
+  };
+
   const handleTabChange = (index: number) => {
     setCurrentIndex(index);
     setActive(1);
@@ -144,7 +153,12 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                   checked={selected.includes(item.value)}
                   onChange={handleChange}
                 />
-                <label style={{ marginLeft: "5px" }}>{item.label}</label>
+                <label
+                  onClick={() => handleLabelClick(item.value)}
+                  style={{ marginLeft: "5px" }}
+                >
+                  {item.label}
+                </label>
               </div>
             ))}
           </div>

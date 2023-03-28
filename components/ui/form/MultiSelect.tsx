@@ -91,7 +91,15 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   //sort options and place checked options at the top
 
   //handle checkbox onchange
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //console.log(e.target.value);
+    if (selected.includes(e.target.value)) {
+      setSelected(selected.filter((item) => item !== e.target.value));
+    } else {
+      setSelected([...selected, e.target.value]);
+    }
+    // console.log(selected);
+  };
 
   const handleLabelClick = (value) => {
     if (selected.includes(value)) {
@@ -99,7 +107,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     } else {
       setSelected([...selected, value]);
     }
-    console.log(selected);
+  //  console.log(selected);
   };
 
   let { domNode1, domNode2 } = useClickOutside(() => {
