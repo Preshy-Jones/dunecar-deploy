@@ -10,6 +10,7 @@ import Api from "../api";
 import { Spinner } from "../components/ui/others";
 import { setSelectedMakes } from "../features/make/makeSlice";
 import { setModelsSelected } from "../features/model/modelSlice";
+import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ const Search = () => {
 
   const { selectedMakes } = useAppSelector((state) => state.make);
   const { modelsSelected } = useAppSelector((state) => state.model);
+  const { mobileFilterSortOpen } = useAppSelector((state) => state.search);
 
   const router = useRouter();
 
@@ -44,9 +46,11 @@ const Search = () => {
 
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
-    dispatch(getCars({ makes: makes, models: models, limit: limit }));
-    dispatch(setSelectedMakes(makes));
-    dispatch(setModelsSelected(models));
+    if (cars.length === 0) {
+      dispatch(getCars({ makes: makes, models: models, limit: limit }));
+      dispatch(setSelectedMakes(makes));
+      dispatch(setModelsSelected(models));
+    }
   }, [router, dispatch]);
 
   useEffect(() => {
@@ -69,11 +73,11 @@ const Search = () => {
     <div className="font-roboto">
       {/* <pre>{JSON.stringify(router.query, null, 2)}</pre> */}
       <SearchBar />
-      <div className="grid grid-cols-store bg-pageBg ">
-        <div className=" col-start-1 col-end-2">
+      <div className="grid tablet:grid-cols-store sm:grid-cols-store_sm  bg-pageBg ">
+        <div className=" col-start-1 col-end-2 hidden sm:block">
           <SideBar filters={filters} />
         </div>
-        <div className="co-start-2 col-end-3">
+        <div className="sm:col-start-2 col-end-3 col-start-1 col-">
           {isLoading ? (
             <div className="flex justify-center items-center pt-[6rem]">
               <Spinner />
@@ -82,11 +86,13 @@ const Search = () => {
             <ProductCatalogue cars={cars} count={count} filters={filters} />
           )}
         </div>
+        {mobileFilterSortOpen && (
+        <FilterComponent />
+      )}
       </div>
     </div>
   );
 };
-
 
 Search.getLayout = (page) => <DefaultLayout>{page}</DefaultLayout>;
 

@@ -26,7 +26,7 @@ const SideBar = ({ filters }) => {
         <div>
           <div className="flex px-6 justify-between pt-[1.5rem] items-center bg-white mb-3">
             <div className="flex items-center justify-between">
-              <FilterIcon />
+              <FilterIcon height={12} width={18} />
               <h2 className="text-tertiaryGray font-semibold leading-secondary ml-6">
                 FILTER & SORT (2)
               </h2>
