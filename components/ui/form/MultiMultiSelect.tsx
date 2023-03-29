@@ -10,10 +10,12 @@ import {
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 import { motion } from "framer-motion";
 import useClickOutside from "../../../hooks/ClickOutside";
+import { setModelOptions } from "../../../features/model/modelSlice";
 
 interface MultiMultiSelectProps {
   placeHolder?: string;
   fieldOptions: any;
+  payloadOptions?: any;
   isDisabled: boolean;
   selected: string[];
   setSelected(selected: string[]): any;
@@ -24,6 +26,7 @@ interface MultiMultiSelectProps {
 const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   placeHolder,
   fieldOptions,
+  payloadOptions,
   isDisabled,
   selected,
   setSelected,
@@ -48,6 +51,27 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
         // dispatch(setFilterTotal(MATHOPERATIONS.ADD));
         handleOpenOperation();
       } else if (isToggled) {
+        console.log(payloadOptions);
+        let result = payloadOptions?.map((make, index) => {
+          return {
+            ...make,
+            options: make.options?.sort((a, b) => {
+              if (selected.includes(a.value) && !selected.includes(b.value)) {
+                return -1;
+              } else if (
+                !selected.includes(a.value) &&
+                selected.includes(b.value)
+              ) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }),
+          };
+        });
+        console.log(result);
+
+        dispatch(setModelOptions(result));
         // dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
         handleCloseOperation(selected);
       }
@@ -57,6 +81,26 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   };
 
   const handleCloseModal = () => {
+    let result = payloadOptions?.map((make, index) => {
+      return {
+        ...make,
+        options: make.options?.sort((a, b) => {
+          if (selected.includes(a.value) && !selected.includes(b.value)) {
+            return -1;
+          } else if (
+            !selected.includes(a.value) &&
+            selected.includes(b.value)
+          ) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }),
+      };
+    });
+    console.log(result);
+
+    dispatch(setModelOptions(result));
     handleCloseOperation(selected);
     setIsToggled(false);
   };

@@ -5,6 +5,7 @@ import modelService from "./modelService";
 export interface CarState {
   models: CarModels[];
   modelsSelected: string[];
+  modelOptions: any;
   isLoading: boolean;
 }
 
@@ -12,6 +13,7 @@ const initialState: CarState = {
   models: [],
   modelsSelected: [],
   isLoading: false,
+  modelOptions: [],
 };
 
 interface ModelPayload {
@@ -58,6 +60,10 @@ const modelSlice = createSlice({
         (model) => model !== action.payload
       );
     },
+    setModelOptions(state, action: PayloadAction<any>) {
+      const { payload } = action;
+      state.modelOptions = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,6 +94,7 @@ const modelSlice = createSlice({
   },
 });
 
-export const { setModelsSelected, deleteSelectedModel } = modelSlice.actions;
+export const { setModelsSelected, deleteSelectedModel, setModelOptions } =
+  modelSlice.actions;
 
 export default modelSlice.reducer;
