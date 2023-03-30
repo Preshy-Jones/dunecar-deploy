@@ -8,8 +8,9 @@ import {
 import ToggleLike from "./ToggleLike";
 import sampleImage from "../../../public/assets/sample-car.svg";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-const ImageSlider = ({ setnavigatorOpen, navigatorOpen }) => {
+const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId }) => {
   const images = [
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc1_zlhzgg.jpg",
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/seatMII_qwy9va.webp",
@@ -39,25 +40,38 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen }) => {
   };
 
   return (
-    <div
-      className="relative h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col justify-between"
-      style={{
-        backgroundImage: `url(${images[currentIndex]})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      
-    >
-      {/* <Image
-          src={images[currentIndex]}
-          alt="car-image1"
-          className="z-0"
-          width="246.95px"
-          height="146.88px"
-        /> */}
+    <div className="relative w-full">
+      <Link href={`car-details/${carId}`} passHref className="w-full z-20">
+        <a target="_blank" className="w-full">
+          <div
+            className=" h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col justify-between"
+            style={{
+              backgroundImage: `url(${images[currentIndex]})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* <Image
+            src={images[currentIndex]}
+            alt="car-image1"
+            className="z-0"
+            width="246.95px"
+            height="146.88px"
+          /> */}
+            <ToggleLike className="ml-4 mt-4 z-30" />
 
-      <ToggleLike className="ml-4 mt-4 z-30" />
-
+            {navigatorOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.7 }}
+                className="w-full h-[9.18rem] absolute hello z-10 top-0"
+              ></motion.div>
+            )}
+            <ToggleButtonIcon className="w-[2.0175rem] -mb-4 mr-2 self-end z-30" />
+          </div>
+        </a>
+      </Link>
       {navigatorOpen && (
         <motion.div
           className="flex justify-between w-full  bottom-[4rem] absolute z-30  px-4"
@@ -76,7 +90,6 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen }) => {
           >
             <SlideCaretLeftIcon className="cursor-pointer z-20" />
           </motion.div>
-
           <motion.div
             className="w-[1rem]"
             // whileHover={{
@@ -90,15 +103,6 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen }) => {
           </motion.div>
         </motion.div>
       )}
-      {navigatorOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          className="w-full h-[9.18rem] absolute hello z-10 top-0"
-        ></motion.div>
-      )}
-      <ToggleButtonIcon className="w-[2.0175rem] -mb-4 mr-2 self-end z-30" />
     </div>
   );
 };
