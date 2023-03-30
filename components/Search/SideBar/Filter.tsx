@@ -43,11 +43,11 @@ const Filter: React.FC<Props> = ({ item }) => {
   return (
     <div className=" border-b border-b-dividerGray">
       <div
-        className="flex h-[3.9375rem] items-center px-[2rem] justify-between "
+        className="flex h-[3.9375rem] items-center px-[2rem] justify-between hover:bg-specialRed hover:bg-opacity-5 cursor-pointer hover:text-specialRed"
         onClick={() => handleFilterOpen(item.filterComponentKey)}
       >
-        <h1 className=" font-normal">{item.title}</h1>
-        <CaretRightIcon />
+        <h1 className="font-normal">{item.title}</h1>
+        <CaretRightIcon className="hover:text-specialRed fill-current" />
       </div>
     </div>
   );

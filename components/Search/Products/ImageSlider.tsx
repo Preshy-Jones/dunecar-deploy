@@ -9,7 +9,7 @@ import ToggleLike from "./ToggleLike";
 import sampleImage from "../../../public/assets/sample-car.svg";
 import { motion } from "framer-motion";
 
-const ImageSlider = () => {
+const ImageSlider = ({ setnavigatorOpen, navigatorOpen }) => {
   const images = [
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc1_zlhzgg.jpg",
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/seatMII_qwy9va.webp",
@@ -19,9 +19,10 @@ const ImageSlider = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [navigatorOpen, setnavigatorOpen] = React.useState(false);
 
   const handleSlide = (direction: string) => {
+    console.log("wahala");
+
     if (direction === "left") {
       if (currentIndex === 0) {
         setCurrentIndex(0);
@@ -39,54 +40,53 @@ const ImageSlider = () => {
 
   return (
     <div
-      className="relative"
-      onMouseEnter={() => setnavigatorOpen(true)}
-      onMouseLeave={() => setnavigatorOpen(false)}
+      className="relative h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col justify-between"
+      style={{
+        backgroundImage: `url(${images[currentIndex]})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      
     >
-      <div className="relative">
-        <Image
+      {/* <Image
           src={images[currentIndex]}
           alt="car-image1"
           className="z-0"
           width="246.95px"
           height="146.88px"
-        />
-        <ToggleLike />
-        <ToggleButtonIcon className="absolute top-[8rem] right-[0.5rem] z-0 w-[2.0175rem]" />
-      </div>
+        /> */}
+
+      <ToggleLike className="ml-4 mt-4 z-30" />
+
       {navigatorOpen && (
         <motion.div
-          className="flex justify-between w-full  bottom-[5rem] absolute px-4"
+          className="flex justify-between w-full  bottom-[4rem] absolute z-30  px-4"
           transition={{ duration: 0.7 }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
         >
           <motion.div
             className="w-[1rem]"
-            whileHover={{
-              x: 0,
-              // transition: { duration: 1 },
-            }}
+            // whileHover={{
+            //   x: 0,
+            //   // transition: { duration: 1 },
+            // }}
             initial={{ x: 20 }}
+            onClick={() => handleSlide("left")}
           >
-            <SlideCaretLeftIcon
-              className="cursor-pointer z-50"
-              onClick={() => handleSlide("left")}
-            />
+            <SlideCaretLeftIcon className="cursor-pointer z-20" />
           </motion.div>
 
           <motion.div
             className="w-[1rem]"
-            whileHover={{
-              x: 0,
-              // transition: { duration: 1 },
-            }}
+            // whileHover={{
+            //   x: 0,
+            //   // transition: { duration: 1 },
+            // }}
             initial={{ x: -20 }}
+            onClick={() => handleSlide("right")}
           >
-            <SlideCaretRightIcon
-              className="cursor-pointer z-50"
-              onClick={() => handleSlide("right")}
-            />
+            <SlideCaretRightIcon className="cursor-pointer z-20" />
           </motion.div>
         </motion.div>
       )}
@@ -95,9 +95,10 @@ const ImageSlider = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="w-[15.434375rem] h-[9.18rem] absolute hello z-40 top-0"
+          className="w-full h-[9.18rem] absolute hello z-10 top-0"
         ></motion.div>
       )}
+      <ToggleButtonIcon className="w-[2.0175rem] -mb-4 mr-2 self-end z-30" />
     </div>
   );
 };

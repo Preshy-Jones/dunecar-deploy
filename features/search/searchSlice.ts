@@ -3,10 +3,12 @@ import { Option } from "../../types/form";
 
 export interface SearchState {
   toggledFilter: string | undefined;
+  mobileFilterSortOpen: boolean;
 }
 
 const initialState: SearchState = {
   toggledFilter: undefined,
+  mobileFilterSortOpen: false,
 };
 
 const searchSlice = createSlice({
@@ -17,9 +19,13 @@ const searchSlice = createSlice({
       const { payload } = action;
       state.toggledFilter = payload;
     },
+    setMobileFilterSortOpen: (state, action: PayloadAction<boolean>) => {
+      const { payload } = action;
+      state.mobileFilterSortOpen = payload;
+    },
   },
 });
 
-export const { setFilter } = searchSlice.actions;
+export const { setFilter, setMobileFilterSortOpen } = searchSlice.actions;
 
 export default searchSlice.reducer;

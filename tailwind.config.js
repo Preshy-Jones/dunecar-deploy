@@ -28,7 +28,7 @@ module.exports = {
         lightRed: "rgba(255, 222, 218, 0.37)",
         lighterRed: "#FFF3F2",
         btnGallery: "rgba(255, 255, 255, 0.68)",
-        greyText:"rgba(255, 255, 255, 0.7)"
+        greyText: "rgba(255, 255, 255, 0.7)",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -48,6 +48,7 @@ module.exports = {
         seventh: "1.25rem",
         eighth: "1.75rem",
         ninth: "1.8125rem",
+        tenth:"1.5625rem"
       },
       letterSpacing: {
         primary: "0.04em",
@@ -62,8 +63,8 @@ module.exports = {
         fourth: "1.5625rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
-        sme: ["0.875em", { lineHeight: "1.25em" }],
-        md: ["0.875em", { lineHeight: "1.25em" }],
+        sme: "0.875rem",
+        md: ["0.875rem", { lineHeight: "1.25em" }],
         "3.5xl": ["2rem", { lineHeight: "2rem" }],
         "1.5xl": ["1.3125rem", { lineHeight: "1.75rem" }],
         "6.5xl": ["4rem", { lineHeight: "6rem" }],
@@ -150,7 +151,8 @@ module.exports = {
         primary: "repeat(6, 20.9375rem)",
         secondary: "repeat(6, 7.877rem)",
         store: "24.6744345% 75.3255655%",
-        gallery:"390px repeat(5, minmax(0, 1fr))",
+        store_sm: "35% 65%",
+        gallery: "390px repeat(5, minmax(0, 1fr))",
         13: "repeat(13, minmax(0, 1fr))",
         14: "repeat(14, minmax(0, 1fr))",
         "3a": "repeat(3, minmax(0, auto))",
@@ -178,6 +180,7 @@ module.exports = {
     screens: {
       xs: "375px",
       "1.5xl": "1400px",
+      tablet: "850px",
       ...defaultTheme.screens,
     },
   },

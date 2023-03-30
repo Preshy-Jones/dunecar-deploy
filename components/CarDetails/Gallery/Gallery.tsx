@@ -52,7 +52,7 @@ const Gallery = () => {
     <div className="font-roboto">
       <div className=" fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-50">
         <div className="grid grid-cols-gallery">
-          <div className="bg-white col-start-1 col-end-2 overflow-y-scroll  h-[50rem]">
+          <div className="bg-white tablet:col-start-1 tablet:col-end-2 col-start-1 col-end-10  overflow-y-scroll  h-[50rem]">
             <div className="grid grid-cols-2 justify-items-center  leading-[21px] text-[18px] mb-4 border-b border-x-dividerGray">
               <div
                 className="h-[3.5rem] w-full pt-4 flex flex-col items-center justify-between cursor-pointer"
@@ -100,7 +100,7 @@ const Gallery = () => {
                 key={index}
                 className={`${
                   currentIndex === index ? "border-4  border-specialRed" : ""
-                } sm:min-w-[22.875rem] h-[14rem] w-[22.875rem] sm:min-h-[14rem] cursor-pointer`}
+                } tablet:min-w-[22.875rem] h-[20rem] w-full tablet:min-h-[14rem] cursor-pointer`}
                 onClick={() => setCurrentIndex(index)}
               >
                 {/* className="  sm:min-h-[14rem] w-[7.8775rem] h-[5.866875rem] border-4 border-t border-r border-specialRed" */}
@@ -114,7 +114,7 @@ const Gallery = () => {
               </div>
             ))}
           </div>
-          <div className="bg-black col-start-2 col-end-10 w-full relative">
+          <div className="bg-black col-start-2 col-end-10 w-full relative hidden tablet:block">
             <div className="h-full w-full flex items-center ">
               <motion.img
                 key={currentIndex}

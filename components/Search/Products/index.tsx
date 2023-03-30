@@ -4,10 +4,15 @@ import Product from "./Product";
 import { useRouter } from "next/router";
 import { getCars, getMoreCarsPagination } from "../../../features/car/carSlice";
 import { Spinner } from "../../ui/others";
+import FilterIcon from "../../ui/icons/FilterIcon";
+import FilterComponent from "./MobileFilter/FilterComponent";
+import { setMobileFilterSortOpen } from "../../../features/search/searchSlice";
 
 const ProductCatalogue = ({ cars, count, filters }) => {
   const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const router = useRouter();
+
+  const [filterSortOpen, setFilterSortOpen] = React.useState(false);
 
   const dispatch = useAppDispatch();
   const { moreCarsLoading } = useAppSelector((state) => state.car);
@@ -48,8 +53,28 @@ const ProductCatalogue = ({ cars, count, filters }) => {
     // );
   };
 
+  const toggleFilterSort = () => {
+    dispatch(setMobileFilterSortOpen(true));
+    document.body.classList.add("hide-overflow");
+    // if (!filterSortOpen) {
+    //   document.body.classList.add("hide-overflow");
+    // } else {
+    //   document.body.classList.remove("hide-overflow");
+    // }
+  };
+
   return (
     <div className="bg-pageBg">
+      <div
+        className=" sm:hidden flex items-center bg-white px-[1.5rem] border-t border-b border-t-dividerGray cursor-pointer"
+        onClick={toggleFilterSort}
+      >
+        <FilterIcon height="24" width="24" />
+
+        <h2 className="text-specialRed py-2 font-semibold leading-secondary ml-6">
+          FILTER & SORT (2)
+        </h2>
+      </div>
       <div className="flex items-center py-4 px-[1.5rem]">
         <h2 className="text-secondaryBlack">Used Cars for sale</h2>
         <div className="w-[1px] bg-dividerGray h-[24px] mx-4"></div>
@@ -57,7 +82,7 @@ const ProductCatalogue = ({ cars, count, filters }) => {
           {count} Matches
         </h2>
       </div>
-      <div className="grid grid-cols-4 gap-x-[1rem] gap-y-[1rem] px-[1.6rem]">
+      <div className="grid lg:grid-cols-4 tablet:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 grid-cols-1 gap-x-[1rem] gap-y-[1rem] sm:px-[1.6rem]">
         {cars.map((item, index) => {
           return <Product key={index} car={item} />;
         })}

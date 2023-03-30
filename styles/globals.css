@@ -5,6 +5,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .custom-scroll {
+    @apply scrollbar-thin  my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200;
+  }
+}
+
+body.hide-overflow {
+  overflow: hidden;
+}
 #container {
   height: 550px !important;
   width: 1300px !important;
@@ -18,12 +27,11 @@
   width: 1300px !important;
 } */
 
-.customcontainer{
+.customcontainer {
   display: flex !important;
   justify-content: center !important;
 }
-.rec-
-.rec-arrow:disabled {
+.rec- .rec-arrow:disabled {
   visibility: hidden;
 }
 .rec-dot {
@@ -125,4 +133,10 @@
 
 .transformcenter {
   transform: translateX(-50%);
+}
+
+.center-absolute-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }

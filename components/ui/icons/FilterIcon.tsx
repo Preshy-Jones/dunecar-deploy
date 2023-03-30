@@ -1,11 +1,11 @@
 import React from "react";
 
-const FilterIcon = ({ ...rest }) => {
+const FilterIcon = ({ width, height, ...rest }) => {
   return (
     <svg
       {...rest}
-      width="18"
-      height="12"
+      width={width}
+      height={height}
       viewBox="0 0 18 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -10,6 +10,7 @@ import Loader from "../../../public/assets/Loader.json";
 import Lottie from "lottie-react";
 import {
   getModels,
+  setModelOptions,
   setModelsSelected,
 } from "../../../features/model/modelSlice";
 import { getMakes, setMakeOptions } from "../../../features/make/makeSlice";
@@ -58,11 +59,14 @@ const Hero = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  let { cars, carFilter, filterTotal, isLoading } = useAppSelector(
+  let { cars, carFilter, isLoading, filterTotal } = useAppSelector(
     (state) => state.car
   );
 
-  let { models, modelsSelected } = useAppSelector((state) => state.model);
+  //  const isLoading = true;
+  let { models, modelsSelected, modelOptions } = useAppSelector(
+    (state) => state.model
+  );
 
   let { makes, makeOptions } = useAppSelector((state) => state.make);
 
@@ -71,7 +75,7 @@ const Hero = () => {
     label: make.title,
   }));
 
-  const modelOptions = models.map((model) => ({
+  const modelOptionsPayload = models.map((model) => ({
     collection_name: model.make_name,
     options: model.models.map((model) => ({
       value: model.slug,
@@ -158,6 +162,17 @@ const Hero = () => {
     dispatch(setMakeOptions(makeOptionsPayload));
   }, [makes, dispatch]);
 
+  useEffect(() => {
+    let modelOptions = models.map((model) => ({
+      collection_name: model.make_name,
+      options: model.models.map((model) => ({
+        value: model.slug,
+        label: model.title,
+      })),
+    }));
+    dispatch(setModelOptions(modelOptions));
+  }, [models, dispatch]);
+
   return (
     <div className="font-roboto">
       <div className="relative mb-10">
@@ -217,6 +232,7 @@ const Hero = () => {
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
+                    payloadOptions={modelOptionsPayload}
                     selected={modelsSelected}
                     setSelected={setModelsSelected}
                     handleCloseOperation={modelCloseHandleOperation}
@@ -247,7 +263,7 @@ const Hero = () => {
                       autoplay
                       loop
                       style={{
-                        height: "300px",
+                        height: "80px",
                         width: "300px",
                         color: "#fff",
                       }}

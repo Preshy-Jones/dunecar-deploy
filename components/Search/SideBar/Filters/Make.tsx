@@ -31,6 +31,7 @@ const MakeFilter = () => {
   // const [selected, setSelected] = useState<string[]>([]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
+    console.log("shhah");
     if (selectedMakes.includes(e.target.value)) {
       dispatch(
         setSelectedMakes(
@@ -42,7 +43,19 @@ const MakeFilter = () => {
     }
     console.log(selectedMakes);
   };
-
+  const handleLabelClick = (value) => {
+    console.log(value);
+    console.log("helshhshshlo");
+    
+    
+    if (selectedMakes.includes(value)) {
+      dispatch(
+        setSelectedMakes(selectedMakes.filter((item) => item !== value))
+      );
+    } else {
+      dispatch(setSelectedMakes([...selectedMakes, value]));
+    }
+  };
   const handleClose = () => {
     dispatch(setFilter(""));
     let result = initialMakeOptions?.sort((a, b) => {
@@ -57,6 +70,9 @@ const MakeFilter = () => {
         return 0;
       }
     });
+
+    console.log(result);
+
     // setOptionsUpdated(optionsUpdated);
     // console.log(optionsUpdated);
 
@@ -81,21 +97,38 @@ const MakeFilter = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    let makeOptionsPayload = makes.map((make) => ({
-      value: make.slug,
-      label: make.title,
-    }));
-
-    dispatch(setMakeOptions(makeOptionsPayload));
+    //when there are no makeOptions loaded yet
+    if (!makeOptions || makeOptions.length === 0) {
+      let makeOptionsPayload = makes.map((make) => ({
+        value: make.slug,
+        label: make.title,
+      }));
+      let result = makeOptionsPayload?.sort((a, b) => {
+        if (
+          selectedMakes.includes(a.value) &&
+          !selectedMakes.includes(b.value)
+        ) {
+          return -1;
+        } else if (
+          !selectedMakes.includes(a.value) &&
+          selectedMakes.includes(b.value)
+        ) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      dispatch(setMakeOptions(result));
+    }
   }, [makes, dispatch]);
 
   return (
     <div className="px-6">
-      <div
-        className="flex border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center"
+   <div
+        className="flex border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center pl-6 hover:bg-specialRed hover:bg-opacity-10 hover:text-specialRed "
         onClick={handleClose}
       >
-        <CaretLeftIcon className="mr-7" />
+        <CaretLeftIcon className="mr-7 hover:text-specialRed fill-current" />
         <h1 className="leading-secondary text-secondary font-medium">Make</h1>
       </div>
       {isLoading ? (
@@ -105,7 +138,11 @@ const MakeFilter = () => {
       ) : (
         <div>
           {makeOptions?.map((item, index) => (
-            <div key={index} className="flex items-center mt-5">
+            <div
+              className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+              key={index}
+              onClick={() => handleLabelClick(item.value)}
+            >
               <input
                 type="checkbox"
                 className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
@@ -115,8 +152,9 @@ const MakeFilter = () => {
                 onChange={handleChange}
               />
               <label
-                className="leading-primary text-secondary text-lighterDark font-normal"
+                className="leading-primary text-secondary text-lighterDark font-normal cursor-pointer"
                 style={{ marginLeft: "5px" }}
+               
               >
                 {item.label}
               </label>

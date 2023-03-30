@@ -9,6 +9,7 @@ import { setFilter } from "../../../features/search/searchSlice";
 import MakesIndicator from "./MakesIndicator";
 import ModelsIndicator from "./ModelsIndicator";
 import Sticky from "react-stickynode";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SideBar = ({ filters }) => {
   const [isFilter, setIsFilter] = React.useState(false);
@@ -26,7 +27,7 @@ const SideBar = ({ filters }) => {
         <div>
           <div className="flex px-6 justify-between pt-[1.5rem] items-center bg-white mb-3">
             <div className="flex items-center justify-between">
-              <FilterIcon />
+              <FilterIcon height={12} width={18} />
               <h2 className="text-tertiaryGray font-semibold leading-secondary ml-6">
                 FILTER & SORT (2)
               </h2>
@@ -63,32 +64,43 @@ const SideBar = ({ filters }) => {
               arrives.
             </p>
           </div>
-          <button className="font-bold text-specialRed text-[0.875rem] border border-specialRed h-[1.875rem] w-[7rem]">
+          <button className="font-bold text-specialRed leading-seventh text-[0.875rem] border border-specialRed h-[1.875rem] w-[7rem] rounded-tertiary">
             SAVE SEARCH
           </button>
         </div>
-        {!toggledFilter ? (
-          <div className="h-[29rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
-            <div className="flex items-end justify-between px-6 border-t-dividerGray border-t border-b h-[5.0625rem] leading-secondary pb-3">
-              <div className="flex justify-between items-center">
-                <SortIcon />
-                <h2 className="ml-4">Sort by</h2>
+        <AnimatePresence>
+          {!toggledFilter ? (
+            <div className="h-[29rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
+              <div className="flex items-end justify-between px-6 border-t-dividerGray border-t border-b h-[5.0625rem] leading-secondary pb-3">
+                <div className="flex justify-between items-center">
+                  <SortIcon />
+                  <h2 className="ml-4">Sort by</h2>
+                </div>
+                <h2 className="text-specialRed">Best match</h2>
               </div>
-              <h2 className="text-specialRed">Best match</h2>
-            </div>
-            <div className="  ">
-              <div>
+              <div className="  ">
                 <div>
-                  {SideBarContent.map((item: any, index) => (
-                    <Filter key={index} item={item} />
-                  ))}
+                  <div>
+                    {SideBarContent.map((item: any, index) => (
+                      <Filter key={index} item={item} />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <div>{toggledFilter && sideBarContentFilters[toggledFilter]}</div>
-        )}
+          ) : (
+            <motion.div
+              key="filteroptions"
+              initial={{ x: "60%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "60%" }}
+              transition={{ duration: 0.2 }}
+              
+            >
+              {sideBarContentFilters[toggledFilter]}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </Sticky>
   );
