@@ -48,18 +48,18 @@ const Year = () => {
         className="flex border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center"
         onClick={handleClose}
       >
-        <CaretLeftIcon className="mr-7" />
-        <h1 className="leading-secondary text-secondary font-medium font-roboto">
+        <CaretLeftIcon className="mr-7 fill-current" />
+        <h1 className="leading-secondary text-secondary font-medium font-roboto ">
           Year
         </h1>
       </div>
 
       <div className="w-full mt-8">
         <div className="mb-4">
-          <Select options={years} label="Min Price" />
+          <Select options={years} label="Min Price" placeHolder="Select Min Price" />
         </div>
         <div>
-          <Select options={years} label="Max Price" />
+          <Select options={years} label="Max Price"  placeHolder="Select Min Price"/>
         </div>
       </div>
     </div>

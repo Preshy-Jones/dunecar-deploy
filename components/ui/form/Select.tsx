@@ -35,6 +35,8 @@ export const CustomSelect: React.FC<SelectProps> = ({
     setIsToggled(!isToggled);
   };
   const handleSelect = (value) => {
+    console.log(value);
+
     setSelected(value);
     setIsToggled(false);
   };
@@ -97,6 +99,8 @@ export const FilterCustomSelect: React.FC<SelectProps> = ({
     setIsToggled(!isToggled);
   };
   const handleSelect = (value) => {
+    console.log(value);
+
     setSelected(value);
     setIsToggled(false);
   };
@@ -126,11 +130,14 @@ export const FilterCustomSelect: React.FC<SelectProps> = ({
         {isToggled && (
           <div className="w-full h-[20rem] z-50 bg-white rounded-[4px] absolute top-[3rem] overflow-y-auto custom-scroll sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-4">
             {options?.map((item, index) => (
-              <div key={index} className="flex items-center hover:bg-opacity-10 py-2 hover:bg-specialRed px-4">
+              <div
+                key={index}
+                className="flex items-center hover:bg-opacity-10 py-2 hover:bg-specialRed px-4"
+                onClick={() => handleSelect(item.value)}
+              >
                 <h2
                   className="leading-[1rem] text-[0.875rem] text-secondaryBlack font-normal cursor-pointer"
                   style={{ marginLeft: "5px" }}
-                  onClick={() => handleSelect(item.value)}
                 >
                   {item.label}
                 </h2>
