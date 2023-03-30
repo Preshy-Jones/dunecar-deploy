@@ -69,6 +69,21 @@ const Search = () => {
     }
   }, [optionDeleted, dispatch, selectedMakes, modelsSelected]);
 
+
+  useEffect(() => {
+    function handleWindowResize() {
+      if (window.innerWidth >= 640) {
+        document.body.classList.remove('hide-overflow');
+      }
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
   return (
     <div className="font-roboto">
       {/* <pre>{JSON.stringify(router.query, null, 2)}</pre> */}

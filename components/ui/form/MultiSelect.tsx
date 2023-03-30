@@ -120,10 +120,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       {isToggled && isDisabled === false && (
         <div
           ref={domNode1}
-          className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-4 px-4 w-[80%] sm:w-[10rem]"
+          className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-4  w-[80%] sm:w-[10rem]"
         >
           {options?.map((item, index) => (
-            <div key={index} className="flex items-center mb-5">
+            <div key={index} className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-10 group hover:text-specialRed">
               <input
                 type="checkbox"
                 className="border-specialRed border rounded-sm  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
@@ -133,7 +133,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 onChange={handleChange}
               />
               <label
-                className="leading-[19px] text-black font-normal cursor-pointer"
+                className="leading-[19px] text-black font-normal cursor-pointer group-hover:text-specialRed"
                 style={{ marginLeft: "5px" }}
                 onClick={() => handleLabelClick(item.value)}
               >

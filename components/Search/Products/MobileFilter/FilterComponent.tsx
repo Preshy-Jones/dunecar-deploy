@@ -22,6 +22,12 @@ const FilterComponent = () => {
   const { selectedMakes } = useAppSelector((state) => state.make);
   const { modelsSelected } = useAppSelector((state) => state.model);
 
+  const closeFilterSort = () => {
+    document.body.classList.remove('hide-overflow');
+    dispatch(setMobileFilterSortOpen(false));
+    
+  };
+
   return (
     <div className="bg-white inset-0 absolute z-40 font-roboto overflow-y-auto block sm:hidden  scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200 ">
       <div className="mb-24">
@@ -38,10 +44,7 @@ const FilterComponent = () => {
                 <h2 className="cursor-pointer underline text-tertiaryGray">
                   Clear filter
                 </h2>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => dispatch(setMobileFilterSortOpen(false))}
-                >
+                <div className="cursor-pointer" onClick={closeFilterSort}>
                   <CancelIcon className="cursor-pointer" />
                 </div>
               </div>

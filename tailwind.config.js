@@ -48,6 +48,7 @@ module.exports = {
         seventh: "1.25rem",
         eighth: "1.75rem",
         ninth: "1.8125rem",
+        tenth:"1.5625rem"
       },
       letterSpacing: {
         primary: "0.04em",
@@ -62,8 +63,8 @@ module.exports = {
         fourth: "1.5625rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
-        sme: ["0.875em", { lineHeight: "1.25em" }],
-        md: ["0.875em", { lineHeight: "1.25em" }],
+        sme: "0.875rem",
+        md: ["0.875rem", { lineHeight: "1.25em" }],
         "3.5xl": ["2rem", { lineHeight: "2rem" }],
         "1.5xl": ["1.3125rem", { lineHeight: "1.75rem" }],
         "6.5xl": ["4rem", { lineHeight: "6rem" }],

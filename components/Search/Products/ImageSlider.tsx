@@ -9,7 +9,7 @@ import ToggleLike from "./ToggleLike";
 import sampleImage from "../../../public/assets/sample-car.svg";
 import { motion } from "framer-motion";
 
-const ImageSlider = () => {
+const ImageSlider = ({ setnavigatorOpen, navigatorOpen }) => {
   const images = [
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc1_zlhzgg.jpg",
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/seatMII_qwy9va.webp",
@@ -19,7 +19,6 @@ const ImageSlider = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [navigatorOpen, setnavigatorOpen] = React.useState(false);
 
   const handleSlide = (direction: string) => {
     console.log("wahala");
@@ -47,8 +46,7 @@ const ImageSlider = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      onMouseEnter={() => setnavigatorOpen(true)}
-      onMouseLeave={() => setnavigatorOpen(false)}
+      
     >
       {/* <Image
           src={images[currentIndex]}

@@ -153,7 +153,8 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
           ref={domNode1}
           className="bg-white rounded-[4px]  z-30 absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-2 px-3.5"
         >
-          <div className="flex pb-1 font-outfit font-medium border-b-[0.5px] border-b-[#D5D5D5] overflow-scroll no-scrollbar w-[80%] sm:w-[12.4375rem]">
+          <div className="flex font-outfit font-medium mb-1 h-10 items-center overflow-scroll no-scrollbar w-[80%] sm:w-[12.4375rem]">
+            {/* no-scrollbar */}
             {/* <div
               className="absolute left-0"
                onClick={() => handleSlide("left")}
@@ -161,7 +162,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             {fieldOptions?.map((item, index: number) => (
               <div
                 key={index}
-                className={`w-[6rem]  pb-1.5 mr-9  ${
+                className={`min-w-[5rem] mr-6cursor-pointer flex flex-col justify-between h-full  ${
                   index === currentIndex - 1 && "flex justify-end"
                 }`}
                 onClick={() => handleTabChange(index)}
@@ -171,24 +172,31 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                     index === currentIndex
                       ? "text-black font-medium"
                       : "text-[#081314] text-opacity-20 font-light"
-                  }   text-[1.25rem] w-full`}
+                  } leading-tertiary  text-[1.25rem] w-full`}
                 >
                   {fieldOptions[index]?.collection_name}
                 </h2>
+                {currentIndex === index && (
+                  <motion.div
+                    transition={{ duration: 0.4 }}
+                    layoutId="makeOptions"
+                    className="bg-specialRed h-[3px] -mt-2 rounded-lg w-full  z-60"
+                  ></motion.div>
+                )}
               </div>
             ))}
-            {/* <div
-              className="absolute right-0"
-              onClick={() => handleSlide("right")}
-            ></div> */}
           </div>
+          <div className="h-[1px] bg-dividerGray relative bottom-1.5"></div>
           {/* <motion.div
             animate={{ x: active === 1 ? 160 : 0 }}
             className="h-[2px] bg-red-700 w-[50%] relative bottom-[0.05rem] rounded-md"
           ></motion.div> */}
-          <div className="pt-3 overflow-y-scroll h-[13.55rem] w-[80%] sm:w-[12.4375rem]">
+          <div className="pt-1.5 overflow-y-scroll h-[13.55rem] w-[80%] sm:w-[12.4375rem] z-0">
             {fieldOptions[currentIndex].options.map((item, index) => (
-              <div className="flex items-center mb-5" key={index}>
+              <div
+                className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+                key={index}
+              >
                 <input
                   type="checkbox"
                   className="border-specialRed border  mr-3 text-specialRed focus:ring-0 rounded-sm"
@@ -198,6 +206,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                   onChange={handleChange}
                 />
                 <label
+                  className="leading-[19px] text-black font-normal cursor-pointer group-hover:text-specialRed"
                   onClick={() => handleLabelClick(item.value)}
                   style={{ marginLeft: "5px" }}
                 >
