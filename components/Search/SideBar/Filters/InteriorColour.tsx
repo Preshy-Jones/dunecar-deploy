@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { FilterCustomSelect as Select } from "../../../ui/form/Select";
 import { CaretLeftIcon } from "../../../ui/icons";
 
-const Year = () => {
+const InteriorColour = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const handleClose = () => {
@@ -66,4 +66,4 @@ const Year = () => {
   );
 };
 
-export default Year;
+export default InteriorColour;

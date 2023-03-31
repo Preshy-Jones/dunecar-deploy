@@ -7,6 +7,7 @@ import { Spinner } from "../../ui/others";
 import FilterIcon from "../../ui/icons/FilterIcon";
 import FilterComponent from "./MobileFilter/FilterComponent";
 import { setMobileFilterSortOpen } from "../../../features/search/searchSlice";
+import { motion } from "framer-motion";
 
 const ProductCatalogue = ({ cars, count, filters }) => {
   const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -84,7 +85,16 @@ const ProductCatalogue = ({ cars, count, filters }) => {
       </div>
       <div className="grid lg:grid-cols-4 tablet:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 grid-cols-1 gap-x-[1rem] gap-y-[1rem] sm:px-[1.6rem]">
         {cars.map((item, index) => {
-          return <Product key={index} car={item} />;
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Product key={index} car={item} />
+            </motion.div>
+          );
         })}
       </div>
 

@@ -6,7 +6,6 @@ import SearchBar from "../components/Search/SearchBar";
 import SideBar from "../components/Search/SideBar";
 import { getCars, setOptionDeleted } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import Api from "../api";
 import { Spinner } from "../components/ui/others";
 import { setSelectedMakes } from "../features/make/makeSlice";
 import { setModelsSelected } from "../features/model/modelSlice";

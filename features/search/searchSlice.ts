@@ -4,11 +4,13 @@ import { Option } from "../../types/form";
 export interface SearchState {
   toggledFilter: string | undefined;
   mobileFilterSortOpen: boolean;
+  selectedSort: string;
 }
 
 const initialState: SearchState = {
   toggledFilter: undefined,
   mobileFilterSortOpen: false,
+  selectedSort: "",
 };
 
 const searchSlice = createSlice({
@@ -23,9 +25,14 @@ const searchSlice = createSlice({
       const { payload } = action;
       state.mobileFilterSortOpen = payload;
     },
+    setSelected: (state, action: PayloadAction<string>) => {
+      const { payload } = action;
+      state.selectedSort = payload;
+    },
   },
 });
 
-export const { setFilter, setMobileFilterSortOpen } = searchSlice.actions;
+export const { setFilter, setMobileFilterSortOpen, setSelected } =
+  searchSlice.actions;
 
 export default searchSlice.reducer;
