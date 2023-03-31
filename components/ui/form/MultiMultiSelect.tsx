@@ -162,7 +162,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             {fieldOptions?.map((item, index: number) => (
               <div
                 key={index}
-                className={`min-w-[5rem] mr-6cursor-pointer flex flex-col justify-between h-full  ${
+                className={`min-w-[5rem] mr-6 cursor-pointer flex flex-col items-center justify-between h-full  ${
                   index === currentIndex - 1 && "flex justify-end"
                 }`}
                 onClick={() => handleTabChange(index)}
@@ -172,7 +172,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                     index === currentIndex
                       ? "text-black font-medium"
                       : "text-[#081314] text-opacity-20 font-light"
-                  } leading-tertiary  text-[1.25rem] w-full`}
+                  } leading-tertiary  text-[1.25rem]`}
                 >
                   {fieldOptions[index]?.collection_name}
                 </h2>
