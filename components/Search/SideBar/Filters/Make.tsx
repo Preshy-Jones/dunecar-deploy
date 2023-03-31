@@ -46,8 +46,7 @@ const MakeFilter = () => {
   const handleLabelClick = (value) => {
     console.log(value);
     console.log("helshhshshlo");
-    
-    
+
     if (selectedMakes.includes(value)) {
       dispatch(
         setSelectedMakes(selectedMakes.filter((item) => item !== value))
@@ -124,7 +123,7 @@ const MakeFilter = () => {
 
   return (
     <div className="px-6">
-   <div
+      <div
         className="flex border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center pl-6 hover:bg-specialRed hover:bg-opacity-10 hover:text-specialRed "
         onClick={handleClose}
       >
@@ -152,9 +151,12 @@ const MakeFilter = () => {
                 onChange={handleChange}
               />
               <label
-                className="leading-primary text-secondary text-lighterDark font-normal cursor-pointer"
+                className={`leading-primary text-secondary font-normal cursor-pointer ${
+                  selectedMakes.includes(item.value)
+                    ? "font-bold text-specialRed"
+                    : "text-lighterDark"
+                }`}
                 style={{ marginLeft: "5px" }}
-               
               >
                 {item.label}
               </label>

@@ -3,9 +3,15 @@ import FuelType from "./Filters/FuelType";
 import MakeFilter from "./Filters/Make";
 import Model from "./Filters/Model";
 import Price from "./Filters/Price";
+import SortBy from "./Filters/SortBy";
 import Year from "./Filters/Year";
 
 export const SideBarContent = [
+  {
+    title: "Sort By",
+    slug: "sort-by",
+    filterComponentKey: "sortBy",
+  },
   {
     title: "Location",
     slug: "location",
@@ -33,7 +39,7 @@ export const SideBarContent = [
   },
   {
     title: "Year",
-    slug:"year",
+    slug: "year",
     filterComponentKey: "year",
   },
   {
@@ -61,6 +67,7 @@ export const SideBarContent = [
     slug: "interior-color",
     filterComponentKey: "interiorColor",
   },
+
 ];
 
 export const sideBarContentFilters = {
@@ -75,4 +82,6 @@ export const sideBarContentFilters = {
   bodyType: <BodyType />,
 
   fuelType: <FuelType />,
+
+  sortBy: <SortBy />,
 };

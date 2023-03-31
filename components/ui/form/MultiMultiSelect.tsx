@@ -162,7 +162,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             {fieldOptions?.map((item, index: number) => (
               <div
                 key={index}
-                className={`min-w-[5rem] mr-6cursor-pointer flex flex-col justify-between h-full  ${
+                className={`min-w-[5rem] mr-6 cursor-pointer flex flex-col items-center justify-between h-full  ${
                   index === currentIndex - 1 && "flex justify-end"
                 }`}
                 onClick={() => handleTabChange(index)}
@@ -172,7 +172,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                     index === currentIndex
                       ? "text-black font-medium"
                       : "text-[#081314] text-opacity-20 font-light"
-                  } leading-tertiary  text-[1.25rem] w-full`}
+                  } leading-tertiary  text-[1.25rem]`}
                 >
                   {fieldOptions[index]?.collection_name}
                 </h2>
@@ -196,6 +196,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
               <div
                 className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
                 key={index}
+                onClick={() => handleLabelClick(item.value)}
               >
                 <input
                   type="checkbox"
@@ -206,8 +207,11 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                   onChange={handleChange}
                 />
                 <label
-                  className="leading-[19px] text-black font-normal cursor-pointer group-hover:text-specialRed"
-                  onClick={() => handleLabelClick(item.value)}
+                  className={`leading-[19px] font-normal cursor-pointer group-hover:text-specialRed ${
+                    selected.includes(item.value)
+                      ? "text-specialRed font-bold"
+                      : "text-black"
+                  }`}
                   style={{ marginLeft: "5px" }}
                 >
                   {item.label}

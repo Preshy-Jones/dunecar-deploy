@@ -6,11 +6,11 @@ import SearchBar from "../components/Search/SearchBar";
 import SideBar from "../components/Search/SideBar";
 import { getCars, setOptionDeleted } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import Api from "../api";
 import { Spinner } from "../components/ui/others";
 import { setSelectedMakes } from "../features/make/makeSlice";
 import { setModelsSelected } from "../features/model/modelSlice";
 import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
+import Sticky from "react-stickynode";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -44,7 +44,7 @@ const Search = () => {
         : query.model
       : [];
 
-    const limit = (query.limit as string) ? (query.limit as string) : "20";
+    const limit = (query.limit as string) ? (query.limit as string) : "80";
     console.log(query);
     if (cars.length === 0) {
       dispatch(getCars({ makes: makes, models: models, limit: limit }));
@@ -69,18 +69,17 @@ const Search = () => {
     }
   }, [optionDeleted, dispatch, selectedMakes, modelsSelected]);
 
-
   useEffect(() => {
     function handleWindowResize() {
       if (window.innerWidth >= 640) {
-        document.body.classList.remove('hide-overflow');
+        document.body.classList.remove("hide-overflow");
       }
     }
 
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener("resize", handleWindowResize);
 
     return () => {
-      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
 
@@ -88,11 +87,14 @@ const Search = () => {
     <div className="font-roboto">
       {/* <pre>{JSON.stringify(router.query, null, 2)}</pre> */}
       <SearchBar />
-      <div className="grid tablet:grid-cols-store sm:grid-cols-store_sm  bg-pageBg ">
-        <div className=" col-start-1 col-end-2 hidden sm:block">
-          <SideBar filters={filters} />
-        </div>
-        <div className="sm:col-start-2 col-end-3 col-start-1 col-">
+      <div className="grid tablet:grid-cols-store sm:grid-cols-store_sm bg-pageBg">
+        <Sticky enabled={true} top={0} bottomBoundary="#my-target" className="z-30">
+          <div className=" col-start-1 col-end-2 hidden sm:block z-30">
+            <SideBar filters={filters} />
+          </div>
+        </Sticky>
+
+        <div className="sm:col-start-2 col-end-3 col-start-1 z-70">
           {isLoading ? (
             <div className="flex justify-center items-center pt-[6rem]">
               <Spinner />
@@ -101,10 +103,10 @@ const Search = () => {
             <ProductCatalogue cars={cars} count={count} filters={filters} />
           )}
         </div>
-        {mobileFilterSortOpen && (
-        <FilterComponent />
-      )}
+        <div className="col-start-1 col-end-3 self-center justify-self-center h-[20rem] mb-[5rem]" id="my-target"></div>
+        {mobileFilterSortOpen && <FilterComponent />}
       </div>
+
     </div>
   );
 };

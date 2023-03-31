@@ -107,7 +107,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     } else {
       setSelected([...selected, value]);
     }
-  //  console.log(selected);
+    //  console.log(selected);
   };
 
   let { domNode1, domNode2 } = useClickOutside(() => {
@@ -123,7 +123,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           className=" overflow-scroll h-[17.3125rem] z-20 bg-white rounded-[4px] absolute bottom-[10rem] sm:bottom-[10rem] border border-[#081314] border-opacity-10 py-4  w-[80%] sm:w-[10rem]"
         >
           {options?.map((item, index) => (
-            <div key={index} className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-10 group hover:text-specialRed">
+            <div
+              key={index}
+              className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-10"
+              onClick={() => handleLabelClick(item.value)}
+            >
               <input
                 type="checkbox"
                 className="border-specialRed border rounded-sm  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
@@ -133,9 +137,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 onChange={handleChange}
               />
               <label
-                className="leading-[19px] text-black font-normal cursor-pointer group-hover:text-specialRed"
+                className={`leading-[19px]  font-normal cursor-pointer ${selected.includes(item.value) ? "font-bold text-specialRed" : "text-black"}`}
                 style={{ marginLeft: "5px" }}
-                onClick={() => handleLabelClick(item.value)}
               >
                 {item.label}
               </label>
@@ -159,7 +162,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
               `| ${capitalizeFirstLetter(selected[1])}...`}
           </h2>
         ) : (
-          
           <h2
             className={`${
               isDisabled ? "text-[#081314] text-opacity-30" : " text-black"
