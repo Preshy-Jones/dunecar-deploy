@@ -196,6 +196,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
               <div
                 className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
                 key={index}
+                onClick={() => handleLabelClick(item.value)}
               >
                 <input
                   type="checkbox"
@@ -206,8 +207,11 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                   onChange={handleChange}
                 />
                 <label
-                  className="leading-[19px] text-black font-normal cursor-pointer group-hover:text-specialRed"
-                  onClick={() => handleLabelClick(item.value)}
+                  className={`leading-[19px] font-normal cursor-pointer group-hover:text-specialRed ${
+                    selected.includes(item.value)
+                      ? "text-specialRed font-bold"
+                      : "text-black"
+                  }`}
                   style={{ marginLeft: "5px" }}
                 >
                   {item.label}

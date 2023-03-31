@@ -44,9 +44,7 @@ const Model = () => {
   const handleLabelClick = (value) => {
     if (modelsSelected.includes(value)) {
       dispatch(
-        setModelsSelected(
-          modelsSelected.filter((item) => item !== value)
-        )
+        setModelsSelected(modelsSelected.filter((item) => item !== value))
       );
     } else {
       dispatch(setModelsSelected([...modelsSelected, value]));
@@ -97,7 +95,7 @@ const Model = () => {
           {modelOptions?.map((item, index: number) => (
             <div
               key={index}
-              className={`min-w-[6.21875rem] mr-6 flex flex-col justify-between h-full cursor-pointer  ${
+              className={`min-w-[6.21875rem] mr-6 flex flex-col justify-between items-center h-full cursor-pointer  ${
                 index === currentIndex - 1 && "flex "
               }`}
               onClick={() => handleTabChange(index)}
@@ -138,7 +136,11 @@ const Model = () => {
                 onChange={handleChange}
               />
               <label
-                className="leading-primary text-secondary text-lighterDark font-normal"
+                className={`leading-primary text-secondary  font-normal ${
+                  modelsSelected.includes(item.value)
+                    ? "font-bold text-specialRed"
+                    : "text-lighterDark"
+                }`}
                 style={{ marginLeft: "5px" }}
               >
                 {item.label}

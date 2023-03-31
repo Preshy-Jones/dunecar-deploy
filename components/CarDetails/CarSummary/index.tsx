@@ -31,7 +31,7 @@ const CarSummary = () => {
 
   return (
     <div className="flex flex-col  items-center justify-center font-roboto">
-      <div className="w-[85.1267992%] hidden sm:block">
+      <div className="w-[85.1267992%] hidden sm:block sticky top-0 z-100 bg-white ">
         <div className="grid grid-cols-5 justify-items-center text-tertiaryBlack leading-seventh  shadow-cardShadow2 mb-[4rem] pt-9">
           <Link
             to="overview"
