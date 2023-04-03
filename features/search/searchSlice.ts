@@ -13,6 +13,7 @@ export interface SearchState {
   selectedFeatures: string[];
   features: Feature[];
   featureOptions: Option[] | undefined;
+  featuresLoading: boolean;
 }
 
 const initialState: SearchState = {
@@ -24,7 +25,22 @@ const initialState: SearchState = {
   selectedFeatures: [],
   features: [],
   featureOptions: [],
+  featuresLoading: false,
 };
+
+export const getFeatures = createAsyncThunk(
+  "search/getFeatures",
+  async (_, thunkAPI) => {
+    try {
+      const response = await searchService.fetchFeatures();
+      console.log(response);
+
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("something went wrong");
+    }
+  }
+);
 
 const searchSlice = createSlice({
   name: "search",
@@ -57,13 +73,23 @@ const searchSlice = createSlice({
     setFeatureOptions: (state, action: PayloadAction<Option[] | undefined>) => {
       const { payload } = action;
       state.featureOptions = payload;
-    }
+    },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(getFeatures.pending, (state, action) => {
-  //     state.isLoading = true;
-  //   });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getFeatures.pending, (state, action) => {
+        state.featuresLoading = true;
+      })
+      .addCase(getFeatures.fulfilled, (state, action) => {
+        state.featuresLoading = false;
+        console.log(action.payload);
+
+        state.features = action.payload;
+      })
+      .addCase(getFeatures.rejected, (state, action) => {
+        state.featuresLoading = false;
+      });
+  },
 });
 
 export const {
@@ -73,7 +99,7 @@ export const {
   setSelectedExteriorColours,
   setSelectedInteriorColours,
   setSelectedFeatures,
-  setFeatureOptions
+  setFeatureOptions,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

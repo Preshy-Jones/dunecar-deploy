@@ -106,7 +106,7 @@ export const FilterCustomSelect: React.FC<SelectProps> = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <label className="text-black text-sme leading-[1rem] text-opacity-90">
         {label}
       </label>

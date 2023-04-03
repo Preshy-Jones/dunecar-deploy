@@ -44,11 +44,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
         <link rel="icon" href="/assets/logo.svg" />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-      </QueryClientProvider>
+      {/* <QueryClientProvider client={queryClient}> */}
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+      {/* </QueryClientProvider> */}
     </>
   );
 }

@@ -69,7 +69,7 @@ const SideBar = ({ filters }) => {
       </div>
       <AnimatePresence>
         {!toggledFilter ? (
-          <div className="h-[29rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
+          <div className="h-[35rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
             <div className="flex items-end justify-between px-6 border-t-dividerGray border-t border-b h-[5.0625rem] leading-secondary pb-3">
               <div className="flex justify-between items-center">
                 <SortIcon />
@@ -94,6 +94,7 @@ const SideBar = ({ filters }) => {
             animate={{ x: 0 }}
             exit={{ x: "60%" }}
             transition={{ duration: 0.2 }}
+            className=""
           >
             {sideBarContentFilters[toggledFilter]}
           </motion.div>
