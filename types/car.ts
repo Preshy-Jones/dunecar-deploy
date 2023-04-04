@@ -62,3 +62,10 @@ export type BodyTypesPayload = {
   makes?: string[];
   models?: string[];
 };
+
+export type Feature = {
+  _id: string;
+  title: string;
+  category: string;
+  slug: string;
+};

@@ -102,40 +102,42 @@ const MakeFilter = () => {
         value: make.slug,
         label: make.title,
       }));
-      let result = makeOptionsPayload?.sort((a, b) => {
-        if (
-          selectedMakes.includes(a.value) &&
-          !selectedMakes.includes(b.value)
-        ) {
-          return -1;
-        } else if (
-          !selectedMakes.includes(a.value) &&
-          selectedMakes.includes(b.value)
-        ) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      dispatch(setMakeOptions(result));
+      // let result = makeOptionsPayload?.sort((a, b) => {
+      //   if (
+      //     selectedMakes.includes(a.value) &&
+      //     !selectedMakes.includes(b.value)
+      //   ) {
+      //     return -1;
+      //   } else if (
+      //     !selectedMakes.includes(a.value) &&
+      //     selectedMakes.includes(b.value)
+      //   ) {
+      //     return 1;
+      //   } else {
+      //     return 0;
+      //   }
+      // });
+      dispatch(setMakeOptions(makeOptionsPayload));
     }
   }, [makes, dispatch]);
 
   return (
-    <div className="px-6">
+    <div className="">
       <div
-        className="flex border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center pl-6 hover:bg-specialRed hover:bg-opacity-10 hover:text-specialRed "
+        className="flex border-t-dividerGray border-t border-b pb-[1.25rem] pt-[1.25rem] items-center px-6 hover:bg-specialRed hover:bg-opacity-10 hover:text-specialRed"
         onClick={handleClose}
       >
         <CaretLeftIcon className="mr-7 hover:text-specialRed fill-current" />
-        <h1 className="leading-secondary text-secondary font-medium">Make</h1>
+        <h1 className="leading-secondary text-secondary font-medium font-roboto">
+          Make
+        </h1>
       </div>
       {isLoading ? (
         <div className="flex justify-center items-center h-[50vh]">
           <Spinner />
         </div>
       ) : (
-        <div>
+        <div className="h-[29rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
           {makeOptions?.map((item, index) => (
             <div
               className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"

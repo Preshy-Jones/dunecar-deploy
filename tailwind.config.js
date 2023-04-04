@@ -29,6 +29,7 @@ module.exports = {
         lighterRed: "#FFF3F2",
         btnGallery: "rgba(255, 255, 255, 0.68)",
         greyText: "rgba(255, 255, 255, 0.7)",
+        lightBlack: "rgba(0, 0, 0, 0.9)",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -60,6 +61,7 @@ module.exports = {
         primary: "1.375rem",
         secondary: "1.125rem",
         tertiary: "1.5rem",
+        xlg:"0.75rem",
         fourth: "1.5625rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],

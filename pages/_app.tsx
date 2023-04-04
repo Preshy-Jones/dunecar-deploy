@@ -7,6 +7,10 @@ import { Provider } from "react-redux";
 import NProgress from "nprogress";
 import Router from "next/router";
 import Head from "next/head";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -40,9 +44,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
         <link rel="icon" href="/assets/logo.svg" />
       </Head>
+      {/* <QueryClientProvider client={queryClient}> */}
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
+      {/* </QueryClientProvider> */}
     </>
   );
 }

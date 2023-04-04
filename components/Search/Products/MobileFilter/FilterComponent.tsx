@@ -29,7 +29,7 @@ const FilterComponent = () => {
   };
 
   return (
-    <div className="bg-white inset-0 absolute z-40 font-roboto overflow-y-auto block sm:hidden  scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200 ">
+    <div className="bg-white inset-0 absolute z-80 font-roboto overflow-y-auto block sm:hidden  scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200 ">
       <div className="mb-24">
         {!toggledFilter ? (
           <div>

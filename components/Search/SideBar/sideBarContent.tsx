@@ -1,6 +1,10 @@
 import BodyType from "./Filters/BodyType";
+import ExteriorColour from "./Filters/ExteriorColour";
+import Feature from "./Filters/Feature";
 import FuelType from "./Filters/FuelType";
+import InteriorColour from "./Filters/InteriorColour";
 import MakeFilter from "./Filters/Make";
+import Mileage from "./Filters/Mileage";
 import Model from "./Filters/Model";
 import Price from "./Filters/Price";
 import SortBy from "./Filters/SortBy";
@@ -50,7 +54,7 @@ export const SideBarContent = [
   {
     title: "Mileage",
     slug: "mileage",
-    filterCompomentKey: "mileage",
+    filterComponentKey: "mileage",
   },
   {
     title: "Features",
@@ -67,7 +71,6 @@ export const SideBarContent = [
     slug: "interior-color",
     filterComponentKey: "interiorColor",
   },
-
 ];
 
 export const sideBarContentFilters = {
@@ -84,4 +87,12 @@ export const sideBarContentFilters = {
   fuelType: <FuelType />,
 
   sortBy: <SortBy />,
+
+  exteriorColor: <ExteriorColour />,
+
+  interiorColor: <InteriorColour />,
+
+  features: <Feature />,
+
+  mileage: <Mileage />,
 };

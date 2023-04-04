@@ -44,7 +44,7 @@ const Search = () => {
         : query.model
       : [];
 
-    const limit = (query.limit as string) ? (query.limit as string) : "80";
+    const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
     if (cars.length === 0) {
       dispatch(getCars({ makes: makes, models: models, limit: limit }));

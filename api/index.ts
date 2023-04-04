@@ -121,6 +121,11 @@ class Api {
     }`;
     return this.publicRequest(url, METHOD.GET, {});
   };
+
+  getFeatures() {
+    const url = "/v1/features";
+    return this.publicRequest(url, METHOD.GET, {});
+  }
 }
 
 export default Api;
