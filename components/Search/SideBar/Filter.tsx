@@ -52,10 +52,10 @@ const Filter: React.FC<Props> = ({ item }) => {
         className="flex h-[3.25rem] items-center px-[2rem] justify-between hover:bg-specialRed hover:bg-opacity-5 cursor-pointer hover:text-specialRed"
         onClick={() => handleFilterOpen(item.filterComponentKey)}
       >
-        <h1 className="font-normal">
+        <h1 className="font-normal text-secondaryGray">
           {item.title} {item.slug === "sort-by" ? sortKeys[selectedSort] : ""}
         </h1>
-        <CaretRightIcon className="hover:text-specialRed fill-current" />
+        <CaretRightIcon className="hover:text-specialRed fill-current text-secondaryGray" />
       </div>
     </div>
   );

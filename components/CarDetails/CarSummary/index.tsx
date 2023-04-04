@@ -14,12 +14,15 @@ import FeatureComponents from "./FeatureComponents";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import { CustomSelect } from "../../ui/form/Select";
+import HouseIcon from "../../ui/icons/HouseIcon";
 
 const CarSummary = () => {
   const [open, setOpen] = React.useState(false);
 
   const { car } = useAppSelector((state) => state.car);
   const [active, setActive] = React.useState(0);
+
+  const [option, setOption] = React.useState(0);
 
   const options = [
     { value: "overview", label: "Overview" },
@@ -185,7 +188,15 @@ const CarSummary = () => {
           </div>
           <div className="shadow-primaryCard bg-white p-4 h-[20rem] mb-[5rem] sm:mb-0">
             <div className="flex ">
-              <div className="rounded-tertiary border border-dividerGray p-3 mr-3">
+              <motion.div
+                animate={{
+                  border:
+                    option === 0 ? "1px solid #D14532" : "1px solid #D1D1D1",
+                  transition: { duration: 0.3 },
+                }}
+                className={`rounded-tertiary border p-3 mr-3 cursor-pointer`}
+                onClick={() => setOption(0)}
+              >
                 <div className="flex justify-between">
                   <CarWheelIcon />
                   <CheckIcon />
@@ -197,29 +208,45 @@ const CarSummary = () => {
                 <h2 className="text-primaryGreen font-medium mt-2 text-sm leading-[1rem]">
                   FREE
                 </h2>
-              </div>
-              <div className="rounded-tertiary border border-dividerGray p-3 mr-3">
+              </motion.div>
+              <motion.div
+                animate={{
+                  border:
+                    option === 1 ? "1px solid #D14532" : "1px solid #D1D1D1",
+                  transition: { duration: 0.3 },
+                }}
+                className={`rounded-tertiary border p-3 mr-3 cursor-pointer`}
+                onClick={() => setOption(1)}
+              >
                 <div className="flex justify-between">
-                  <CarWheelIcon />
+                  <HouseIcon />
                 </div>
-                <h2 className="text-specialRed mt-2 mb-1">Reserve</h2>
+                <h2 className="text-specialRed mt-2 mb-1">Buy Online</h2>
                 <p className="font-light text-sm leading-[1rem]">
                   & get delivery
                 </p>
                 <h2 className="text-primaryGreen font-medium mt-2 text-sm leading-[1rem]">
                   FREE
                 </h2>
-              </div>
-              <div className="rounded-tertiary border border-dividerGray p-3 mr-3">
+              </motion.div>
+              <motion.div
+                animate={{
+                  border:
+                    option === 2 ? "1px solid #D14532" : "1px solid #D1D1D1",
+                  transition: { duration: 0.3 },
+                }}
+                className={`rounded-tertiary border p-3 mr-3 cursor-pointer`}
+                onClick={() => setOption(2)}
+              >
                 <div className="flex justify-between">
-                  <CarWheelIcon />
+                  <HouseIcon />
                 </div>
-                <h2 className="text-specialRed mt-2 mb-1">Reserve</h2>
+                <h2 className="text-specialRed mt-2 mb-1">Buy Online</h2>
                 <p className="font-light text-sm leading-[1rem]">& pick up</p>
                 <h2 className="text-primaryGreen font-medium mt-2 text-sm leading-[1rem]">
                   FREE
                 </h2>
-              </div>
+              </motion.div>
             </div>
             <h1 className="text-thirdBlack text-tertiary leading-eighth font-semibold mt-8">
               At Surulere, Lagos

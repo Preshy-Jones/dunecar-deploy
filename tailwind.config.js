@@ -30,6 +30,7 @@ module.exports = {
         btnGallery: "rgba(255, 255, 255, 0.68)",
         greyText: "rgba(255, 255, 255, 0.7)",
         lightBlack: "rgba(0, 0, 0, 0.9)",
+        greyBg:"#F4F4F4"
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -181,6 +182,7 @@ module.exports = {
     },
     screens: {
       xs: "375px",
+      iphone: "420px",
       "1.5xl": "1400px",
       tablet: "850px",
       ...defaultTheme.screens,

@@ -83,7 +83,7 @@ const ProductCatalogue = ({ cars, count, filters }) => {
           {count} Matches
         </h2>
       </div>
-      <div className="grid lg:grid-cols-4 tablet:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 grid-cols-1 gap-x-[1rem] gap-y-[1rem] sm:px-[1.6rem]">
+      <div className="grid lg:grid-cols-4 tablet:grid-cols-3 sm:grid-cols-2 iphone:grid-cols-2 grid-cols-1 gap-x-[1rem] gap-y-[1rem] sm:px-[1.6rem]">
         {cars.map((item, index) => {
           return (
             <motion.div

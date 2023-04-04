@@ -56,7 +56,7 @@ const SideBar = ({ filters }) => {
             ))}
         </div>
       </div>
-      <div className="border-t-dividerGray  border-t py-[1.6rem] flex flex-col items-center bg-white">
+      <div className="border-t-dividerGray border-b border-t py-[1.6rem] flex flex-col items-center bg-white">
         <div className="flex justify-center">
           <p className="text-lighterDark text-[0.875rem] leading-[1.25rem] mb-4 text-center w-[80%]">
             Pick up where you left off or get notified when new inventory
@@ -70,13 +70,13 @@ const SideBar = ({ filters }) => {
       <AnimatePresence>
         {!toggledFilter ? (
           <div className="h-[35rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
-            <div className="flex items-end justify-between px-6 border-t-dividerGray border-t border-b h-[5.0625rem] leading-secondary pb-3">
+            {/* <div className="flex items-end justify-between px-6 border-t-dividerGray border-t border-b h-[5.0625rem] leading-secondary pb-3">
               <div className="flex justify-between items-center">
                 <SortIcon />
                 <h2 className="ml-4">Sort by</h2>
               </div>
               <h2 className="text-specialRed">Best match</h2>
-            </div>
+            </div> */}
             <div className="  ">
               <div>
                 <div>
