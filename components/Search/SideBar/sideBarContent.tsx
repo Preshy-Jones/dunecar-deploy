@@ -23,22 +23,26 @@ export const SideBarContent = [
   },
   {
     title: "Make",
-    slug: "make",
+    slug: "makes",
+    groupByKey: "make_id",
     filterComponentKey: "make",
   },
   {
     title: "Model",
-    slug: "model",
+    slug: "models",
+    groupByKey: "model_id",
     filterComponentKey: "model",
   },
   {
     title: "Body Type",
-    slug: "body-type",
+    slug: "body_types",
+    groupByKey: "body_type_id",
     filterComponentKey: "bodyType",
   },
   {
     title: "Fuel Type",
-    slug: "fuel-type",
+    slug: "fuel_types",
+    groupByKey: "fuel_type_id",
     filterComponentKey: "fuelType",
   },
   {
@@ -59,19 +63,24 @@ export const SideBarContent = [
   {
     title: "Features",
     slug: "features",
+    groupByKey: "features",
     filterComponentKey: "features",
   },
   {
     title: "Exterior Color",
-    slug: "exterior-color",
+    slug: "exterior_colors",
+    groupByKey: "exterior_color",
     filterComponentKey: "exteriorColor",
   },
   {
     title: "Interior Color",
-    slug: "interior-color",
+    slug: "interior_colors",
+    groupByKey: "interior_color",
     filterComponentKey: "interiorColor",
   },
 ];
+
+export type SideBarContentType = typeof SideBarContent[number] ;
 
 export const sideBarContentFilters = {
   make: <MakeFilter />,

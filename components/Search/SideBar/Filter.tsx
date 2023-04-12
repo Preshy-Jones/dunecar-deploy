@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { RxChevronDown, RxChevronUp } from "react-icons/rx";
-import { setFilter } from "../../../features/search/searchSlice";
+import {
+  getFilterOptions,
+  setFilter,
+} from "../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { CaretRightIcon } from "../../ui/icons";
 import { Spinner } from "../../ui/others";
 import { sortOptions } from "./Filters/SortBy";
-
+import { SideBarContentType } from "./sideBarContent";
 
 interface Props {
   item: {
@@ -18,7 +21,9 @@ interface Props {
 const Filter: React.FC<Props> = ({ item }) => {
   const dispatch = useAppDispatch();
 
-  const { selectedSort } = useAppSelector((state) => state.search);
+  const { selectedSort, filtersLoading, filters } = useAppSelector(
+    (state) => state.search
+  );
 
   // const { isLoading: makeIsLoading } = useAppSelector((state) => state.make);
   // const { isLoading: modelIsLoading } = useAppSelector((state) => state.model);
@@ -42,15 +47,35 @@ const Filter: React.FC<Props> = ({ item }) => {
   //     break;
   // }
 
-  const handleFilterOpen = (filterKey: string) => {
-    dispatch(setFilter(filterKey));
+  const handleFilterOpen = async (filter: SideBarContentType) => {
+    const fetchRequiredFilters = [
+      "makes",
+      "models",
+      "body_types",
+      "fuel_types",
+      "features",
+      "exterior_colors",
+      "interior_colors",
+    ];
+    if (fetchRequiredFilters.includes(filter.slug)) {
+      await dispatch(
+        getFilterOptions({
+          key: filter.slug,
+          filters,
+          group_by: filter.groupByKey as string,
+        })
+      );
+      await dispatch(setFilter(filter.filterComponentKey));
+    } else {
+      dispatch(setFilter(filter.filterComponentKey));
+    }
   };
 
   return (
     <div className=" border-b border-b-dividerGray">
       <div
         className="flex h-[3.25rem] items-center px-[2rem] justify-between hover:bg-specialRed hover:bg-opacity-5 cursor-pointer hover:text-specialRed"
-        onClick={() => handleFilterOpen(item.filterComponentKey)}
+        onClick={() => handleFilterOpen(item)}
       >
         <h1 className="font-normal text-secondaryGray">
           {item.title} {item.slug === "sort-by" ? sortKeys[selectedSort] : ""}

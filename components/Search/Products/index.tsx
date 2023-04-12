@@ -17,8 +17,6 @@ const ProductCatalogue = ({ cars, count, filters }) => {
 
   const dispatch = useAppDispatch();
   const { moreCarsLoading } = useAppSelector((state) => state.car);
-  const { selectedMakes } = useAppSelector((state) => state.make);
-  const { modelsSelected } = useAppSelector((state) => state.model);
 
   const getMoreCars = () => {
     const path = router.pathname;
@@ -100,12 +98,12 @@ const ProductCatalogue = ({ cars, count, filters }) => {
 
       {moreCarsLoading ? (
         <div className="flex justify-center items-center py-8">
-          <Spinner />
+          <div className="spinner w-6 h-6 border-4 border-specialRed border-t-white"></div>
         </div>
       ) : (
         <div className="flex justify-center items-center flex-col my-8">
           <p className="text-secondaryGray mb-4">
-            Currently viewing {filters.displayedCount} out of {count} Matches
+            Currently viewing {cars.length} out of {count} Matches
           </p>
 
           <button

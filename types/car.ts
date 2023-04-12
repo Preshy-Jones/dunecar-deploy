@@ -52,10 +52,9 @@ export type CarBodyType = {
 };
 
 export type CarPayload = {
-  models?: string[];
-  makes?: string[];
-  body_types?: string[];
-  limit?: string;
+  page:string;
+  perPage:string;
+  filters: FilterOptionsInterface;
 };
 
 export type BodyTypesPayload = {
@@ -68,4 +67,29 @@ export type Feature = {
   title: string;
   category: string;
   slug: string;
+};
+
+export type FilterOptionsInterface = {
+  make?: string[];
+  model?: string[];
+  body_type?: string[];
+  fuel_type?: string[];
+  year_from?: number;
+  year_to?: number;
+  price_from?: number;
+  price_to?: number;
+  milleage?: number;
+  exterior_color?: string[];
+  interior_color?: string[];
+  features?: string[];
+  transmission?: string[];
+  trim?: String[];
+  series?: String[];
+  packages?: String[];
+};
+
+export type FilterPayload = {
+  key?: string;
+  group_by: string;
+  filters: FilterOptionsInterface;
 };

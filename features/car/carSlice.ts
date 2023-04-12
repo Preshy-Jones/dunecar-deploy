@@ -51,9 +51,9 @@ export const getCar = createAsyncThunk(
 export const getCars = createAsyncThunk(
   "car/getCars",
   async (payload: CarPayload, thunkAPI) => {
-    const { models, makes, limit, body_types } = payload;
+    console.log(payload);
     try {
-      return await carService.fetchCars({ models, makes, limit, body_types });
+      return await carService.fetchCars(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
     }
@@ -63,9 +63,8 @@ export const getCars = createAsyncThunk(
 export const getMoreCarsPagination = createAsyncThunk(
   "car/getMoreCars",
   async (payload: CarPayload, thunkAPI) => {
-    const { models, makes, limit } = payload;
     try {
-      return await carService.fetchCars({ models, makes, limit });
+      return await carService.fetchCars(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
     }
@@ -100,11 +99,11 @@ const carSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCars.fulfilled, (state: CarState, action) => {
-        // console.log(action);
+        console.log(action.payload.data);
         state.isLoading = false;
-        state.cars = action.payload.data.results.cars;
-        state.carFilter = action.payload.data.filter;
-        state.count = action.payload.data.results.count;
+        state.cars = action.payload.data.cars[0].results;
+        // state.carFilter = action.payload.data.filter;
+        state.count = action.payload.data.cars[0].pageInfo[0].count;
       })
       .addCase(getCars.rejected, (state: CarState, action) => {
         // console.log(action);
@@ -114,11 +113,11 @@ const carSlice = createSlice({
         state.moreCarsLoading = true;
       })
       .addCase(getMoreCarsPagination.fulfilled, (state: CarState, action) => {
-        // console.log(action);
+        
         state.moreCarsLoading = false;
-        state.cars = action.payload.data.results.cars;
+        state.cars = action.payload.data.cars.results;
         state.carFilter = action.payload.data.filter;
-        state.count = action.payload.data.results.count;
+        // state.count = action.payload.data.cars.pageInfo[0].count;
       })
       .addCase(getMoreCarsPagination.rejected, (state: CarState, action) => {
         // console.log(action);

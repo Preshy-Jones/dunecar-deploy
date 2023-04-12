@@ -88,7 +88,12 @@ const Search = () => {
       {/* <pre>{JSON.stringify(router.query, null, 2)}</pre> */}
       <SearchBar />
       <div className="grid tablet:grid-cols-store sm:grid-cols-store_sm bg-pageBg">
-        <Sticky enabled={true} top={0} bottomBoundary="#my-target" className="z-30">
+        <Sticky
+          enabled={true}
+          top={0}
+          bottomBoundary="#my-target"
+          className="z-30"
+        >
           <div className=" col-start-1 col-end-2 hidden sm:block z-30">
             <SideBar filters={filters} />
           </div>
@@ -97,16 +102,18 @@ const Search = () => {
         <div className="sm:col-start-2 col-end-3 col-start-1 z-70">
           {isLoading ? (
             <div className="flex justify-center items-center pt-[6rem]">
-              <Spinner />
+              <div className="spinner w-8 h-8 border-4 border-specialRed border-t-white"></div>
             </div>
           ) : (
             <ProductCatalogue cars={cars} count={count} filters={filters} />
           )}
         </div>
-        <div className="col-start-1 col-end-3 self-center justify-self-center h-[20rem] mb-[5rem]" id="my-target"></div>
+        <div
+          className="col-start-1 col-end-3 self-center justify-self-center h-[20rem] mb-[5rem]"
+          id="my-target"
+        ></div>
         {mobileFilterSortOpen && <FilterComponent />}
       </div>
-
     </div>
   );
 };

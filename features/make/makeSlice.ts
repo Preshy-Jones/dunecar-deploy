@@ -1,17 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Car, CarMake, CarModel } from "../../types/car";
 import { Option } from "../../types/form";
-import makeService from "./makeService";
+import makeService, { MakeFilterPayload } from "./makeService";
 
-export interface CarState {
+export type CarState = {
   makes: CarMake[];
+  makeFilters: CarMakeFilter[];
   makeOptions: Option[] | undefined;
   isLoading: boolean;
   selectedMakes: string[];
-}
+};
 
+type CarMakeFilter = {
+  count: number;
+  make: CarMake;
+};
 const initialState: CarState = {
   makes: [],
+  makeFilters: [],
   makeOptions: [],
   isLoading: false,
   selectedMakes: [],
