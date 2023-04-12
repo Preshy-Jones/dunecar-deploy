@@ -9,11 +9,9 @@ import FilterComponent from "./MobileFilter/FilterComponent";
 import { setMobileFilterSortOpen } from "../../../features/search/searchSlice";
 import { motion } from "framer-motion";
 
-const ProductCatalogue = ({ cars, count, filters }) => {
+const ProductCatalogue = ({ cars, count }) => {
   const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const router = useRouter();
-
-  const [filterSortOpen, setFilterSortOpen] = React.useState(false);
 
   const dispatch = useAppDispatch();
   const { moreCarsLoading } = useAppSelector((state) => state.car);
@@ -33,13 +31,13 @@ const ProductCatalogue = ({ cars, count, filters }) => {
       : [""];
     console.log({ path, query });
 
-    dispatch(
-      getMoreCarsPagination({
-        makes: makes,
-        models: models,
-        limit: (Number(filters.limit) + 20).toString(),
-      })
-    );
+    // dispatch(
+    //   getMoreCarsPagination({
+    //     makes: makes,
+    //     models: models,
+    //     limit: (Number(filters.limit) + 20).toString(),
+    //   })
+    // );
 
     // router.push(
     //   {
