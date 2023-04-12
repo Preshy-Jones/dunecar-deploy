@@ -7,62 +7,96 @@ import {
   setSelectedMakes,
 } from "../../../../features/make/makeSlice";
 import { getModels } from "../../../../features/model/modelSlice";
-import { setFilter } from "../../../../features/search/searchSlice";
+import {
+  setFilter,
+  setFilterOptions,
+} from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
 import { Spinner } from "../../../ui/others";
 
 const MakeFilter = () => {
-  let { makes, makeOptions, selectedMakes, isLoading } = useAppSelector(
-    (state) => state.make
-  );
+  let { makeOptions, isLoading } = useAppSelector((state) => state.make);
+  let { makes, filters } = useAppSelector((state) => state.search);
 
+
+  let selectedMakes = filters.make;
   const router = useRouter();
 
-  let { carFilter: filters } = useAppSelector((state) => state.car);
-
   let initialMakeOptions = makes.map((make) => ({
-    value: make.slug,
-    label: make.title,
+    value: make.make._id,
+    label: make.make.title,
   }));
 
   const dispatch = useAppDispatch();
 
-  // const [selected, setSelected] = useState<string[]>([]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
-    console.log("shhah");
-    if (selectedMakes.includes(e.target.value)) {
+
+    let selectedMakes = filters.make;
+    if (selectedMakes?.includes(e.target.value)) {
       dispatch(
-        setSelectedMakes(
-          selectedMakes.filter((item) => item !== e.target.value)
-        )
+        setFilterOptions({
+          field: "make",
+          value: selectedMakes.filter((item) => item !== e.target.value),
+        })
       );
     } else {
-      dispatch(setSelectedMakes([...selectedMakes, e.target.value]));
+      dispatch(
+        setFilterOptions({
+          field: "make",
+          value: [...(selectedMakes as string[]), e.target.value],
+        })
+      );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            make: [...(selectedMakes as string[]), e.target.value],
+          },
+        })
+      );
     }
-    console.log(selectedMakes);
   };
   const handleLabelClick = (value) => {
-    console.log(value);
-    console.log("helshhshshlo");
-
-    if (selectedMakes.includes(value)) {
+    let selectedMakes = filters.make;
+    if (selectedMakes?.includes(value)) {
       dispatch(
-        setSelectedMakes(selectedMakes.filter((item) => item !== value))
+        setFilterOptions({
+          field: "make",
+          value: selectedMakes.filter((item) => item !== value),
+        })
       );
     } else {
-      dispatch(setSelectedMakes([...selectedMakes, value]));
+      dispatch(
+        setFilterOptions({
+          field: "make",
+          value: [...(selectedMakes as string[]), value],
+        })
+      );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            make: [...(selectedMakes as string[]), value],
+          },
+        })
+      );
     }
   };
-  const handleClose = () => {
-    dispatch(setFilter(""));
+  const handleClose = async () => {
+    await dispatch(setFilter(""));
+    let selectedMakes = filters.make;
     let result = initialMakeOptions?.sort((a, b) => {
-      if (selectedMakes.includes(a.value) && !selectedMakes.includes(b.value)) {
+      if (selectedMakes?.includes(a.value) && !selectedMakes.includes(b.value)) {
         return -1;
       } else if (
-        !selectedMakes.includes(a.value) &&
-        selectedMakes.includes(b.value)
+        !selectedMakes?.includes(a.value) &&
+        selectedMakes?.includes(b.value)
       ) {
         return 1;
       } else {
@@ -76,8 +110,6 @@ const MakeFilter = () => {
     // console.log(optionsUpdated);
 
     dispatch(setMakeOptions(result));
-    dispatch(getCars({ makes: selectedMakes, limit: "20" }));
-    dispatch(getModels({ makes: selectedMakes }));
 
     //update the query strings but don't reload the page
     router.push(
@@ -99,8 +131,8 @@ const MakeFilter = () => {
     //when there are no makeOptions loaded yet
     if (!makeOptions || makeOptions.length === 0) {
       let makeOptionsPayload = makes.map((make) => ({
-        value: make.slug,
-        label: make.title,
+        value: make.make._id,
+        label: make.make.title,
       }));
       // let result = makeOptionsPayload?.sort((a, b) => {
       //   if (
@@ -149,12 +181,12 @@ const MakeFilter = () => {
                 className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
                 value={item.value}
                 name="make"
-                checked={selectedMakes.includes(item.value)}
+                checked={selectedMakes?.includes(item.value)}
                 onChange={handleChange}
               />
               <label
                 className={`leading-primary text-secondary font-normal cursor-pointer ${
-                  selectedMakes.includes(item.value)
+                  selectedMakes?.includes(item.value)
                     ? "font-bold text-specialRed"
                     : "text-lighterDark"
                 }`}

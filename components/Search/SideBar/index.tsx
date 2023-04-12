@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
 import FilterIcon from "../../ui/icons/FilterIcon";
-import SortIcon from "../../ui/icons/SortIcon";
+
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
-import { setFilter } from "../../../features/search/searchSlice";
+
 import MakesIndicator from "./MakesIndicator";
 import ModelsIndicator from "./ModelsIndicator";
-import Sticky from "react-stickynode";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 const SideBar = ({ filters }) => {
-  const [isFilter, setIsFilter] = React.useState(false);
-
   const { toggledFilter } = useAppSelector((state) => state.search);
 
   const dispatch = useAppDispatch();
