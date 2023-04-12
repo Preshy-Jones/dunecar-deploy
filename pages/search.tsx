@@ -47,7 +47,7 @@ const Search = () => {
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
     if (cars.length === 0) {
-      dispatch(getCars({ makes: makes, models: models, limit: limit }));
+//      dispatch(getCars({ makes: makes, models: models, limit: limit }));
       dispatch(setSelectedMakes(makes));
       dispatch(setModelsSelected(models));
     }
@@ -58,13 +58,13 @@ const Search = () => {
     if (optionDeleted) {
       console.log({ selectedMakes, modelsSelected });
 
-      dispatch(
-        getCars({
-          makes: selectedMakes,
-          models: modelsSelected,
-          limit: "20",
-        })
-      );
+      // dispatch(
+      //   getCars({
+      //     makes: selectedMakes,
+      //     models: modelsSelected,
+      //     limit: "20",
+      //   })
+      // );
       dispatch(setOptionDeleted(false));
     }
   }, [optionDeleted, dispatch, selectedMakes, modelsSelected]);
@@ -95,7 +95,7 @@ const Search = () => {
           className="z-30"
         >
           <div className=" col-start-1 col-end-2 hidden sm:block z-30">
-            <SideBar filters={filters} />
+            <SideBar  />
           </div>
         </Sticky>
 
@@ -105,7 +105,7 @@ const Search = () => {
               <div className="spinner w-8 h-8 border-4 border-specialRed border-t-white"></div>
             </div>
           ) : (
-            <ProductCatalogue cars={cars} count={count} filters={filters} />
+            <ProductCatalogue cars={cars} count={count} />
           )}
         </div>
         <div

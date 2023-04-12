@@ -11,7 +11,7 @@ import ModelsIndicator from "./ModelsIndicator";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-const SideBar = ({ filters }) => {
+const SideBar = () => {
   const { toggledFilter } = useAppSelector((state) => state.search);
 
   const dispatch = useAppDispatch();
