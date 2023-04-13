@@ -19,7 +19,6 @@ const MakeFilter = () => {
   let { makeOptions, isLoading } = useAppSelector((state) => state.make);
   let { makes, filters } = useAppSelector((state) => state.search);
 
-
   let selectedMakes = filters.make;
   const router = useRouter();
 
@@ -30,7 +29,7 @@ const MakeFilter = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
 
     let selectedMakes = filters.make;
@@ -39,6 +38,16 @@ const MakeFilter = () => {
         setFilterOptions({
           field: "make",
           value: selectedMakes.filter((item) => item !== e.target.value),
+        })
+      );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            make: [...(selectedMakes as string[]), e.target.value],
+          },
         })
       );
     } else {
@@ -69,6 +78,16 @@ const MakeFilter = () => {
           value: selectedMakes.filter((item) => item !== value),
         })
       );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            make: [...(selectedMakes as string[]), value],
+          },
+        })
+      );
     } else {
       dispatch(
         setFilterOptions({
@@ -92,7 +111,10 @@ const MakeFilter = () => {
     await dispatch(setFilter(""));
     let selectedMakes = filters.make;
     let result = initialMakeOptions?.sort((a, b) => {
-      if (selectedMakes?.includes(a.value) && !selectedMakes.includes(b.value)) {
+      if (
+        selectedMakes?.includes(a.value) &&
+        !selectedMakes.includes(b.value)
+      ) {
         return -1;
       } else if (
         !selectedMakes?.includes(a.value) &&
@@ -122,10 +144,7 @@ const MakeFilter = () => {
     );
   };
 
-  useEffect(() => {
-    dispatch(getMakes());
-    // console.log(modelOptions);
-  }, [dispatch]);
+
 
   useEffect(() => {
     //when there are no makeOptions loaded yet

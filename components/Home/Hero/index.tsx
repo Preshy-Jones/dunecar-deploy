@@ -3,21 +3,23 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { getCars } from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { motion } from "framer-motion";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
-import { DotLoader, Spinner } from "../../ui/others";
 import Loader from "../../../public/assets/Loader.json";
-import Lottie from "lottie-react";
 import {
   getModels,
   setModelOptions,
   setModelsSelected,
 } from "../../../features/model/modelSlice";
-import { getMakes, setMakeOptions } from "../../../features/make/makeSlice";
+import {
+  getMakes,
+  setMakeOptions,
+  setSelectedMakes,
+} from "../../../features/make/makeSlice";
 import { useRouter } from "next/router";
 import { formatMultipleValueKeyQuery } from "../../../utils/utilityFunctions";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import MobileForm from "./MobileForm";
+import { getFilterOptions } from "../../../features/search/searchSlice";
 
 // import heroImage from "../../assets/heroimage.svg";
 
@@ -59,36 +61,75 @@ const Hero = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  let { cars, carFilter, isLoading, filterTotal } = useAppSelector(
+  let { cars, carFilter, isLoading, count } = useAppSelector(
     (state) => state.car
   );
 
   //  const isLoading = true;
-  let { models, modelsSelected, modelOptions } = useAppSelector(
-    (state) => state.model
-  );
+  let { modelsSelected, modelOptions } = useAppSelector((state) => state.model);
 
-  let { makes, makeOptions } = useAppSelector((state) => state.make);
+  let { models, makes, filters } = useAppSelector((state) => state.search);
+
+  let { makeOptions, selectedMakes } = useAppSelector((state) => state.make);
 
   let makeOptionsPayload = makes.map((make) => ({
-    value: make.slug,
-    label: make.title,
+    value: make.make._id,
+    label: make.make.title,
   }));
 
-  const modelOptionsPayload = models.map((model) => ({
-    collection_name: model.make_name,
-    options: model.models.map((model) => ({
-      value: model.slug,
-      label: model.title,
-    })),
-  }));
+  let modelOptionsPayload;
+
+  console.log("models", models);
+
+  const groupedByMake = Object.values(
+    models.reduce((acc, model) => {
+      const make = model.make.title;
+      if (!acc[make]) {
+        acc[make] = {
+          make: model.make.title,
+          models: [],
+        };
+      }
+      acc[make].models.push({
+        value: model.model._id,
+        label: model.model.title,
+      });
+      return acc;
+    }, {})
+  );
+
+  console.log("groupedByMake", groupedByMake);
+
+  // const modelOptionsPayload = models.map((model) => ({
+  //   collection_name: model.make_name,
+  //   options: model.models.map((model) => ({
+  //     value: model.slug,
+  //     label: model.title,
+  //   })),
+  // }));
 
   const [makeToggled, setMakeToggled] = React.useState(true);
   const [modelToggled, setModelToggled] = React.useState(false);
 
-  const makeCloseHandleOperation = (makes: string[]) => {
-    dispatch(getModels({ makes: makes }));
-    dispatch(getCars({ makes }));
+  const makeCloseHandleOperation = async (makes: string[]) => {
+    await dispatch(
+      getFilterOptions({
+        key: "models",
+        group_by: "model_id",
+        filters: {
+          make: makes,
+        },
+      })
+    );
+    await dispatch(
+      getCars({
+        page: "1",
+        perPage: "20",
+        filters: {
+          make: makes,
+        },
+      })
+    );
     if (makes.length > 0) {
       setModelToggled(true);
     } else {
@@ -102,7 +143,16 @@ const Hero = () => {
   };
 
   const modelCloseHandleOperation = (models: string[]) => {
-    dispatch(getCars({ models, makes: carFilter.makes }));
+    // dispatch(getCars({ models, makes: carFilter.makes }));
+    dispatch(
+      getCars({
+        page: "1",
+        perPage: "20",
+        filters: {
+          model: models,
+        },
+      })
+    );
     setMakeToggled(true);
   };
 
@@ -117,7 +167,7 @@ const Hero = () => {
     e.preventDefault();
     console.log("hello");
 
-    let { makes, models } = carFilter;
+    let { makes, models } = { makes: selectedMakes, models: modelsSelected };
     const makesPayload = makes
       ? typeof makes === "string"
         ? [makes]
@@ -149,28 +199,56 @@ const Hero = () => {
     router.push(url);
   };
   useEffect(() => {
-    dispatch(getMakes());
-    dispatch(getCars({ makes: [], models: [] }));
-    // console.log(modelOptions);
-  }, [dispatch]);
+    dispatch(
+      getCars({
+        page: "1",
+        perPage: "20",
+        filters: {},
+      })
+    );
+    dispatch(
+      getFilterOptions({
+        key: "makes",
+        group_by: "make_id",
+        filters: {},
+      })
+    );
+  }, []);
 
   useEffect(() => {
     let makeOptionsPayload = makes.map((make) => ({
-      value: make.slug,
-      label: make.title,
+      value: make.make._id,
+      label: make.make.title,
     }));
     dispatch(setMakeOptions(makeOptionsPayload));
   }, [makes, dispatch]);
 
   useEffect(() => {
-    let modelOptions = models.map((model) => ({
-      collection_name: model.make_name,
-      options: model.models.map((model) => ({
-        value: model.slug,
-        label: model.title,
-      })),
-    }));
-    dispatch(setModelOptions(modelOptions));
+    const groupedByMake = Object.values(
+      models.reduce((acc, model) => {
+        const make = model.make.title;
+        if (!acc[make]) {
+          acc[make] = {
+            make: model.make.title,
+            models: [],
+          };
+        }
+        acc[make].models.push({
+          value: model.model._id,
+          label: model.model.title,
+        });
+        return acc;
+      }, {})
+    );
+    dispatch(setModelOptions(groupedByMake));
+    // let modelOptions = models.map((model) => ({
+    //   collection_name: model.make_name,
+    //   options: model.models.map((model) => ({
+    //     value: model.slug,
+    //     label: model.title,
+    //   })),
+    // }));
+    // dispatch(setModelOptions(modelOptions));
   }, [models, dispatch]);
 
   return (
@@ -210,7 +288,10 @@ const Hero = () => {
           makeOpenHandleOperation={makeOpenHandleOperation}
           modelCloseHandleOperation={modelCloseHandleOperation}
           modelOpenHandleOperation={modelOpenHandleOperation}
+          selectedMakes={selectedMakes}
+          setSelectedMakes={setSelectedMakes}
           cars={cars}
+          count={count}
         />
         <div className="absolute top-[21rem]  lg:flex justify-center w-full hidden h-[13.25rem] ">
           <div className="  md:flex justify-center w-[70.97%] ">
@@ -225,6 +306,8 @@ const Hero = () => {
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
                     isDisabled={!makeToggled}
+                    selected={selectedMakes}
+                    setSelected={setSelectedMakes}
                     handleCloseOperation={makeCloseHandleOperation}
                     handleOpenOperation={makeOpenHandleOperation}
                   />
@@ -232,7 +315,7 @@ const Hero = () => {
                     placeHolder="Select Model"
                     isDisabled={!modelToggled}
                     fieldOptions={modelOptions}
-                    payloadOptions={modelOptionsPayload}
+                    payloadOptions={groupedByMake}
                     selected={modelsSelected}
                     setSelected={setModelsSelected}
                     handleCloseOperation={modelCloseHandleOperation}
@@ -243,6 +326,8 @@ const Hero = () => {
                     payloadOptions={locationOptions}
                     options={locationOptions}
                     isDisabled={false}
+                    selected={modelsSelected}
+                    setSelected={setModelsSelected}
                     handleCloseOperation={makeCloseHandleOperation}
                     handleOpenOperation={makeOpenHandleOperation}
                   />
@@ -255,7 +340,7 @@ const Hero = () => {
                   {!isLoading ? (
                     <div className="flex items-center justify-center">
                       <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-                      Search all {cars.length} cars
+                      Search all {count} cars
                     </div>
                   ) : (
                     <Player

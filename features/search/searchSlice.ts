@@ -3,6 +3,7 @@ import { Option } from "../../types/form";
 import searchService from "./searchService";
 import {
   CarMake,
+  CarModel,
   Feature,
   FilterOptionsInterface,
   FilterPayload,
@@ -25,7 +26,12 @@ export interface SearchState {
     make: CarMake;
     count: number;
   }[];
-  models: string[];
+  models: {
+    id: string;
+    count: number;
+    model: CarModel;
+    make: CarMake;
+  }[];
   exterior_colors: string[];
   interior_colors: string[];
   filters: FilterOptionsInterface;
