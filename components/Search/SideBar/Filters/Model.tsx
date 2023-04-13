@@ -57,9 +57,9 @@ const Model = () => {
   const handleClose = () => {
     dispatch(setFilter(""));
 
-    dispatch(
-      getCars({ makes: selectedMakes, models: modelsSelected, limit: "20" })
-    );
+    // dispatch(
+    //   getCars({ makes: selectedMakes, models: modelsSelected, limit: "20" })
+    // );
     //update the query strings but don't reload the page
     router.push(
       {
