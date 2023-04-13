@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { setFilterTotal } from "../../../features/car/carSlice";
 import { setMakeOptions } from "../../../features/make/makeSlice";
 import useClickOutside from "../../../hooks/ClickOutside";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Option } from "../../../types/form";
-import { MATHOPERATIONS } from "../../../types/methods";
+
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 import { CaretDownIcon } from "../icons";
 
@@ -15,6 +14,8 @@ interface MultiSelectProps {
   isDisabled?: boolean;
   handleCloseOperation: (value: string[]) => void;
   handleOpenOperation: () => void;
+  selected: string[];
+  setSelected(selected: string[]): any;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -22,8 +23,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   options,
   payloadOptions,
   isDisabled,
-  // selected,
-  // updateSelected,
+  selected,
+  setSelected,
   handleOpenOperation,
   handleCloseOperation,
   ...rest
@@ -32,13 +33,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   const [isToggled, setIsToggled] = useState(false);
 
-  const [selected, setSelected] = useState<string[]>([]);
+  // const [selected, setSelected] = useState<string[]>([]);
 
   // const selected = useRef<string[]>([]);
 
-  let modalRef = useRef<HTMLDivElement>(null);
-
-  let togglerRef = useRef<HTMLDivElement>(null);
+ 
 
   const handleToggled = () => {
     if (!isDisabled) {
@@ -94,18 +93,18 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log(e.target.value);
     if (selected.includes(e.target.value)) {
-      setSelected(selected.filter((item) => item !== e.target.value));
+      dispatch(setSelected(selected.filter((item) => item !== e.target.value)));
     } else {
-      setSelected([...selected, e.target.value]);
+      dispatch(setSelected([...selected, e.target.value]));
     }
     // console.log(selected);
   };
 
   const handleLabelClick = (value) => {
     if (selected.includes(value)) {
-      setSelected(selected.filter((item) => item !== value));
+      dispatch(setSelected(selected.filter((item) => item !== value)));
     } else {
-      setSelected([...selected, value]);
+      dispatch(setSelected([...selected, value]));
     }
     //  console.log(selected);
   };

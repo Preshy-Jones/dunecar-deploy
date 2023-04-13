@@ -22,6 +22,9 @@ interface Props {
   handleSearchCars: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isLoading: boolean;
   cars: any;
+  count: number;
+  selectedMakes: string[];
+  setSelectedMakes(selected: string[]): any;
 }
 
 const MobileForm: React.FC<Props> = ({
@@ -40,6 +43,9 @@ const MobileForm: React.FC<Props> = ({
   handleSearchCars,
   cars,
   isLoading,
+  count,
+  selectedMakes,
+  setSelectedMakes,
 }) => {
   const [active, setActive] = React.useState(0);
   return (
@@ -74,6 +80,8 @@ const MobileForm: React.FC<Props> = ({
                 isDisabled={!makeToggled}
                 handleCloseOperation={makeCloseHandleOperation}
                 handleOpenOperation={makeOpenHandleOperation}
+                selected={selectedMakes}
+                setSelected={setSelectedMakes}
               />
             </div>
             <div className="mb-3">
@@ -95,6 +103,8 @@ const MobileForm: React.FC<Props> = ({
                 isDisabled={!makeToggled}
                 handleCloseOperation={makeCloseHandleOperation}
                 handleOpenOperation={makeOpenHandleOperation}
+                selected={selectedMakes}
+                setSelected={setSelectedMakes}
               />
             </div>
             <button
@@ -104,7 +114,7 @@ const MobileForm: React.FC<Props> = ({
               {!isLoading ? (
                 <div className="flex items-center justify-center">
                   <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-                  Search all {cars.length} cars
+                  Search all {count} cars
                 </div>
               ) : (
                 <Lottie animationData={Loader} />

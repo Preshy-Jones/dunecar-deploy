@@ -55,7 +55,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
         let result = payloadOptions?.map((make, index) => {
           return {
             ...make,
-            options: make.options?.sort((a, b) => {
+            models: make.models?.sort((a, b) => {
               if (selected.includes(a.value) && !selected.includes(b.value)) {
                 return -1;
               } else if (
@@ -174,7 +174,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
                       : "text-[#081314] text-opacity-20 font-light"
                   } leading-tertiary  text-[1.25rem]`}
                 >
-                  {fieldOptions[index]?.collection_name}
+                  {fieldOptions[index]?.make}
                 </h2>
                 {currentIndex === index && (
                   <motion.div
@@ -192,7 +192,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             className="h-[2px] bg-red-700 w-[50%] relative bottom-[0.05rem] rounded-md"
           ></motion.div> */}
           <div className="pt-1.5 overflow-y-scroll h-[13.55rem] w-[80%] sm:w-[12.4375rem] z-0">
-            {fieldOptions[currentIndex].options.map((item, index) => (
+            {fieldOptions[currentIndex].models.map((item, index) => (
               <div
                 className="flex items-center py-2.5 px-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
                 key={index}

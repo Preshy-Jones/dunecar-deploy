@@ -15,18 +15,15 @@ import Sticky from "react-stickynode";
 const Search = () => {
   const dispatch = useAppDispatch();
 
-  const {
-    cars,
-    carFilter: filters,
-    isLoading,
-    optionDeleted,
-    moreCarsLoading,
-    count,
-  } = useAppSelector((state) => state.car);
+  const { cars, isLoading, optionDeleted, moreCarsLoading, count } =
+    useAppSelector((state) => state.car);
 
-  const { selectedMakes } = useAppSelector((state) => state.make);
   const { modelsSelected } = useAppSelector((state) => state.model);
-  const { mobileFilterSortOpen } = useAppSelector((state) => state.search);
+  const { mobileFilterSortOpen, filters } = useAppSelector(
+    (state) => state.search
+  );
+
+  let selectedMakes = filters.make;
 
   const router = useRouter();
 
@@ -47,24 +44,34 @@ const Search = () => {
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
     if (cars.length === 0) {
-//      dispatch(getCars({ makes: makes, models: models, limit: limit }));
+      dispatch(
+        getCars({
+          perPage: limit,
+          page: "1",
+          filters: {
+            ...filters,
+            make: makes,
+            model: models,
+          },
+        })
+      )
       dispatch(setSelectedMakes(makes));
       dispatch(setModelsSelected(models));
     }
   }, [router, dispatch]);
 
   useEffect(() => {
-    console.log("hello there");
+//    console.log("hello there");
     if (optionDeleted) {
       console.log({ selectedMakes, modelsSelected });
 
-      // dispatch(
-      //   getCars({
-      //     makes: selectedMakes,
-      //     models: modelsSelected,
-      //     limit: "20",
-      //   })
-      // );
+      dispatch(
+        getCars({
+          perPage: "20",
+          page: "1",
+          filters,
+        })
+      );
       dispatch(setOptionDeleted(false));
     }
   }, [optionDeleted, dispatch, selectedMakes, modelsSelected]);
@@ -95,7 +102,7 @@ const Search = () => {
           className="z-30"
         >
           <div className=" col-start-1 col-end-2 hidden sm:block z-30">
-            <SideBar  />
+            <SideBar />
           </div>
         </Sticky>
 
