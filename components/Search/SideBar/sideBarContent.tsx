@@ -37,13 +37,13 @@ export const SideBarContent = [
     title: "Body Type",
     slug: "body_types",
     groupByKey: "body_type_id",
-    filterComponentKey: "bodyType",
+    filterComponentKey: "body_type",
   },
   {
     title: "Fuel Type",
     slug: "fuel_types",
     groupByKey: "fuel_type_id",
-    filterComponentKey: "fuelType",
+    filterComponentKey: "fuel_type",
   },
   {
     title: "Year",
@@ -70,13 +70,13 @@ export const SideBarContent = [
     title: "Exterior Color",
     slug: "exterior_colors",
     groupByKey: "exterior_color",
-    filterComponentKey: "exteriorColor",
+    filterComponentKey: "exterior_color",
   },
   {
     title: "Interior Color",
     slug: "interior_colors",
     groupByKey: "interior_color",
-    filterComponentKey: "interiorColor",
+    filterComponentKey: "interior_color",
   },
 ];
 
@@ -91,15 +91,15 @@ export const sideBarContentFilters = {
 
   model: <Model />,
 
-  bodyType: <BodyType />,
+  body_type: <BodyType />,
 
-  fuelType: <FuelType />,
+  fuel_type: <FuelType />,
 
   sortBy: <SortBy />,
 
-  exteriorColor: <ExteriorColour />,
+  exterior_color: <ExteriorColour />,
 
-  interiorColor: <InteriorColour />,
+  interior_color: <InteriorColour />,
 
   features: <Feature />,
 

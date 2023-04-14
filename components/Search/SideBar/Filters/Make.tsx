@@ -25,6 +25,7 @@ const MakeFilter = () => {
   let initialMakeOptions = makes.map((make) => ({
     value: make.make._id,
     label: make.make.title,
+    count: make.count
   }));
 
   const dispatch = useAppDispatch();
@@ -144,32 +145,17 @@ const MakeFilter = () => {
     );
   };
 
-
-
   useEffect(() => {
     //when there are no makeOptions loaded yet
-    if (!makeOptions || makeOptions.length === 0) {
-      let makeOptionsPayload = makes.map((make) => ({
-        value: make.make._id,
-        label: make.make.title,
-      }));
-      // let result = makeOptionsPayload?.sort((a, b) => {
-      //   if (
-      //     selectedMakes.includes(a.value) &&
-      //     !selectedMakes.includes(b.value)
-      //   ) {
-      //     return -1;
-      //   } else if (
-      //     !selectedMakes.includes(a.value) &&
-      //     selectedMakes.includes(b.value)
-      //   ) {
-      //     return 1;
-      //   } else {
-      //     return 0;
-      //   }
-      // });
-      dispatch(setMakeOptions(makeOptionsPayload));
-    }
+    // if (!makeOptions || makeOptions.length === 0) {
+    let makeOptionsPayload = makes.map((make) => ({
+      value: make.make._id,
+      label: make.make.title,
+      count: make.count
+    }));
+
+    dispatch(setMakeOptions(makeOptionsPayload));
+    // }
   }, [makes, dispatch]);
 
   return (
@@ -211,7 +197,7 @@ const MakeFilter = () => {
                 }`}
                 style={{ marginLeft: "5px" }}
               >
-                {item.label}
+                {item.label} ({item.count})
               </label>
             </div>
           ))}
