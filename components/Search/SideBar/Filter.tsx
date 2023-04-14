@@ -24,7 +24,7 @@ const Filter: React.FC<Props> = ({ item }) => {
   const { selectedSort, filtersLoading, filters } = useAppSelector(
     (state) => state.search
   );
-
+  let [isLoading, setisLoading] = useState(false);
   // const { isLoading: makeIsLoading } = useAppSelector((state) => state.make);
   // const { isLoading: modelIsLoading } = useAppSelector((state) => state.model);
 
@@ -48,6 +48,7 @@ const Filter: React.FC<Props> = ({ item }) => {
   // }
 
   const handleFilterOpen = async (filter: SideBarContentType) => {
+    setisLoading(true);
     const fetchRequiredFilters = [
       "makes",
       "models",
@@ -58,16 +59,27 @@ const Filter: React.FC<Props> = ({ item }) => {
       "interior_colors",
     ];
     if (fetchRequiredFilters.includes(filter.slug)) {
+      //from the filters object, remove the field that is equal to the filter.filterComponentKey
+
+      let newFilters = Object.keys(filters).reduce((acc, key) => {
+        if (key !== filter.filterComponentKey) {
+          acc[key] = filters[key];
+        }
+        return acc;
+      }, {} as any);
+
       await dispatch(
         getFilterOptions({
           key: filter.slug,
-          filters,
+          filters: newFilters,
           group_by: filter.groupByKey as string,
         })
       );
+      setisLoading(false);
       await dispatch(setFilter(filter.filterComponentKey));
     } else {
-      dispatch(setFilter(filter.filterComponentKey));
+      setisLoading(false);
+      await dispatch(setFilter(filter.filterComponentKey));
     }
   };
 
@@ -80,7 +92,13 @@ const Filter: React.FC<Props> = ({ item }) => {
         <h1 className="font-normal text-secondaryGray">
           {item.title} {item.slug === "sort-by" ? sortKeys[selectedSort] : ""}
         </h1>
-        <CaretRightIcon className="hover:text-specialRed fill-current text-secondaryGray" />
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <div className="spinner w-6 h-6 border-4 border-specialRed border-t-white"></div>
+          </div>
+        ) : (
+          <CaretRightIcon className="hover:text-specialRed fill-current text-secondaryGray" />
+        )}
       </div>
     </div>
   );

@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 import { getCars } from "../../../../features/car/carSlice";
 import {
   getModels,
-  setModelsSelected,
+  setModelOptions,
 } from "../../../../features/model/modelSlice";
-import { setFilter } from "../../../../features/search/searchSlice";
+import {
+  setFilter,
+  setFilterOptions,
+} from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { dummyModels } from "../../../../utils/dummies/dummyModels";
 import { CaretLeftIcon } from "../../../ui/icons";
@@ -15,39 +18,73 @@ const Model = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
-  const { models, modelsSelected } = useAppSelector((state) => state.model);
+  const { modelOptions } = useAppSelector((state) => state.model);
+
+  let { filters, models } = useAppSelector((state) => state.search);
 
   const { makes, selectedMakes } = useAppSelector((state) => state.make);
 
+  let selectedModels = filters.model;
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const modelOptions = models.map((model) => ({
-    collection_name: model.make_name,
-    options: model.models.map((model) => ({
-      value: model.slug,
-      label: model.title,
-    })),
-  }));
+  const groupedByMake = Object.values(
+    models.reduce((acc, model) => {
+      const make = model.make.title;
+      if (!acc[make]) {
+        acc[make] = {
+          make: model.make.title,
+          models: [],
+        };
+      }
+      acc[make].models.push({
+        value: model.model._id,
+        label: model.model.title,
+      });
+      return acc;
+    }, {})
+  );
+  // const modelOptions = models.map((model) => ({
+  //   collection_name: model.make_name,
+  //   options: model.models.map((model) => ({
+  //     value: model.slug,
+  //     label: model.title,
+  //   })),
+  // }));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (modelsSelected.includes(e.target.value)) {
+    if (selectedModels?.includes(e.target.value)) {
       dispatch(
-        setModelsSelected(
-          modelsSelected.filter((item) => item !== e.target.value)
-        )
+        setFilterOptions({
+          field: "model",
+          value: selectedModels.filter((item) => item !== e.target.value),
+        })
       );
     } else {
-      dispatch(setModelsSelected([...modelsSelected, e.target.value]));
+      dispatch(
+        setFilterOptions({
+          field: "model",
+          value: [...(selectedModels as string[]), e.target.value],
+        })
+      );
     }
   };
 
   const handleLabelClick = (value) => {
-    if (modelsSelected.includes(value)) {
+    if (selectedModels?.includes(value)) {
       dispatch(
-        setModelsSelected(modelsSelected.filter((item) => item !== value))
+        setFilterOptions({
+          field: "model",
+          value: selectedModels.filter((item) => item !== value),
+        })
       );
     } else {
-      dispatch(setModelsSelected([...modelsSelected, value]));
+      dispatch(
+        setFilterOptions({
+          field: "model",
+          value: [...(selectedModels as string[]), value],
+        })
+      );
     }
   };
 
@@ -58,7 +95,7 @@ const Model = () => {
     dispatch(setFilter(""));
 
     // dispatch(
-    //   getCars({ makes: selectedMakes, models: modelsSelected, limit: "20" })
+    //   getCars({ makes: selectedMakes, models: selectedModels?, limit: "20" })
     // );
     //update the query strings but don't reload the page
     router.push(
@@ -67,7 +104,7 @@ const Model = () => {
         query: {
           ...router.query,
           make: selectedMakes,
-          model: modelsSelected,
+          model: selectedModels,
         },
       },
       undefined,
@@ -76,9 +113,25 @@ const Model = () => {
   };
 
   useEffect(() => {
+    const groupedByMake = Object.values(
+      models.reduce((acc, model) => {
+        const make = model.make.title;
+        if (!acc[make]) {
+          acc[make] = {
+            make: model.make.title,
+            models: [],
+          };
+        }
+        acc[make].models.push({
+          value: model.model._id,
+          label: model.model.title,
+        });
+        return acc;
+      }, {})
+    );
+    dispatch(setModelOptions(groupedByMake));
     //get models
-    dispatch(getModels({ makes: selectedMakes }));
-  }, [dispatch, selectedMakes]);
+  }, [dispatch, models]);
 
   return (
     <div className="">
@@ -107,7 +160,7 @@ const Model = () => {
                     : "text-[#081314] text-opacity-20 font-light"
                 }   text-[1.25rem] `}
               >
-                {modelOptions[index]?.collection_name}
+                {modelOptions[index]?.make}
               </h2>
               {currentIndex === index && (
                 <motion.div
@@ -121,7 +174,7 @@ const Model = () => {
         </div>
         <div className="h-[1px] bg-dividerGray relative bottom-1.5"></div>
         <div className="pt-3 ">
-          {modelOptions[currentIndex]?.options.map((item, index) => (
+          {modelOptions[currentIndex]?.models.map((item, index) => (
             <div
               className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
               key={index}
@@ -132,12 +185,12 @@ const Model = () => {
                 className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
                 value={item.value}
                 name="make"
-                checked={modelsSelected.includes(item.value)}
+                checked={selectedModels?.includes(item.value)}
                 onChange={handleChange}
               />
               <label
                 className={`leading-primary text-secondary  font-normal ${
-                  modelsSelected.includes(item.value)
+                  selectedModels?.includes(item.value)
                     ? "font-bold text-specialRed"
                     : "text-lighterDark"
                 }`}
