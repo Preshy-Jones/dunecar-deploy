@@ -1,9 +1,9 @@
 import React from "react";
 import { getCars, setOptionDeleted } from "../../../features/car/carSlice";
-import { deleteSelectedMake } from "../../../features/make/makeSlice";
-import { deleteModelsofMake } from "../../../features/model/modelSlice";
+
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import FilterIndicator from "./FilterIndicator";
+import { deleteSelectedMake } from "../../../features/search/searchSlice";
 
 const MakesIndicator = ({ label }) => {
   const dispatch = useAppDispatch();
@@ -11,10 +11,7 @@ const MakesIndicator = ({ label }) => {
   const { selectedMakes } = useAppSelector((state) => state.make);
 
   const handleDelete = async () => {
-    await Promise.all([
-      dispatch(deleteSelectedMake(label)),
-      dispatch(deleteModelsofMake({ make: label, models: modelsSelected })),
-    ]);
+    await Promise.all([dispatch(deleteSelectedMake(label))]);
     dispatch(setOptionDeleted(true));
     // console.log({ selectedMakes, modelsSelected });
   };

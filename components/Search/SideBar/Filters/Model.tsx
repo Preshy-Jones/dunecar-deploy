@@ -60,6 +60,16 @@ const Model = () => {
           value: selectedModels.filter((item) => item !== e.target.value),
         })
       );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            model: [...(selectedModels as string[]), e.target.value],
+          },
+        })
+      );
     } else {
       dispatch(
         setFilterOptions({
@@ -78,11 +88,31 @@ const Model = () => {
           value: selectedModels.filter((item) => item !== value),
         })
       );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            model: [...(selectedModels as string[]), value],
+          },
+        })
+      );
     } else {
       dispatch(
         setFilterOptions({
           field: "model",
           value: [...(selectedModels as string[]), value],
+        })
+      );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            model: [...(selectedModels as string[]), value],
+          },
         })
       );
     }
@@ -98,18 +128,18 @@ const Model = () => {
     //   getCars({ makes: selectedMakes, models: selectedModels?, limit: "20" })
     // );
     //update the query strings but don't reload the page
-    router.push(
-      {
-        pathname: "/search",
-        query: {
-          ...router.query,
-          make: selectedMakes,
-          model: selectedModels,
-        },
-      },
-      undefined,
-      { shallow: true }
-    );
+    // router.push(
+    //   {
+    //     pathname: "/search",
+    //     query: {
+    //       ...router.query,
+    //       make: selectedMakes,
+    //       model: selectedModels,
+    //     },
+    //   },
+    //   undefined,
+    //   { shallow: true }
+    // );
   };
 
   useEffect(() => {

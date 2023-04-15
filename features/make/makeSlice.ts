@@ -46,12 +46,12 @@ const makeSlice = createSlice({
       const { payload } = action;
       state.selectedMakes = payload;
     },
-    deleteSelectedMake: (state, action: PayloadAction<string>) => {
-      const { payload } = action;
-      state.selectedMakes = state.selectedMakes.filter(
-        (make) => make !== payload
-      );
-    },
+    // deleteSelectedMake: (state, action: PayloadAction<string>) => {
+    //   const { payload } = action;
+    //   state.selectedMakes = state.selectedMakes.filter(
+    //     (make) => make !== payload
+    //   );
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -70,7 +70,7 @@ const makeSlice = createSlice({
   },
 });
 
-export const { setMakeOptions, setSelectedMakes, deleteSelectedMake } =
+export const { setMakeOptions, setSelectedMakes } =
   makeSlice.actions;
 
 export default makeSlice.reducer;
