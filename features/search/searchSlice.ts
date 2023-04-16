@@ -142,7 +142,7 @@ const searchSlice = createSlice({
     ) => {
       const { payload } = action;
       state.filters[payload.field] = state.filters[payload.field].filter(
-        (option) => option != payload
+        (option) => option != payload.value
       );
     },
     deleteSelectedMake: (state, action: PayloadAction<string>) => {
@@ -158,7 +158,7 @@ const searchSlice = createSlice({
           }
           return true;
         }
-      )
+      );
     },
   },
   extraReducers: (builder) => {
@@ -198,7 +198,8 @@ export const {
   setSelectedFeatures,
   setFeatureOptions,
   setFilterOptions,
-  deleteSelectedMake
+  deleteSelectedMake,
+  deleteSelectedOption,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

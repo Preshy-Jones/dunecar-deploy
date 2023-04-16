@@ -31,7 +31,7 @@ const MakeFilter = () => {
   const dispatch = useAppDispatch();
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
 
     let selectedMakes = filters.make;
     if (selectedMakes?.includes(e.target.value)) {

@@ -22,8 +22,6 @@ const Model = () => {
 
   let { filters, models } = useAppSelector((state) => state.search);
 
-  const { makes, selectedMakes } = useAppSelector((state) => state.make);
-
   let selectedModels = filters.model;
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,12 +52,43 @@ const Model = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (selectedModels?.includes(e.target.value)) {
+      let newSelectedModels = selectedModels?.filter(
+        (item) => item !== e.target.value
+      ) as string[];
+
       dispatch(
         setFilterOptions({
           field: "model",
-          value: selectedModels.filter((item) => item !== e.target.value),
+          value: newSelectedModels,
         })
       );
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            ...filters,
+            model: newSelectedModels,
+          },
+        })
+      ).then(() => {
+        router.push(
+          {
+            pathname: "/search",
+            query: { ...router.query, model: newSelectedModels },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
+    } else {
+      dispatch(
+        setFilterOptions({
+          field: "model",
+          value: [...(selectedModels as string[]), e.target.value],
+        })
+      );
+
       dispatch(
         getCars({
           page: "1",
@@ -69,23 +98,31 @@ const Model = () => {
             model: [...(selectedModels as string[]), e.target.value],
           },
         })
-      );
-    } else {
-      dispatch(
-        setFilterOptions({
-          field: "model",
-          value: [...(selectedModels as string[]), e.target.value],
-        })
-      );
+      ).then(() => {
+        router.push(
+          {
+            pathname: "/search",
+            query: {
+              ...router.query,
+              model: [...(selectedModels as string[]), e.target.value],
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     }
   };
 
   const handleLabelClick = (value) => {
     if (selectedModels?.includes(value)) {
+      let newSelectedModels = selectedModels?.filter(
+        (item) => item !== value
+      ) as string[];
       dispatch(
         setFilterOptions({
           field: "model",
-          value: selectedModels.filter((item) => item !== value),
+          value: newSelectedModels,
         })
       );
       dispatch(
@@ -97,7 +134,16 @@ const Model = () => {
             model: [...(selectedModels as string[]), value],
           },
         })
-      );
+      ).then(() => {
+        router.push(
+          {
+            pathname: "/search",
+            query: { ...router.query, model: newSelectedModels },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     } else {
       dispatch(
         setFilterOptions({
@@ -114,7 +160,19 @@ const Model = () => {
             model: [...(selectedModels as string[]), value],
           },
         })
-      );
+      ).then(() => {
+        router.push(
+          {
+            pathname: "/search",
+            query: {
+              ...router.query,
+              model: [...(selectedModels as string[]), value],
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     }
   };
 
