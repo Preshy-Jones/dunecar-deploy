@@ -11,6 +11,7 @@ import { setSelectedMakes } from "../features/make/makeSlice";
 import { setModelsSelected } from "../features/model/modelSlice";
 import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
 import Sticky from "react-stickynode";
+import { setFilterOptions } from "../features/search/searchSlice";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -18,12 +19,13 @@ const Search = () => {
   const { cars, isLoading, optionDeleted, moreCarsLoading, count } =
     useAppSelector((state) => state.car);
 
-  const { modelsSelected } = useAppSelector((state) => state.model);
+  // const { modelsSelected } = useAppSelector((state) => state.model);
   const { mobileFilterSortOpen, filters } = useAppSelector(
     (state) => state.search
   );
 
   let selectedMakes = filters.make;
+  let modelsSelected = filters.model;
 
   const router = useRouter();
 
@@ -54,14 +56,24 @@ const Search = () => {
             model: models,
           },
         })
-      )
-      dispatch(setSelectedMakes(makes));
-      dispatch(setModelsSelected(models));
+      );
+      dispatch(
+        setFilterOptions({
+          field: "make",
+          value: makes,
+        })
+      );
+      dispatch(
+        setFilterOptions({
+          field: "model",
+          value: models,
+        })
+      );
     }
   }, [router, dispatch]);
 
   useEffect(() => {
-//    console.log("hello there");
+    //    console.log("hello there");
     if (optionDeleted) {
       console.log({ selectedMakes, modelsSelected });
 
@@ -74,7 +86,11 @@ const Search = () => {
       );
       dispatch(setOptionDeleted(false));
     }
-  }, [optionDeleted, dispatch, selectedMakes, modelsSelected]);
+  }, [
+    optionDeleted,
+    dispatch,
+    // selectedMakes, modelsSelected
+  ]);
 
   useEffect(() => {
     function handleWindowResize() {

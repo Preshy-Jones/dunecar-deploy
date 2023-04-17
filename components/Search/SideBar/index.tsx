@@ -16,8 +16,9 @@ const SideBar = () => {
 
   const dispatch = useAppDispatch();
 
-  const { selectedMakes } = useAppSelector((state) => state.make);
-  const { modelsSelected } = useAppSelector((state) => state.model);
+  const { filters } = useAppSelector((state) => state.search);
+  const selectedMakes = filters.make;
+  const selectedModels = filters.model;
 
   return (
     <div className="font-roboto border-r-[0.1rem] border-r-dividerGray ">
@@ -43,11 +44,11 @@ const SideBar = () => {
                 <MakesIndicator key={index} label={make} />
               </div>
             ))}
-          {modelsSelected &&
-            modelsSelected &&
-            modelsSelected.length > 0 &&
-            modelsSelected[0] !== "" &&
-            modelsSelected.map((model, index) => (
+          {selectedModels &&
+            selectedModels &&
+            selectedModels.length > 0 &&
+            selectedModels[0] !== "" &&
+            selectedModels.map((model, index) => (
               <div key={index}>
                 <ModelsIndicator key={index} label={model} />
               </div>
@@ -78,9 +79,15 @@ const SideBar = () => {
             <div className="  ">
               <div>
                 <div>
-                  {SideBarContent.map((item: any, index) => (
-                    <Filter key={index} item={item} />
-                  ))}
+                  {SideBarContent.map((item: any, index) =>
+                    item.shouldRenderFunction ? (
+                      item.shouldRenderFunction(filters) && (
+                        <Filter key={index} item={item} />
+                      )
+                    ) : (
+                      <Filter key={index} item={item} />
+                    )
+                  )}
                 </div>
               </div>
             </div>

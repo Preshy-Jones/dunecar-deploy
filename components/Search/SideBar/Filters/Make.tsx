@@ -25,40 +25,55 @@ const MakeFilter = () => {
   let initialMakeOptions = makes.map((make) => ({
     value: make.make._id,
     label: make.make.title,
-    count: make.count
+    count: make.count,
   }));
 
   const dispatch = useAppDispatch();
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
 
     let selectedMakes = filters.make;
     if (selectedMakes?.includes(e.target.value)) {
-      dispatch(
+      let newSelectedMakes = selectedMakes?.filter(
+        (item) => item !== e.target.value
+      ) as string[];
+      await dispatch(
         setFilterOptions({
           field: "make",
-          value: selectedMakes.filter((item) => item !== e.target.value),
+          value: newSelectedMakes,
         })
       );
-      dispatch(
+
+      await dispatch(
         getCars({
           page: "1",
           perPage: "20",
           filters: {
             ...filters,
-            make: [...(selectedMakes as string[]), e.target.value],
+            make: newSelectedMakes,
           },
         })
-      );
+      ).then(() => {
+        //make a new array of makes and remove the one that was clicked which is the value
+
+        router.push(
+          {
+            pathname: "/search",
+            query: { ...router.query, make: newSelectedMakes },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     } else {
-      dispatch(
+      await dispatch(
         setFilterOptions({
           field: "make",
           value: [...(selectedMakes as string[]), e.target.value],
         })
       );
-      dispatch(
+      await dispatch(
         getCars({
           page: "1",
           perPage: "20",
@@ -67,30 +82,54 @@ const MakeFilter = () => {
             make: [...(selectedMakes as string[]), e.target.value],
           },
         })
-      );
+      ).then(() => {
+        router.push(
+          {
+            pathname: "/search",
+            query: {
+              ...router.query,
+              make: [...(selectedMakes as string[]), e.target.value],
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     }
   };
-  const handleLabelClick = (value) => {
+  const handleLabelClick = async (value) => {
     let selectedMakes = filters.make;
     if (selectedMakes?.includes(value)) {
-      dispatch(
+      let newSelectedMakes = selectedMakes?.filter(
+        (item) => item !== value
+      ) as string[];
+      await dispatch(
         setFilterOptions({
           field: "make",
-          value: selectedMakes.filter((item) => item !== value),
+          value: newSelectedMakes,
         })
       );
-      dispatch(
+      await dispatch(
         getCars({
           page: "1",
           perPage: "20",
           filters: {
             ...filters,
-            make: [...(selectedMakes as string[]), value],
+            make: newSelectedMakes,
           },
         })
-      );
+      ).then(() => { 
+        router.push(
+          {
+            pathname: "/search",
+            query: { ...router.query, make: newSelectedMakes },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     } else {
-      dispatch(
+      await dispatch(
         setFilterOptions({
           field: "make",
           value: [...(selectedMakes as string[]), value],
@@ -105,7 +144,19 @@ const MakeFilter = () => {
             make: [...(selectedMakes as string[]), value],
           },
         })
-      );
+      ).then(() => {
+        router.push(
+          {
+            pathname: "/search",
+            query: {
+              ...router.query,
+              make: [...(selectedMakes as string[]), value],
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      });
     }
   };
   const handleClose = async () => {
@@ -135,14 +186,6 @@ const MakeFilter = () => {
     dispatch(setMakeOptions(result));
 
     //update the query strings but don't reload the page
-    router.push(
-      {
-        pathname: "/search",
-        query: { ...router.query, make: selectedMakes },
-      },
-      undefined,
-      { shallow: true }
-    );
   };
 
   useEffect(() => {
@@ -151,7 +194,7 @@ const MakeFilter = () => {
     let makeOptionsPayload = makes.map((make) => ({
       value: make.make._id,
       label: make.make.title,
-      count: make.count
+      count: make.count,
     }));
 
     dispatch(setMakeOptions(makeOptionsPayload));

@@ -22,12 +22,12 @@ export interface SearchState {
   featuresLoading: boolean;
   filtersLoading: boolean;
   makes: {
-    id: string;
+    _id: string;
     make: CarMake;
     count: number;
   }[];
   models: {
-    id: string;
+    _id: string;
     count: number;
     model: CarModel;
     make: CarMake;
@@ -136,6 +136,30 @@ const searchSlice = createSlice({
       const { payload } = action;
       state.filters[payload.field] = payload.value;
     },
+    deleteSelectedOption: (
+      state,
+      action: PayloadAction<{ field: string; value: string[] }>
+    ) => {
+      const { payload } = action;
+      state.filters[payload.field] = state.filters[payload.field].filter(
+        (option) => option != payload.value
+      );
+    },
+    deleteSelectedMake: (state, action: PayloadAction<string>) => {
+      const { payload } = action;
+      state.filters.make = (state.filters.make as string[]).filter(
+        (make) => make !== payload
+      );
+      state.filters.model = (state.filters.model as string[]).filter(
+        (model) => {
+          const modelObj = state.models.find((m) => m._id === model);
+          if (modelObj) {
+            return modelObj.make._id !== payload;
+          }
+          return true;
+        }
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -174,6 +198,8 @@ export const {
   setSelectedFeatures,
   setFeatureOptions,
   setFilterOptions,
+  deleteSelectedMake,
+  deleteSelectedOption,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

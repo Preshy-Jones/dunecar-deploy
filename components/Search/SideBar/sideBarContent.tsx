@@ -10,6 +10,10 @@ import Price from "./Filters/Price";
 import SortBy from "./Filters/SortBy";
 import Year from "./Filters/Year";
 
+const shouldRenderModel = (filters: any) => {
+  return filters.make && filters.make.length > 0 && filters.make[0] !== "";
+};
+
 export const SideBarContent = [
   {
     title: "Sort By",
@@ -32,6 +36,7 @@ export const SideBarContent = [
     slug: "models",
     groupByKey: "model_id",
     filterComponentKey: "model",
+    shouldRenderFunction: shouldRenderModel,
   },
   {
     title: "Body Type",
@@ -80,7 +85,7 @@ export const SideBarContent = [
   },
 ];
 
-export type SideBarContentType = typeof SideBarContent[number] ;
+export type SideBarContentType = typeof SideBarContent[number];
 
 export const sideBarContentFilters = {
   make: <MakeFilter />,
