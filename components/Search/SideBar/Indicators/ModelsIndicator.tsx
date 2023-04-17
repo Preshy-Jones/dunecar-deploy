@@ -1,8 +1,8 @@
 import React from "react";
-import { setOptionDeleted } from "../../../features/car/carSlice";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import FilterIndicator from "./FilterIndicator";
-import { deleteSelectedOption } from "../../../features/search/searchSlice";
+import { setOptionDeleted } from "../../../../features/car/carSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import FilterIndicator from "../FilterIndicator";
+import { deleteSelectedOption } from "../../../../features/search/searchSlice";
 import { useRouter } from "next/router";
 
 const ModelsIndicator = ({ label }) => {

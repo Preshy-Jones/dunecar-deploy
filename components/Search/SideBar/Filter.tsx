@@ -52,7 +52,7 @@ const Filter: React.FC<Props> = ({ item }) => {
     const fetchRequiredFilters = [
       "makes",
       "models",
-      "body_types",
+      "bodyTypes",
       "fuel_types",
       "features",
       "exterior_colors",

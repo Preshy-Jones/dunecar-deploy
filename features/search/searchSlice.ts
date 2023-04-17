@@ -5,6 +5,7 @@ import {
   CarMake,
   CarModel,
   Feature,
+  FieldData,
   FilterOptionsInterface,
   FilterPayload,
 } from "../../types/car";
@@ -17,20 +18,29 @@ export interface SearchState {
   selectedExteriorColours: string[];
   selectedinteriorColours: string[];
   selectedFeatures: string[];
-  features: Feature[];
   featureOptions: Option[] | undefined;
   featuresLoading: boolean;
   filtersLoading: boolean;
   makes: {
     _id: string;
-    make: CarMake;
+    make: FieldData;
     count: number;
   }[];
   models: {
     _id: string;
     count: number;
-    model: CarModel;
-    make: CarMake;
+    model: FieldData;
+    make: FieldData;
+  }[];
+  bodyTypes: {
+    _id: string;
+    count: number;
+    body_type: FieldData;
+  }[];
+  features: {
+    _id: string;
+    count: number;
+    feature: FieldData;
   }[];
   exterior_colors: string[];
   interior_colors: string[];
@@ -44,12 +54,14 @@ const initialState: SearchState = {
   selectedExteriorColours: [],
   selectedinteriorColours: [],
   selectedFeatures: [],
-  features: [],
+
   featureOptions: [],
   featuresLoading: false,
   filtersLoading: false,
   makes: [],
   models: [],
+  bodyTypes: [],
+  features: [],
   exterior_colors: [],
   interior_colors: [],
   filters: {
@@ -129,7 +141,7 @@ const searchSlice = createSlice({
       const { payload } = action;
       state.featureOptions = payload;
     },
-    setFilterOptions: (
+    setSelectedFilters: (
       state,
       action: PayloadAction<{ field: string; value: string[] }>
     ) => {
@@ -197,7 +209,7 @@ export const {
   setSelectedInteriorColours,
   setSelectedFeatures,
   setFeatureOptions,
-  setFilterOptions,
+  setSelectedFilters,
   deleteSelectedMake,
   deleteSelectedOption,
 } = searchSlice.actions;

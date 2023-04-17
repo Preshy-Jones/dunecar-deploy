@@ -1,15 +1,10 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { getCars } from "../../../../features/car/carSlice";
-import {
-  getMakes,
-  setMakeOptions,
-  setSelectedMakes,
-} from "../../../../features/make/makeSlice";
-import { getModels } from "../../../../features/model/modelSlice";
+import { setMakeOptions } from "../../../../features/make/makeSlice";
 import {
   setFilter,
-  setFilterOptions,
+  setSelectedFilters,
 } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
@@ -22,11 +17,11 @@ const MakeFilter = () => {
   let selectedMakes = filters.make;
   const router = useRouter();
 
-  let initialMakeOptions = makes.map((make) => ({
-    value: make.make._id,
-    label: make.make.title,
-    count: make.count,
-  }));
+  // let initialMakeOptions = makes.map((make) => ({
+  //   value: make.make._id,
+  //   label: make.make.title,
+  //   count: make.count,
+  // }));
 
   const dispatch = useAppDispatch();
 
@@ -39,7 +34,7 @@ const MakeFilter = () => {
         (item) => item !== e.target.value
       ) as string[];
       await dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "make",
           value: newSelectedMakes,
         })
@@ -55,8 +50,7 @@ const MakeFilter = () => {
           },
         })
       ).then(() => {
-        //make a new array of makes and remove the one that was clicked which is the value
-
+        //update route params
         router.push(
           {
             pathname: "/search",
@@ -68,7 +62,7 @@ const MakeFilter = () => {
       });
     } else {
       await dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "make",
           value: [...(selectedMakes as string[]), e.target.value],
         })
@@ -104,7 +98,7 @@ const MakeFilter = () => {
         (item) => item !== value
       ) as string[];
       await dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "make",
           value: newSelectedMakes,
         })
@@ -118,7 +112,7 @@ const MakeFilter = () => {
             make: newSelectedMakes,
           },
         })
-      ).then(() => { 
+      ).then(() => {
         router.push(
           {
             pathname: "/search",
@@ -130,7 +124,7 @@ const MakeFilter = () => {
       });
     } else {
       await dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "make",
           value: [...(selectedMakes as string[]), value],
         })
@@ -161,8 +155,18 @@ const MakeFilter = () => {
   };
   const handleClose = async () => {
     await dispatch(setFilter(""));
-    let selectedMakes = filters.make;
-    let result = initialMakeOptions?.sort((a, b) => {
+  };
+
+  useEffect(() => {
+    //when there are no makeOptions loaded yet
+    // if (!makeOptions || makeOptions.length === 0) {
+    let makeOptionsPayload = makes.map((make) => ({
+      value: make.make._id,
+      label: make.make.title,
+      count: make.count,
+    }));
+
+    let result = makeOptionsPayload?.sort((a, b) => {
       if (
         selectedMakes?.includes(a.value) &&
         !selectedMakes.includes(b.value)
@@ -178,26 +182,7 @@ const MakeFilter = () => {
       }
     });
 
-    console.log(result);
-
-    // setOptionsUpdated(optionsUpdated);
-    // console.log(optionsUpdated);
-
     dispatch(setMakeOptions(result));
-
-    //update the query strings but don't reload the page
-  };
-
-  useEffect(() => {
-    //when there are no makeOptions loaded yet
-    // if (!makeOptions || makeOptions.length === 0) {
-    let makeOptionsPayload = makes.map((make) => ({
-      value: make.make._id,
-      label: make.make.title,
-      count: make.count,
-    }));
-
-    dispatch(setMakeOptions(makeOptionsPayload));
     // }
   }, [makes, dispatch]);
 
@@ -212,40 +197,34 @@ const MakeFilter = () => {
           Make
         </h1>
       </div>
-      {isLoading ? (
-        <div className="flex justify-center items-center h-[50vh]">
-          <Spinner />
-        </div>
-      ) : (
-        <div className="h-[29rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
-          {makeOptions?.map((item, index) => (
-            <div
-              className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
-              key={index}
-              onClick={() => handleLabelClick(item.value)}
+      <div className="h-[29rem] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded my-scrollbar scrollbar-thumb-specialRed scrollbar-track-gray-200">
+        {makeOptions?.map((item, index) => (
+          <div
+            className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+            key={index}
+            onClick={() => handleLabelClick(item.value)}
+          >
+            <input
+              type="checkbox"
+              className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
+              value={item.value}
+              name="make"
+              checked={selectedMakes?.includes(item.value)}
+              onChange={handleChange}
+            />
+            <label
+              className={`leading-primary text-secondary font-normal cursor-pointer ${
+                selectedMakes?.includes(item.value)
+                  ? "font-bold text-specialRed"
+                  : "text-lighterDark"
+              }`}
+              style={{ marginLeft: "5px" }}
             >
-              <input
-                type="checkbox"
-                className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
-                value={item.value}
-                name="make"
-                checked={selectedMakes?.includes(item.value)}
-                onChange={handleChange}
-              />
-              <label
-                className={`leading-primary text-secondary font-normal cursor-pointer ${
-                  selectedMakes?.includes(item.value)
-                    ? "font-bold text-specialRed"
-                    : "text-lighterDark"
-                }`}
-                style={{ marginLeft: "5px" }}
-              >
-                {item.label} ({item.count})
-              </label>
-            </div>
-          ))}
-        </div>
-      )}
+              {item.label} ({item.count})
+            </label>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

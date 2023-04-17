@@ -38,6 +38,7 @@ const Model = () => {
       acc[make].models.push({
         value: model.model._id,
         label: model.model.title,
+        count: model.count,
       });
       return acc;
     }, {})
@@ -213,6 +214,7 @@ const Model = () => {
         acc[make].models.push({
           value: model.model._id,
           label: model.model.title,
+          count: model.count,
         });
         return acc;
       }, {})
@@ -284,7 +286,7 @@ const Model = () => {
                 }`}
                 style={{ marginLeft: "5px" }}
               >
-                {item.label}
+                {item.label} ({item.count})
               </label>
             </div>
           ))}

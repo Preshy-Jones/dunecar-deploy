@@ -22,6 +22,14 @@ export interface Car {
   }[];
 }
 
+export type FieldData = {
+  _id: string;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+  
+
 export interface CarModels {
   _id: string;
   make_name: string;
@@ -33,14 +41,15 @@ export interface CarModels {
 export type CarMake = {
   _id: string;
   title: string;
-  slug: string;
+  // slug: string;
   createdAt: Date;
   updatedAt: Date;
 };
+
 export type CarModel = {
   _id: string;
   title: string;
-  slug: string;
+  // slug: string;
   createdAt: Date;
   updatedAt: Date;
 };

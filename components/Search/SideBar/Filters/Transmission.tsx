@@ -1,21 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { getCars } from "../../../../features/car/carSlice";
-import {
-  getMakes,
-  setMakeOptions,
-  setSelectedMakes,
-} from "../../../../features/make/makeSlice";
-import { getModels } from "../../../../features/model/modelSlice";
+import { setMakeOptions } from "../../../../features/make/makeSlice";
 import {
   setFilter,
   setSelectedFilters,
 } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
-import { Spinner } from "../../../ui/others";
 
-const FuelTypeFilter = () => {
+const TransmissionFilter = () => {
   let { makeOptions, isLoading } = useAppSelector((state) => state.make);
   let { makes, filters } = useAppSelector((state) => state.search);
 
@@ -55,7 +49,6 @@ const FuelTypeFilter = () => {
           },
         })
       ).then(() => {
-        
         //update route params
         router.push(
           {
@@ -245,4 +238,4 @@ const FuelTypeFilter = () => {
   );
 };
 
-export default FuelTypeFilter;
+export default TransmissionFilter;

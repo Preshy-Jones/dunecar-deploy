@@ -11,7 +11,7 @@ import { setSelectedMakes } from "../features/make/makeSlice";
 import { setModelsSelected } from "../features/model/modelSlice";
 import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
 import Sticky from "react-stickynode";
-import { setFilterOptions } from "../features/search/searchSlice";
+import { setSelectedFilters } from "../features/search/searchSlice";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -58,13 +58,13 @@ const Search = () => {
         })
       );
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "make",
           value: makes,
         })
       );
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: models,
         })

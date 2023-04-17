@@ -40,7 +40,7 @@ export const SideBarContent = [
   },
   {
     title: "Body Type",
-    slug: "body_types",
+    slug: "bodyTypes",
     groupByKey: "body_type_id",
     filterComponentKey: "body_type",
   },
@@ -83,6 +83,12 @@ export const SideBarContent = [
     groupByKey: "interior_color",
     filterComponentKey: "interior_color",
   },
+  {
+    title: "Transmission",
+    slug: "transmission",
+    groupByKey: "transmission",
+    filterComponentKey: "transmission",
+  }
 ];
 
 export type SideBarContentType = typeof SideBarContent[number];
