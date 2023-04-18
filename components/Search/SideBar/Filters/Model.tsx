@@ -7,7 +7,7 @@ import {
 } from "../../../../features/model/modelSlice";
 import {
   setFilter,
-  setFilterOptions,
+  setSelectedFilters,
 } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { dummyModels } from "../../../../utils/dummies/dummyModels";
@@ -58,7 +58,7 @@ const Model = () => {
       ) as string[];
 
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: newSelectedModels,
         })
@@ -84,7 +84,7 @@ const Model = () => {
       });
     } else {
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: [...(selectedModels as string[]), e.target.value],
         })
@@ -121,7 +121,7 @@ const Model = () => {
         (item) => item !== value
       ) as string[];
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: newSelectedModels,
         })
@@ -147,7 +147,7 @@ const Model = () => {
       });
     } else {
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: [...(selectedModels as string[]), value],
         })

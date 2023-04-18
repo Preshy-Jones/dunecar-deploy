@@ -6,20 +6,34 @@ export interface FilterOptionsState {
   exteriorColourOptions: Option[];
   interiorColourOptions: Option[];
   featureOptions: Option[];
+  transmissionOptions: Option[];
 }
 
 const initialState: FilterOptionsState = {
   exteriorColourOptions: [],
   interiorColourOptions: [],
   featureOptions: [],
+  transmissionOptions: [],
 };
 
 const FilterOptionsSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilterOptions: (
+      state,
+      action: PayloadAction<{ field: string; value: {
+        label: string;
+        value: string;
+        count: number;
+      }[] }>
+    ) => {
+      const { payload } = action;
+      state[payload.field] = payload.value;
+    },
+  },
 });
 
-// export const {} = FilterOptionsSlice.actions;
+export const { setFilterOptions } = FilterOptionsSlice.actions;
 
 export default FilterOptionsSlice.reducer;

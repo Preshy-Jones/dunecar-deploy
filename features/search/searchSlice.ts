@@ -42,8 +42,19 @@ export interface SearchState {
     count: number;
     feature: FieldData;
   }[];
-  exterior_colors: string[];
-  interior_colors: string[];
+  exterior_colors: {
+    _id: string;
+    count: number;
+  }[];
+  interior_colors: {
+    _id: string;
+    count: number;
+  }[];
+  transmissions: {
+    _id: string;
+    count: number;
+    transmission: FieldData;
+  }[];
   filters: FilterOptionsInterface;
 }
 
@@ -64,6 +75,7 @@ const initialState: SearchState = {
   features: [],
   exterior_colors: [],
   interior_colors: [],
+  transmissions: [],
   filters: {
     make: [],
     model: [],
@@ -77,6 +89,7 @@ const initialState: SearchState = {
     exterior_color: [],
     interior_color: [],
     features: [],
+    transmission: [],
   },
 };
 

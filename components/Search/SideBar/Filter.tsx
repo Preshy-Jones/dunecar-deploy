@@ -57,6 +57,7 @@ const Filter: React.FC<Props> = ({ item }) => {
       "features",
       "exterior_colors",
       "interior_colors",
+      "transmissions",
     ];
     if (fetchRequiredFilters.includes(filter.slug)) {
       //from the filters object, remove the field that is equal to the filter.filterComponentKey
