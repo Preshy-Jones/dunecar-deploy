@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import MakesIndicator from "../../SideBar/MakesIndicator";
-import ModelsIndicator from "../../SideBar/ModelsIndicator";
+import MakesIndicator from "../../SideBar/Indicators/MakesIndicator";
+import ModelsIndicator from "../../SideBar/Indicators/ModelsIndicator";
 import FilterIcon from "../../../ui/icons/FilterIcon";
 import SortIcon from "../../../ui/icons/SortIcon";
 import {

@@ -8,6 +8,7 @@ import Mileage from "./Filters/Mileage";
 import Model from "./Filters/Model";
 import Price from "./Filters/Price";
 import SortBy from "./Filters/SortBy";
+import TransmissionFilter from "./Filters/Transmission";
 import Year from "./Filters/Year";
 
 const shouldRenderModel = (filters: any) => {
@@ -40,7 +41,7 @@ export const SideBarContent = [
   },
   {
     title: "Body Type",
-    slug: "body_types",
+    slug: "bodyTypes",
     groupByKey: "body_type_id",
     filterComponentKey: "body_type",
   },
@@ -83,6 +84,12 @@ export const SideBarContent = [
     groupByKey: "interior_color",
     filterComponentKey: "interior_color",
   },
+  {
+    title: "Transmission",
+    slug: "transmissions",
+    groupByKey: "transmission_id",
+    filterComponentKey: "transmission",
+  }
 ];
 
 export type SideBarContentType = typeof SideBarContent[number];
@@ -109,4 +116,6 @@ export const sideBarContentFilters = {
   features: <Feature />,
 
   mileage: <Mileage />,
+
+  transmission: <TransmissionFilter />,
 };

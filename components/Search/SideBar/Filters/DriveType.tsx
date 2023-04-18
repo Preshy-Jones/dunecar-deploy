@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { CaretLeftIcon } from "../../../ui/icons";
 import { Spinner } from "../../../ui/others";
 
-const FuelTypeFilter = () => {
+const MakeFilter = () => {
   let { makeOptions, isLoading } = useAppSelector((state) => state.make);
   let { makes, filters } = useAppSelector((state) => state.search);
 
@@ -245,4 +245,4 @@ const FuelTypeFilter = () => {
   );
 };
 
-export default FuelTypeFilter;
+export default MakeFilter;

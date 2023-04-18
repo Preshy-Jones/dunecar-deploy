@@ -1,9 +1,9 @@
 import React from "react";
-import { getCars, setOptionDeleted } from "../../../features/car/carSlice";
+import { getCars, setOptionDeleted } from "../../../../features/car/carSlice";
 
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import FilterIndicator from "./FilterIndicator";
-import { deleteSelectedMake } from "../../../features/search/searchSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import FilterIndicator from "../FilterIndicator";
+import { deleteSelectedMake } from "../../../../features/search/searchSlice";
 import { useRouter } from "next/router";
 
 const MakesIndicator = ({ label }) => {

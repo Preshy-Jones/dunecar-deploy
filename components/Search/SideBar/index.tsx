@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
 
-import MakesIndicator from "./MakesIndicator";
-import ModelsIndicator from "./ModelsIndicator";
+import MakesIndicator from "./Indicators/MakesIndicator";
+import ModelsIndicator from "./Indicators/ModelsIndicator";
 
 import { motion, AnimatePresence } from "framer-motion";
 

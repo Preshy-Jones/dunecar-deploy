@@ -52,11 +52,12 @@ const Filter: React.FC<Props> = ({ item }) => {
     const fetchRequiredFilters = [
       "makes",
       "models",
-      "body_types",
+      "bodyTypes",
       "fuel_types",
       "features",
       "exterior_colors",
       "interior_colors",
+      "transmissions",
     ];
     if (fetchRequiredFilters.includes(filter.slug)) {
       //from the filters object, remove the field that is equal to the filter.filterComponentKey

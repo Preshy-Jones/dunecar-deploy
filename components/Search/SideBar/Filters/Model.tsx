@@ -7,7 +7,7 @@ import {
 } from "../../../../features/model/modelSlice";
 import {
   setFilter,
-  setFilterOptions,
+  setSelectedFilters,
 } from "../../../../features/search/searchSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { dummyModels } from "../../../../utils/dummies/dummyModels";
@@ -38,6 +38,7 @@ const Model = () => {
       acc[make].models.push({
         value: model.model._id,
         label: model.model.title,
+        count: model.count,
       });
       return acc;
     }, {})
@@ -57,7 +58,7 @@ const Model = () => {
       ) as string[];
 
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: newSelectedModels,
         })
@@ -83,7 +84,7 @@ const Model = () => {
       });
     } else {
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: [...(selectedModels as string[]), e.target.value],
         })
@@ -120,7 +121,7 @@ const Model = () => {
         (item) => item !== value
       ) as string[];
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: newSelectedModels,
         })
@@ -146,7 +147,7 @@ const Model = () => {
       });
     } else {
       dispatch(
-        setFilterOptions({
+        setSelectedFilters({
           field: "model",
           value: [...(selectedModels as string[]), value],
         })
@@ -213,6 +214,7 @@ const Model = () => {
         acc[make].models.push({
           value: model.model._id,
           label: model.model.title,
+          count: model.count,
         });
         return acc;
       }, {})
@@ -284,7 +286,7 @@ const Model = () => {
                 }`}
                 style={{ marginLeft: "5px" }}
               >
-                {item.label}
+                {item.label} ({item.count})
               </label>
             </div>
           ))}
