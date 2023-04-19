@@ -37,6 +37,11 @@ export interface SearchState {
     count: number;
     body_type: FieldData;
   }[];
+  fuelTypes: {
+    _id: string;
+    count: number;
+    fuel_type: FieldData;
+  }[];
   features: {
     _id: string;
     count: number;
@@ -50,10 +55,45 @@ export interface SearchState {
     _id: string;
     count: number;
   }[];
+  locations: {
+    _id: string;
+    count: number;
+  }[];
   transmissions: {
     _id: string;
     count: number;
     transmission: FieldData;
+  }[];
+  series: {
+    _id: string;
+    count: number;
+    series: FieldData;
+  }[];
+  bodyStyles: {
+    _id: string;
+    count: number;
+    body_style: FieldData;
+  }[];
+  trims: {
+    _id: string;
+    count: number;
+    trim: FieldData;
+  }[];
+  vehicleConditions: {
+    _id: string;
+    count: number;
+  }[];
+  cylinders: {
+    _id: string;
+    count: number;
+  }[];
+  mpg_highway: {
+    _id: string;
+    count: number;
+  }[];
+  packages: {
+    _id: string;
+    count: number;
   }[];
   filters: FilterOptionsInterface;
 }
@@ -72,14 +112,24 @@ const initialState: SearchState = {
   makes: [],
   models: [],
   bodyTypes: [],
+  fuelTypes: [],
   features: [],
   exterior_colors: [],
   interior_colors: [],
   transmissions: [],
+  locations: [],
+  series: [],
+  bodyStyles: [],
+  trims: [],
+  vehicleConditions: [],
+  packages: [],
+  cylinders: [],
+  mpg_highway: [],
   filters: {
     make: [],
     model: [],
     body_type: [],
+    body_style: [],
     fuel_type: [],
     year_from: 0,
     year_to: 0,
@@ -90,6 +140,11 @@ const initialState: SearchState = {
     interior_color: [],
     features: [],
     transmission: [],
+    location: [],
+    series: [],
+    vehicle_condition: [],
+    trim: [],
+    cylinder_count: [],
   },
 };
 
@@ -163,7 +218,7 @@ const searchSlice = createSlice({
     },
     deleteSelectedOption: (
       state,
-      action: PayloadAction<{ field: string; value: string[] }>
+      action: PayloadAction<{ field: string; value: string }>
     ) => {
       const { payload } = action;
       state.filters[payload.field] = state.filters[payload.field].filter(

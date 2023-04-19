@@ -8,6 +8,11 @@ import { motion } from "framer-motion";
 
 const Product = ({ car }) => {
   const [navigatorOpen, setnavigatorOpen] = React.useState(false);
+  const keys = {
+    local_used: "Local Used",
+    foreign_used: "Foreign Used",
+    brand_new: "Brand New",
+  };
 
   return (
     <div className="cursor-pointer flex justify-center w-full">
@@ -37,12 +42,14 @@ const Product = ({ car }) => {
                     </h2>
                   </div>
                   <div className="bg-greyBg flex items-center px-1 py-1 rounded-sm w-[40%] justify-center">
-                    <h2 className="text-xlg leading-[0.87875rem] tracking-[-0.03em]">Nigerian Used</h2>
+                    <h2 className="text-xlg leading-[0.87875rem] tracking-[-0.03em]">
+                      {keys[car.vehicle_condition]}
+                    </h2>
                   </div>
                 </div>
                 <div className="flex 1.5xl:text-[1.210525rem] lg:[1rem] tablet:text-[0.9rem] tex  justify-start text-specialBlack font-semibold leading-tertiary">
                   <h3 className="mr-3">
-                    ${car?.price && priceSplitter(car?.price)}
+                    ₦{car?.price && priceSplitter(car?.price)}
                   </h3>
 
                   <Image src={dot} alt="dot" />
