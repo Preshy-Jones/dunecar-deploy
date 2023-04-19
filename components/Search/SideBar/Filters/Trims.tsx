@@ -54,7 +54,7 @@ const TrimsFilter = () => {
       {trimsOptions?.map((item, index) => (
         <div
           className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
-          key={index}a
+          key={index}
           onClick={() => handleChange(item.value)}
         >
           <input
