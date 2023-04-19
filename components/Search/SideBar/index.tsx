@@ -10,6 +10,7 @@ import MakesIndicator from "./Indicators/MakesIndicator";
 import ModelsIndicator from "./Indicators/ModelsIndicator";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Indicators from "./Indicators/Indicator";
 
 const SideBar = () => {
   const { toggledFilter } = useAppSelector((state) => state.search);
@@ -35,24 +36,9 @@ const SideBar = () => {
           </h2>
         </div>
         <div className="flex flex-wrap w-full px-6 text-white pb-4">
-          {selectedMakes &&
-            selectedMakes &&
-            selectedMakes.length > 0 &&
-            selectedMakes[0] !== "" &&
-            selectedMakes.map((make, index) => (
-              <div key={index}>
-                <MakesIndicator key={index} label={make} />
-              </div>
-            ))}
-          {selectedModels &&
-            selectedModels &&
-            selectedModels.length > 0 &&
-            selectedModels[0] !== "" &&
-            selectedModels.map((model, index) => (
-              <div key={index}>
-                <ModelsIndicator key={index} label={model} />
-              </div>
-            ))}
+          {Object.keys(filters).map((filter, index) => (
+            <Indicators filterKey={filter} key={index} />
+          ))}
         </div>
       </div>
       <div className="border-t-dividerGray border-b border-t py-[1.6rem] flex flex-col items-center bg-white">

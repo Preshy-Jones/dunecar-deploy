@@ -4,29 +4,32 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setFilterOptions } from "../../../../features/filters_options/filterOptionsSlice";
 import useFilter from "../../../../hooks/useFilter";
 
-const FuelTypeFilter = () => {
-  let { fuelTypeOptions } = useAppSelector((state) => state.filterOptions);
-  let { filters, fuelTypes } = useAppSelector((state) => state.search);
+const VehicleConditionFilter = () => {
+  let { vehicleConditionsOptions } = useAppSelector(
+    (state) => state.filterOptions
+  );
+  let { filters, vehicleConditions } = useAppSelector((state) => state.search);
+
   const dispatch = useAppDispatch();
 
-  let selectedFuelTypes = filters.fuel_type;
+  let selectedVehicleCondtions = filters.vehicle_condition;
 
   const handleSetOptions = () => {
-    let optionsPayload = fuelTypes.map((option) => ({
+    let optionsPayload = vehicleConditions.map((option) => ({
       value: option._id,
-      label: option.fuel_type.title,
+      label: option._id,
       count: option.count,
     }));
 
     optionsPayload?.sort((a, b) => {
       if (
-        selectedFuelTypes?.includes(a.value) &&
-        !selectedFuelTypes.includes(b.value)
+        selectedVehicleCondtions?.includes(a.value) &&
+        !selectedVehicleCondtions.includes(b.value)
       ) {
         return -1;
       } else if (
-        !selectedFuelTypes?.includes(a.value) &&
-        selectedFuelTypes?.includes(b.value)
+        !selectedVehicleCondtions?.includes(a.value) &&
+        selectedVehicleCondtions?.includes(b.value)
       ) {
         return 1;
       } else {
@@ -36,22 +39,27 @@ const FuelTypeFilter = () => {
 
     dispatch(
       setFilterOptions({
-        field: "fuelTypeOptions",
+        field: "vehicleConditionsOptions",
         value: optionsPayload,
       })
     );
   };
 
   let { handleChange } = useFilter({
-    field: "fuel_type",
-    filterData: fuelTypes,
-    selected: selectedFuelTypes as string[],
+    field: "vehicle_condition",
+    filterData: vehicleConditions,
+    selected: selectedVehicleCondtions as string[],
     setOptionsHandler: handleSetOptions,
   });
+  const keys = {
+    local_used: "Local Used",
+    foreign_used: "Foreign Used",
+    brand_new: "Brand New",
+  };
 
   return (
-    <FilterBody title="Series">
-      {fuelTypeOptions?.map((item, index) => (
+    <FilterBody title="Vehicle Conditions">
+      {vehicleConditionsOptions?.map((item, index) => (
         <div
           className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
           key={index}
@@ -61,19 +69,19 @@ const FuelTypeFilter = () => {
             type="checkbox"
             className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
             value={item.value}
-            name="make"
-            checked={selectedFuelTypes?.includes(item.value)}
+            name="vehicle_condition"
+            checked={selectedVehicleCondtions?.includes(item.value)}
             onChange={(e) => handleChange(e.target.value)}
           />
           <label
             className={`leading-primary text-secondary font-normal cursor-pointer ${
-              selectedFuelTypes?.includes(item.value)
+              selectedVehicleCondtions?.includes(item.value)
                 ? "font-bold text-specialRed"
                 : "text-lighterDark"
             }`}
             style={{ marginLeft: "5px" }}
           >
-            {item.label} ({item.count})
+            {keys[item.label]} ({item.count})
           </label>
         </div>
       ))}
@@ -81,4 +89,4 @@ const FuelTypeFilter = () => {
   );
 };
 
-export default FuelTypeFilter;
+export default VehicleConditionFilter;

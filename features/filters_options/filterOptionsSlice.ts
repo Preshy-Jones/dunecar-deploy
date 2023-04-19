@@ -7,6 +7,17 @@ export interface FilterOptionsState {
   interiorColourOptions: Option[];
   featureOptions: Option[];
   transmissionOptions: Option[];
+  locationOptions: Option[];
+  bodyTypeOptions: Option[];
+  seriesOptions: Option[];
+  packagesOptions: Option[];
+  vehicleConditionsOptions: Option[];
+  trimsOptions: Option[];
+  bodyStyleOptions: Option[];
+  fuelTypeOptions: Option[];
+  packagesOOptions: Option[];
+  cylinderCountOptions: Option[];
+  mpgHighwayOptions: Option[];
 }
 
 const initialState: FilterOptionsState = {
@@ -14,6 +25,17 @@ const initialState: FilterOptionsState = {
   interiorColourOptions: [],
   featureOptions: [],
   transmissionOptions: [],
+  locationOptions: [],
+  bodyTypeOptions: [],
+  seriesOptions: [],
+  packagesOptions: [],
+  vehicleConditionsOptions: [],
+  trimsOptions: [],
+  bodyStyleOptions: [],
+  fuelTypeOptions: [],
+  packagesOOptions: [],
+  cylinderCountOptions: [],
+  mpgHighwayOptions: [],
 };
 
 const FilterOptionsSlice = createSlice({
@@ -22,11 +44,14 @@ const FilterOptionsSlice = createSlice({
   reducers: {
     setFilterOptions: (
       state,
-      action: PayloadAction<{ field: string; value: {
-        label: string;
-        value: string;
-        count: number;
-      }[] }>
+      action: PayloadAction<{
+        field: string;
+        value: {
+          label: string;
+          value: string;
+          count: number;
+        }[];
+      }>
     ) => {
       const { payload } = action;
       state[payload.field] = payload.value;

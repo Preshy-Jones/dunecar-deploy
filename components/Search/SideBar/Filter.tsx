@@ -53,11 +53,17 @@ const Filter: React.FC<Props> = ({ item }) => {
       "makes",
       "models",
       "bodyTypes",
-      "fuel_types",
+      "fuelTypes",
       "features",
       "exterior_colors",
       "interior_colors",
       "transmissions",
+      "locations",
+      "series",
+      "bodyStyles",
+      "trims",
+      "vehicleConditions",
+      "cylinders"
     ];
     if (fetchRequiredFilters.includes(filter.slug)) {
       //from the filters object, remove the field that is equal to the filter.filterComponentKey
@@ -95,7 +101,7 @@ const Filter: React.FC<Props> = ({ item }) => {
         </h1>
         {isLoading ? (
           <div className="flex justify-center items-center">
-            <div className="spinner w-6 h-6 border-4 border-specialRed border-t-white"></div>
+            <div className="spinner w-5 h-5 border-[3px] border-specialRed border-t-white"></div>
           </div>
         ) : (
           <CaretRightIcon className="hover:text-specialRed fill-current text-secondaryGray" />

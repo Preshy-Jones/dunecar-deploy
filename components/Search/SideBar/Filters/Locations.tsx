@@ -4,29 +4,30 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setFilterOptions } from "../../../../features/filters_options/filterOptionsSlice";
 import useFilter from "../../../../hooks/useFilter";
 
-const FuelTypeFilter = () => {
-  let { fuelTypeOptions } = useAppSelector((state) => state.filterOptions);
-  let { filters, fuelTypes } = useAppSelector((state) => state.search);
+const LocationFilter = () => {
+  let { locationOptions } = useAppSelector((state) => state.filterOptions);
+  let { filters, locations } = useAppSelector((state) => state.search);
+
   const dispatch = useAppDispatch();
 
-  let selectedFuelTypes = filters.fuel_type;
+  let selectedLocations = filters.location;
 
   const handleSetOptions = () => {
-    let optionsPayload = fuelTypes.map((option) => ({
-      value: option._id,
-      label: option.fuel_type.title,
-      count: option.count,
+    let locationOptionsPayload = locations.map((location) => ({
+      value: location._id,
+      label: location._id,
+      count: location.count,
     }));
 
-    optionsPayload?.sort((a, b) => {
+    locationOptionsPayload?.sort((a, b) => {
       if (
-        selectedFuelTypes?.includes(a.value) &&
-        !selectedFuelTypes.includes(b.value)
+        selectedLocations?.includes(a.value) &&
+        !selectedLocations.includes(b.value)
       ) {
         return -1;
       } else if (
-        !selectedFuelTypes?.includes(a.value) &&
-        selectedFuelTypes?.includes(b.value)
+        !selectedLocations?.includes(a.value) &&
+        selectedLocations?.includes(b.value)
       ) {
         return 1;
       } else {
@@ -36,22 +37,22 @@ const FuelTypeFilter = () => {
 
     dispatch(
       setFilterOptions({
-        field: "fuelTypeOptions",
-        value: optionsPayload,
+        field: "locationOptions",
+        value: locationOptionsPayload,
       })
     );
   };
 
   let { handleChange } = useFilter({
-    field: "fuel_type",
-    filterData: fuelTypes,
-    selected: selectedFuelTypes as string[],
+    field: "location",
+    filterData: locations,
+    selected: selectedLocations as string[],
     setOptionsHandler: handleSetOptions,
   });
 
   return (
-    <FilterBody title="Series">
-      {fuelTypeOptions?.map((item, index) => (
+    <FilterBody title="Location">
+      {locationOptions?.map((item, index) => (
         <div
           className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
           key={index}
@@ -62,12 +63,12 @@ const FuelTypeFilter = () => {
             className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
             value={item.value}
             name="make"
-            checked={selectedFuelTypes?.includes(item.value)}
+            checked={selectedLocations?.includes(item.value)}
             onChange={(e) => handleChange(e.target.value)}
           />
           <label
             className={`leading-primary text-secondary font-normal cursor-pointer ${
-              selectedFuelTypes?.includes(item.value)
+              selectedLocations?.includes(item.value)
                 ? "font-bold text-specialRed"
                 : "text-lighterDark"
             }`}
@@ -81,4 +82,4 @@ const FuelTypeFilter = () => {
   );
 };
 
-export default FuelTypeFilter;
+export default LocationFilter;

@@ -20,6 +20,7 @@ export interface Car {
     };
     installedUpgrade: boolean;
   }[];
+  vehicle_condition: string;
 }
 
 export type FieldData = {
@@ -28,7 +29,6 @@ export type FieldData = {
   createdAt: Date;
   updatedAt: Date;
 };
-  
 
 export interface CarModels {
   _id: string;
@@ -61,8 +61,8 @@ export type CarBodyType = {
 };
 
 export type CarPayload = {
-  page:string;
-  perPage:string;
+  page: string;
+  perPage: string;
   filters: FilterOptionsInterface;
 };
 
@@ -82,6 +82,7 @@ export type FilterOptionsInterface = {
   make?: string[];
   model?: string[];
   body_type?: string[];
+  body_style?: string[];
   fuel_type?: string[];
   year_from?: number;
   year_to?: number;
@@ -95,6 +96,10 @@ export type FilterOptionsInterface = {
   trim?: String[];
   series?: String[];
   packages?: String[];
+  location?: string[];
+  vehicle_condition?: string[];
+  cylinder_count?: string[];
+  mpg_highway?: string;
 };
 
 export type FilterPayload = {
