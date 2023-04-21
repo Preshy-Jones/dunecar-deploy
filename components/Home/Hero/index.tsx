@@ -342,7 +342,7 @@ const Hero = () => {
           modelOptions={modelOptions}
           makeToggled={makeToggled}
           modelToggled={modelToggled}
-          modelsSelected={selectedModels}
+          modelsSelected={selectedModels as string[]}
           setModelsSelected={setModelsSelected}
           makeOptionsPayload={makeOptionsPayload}
           locationOptions={locationOptions}
@@ -352,8 +352,18 @@ const Hero = () => {
           makeOpenHandleOperation={makeOpenHandleOperation}
           modelCloseHandleOperation={modelCloseHandleOperation}
           modelOpenHandleOperation={modelOpenHandleOperation}
-          selectedMakes={selectedMakes}
-          setSelectedMakes={setSelectedMakes}
+          selectedMakes={selectedMakes as string[]}
+          setSelectedMakes={makeHandleSetSelected}
+          makeHandleSetOptions={makeHandleSetOptions}
+          modelHandleSetOptions={modelHandleSetOptions}
+          locationHandleSetOptions={locationHandleSetOptions}
+          groupedByMake={groupedByMake as ModelOptions[]}
+          setSelectedLocations={locationHandleSetSelected}
+          selectedLocations={selectedLocations as string[]}
+          locationCloseHandleOperation={locationCloseHandleOperation}
+          locationOpenHandleOperation={locationOpenHandleOperation}
+          locationOptionsPayload={locationOptionsPayload}
+          locationToggled={locationToggled}
           cars={cars}
           count={count}
         />

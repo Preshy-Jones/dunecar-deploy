@@ -23,14 +23,25 @@ const Indicators = ({ filterKey }) => {
           <FilterIndicator
             key={index}
             label={option}
-            handleDelete={() =>
-              deleteFunctions[filterKey](
-                dispatch,
-                option,
-                selectedOptions,
-                router
-              )
-            }
+            handleDelete={() => {
+              if (!deleteFunctions.specialCases.includes(filterKey)) {
+                deleteFunctions.general(
+                  dispatch,
+                  option,
+                  selectedOptions,
+                  router,
+                  filterKey
+                );
+              }
+              if (deleteFunctions.specialCases.includes(filterKey)) {
+                deleteFunctions.specialCasesFunctions[filterKey](
+                  dispatch,
+                  option,
+                  selectedOptions,
+                  router
+                );
+              }
+            }}
           />
         ))}
     </div>

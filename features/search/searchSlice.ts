@@ -252,6 +252,13 @@ const searchSlice = createSlice({
       const { payload } = action;
       state.filters[payload.field] = payload.value;
     },
+    setAllFilters: (state, action: PayloadAction<FilterOptionsInterface>) => {
+      const { payload } = action;
+      //update state.filters, payload is an object with keys and values, we need to update the values of the keys in state.filters by adding the values from payload
+      Object.keys(payload).forEach((key) => {
+        state.filters[key] = payload[key];
+      });
+    },
     deleteSelectedOption: (
       state,
       action: PayloadAction<{ field: string; value: string }>
@@ -315,6 +322,7 @@ export const {
   setSelectedFilters,
   deleteSelectedMake,
   deleteSelectedOption,
+  setAllFilters,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

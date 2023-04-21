@@ -11,7 +11,10 @@ import { setSelectedMakes } from "../features/make/makeSlice";
 import { setModelsSelected } from "../features/model/modelSlice";
 import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
 import Sticky from "react-stickynode";
-import { setSelectedFilters } from "../features/search/searchSlice";
+import {
+  setAllFilters,
+  setSelectedFilters,
+} from "../features/search/searchSlice";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -30,21 +33,53 @@ const Search = () => {
   const router = useRouter();
 
   useEffect(() => {
+    const filterKeys = Object.keys(filters);
+
     if (!router.isReady) return;
+
+    // const query = filterKeys.reduce((acc, key) => {
+    //   if (filters[key].length > 0) {
+    //     acc[key] = filters[key];
+    //   }
+    //   return acc;
+    // }, {});
+
     const { query } = router;
-    const makes = query.make
-      ? typeof query.make === "string"
-        ? [query.make]
-        : query.make
-      : [];
-    const models = query.model
-      ? typeof query.model === "string"
-        ? [query.model]
-        : query.model
-      : [];
+
+    const queryKeys = Object.keys(query);
+
+    const presentQueryKeys = queryKeys.filter((key) =>
+      filterKeys.includes(key)
+    );
+
+    console.log({ presentQueryKeys });
+
+    // const makes = query.make
+    //   ? typeof query.make === "string"
+    //     ? [query.make]
+    //     : query.make
+    //   : [];
+    // const models = query.model
+    //   ? typeof query.model === "string"
+    //     ? [query.model]
+    //     : query.model
+    //   : [];
 
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
+
+    // convert every field's value in the query to an array
+    const newQueryObject = presentQueryKeys.reduce((acc, key) => {
+      if (typeof query[key] === "string") {
+        acc[key] = [query[key]];
+      } else {
+        acc[key] = query[key];
+      }
+      return acc;
+    }, {});
+
+    console.log({ newQueryObject });
+
     if (cars.length === 0) {
       dispatch(
         getCars({
@@ -52,23 +87,32 @@ const Search = () => {
           page: "1",
           filters: {
             ...filters,
-            make: makes,
-            model: models,
+            ...newQueryObject,
           },
         })
       );
-      dispatch(
-        setSelectedFilters({
-          field: "make",
-          value: makes,
-        })
-      );
-      dispatch(
-        setSelectedFilters({
-          field: "model",
-          value: models,
-        })
-      );
+
+      dispatch(setAllFilters(newQueryObject));
+      // // for (let key of presentQueryKeys) {
+      // //   dispatch(
+      // //     setSelectedFilters({
+      // //       field: key,
+      // //       value: query[key],
+      // //     })
+      // //   );
+      // // }
+      // dispatch(
+      //   setSelectedFilters({
+      //     field: "make",
+      //     value: makes,
+      //   })
+      // );
+      // dispatch(
+      //   setSelectedFilters({
+      //     field: "model",
+      //     value: models,
+      //   })
+      // );
     }
   }, [router, dispatch]);
 

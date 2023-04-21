@@ -57,13 +57,13 @@ const MakeFilter = () => {
     <FilterBody title="Make">
       {makeOptions?.map((item, index) => (
         <div
-          className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+          className="flex items-center pl-6 py-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
           key={index}
           onClick={() => handleChange(item.value)}
         >
           <input
             type="checkbox"
-            className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem]  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
+            className="border-specialRed border rounded-sm w-[1.5rem] h-[1.5rem] mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
             value={item.value}
             name="make"
             checked={selectedMakes?.includes(item.value)}
