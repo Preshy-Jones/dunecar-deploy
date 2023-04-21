@@ -27,37 +27,42 @@ const makeHandleDelete = (
   // console.log({ selectedMakes, modelsSelected });
 };
 
-const modelsHandleDelete = (
+const generalHandleDelete = (
   dispatch: Dispatch,
   option: string,
   selectedOptions: string[],
-  router
+  router,
+  field: string
 ) => {
+  console.log({ option, selectedOptions, field });
+  
   dispatch(
     deleteSelectedOption({
-      field: "model",
+      field,
       value: option,
     })
   );
 
-  let newSelectedModels = selectedOptions?.filter(
+  let newSelectedOptions = selectedOptions?.filter(
     (item) => item !== option
   ) as string[];
   router.push(
     {
       pathname: "/search",
-      query: { ...router.query, model: newSelectedModels },
+      query: { ...router.query, [field]: newSelectedOptions },
     },
     undefined,
     { shallow: true }
   );
   dispatch(setOptionDeleted(true));
-  // console.log({ selectedMakes, modelsSelected });
 };
 
 const deleteFunctions = {
-  make: makeHandleDelete,
-  model: modelsHandleDelete,
+  specialCasesFunctions: {
+    make: makeHandleDelete,
+  },
+  specialCases: ["make"],
+  general: generalHandleDelete,
 };
 
 export default deleteFunctions;

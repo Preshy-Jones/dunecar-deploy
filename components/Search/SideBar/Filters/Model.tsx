@@ -266,7 +266,7 @@ const Model = () => {
         <div className="pt-3 ">
           {modelOptions[currentIndex]?.models.map((item, index) => (
             <div
-              className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+              className="flex items-center pl-6 py-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
               key={index}
               onClick={() => handleLabelClick(item.value)}
             >

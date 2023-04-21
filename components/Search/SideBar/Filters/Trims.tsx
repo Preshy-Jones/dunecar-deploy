@@ -53,7 +53,7 @@ const TrimsFilter = () => {
     <FilterBody title="Trims">
       {trimsOptions?.map((item, index) => (
         <div
-          className="flex items-center pl-6 py-2.5 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
+          className="flex items-center pl-6 py-4 hover:bg-specialRed hover:bg-opacity-5 cursor-pointer"
           key={index}
           onClick={() => handleChange(item.value)}
         >

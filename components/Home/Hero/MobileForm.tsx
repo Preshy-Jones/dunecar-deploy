@@ -5,6 +5,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import Lottie from "lottie-react";
 import { Option } from "../../../types/form";
 import Loader from "../../../public/assets/Loader.json";
+import { useAppSelector } from "../../../store/hooks";
+import { ModelOptions } from "../../../features/filters_options/filterOptionsSlice";
 
 interface Props {
   makeOptionsPayload: Option[] | undefined;
@@ -12,6 +14,9 @@ interface Props {
   makeToggled: boolean;
   makeCloseHandleOperation: (value: string[]) => void;
   makeOpenHandleOperation: () => void;
+  selectedMakes: string[];
+  setSelectedMakes(selected: string[]): any;
+  makeHandleSetOptions(options: Option[]): any;
   modelToggled: boolean;
   modelCloseHandleOperation: (value: string[]) => void;
   modelOpenHandleOperation: () => void;
@@ -19,12 +24,19 @@ interface Props {
   modelsSelected: string[];
   setModelsSelected(selected: string[]): any;
   locationOptions: Option[] | undefined;
+  modelHandleSetOptions(options: Option[]): any;
+  locationHandleSetOptions(options: Option[]): any;
+  groupedByMake: ModelOptions[]
+  locationOptionsPayload: Option[] | undefined;
+  locationToggled:boolean
+  selectedLocations: string[];
+  setSelectedLocations(selected: string[]): any;
+  locationOpenHandleOperation: () => void;
+  locationCloseHandleOperation: (value: string[]) => void;
   handleSearchCars: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isLoading: boolean;
   cars: any;
   count: number;
-  selectedMakes: string[];
-  setSelectedMakes(selected: string[]): any;
 }
 
 const MobileForm: React.FC<Props> = ({
@@ -41,12 +53,22 @@ const MobileForm: React.FC<Props> = ({
   setModelsSelected,
   locationOptions,
   handleSearchCars,
-  cars,
   isLoading,
   count,
   selectedMakes,
+  makeHandleSetOptions,
+  modelHandleSetOptions,
+  locationHandleSetOptions,
   setSelectedMakes,
+  groupedByMake,
+  locationOptionsPayload,
+  locationToggled,
+  selectedLocations,
+  setSelectedLocations,
+  locationCloseHandleOperation,
+  locationOpenHandleOperation
 }) => {
+  const { filtersLoading } = useAppSelector((state) => state.search);
   const [active, setActive] = React.useState(0);
   return (
     <div className="absolute top-[19.5rem]  flex justify-center w-full lg:hidden ">
@@ -77,34 +99,38 @@ const MobileForm: React.FC<Props> = ({
                 placeHolder="Select Make"
                 payloadOptions={makeOptionsPayload}
                 options={makeOptions}
-                isDisabled={!makeToggled}
+                isDisabled={!makeToggled || filtersLoading.makes}
+                selected={selectedMakes as string[]}
+                setSelected={setSelectedMakes}
+                setOptions={makeHandleSetOptions}
                 handleCloseOperation={makeCloseHandleOperation}
                 handleOpenOperation={makeOpenHandleOperation}
-                selected={selectedMakes}
-                setSelected={setSelectedMakes}
               />
             </div>
             <div className="mb-3">
               <MultiMultiSelect
                 placeHolder="Select Model"
-                isDisabled={!modelToggled}
+                isDisabled={!modelToggled || filtersLoading.models}
                 fieldOptions={modelOptions}
-                selected={modelsSelected}
+                payloadOptions={groupedByMake}
+                selected={modelsSelected as string[]}
                 setSelected={setModelsSelected}
+                setOptions={modelHandleSetOptions}
                 handleCloseOperation={modelCloseHandleOperation}
                 handleOpenOperation={modelOpenHandleOperation}
               />
             </div>
             <div className="mb-6">
               <MultiSelect
-                placeHolder="Select Loction"
-                payloadOptions={locationOptions}
+                placeHolder="Select Location"
+                payloadOptions={locationOptionsPayload}
                 options={locationOptions}
-                isDisabled={!makeToggled}
-                handleCloseOperation={makeCloseHandleOperation}
-                handleOpenOperation={makeOpenHandleOperation}
-                selected={selectedMakes}
-                setSelected={setSelectedMakes}
+                isDisabled={!locationToggled || filtersLoading.locations}
+                selected={selectedLocations as string[]}
+                setSelected={setSelectedLocations}
+                setOptions={locationHandleSetOptions}
+                handleCloseOperation={locationCloseHandleOperation}
+                handleOpenOperation={locationOpenHandleOperation}
               />
             </div>
             <button
