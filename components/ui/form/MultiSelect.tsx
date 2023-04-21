@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { setMakeOptions } from "../../../features/make/makeSlice";
 import useClickOutside from "../../../hooks/ClickOutside";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Option } from "../../../types/form";
 
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
@@ -12,6 +11,7 @@ interface MultiSelectProps {
   options?: Option[] | undefined;
   payloadOptions?: Option[] | undefined;
   isDisabled?: boolean;
+  setOptions(options: Option[]): any;
   handleCloseOperation: (value: string[]) => void;
   handleOpenOperation: () => void;
   selected: string[];
@@ -26,18 +26,15 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   selected,
   setSelected,
   handleOpenOperation,
+  setOptions,
   handleCloseOperation,
   ...rest
 }) => {
-  const dispatch = useAppDispatch();
-
   const [isToggled, setIsToggled] = useState(false);
 
   // const [selected, setSelected] = useState<string[]>([]);
 
   // const selected = useRef<string[]>([]);
-
- 
 
   const handleToggled = () => {
     if (!isDisabled) {
@@ -59,7 +56,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         // setOptionsUpdated(optionsUpdated);
         // console.log(optionsUpdated);
 
-        dispatch(setMakeOptions(result));
+        setOptions(result as Option[]);
         handleCloseOperation(selected);
       }
 
@@ -80,7 +77,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     // setOptionsUpdated(optionsUpdated);
     // console.log(optionsUpdated);
 
-    dispatch(setMakeOptions(result));
+    setOptions(result as Option[]);
     console.log(selected);
 
     handleCloseOperation(selected);
@@ -93,18 +90,18 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log(e.target.value);
     if (selected.includes(e.target.value)) {
-      dispatch(setSelected(selected.filter((item) => item !== e.target.value)));
+      setSelected(selected.filter((item) => item !== e.target.value));
     } else {
-      dispatch(setSelected([...selected, e.target.value]));
+      setSelected([...selected, e.target.value]);
     }
     // console.log(selected);
   };
 
   const handleLabelClick = (value) => {
     if (selected.includes(value)) {
-      dispatch(setSelected(selected.filter((item) => item !== value)));
+      setSelected(selected.filter((item) => item !== value));
     } else {
-      dispatch(setSelected([...selected, value]));
+      setSelected([...selected, value]);
     }
     //  console.log(selected);
   };
@@ -131,12 +128,16 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 type="checkbox"
                 className="border-specialRed border rounded-sm  mr-3 text-specialRed focus:outline-none focus:shadow-outline-specialRed focus:ring-0"
                 value={item.value}
-                name="make"
+                name={placeHolder}
                 checked={selected.includes(item.value)}
                 onChange={handleChange}
               />
               <label
-                className={`leading-[19px]  font-normal cursor-pointer ${selected.includes(item.value) ? "font-bold text-specialRed" : "text-black"}`}
+                className={`leading-[19px]  font-normal cursor-pointer ${
+                  selected.includes(item.value)
+                    ? "font-bold text-specialRed"
+                    : "text-black"
+                }`}
                 style={{ marginLeft: "5px" }}
               >
                 {item.label}
@@ -169,7 +170,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             {placeHolder}
           </h2>
         )}
-        <CaretDownIcon />
+        <CaretDownIcon
+          className={`${
+            isDisabled ? "text-[#081314] text-opacity-30" : "text-black"
+          }text-[#081314] fill-current`}
+        />
       </div>
     </div>
   );

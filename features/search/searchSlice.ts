@@ -20,7 +20,24 @@ export interface SearchState {
   selectedFeatures: string[];
   featureOptions: Option[] | undefined;
   featuresLoading: boolean;
-  filtersLoading: boolean;
+  filtersLoading: {
+    makes: boolean;
+    models: boolean;
+    bodyTypes: boolean;
+    fuelTypes: boolean;
+    features: boolean;
+    exterior_colors: boolean;
+    interior_colors: boolean;
+    transmissions: boolean;
+    locations: boolean;
+    series: boolean;
+    bodyStyles: boolean;
+    trims: boolean;
+    vehicleConditions: boolean;
+    packages: boolean;
+    cylinders: boolean;
+    mpg_highway: boolean;
+  };
   makes: {
     _id: string;
     make: FieldData;
@@ -108,7 +125,24 @@ const initialState: SearchState = {
 
   featureOptions: [],
   featuresLoading: false,
-  filtersLoading: false,
+  filtersLoading: {
+    makes: false,
+    models: false,
+    bodyTypes: false,
+    fuelTypes: false,
+    features: false,
+    exterior_colors: false,
+    interior_colors: false,
+    transmissions: false,
+    locations: false,
+    series: false,
+    bodyStyles: false,
+    trims: false,
+    vehicleConditions: false,
+    packages: false,
+    cylinders: false,
+    mpg_highway: false,
+  },
   makes: [],
   models: [],
   bodyTypes: [],
@@ -166,6 +200,8 @@ export const getFilterOptions = createAsyncThunk(
   "search/getFilterOptions",
   async (payload: FilterPayload, thunkAPI) => {
     try {
+      //simlate async call for 5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 5000));
       const response = await searchService.fetchFiltersOptions(payload);
       return {
         response,
@@ -254,17 +290,16 @@ const searchSlice = createSlice({
       .addCase(getFeatures.rejected, (state, action) => {
         state.featuresLoading = false;
       })
-      .addCase(getFilterOptions.pending, (state) => {
-        state.filtersLoading = true;
+      .addCase(getFilterOptions.pending, (state: SearchState, { meta }) => {
+        state.filtersLoading[meta.arg.key as string] = true;
       })
       .addCase(getFilterOptions.fulfilled, (state: SearchState, action) => {
-        console.log(action);
-        state.filtersLoading = false;
+        // console.log(action);
+        state.filtersLoading[action.payload.key as string] = false;
         state[action.payload.key as string] = action.payload.response.data;
       })
-      .addCase(getFilterOptions.rejected, (state: SearchState, action) => {
-        console.log(action);
-        state.filtersLoading = false;
+      .addCase(getFilterOptions.rejected, (state: SearchState, { meta }) => {
+        state.filtersLoading[meta.arg.key as string] = false;
       });
   },
 });

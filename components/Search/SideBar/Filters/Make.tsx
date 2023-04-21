@@ -72,7 +72,7 @@ const MakeFilter = () => {
           <label
             className={`leading-primary text-secondary font-normal cursor-pointer ${
               selectedMakes?.includes(item.value)
-                ? "font-bold text-specialRed"
+                ? "font-semibold"
                 : "text-lighterDark"
             }`}
             style={{ marginLeft: "5px" }}

@@ -1,85 +1,55 @@
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { getCars } from "../../../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { MultiMultiSelect, MultiSelect } from "../../ui/form";
 import Loader from "../../../public/assets/Loader.json";
-import {
-  getModels,
-  setModelOptions,
-  setModelsSelected,
-} from "../../../features/model/modelSlice";
-import {
-  getMakes,
-  setMakeOptions,
-  setSelectedMakes,
-} from "../../../features/make/makeSlice";
+import { setModelsSelected } from "../../../features/model/modelSlice";
+import { setSelectedMakes } from "../../../features/make/makeSlice";
 import { useRouter } from "next/router";
 import { formatMultipleValueKeyQuery } from "../../../utils/utilityFunctions";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import MobileForm from "./MobileForm";
-import { getFilterOptions } from "../../../features/search/searchSlice";
+import {
+  getFilterOptions,
+  setSelectedFilters,
+} from "../../../features/search/searchSlice";
+import {
+  ModelOptions,
+  setFilterOptions,
+  setModelOptions,
+} from "../../../features/filters_options/filterOptionsSlice";
 
 // import heroImage from "../../assets/heroimage.svg";
 
 const Hero = () => {
-  const locations = [
-    "Lagos",
-    "Abuja",
-    "Port Harcourt",
-    "Ibadan",
-    "Kano",
-    "Akure",
-    "Ibadan",
-    "Jos",
-    "Owerri",
-    "Enugu",
-    "Benin",
-    "Aba",
-    "Kaduna",
-    "Uyo",
-    "Ilorin",
-    "Abeokuta",
-    "Onitsha",
-    "Sokoto",
-    "Katsina",
-    "Maiduguri",
-    "Zaria",
-    "Ogbomosho",
-    "Iwo",
-    "Ife",
-    "Ilesha",
-    "Ila Orangun",
-    "Ikerre",
-  ];
-
-  const locationOptions = locations.map((location) => ({
-    value: location,
-    label: location,
-  }));
-
   const router = useRouter();
   const dispatch = useAppDispatch();
-  let { cars, carFilter, isLoading, count } = useAppSelector(
-    (state) => state.car
-  );
+  let { cars, isLoading, count } = useAppSelector((state) => state.car);
 
   //  const isLoading = true;
-  let { modelsSelected, modelOptions } = useAppSelector((state) => state.model);
 
-  let { models, makes, filters } = useAppSelector((state) => state.search);
+  let { locationOptions, makeOptions, modelOptions } = useAppSelector(
+    (state) => state.filterOptions
+  );
 
-  let { makeOptions, selectedMakes } = useAppSelector((state) => state.make);
+  let { models, makes, locations, filters, filtersLoading } = useAppSelector(
+    (state) => state.search
+  );
+
+  let selectedMakes = filters.make;
+  let selectedModels = filters.model;
+  let selectedLocations = filters.location;
 
   let makeOptionsPayload = makes.map((make) => ({
     value: make.make._id,
     label: make.make.title,
   }));
 
-  let modelOptionsPayload;
-
-  console.log("models", models);
+  const locationOptionsPayload = locations.map((location) => ({
+    value: location._id,
+    label: location._id,
+  }));
 
   const groupedByMake = Object.values(
     models.reduce((acc, model) => {
@@ -100,39 +70,87 @@ const Hero = () => {
 
   console.log("groupedByMake", groupedByMake);
 
-  // const modelOptionsPayload = models.map((model) => ({
-  //   collection_name: model.make_name,
-  //   options: model.models.map((model) => ({
-  //     value: model.slug,
-  //     label: model.title,
-  //   })),
-  // }));
-
   const [makeToggled, setMakeToggled] = React.useState(true);
   const [modelToggled, setModelToggled] = React.useState(false);
+  const [locationToggled, setLocationToggled] = React.useState(false);
+
+  //setting options handlers
+
+  const makeHandleSetOptions = (options) => {
+    dispatch(
+      setFilterOptions({
+        field: "makeOptions",
+        value: options,
+      })
+    );
+  };
+
+  const modelHandleSetOptions = (options) => {
+    dispatch(setModelOptions(options));
+  };
+
+  const locationHandleSetOptions = (options) => {
+    dispatch(
+      setFilterOptions({
+        field: "locationOptions",
+        value: options,
+      })
+    );
+  };
+
+  //setting selected handlers
+
+  const makeHandleSetSelected = (selected) => {
+    dispatch(setSelectedFilters({ field: "make", value: selected }));
+  };
+
+  const modelHandleSetSelected = (selected) => {
+    dispatch(setSelectedFilters({ field: "model", value: selected }));
+  };
+
+  const locationHandleSetSelected = (selected) => {
+    dispatch(
+      setSelectedFilters({
+        field: "location",
+        value: selected,
+      })
+    );
+  };
 
   const makeCloseHandleOperation = async (makes: string[]) => {
-    await dispatch(
-      getFilterOptions({
-        key: "models",
-        group_by: "model_id",
-        filters: {
-          make: makes,
-        },
-      })
-    );
-    await dispatch(
-      getCars({
-        page: "1",
-        perPage: "20",
-        filters: {
-          make: makes,
-        },
-      })
-    );
     if (makes.length > 0) {
+      dispatch(
+        getCars({
+          page: "1",
+          perPage: "20",
+          filters: {
+            make: makes,
+          },
+        })
+      );
+      await dispatch(
+        getFilterOptions({
+          key: "models",
+          group_by: "model_id",
+          filters: {
+            make: makes,
+          },
+        })
+      );
+
+      await dispatch(
+        getFilterOptions({
+          key: "locations",
+          group_by: "location",
+          filters: {
+            make: makes,
+          },
+        })
+      );
       setModelToggled(true);
+      setLocationToggled(true);
     } else {
+      setLocationToggled(false);
       setModelToggled(false);
     }
   };
@@ -142,9 +160,9 @@ const Hero = () => {
     dispatch(setModelsSelected([]));
   };
 
-  const modelCloseHandleOperation = (models: string[]) => {
+  const modelCloseHandleOperation = async (models: string[]) => {
     // dispatch(getCars({ models, makes: carFilter.makes }));
-    dispatch(
+    await dispatch(
       getCars({
         page: "1",
         perPage: "20",
@@ -154,20 +172,40 @@ const Hero = () => {
       })
     );
     setMakeToggled(true);
+    setLocationToggled(true);
   };
 
   const modelOpenHandleOperation = () => {
     setMakeToggled(false);
+    setLocationToggled(false);
   };
-  const locationHandleOperation = (locations: string[]) => {
-    // dispatch(getCars({ locations }));
+
+  const locationCloseHandleOperation = async (locations: string[]) => {
+    // dispatch(getCars({ models, makes: carFilter.makes }));
+    await dispatch(
+      getCars({
+        page: "1",
+        perPage: "20",
+        filters: {
+          location: locations,
+        },
+      })
+    );
+    setMakeToggled(true);
+  };
+
+  const locationOpenHandleOperation = () => {
+    setMakeToggled(false);
+    setModelToggled(false);
   };
 
   const handleSearchCars = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("hello");
-
-    let { makes, models } = { makes: selectedMakes, models: modelsSelected };
+    let { makes, models, locations } = {
+      makes: selectedMakes,
+      models: selectedModels,
+      locations: selectedLocations,
+    };
     const makesPayload = makes
       ? typeof makes === "string"
         ? [makes]
@@ -179,7 +217,13 @@ const Hero = () => {
         : models
       : [""];
 
-    console.log({ makesPayload, modelsPayload, makes, models });
+    const locationsPayload = locations
+      ? typeof locations === "string"
+        ? [locations]
+        : locations
+      : [""];
+
+    //    console.log({ makesPayload, modelsPayload, makes, models });
 
     const url = `/search?${
       models
@@ -193,7 +237,17 @@ const Hero = () => {
           ? formatMultipleValueKeyQuery("make", makesPayload)
           : `make=${makes[0]}`
         : ""
-    }`;
+    }
+    &${
+      locations
+        ? locations.length > 1
+          ? formatMultipleValueKeyQuery("location", locationsPayload)
+          : `location=${locations[0]}`
+        : ""
+    }
+          
+    `;
+
     console.log(url);
 
     router.push(url);
@@ -220,7 +274,12 @@ const Hero = () => {
       value: make.make._id,
       label: make.make.title,
     }));
-    dispatch(setMakeOptions(makeOptionsPayload));
+    dispatch(
+      setFilterOptions({
+        field: "makeOptions",
+        value: makeOptionsPayload,
+      })
+    );
   }, [makes, dispatch]);
 
   useEffect(() => {
@@ -240,16 +299,21 @@ const Hero = () => {
         return acc;
       }, {})
     );
-    dispatch(setModelOptions(groupedByMake));
-    // let modelOptions = models.map((model) => ({
-    //   collection_name: model.make_name,
-    //   options: model.models.map((model) => ({
-    //     value: model.slug,
-    //     label: model.title,
-    //   })),
-    // }));
-    // dispatch(setModelOptions(modelOptions));
+    dispatch(setModelOptions(groupedByMake as ModelOptions[]));
   }, [models, dispatch]);
+
+  useEffect(() => {
+    let locationOptionsPayload = locations.map((option) => ({
+      value: option._id,
+      label: option._id,
+    }));
+    dispatch(
+      setFilterOptions({
+        field: "locationOptions",
+        value: locationOptionsPayload,
+      })
+    );
+  }, [locations, dispatch]);
 
   return (
     <div className="font-roboto">
@@ -278,7 +342,7 @@ const Hero = () => {
           modelOptions={modelOptions}
           makeToggled={makeToggled}
           modelToggled={modelToggled}
-          modelsSelected={modelsSelected}
+          modelsSelected={selectedModels}
           setModelsSelected={setModelsSelected}
           makeOptionsPayload={makeOptionsPayload}
           locationOptions={locationOptions}
@@ -305,31 +369,34 @@ const Hero = () => {
                     placeHolder="Select Make"
                     payloadOptions={makeOptionsPayload}
                     options={makeOptions}
-                    isDisabled={!makeToggled}
-                    selected={selectedMakes}
-                    setSelected={setSelectedMakes}
+                    isDisabled={!makeToggled || filtersLoading.makes}
+                    selected={selectedMakes as string[]}
+                    setSelected={makeHandleSetSelected}
+                    setOptions={makeHandleSetOptions}
                     handleCloseOperation={makeCloseHandleOperation}
                     handleOpenOperation={makeOpenHandleOperation}
                   />
                   <MultiMultiSelect
                     placeHolder="Select Model"
-                    isDisabled={!modelToggled}
+                    isDisabled={!modelToggled || filtersLoading.models}
                     fieldOptions={modelOptions}
                     payloadOptions={groupedByMake}
-                    selected={modelsSelected}
-                    setSelected={setModelsSelected}
+                    selected={selectedModels as string[]}
+                    setSelected={modelHandleSetSelected}
+                    setOptions={modelHandleSetOptions}
                     handleCloseOperation={modelCloseHandleOperation}
                     handleOpenOperation={modelOpenHandleOperation}
                   />
                   <MultiSelect
                     placeHolder="Select Location"
-                    payloadOptions={locationOptions}
+                    payloadOptions={locationOptionsPayload}
                     options={locationOptions}
-                    isDisabled={false}
-                    selected={modelsSelected}
-                    setSelected={setModelsSelected}
-                    handleCloseOperation={makeCloseHandleOperation}
-                    handleOpenOperation={makeOpenHandleOperation}
+                    isDisabled={!locationToggled || filtersLoading.locations}
+                    selected={selectedLocations as string[]}
+                    setSelected={locationHandleSetSelected}
+                    setOptions={locationHandleSetOptions}
+                    handleCloseOperation={locationCloseHandleOperation}
+                    handleOpenOperation={locationOpenHandleOperation}
                   />
                 </div>
                 <button
@@ -340,7 +407,7 @@ const Hero = () => {
                   {!isLoading ? (
                     <div className="flex items-center justify-center">
                       <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-                      Search all {count} cars
+                      View all {count} cars
                     </div>
                   ) : (
                     <Player
