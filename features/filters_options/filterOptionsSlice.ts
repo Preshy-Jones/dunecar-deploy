@@ -2,7 +2,14 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Option } from "../../types/form";
 import {} from "../../types/car";
 
+export type ModelOptions = {
+  make: string;
+  models: Option[];
+};
+
 export interface FilterOptionsState {
+  makeOptions: Option[];
+  modelOptions: ModelOptions[];
   exteriorColourOptions: Option[];
   interiorColourOptions: Option[];
   featureOptions: Option[];
@@ -21,6 +28,8 @@ export interface FilterOptionsState {
 }
 
 const initialState: FilterOptionsState = {
+  makeOptions: [],
+  modelOptions: [],
   exteriorColourOptions: [],
   interiorColourOptions: [],
   featureOptions: [],
@@ -49,16 +58,20 @@ const FilterOptionsSlice = createSlice({
         value: {
           label: string;
           value: string;
-          count: number;
+          count?: number;
         }[];
       }>
     ) => {
       const { payload } = action;
       state[payload.field] = payload.value;
     },
+    setModelOptions: (state, action: PayloadAction<ModelOptions[]>) => {
+      const { payload } = action;
+      state.modelOptions = payload;
+    },
   },
 });
 
-export const { setFilterOptions } = FilterOptionsSlice.actions;
+export const { setFilterOptions, setModelOptions } = FilterOptionsSlice.actions;
 
 export default FilterOptionsSlice.reducer;

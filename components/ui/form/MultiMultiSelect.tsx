@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { setFilterTotal } from "../../../features/car/carSlice";
-import { useAppDispatch } from "../../../store/hooks";
-import { MATHOPERATIONS } from "../../../types/methods";
 import { CaretDownIcon } from "../icons";
-import {
-  BsFillArrowLeftCircleFill,
-  BsFillArrowRightCircleFill,
-} from "react-icons/bs";
 import { capitalizeFirstLetter } from "../../../utils/utilityFunctions";
 import { motion } from "framer-motion";
 import useClickOutside from "../../../hooks/ClickOutside";
 import { setModelOptions } from "../../../features/model/modelSlice";
+import { Option } from "../../../types/form";
 
 interface MultiMultiSelectProps {
   placeHolder?: string;
@@ -19,6 +13,7 @@ interface MultiMultiSelectProps {
   isDisabled: boolean;
   selected: string[];
   setSelected(selected: string[]): any;
+  setOptions(options: Option[]): any;
   handleCloseOperation: (value: string[]) => void;
   handleOpenOperation: () => void;
 }
@@ -31,11 +26,10 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   selected,
   setSelected,
   handleCloseOperation,
+  setOptions,
   handleOpenOperation,
   ...rest
 }) => {
-  const dispatch = useAppDispatch();
-
   const [isToggled, setIsToggled] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,7 +65,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
         });
         console.log(result);
 
-        dispatch(setModelOptions(result));
+        setOptions(result);
         // dispatch(setFilterTotal(MATHOPERATIONS.SUBTRACT));
         handleCloseOperation(selected);
       }
@@ -100,7 +94,7 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
     });
     console.log(result);
 
-    dispatch(setModelOptions(result));
+    setOptions(result);
     handleCloseOperation(selected);
     setIsToggled(false);
   };
@@ -108,18 +102,18 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     if (selected.includes(e.target.value)) {
-      dispatch(setSelected(selected.filter((item) => item !== e.target.value)));
+      setSelected(selected.filter((item) => item !== e.target.value));
     } else {
-      dispatch(setSelected([...selected, e.target.value]));
+      setSelected([...selected, e.target.value]);
     }
   };
 
   const handleLabelClick = (value) => {
     console.log(value);
     if (selected.includes(value)) {
-      dispatch(setSelected(selected.filter((item) => item !== value)));
+      setSelected(selected.filter((item) => item !== value));
     } else {
-      dispatch(setSelected([...selected, value]));
+      setSelected([...selected, value]);
     }
   };
 
@@ -245,7 +239,11 @@ const MultiMultiSelect: React.FC<MultiMultiSelectProps> = ({
             {placeHolder}
           </h2>
         )}
-        <CaretDownIcon />
+        <CaretDownIcon
+          className={`${
+            isDisabled ? "text-[#081314] text-opacity-30" : "text-black"
+          }text-[#081314] fill-current`}
+        />
       </div>
     </div>
   );
