@@ -23,21 +23,6 @@ const Year = () => {
 
   const handleClose = () => {
     dispatch(setFilter(""));
-
-    // setOptionsUpdated(optionsUpdated);
-    // console.log(optionsUpdated);
-
-    //    dispatch(getCars({ makes: selectedMakes, limit: "20" }));
-
-    //update the query strings but don't reload the page
-    // router.push(
-    //   {
-    //     pathname: "/search",
-    //     query: { ...router.query, make: selectedMakes },
-    //   },
-    //   undefined,
-    //   { shallow: true }
-    // );
   };
 
   const handleChange = async (value, field) => {
@@ -76,17 +61,6 @@ const Year = () => {
         value: Number(value),
       })
     );
-
-    // if(filters[fieldOppositKeys[field]] ){
-    //     await dispatch(
-    //       setSelectedFilters({
-    //         field: fieldOppositKeys[field],
-    //         value:
-    //           field === "year_from"
-    //             ? Number(years[0].value)
-    //             : Number(years[years.length - 1].value),
-    //       })
-    //     );}
 
     await dispatch(
       getCars({

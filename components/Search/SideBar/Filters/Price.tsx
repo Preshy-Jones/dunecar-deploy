@@ -1,31 +1,85 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { getCars } from "../../../../features/car/carSlice";
-import { setFilter } from "../../../../features/search/searchSlice";
-import { useAppDispatch } from "../../../../store/hooks";
+import {
+  setFilter,
+  setSelectedFilters,
+} from "../../../../features/search/searchSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { FilterCustomSelect as Select } from "../../../ui/form/Select";
 import { CaretLeftIcon } from "../../../ui/icons";
 
 const Price = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const { filters } = useAppSelector((state) => state.search);
+
+  let price_from = filters.price_from;
+  let price_to = filters.price_to;
+
   const handleClose = () => {
     dispatch(setFilter(""));
+  };
 
-    // setOptionsUpdated(optionsUpdated);
-    // console.log(optionsUpdated);
+  const handleChange = async (value, field) => {
+    console.log("field", field);
+    console.log("value", value);
 
-    //    dispatch(getCars({ makes: selectedMakes, limit: "20" }));
+    const fieldOppositKeys = {
+      price_from: "price_to",
+      price_to: "price_from",
+    };
 
-    //update the query strings but don't reload the page
-    // router.push(
-    //   {
-    //     pathname: "/search",
-    //     query: { ...router.query, make: selectedMakes },
-    //   },
-    //   undefined,
-    //   { shallow: true }
-    // );
+    let oppositeFieldValue = filters[fieldOppositKeys[field]];
+
+    if (field === "price_from" && value > (price_to as number)) {
+      oppositeFieldValue = value;
+      await dispatch(
+        setSelectedFilters({
+          field: "price_to",
+          value: Number(value),
+        })
+      );
+    }
+    if (field === "price_to" && value < (price_from as number)) {
+      oppositeFieldValue = value;
+      await dispatch(
+        setSelectedFilters({
+          field: "price_from",
+          value: Number(value),
+        })
+      );
+    }
+
+    await dispatch(
+      setSelectedFilters({
+        field,
+        value: Number(value),
+      })
+    );
+
+    await dispatch(
+      getCars({
+        page: "1",
+        perPage: "20",
+        filters: {
+          ...filters,
+          [field]: Number(value),
+          [fieldOppositKeys[field]]: Number(oppositeFieldValue),
+        },
+      })
+    ).then(() => {
+      //update route params
+      router.push(
+        {
+          pathname: "/search",
+          query: { ...router.query, [field]: value },
+        },
+        undefined,
+        { shallow: true }
+      );
+    });
   };
 
   return (
@@ -43,16 +97,20 @@ const Price = () => {
       <div className="w-full mt-8 px-6">
         <div className="mb-4">
           <Select
+            onChange={(value) => handleChange(value, "price_from")}
             options={priceOptions}
             label="Min Price"
             placeHolder="Select Min Price"
+            value={price_from}
           />
         </div>
         <div>
           <Select
+            onChange={(value) => handleChange(value, "price_to")}
             options={priceOptions}
             label="Max Price"
             placeHolder="Select Min Price"
+            value={price_to}
           />
         </div>
       </div>
