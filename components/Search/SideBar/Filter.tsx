@@ -25,6 +25,7 @@ const Filter: React.FC<Props> = ({ item }) => {
     (state) => state.search
   );
   let [isLoading, setisLoading] = useState(false);
+
   // const { isLoading: makeIsLoading } = useAppSelector((state) => state.make);
   // const { isLoading: modelIsLoading } = useAppSelector((state) => state.model);
 
@@ -63,7 +64,7 @@ const Filter: React.FC<Props> = ({ item }) => {
       "bodyStyles",
       "trims",
       "vehicleConditions",
-      "cylinders"
+      "cylinders",
     ];
     if (fetchRequiredFilters.includes(filter.slug)) {
       //from the filters object, remove the field that is equal to the filter.filterComponentKey

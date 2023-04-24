@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
 import FilterIcon from "../../ui/icons/FilterIcon";
-
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-
 import { SideBarContent, sideBarContentFilters } from "./sideBarContent";
-
-import MakesIndicator from "./Indicators/MakesIndicator";
-import ModelsIndicator from "./Indicators/ModelsIndicator";
-
 import { motion, AnimatePresence } from "framer-motion";
 import Indicators from "./Indicators/Indicator";
 
@@ -18,8 +12,25 @@ const SideBar = () => {
   const dispatch = useAppDispatch();
 
   const { filters } = useAppSelector((state) => state.search);
-  const selectedMakes = filters.make;
-  const selectedModels = filters.model;
+
+  let filterArray = Object.keys(filters);
+
+  //create a new filterArray by removing strings year_from, year_to, price_from, price_to and add new strings year, price
+
+  let newFilterArray = filterArray.reduce((acc, key) => {
+    if (
+      key !== "year_from" &&
+      key !== "year_to" &&
+      key !== "price_from" &&
+      key !== "price_to"
+    ) {
+      acc.push(key);
+    }
+    return acc;
+  }, [] as string[]);
+
+  newFilterArray.push("year");
+  newFilterArray.push("price");
 
   return (
     <div className="font-roboto border-r-[0.1rem] border-r-dividerGray ">
@@ -36,7 +47,7 @@ const SideBar = () => {
           </h2>
         </div>
         <div className="flex flex-wrap w-full px-6 text-white pb-4">
-          {Object.keys(filters).map((filter, index) => (
+          {newFilterArray.map((filter, index) => (
             <Indicators filterKey={filter} key={index} />
           ))}
         </div>

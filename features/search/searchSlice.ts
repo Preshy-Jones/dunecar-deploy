@@ -10,6 +10,8 @@ import {
   FilterPayload,
 } from "../../types/car";
 import { useQuery } from "@tanstack/react-query";
+import { years } from "../../components/Search/SideBar/Filters/Year";
+import { priceOptions } from "../../components/Search/SideBar/Filters/Price";
 
 export interface SearchState {
   toggledFilter: string | undefined;
@@ -73,6 +75,10 @@ export interface SearchState {
     count: number;
   }[];
   locations: {
+    _id: string;
+    count: number;
+  }[];
+  years: {
     _id: string;
     count: number;
   }[];
@@ -152,6 +158,7 @@ const initialState: SearchState = {
   interior_colors: [],
   transmissions: [],
   locations: [],
+  years: [],
   series: [],
   bodyStyles: [],
   trims: [],
@@ -165,10 +172,10 @@ const initialState: SearchState = {
     body_type: [],
     body_style: [],
     fuel_type: [],
-    year_from: 0,
-    year_to: 0,
-    price_from: 0,
-    price_to: 0,
+    year_from: Number(years[years.length - 1].value),
+    year_to: Number(years[0].value),
+    price_from: Number(priceOptions[priceOptions.length - 1].value),
+    price_to: Number(priceOptions[0].value),
     milleage: 0,
     exterior_color: [],
     interior_color: [],
@@ -247,7 +254,10 @@ const searchSlice = createSlice({
     },
     setSelectedFilters: (
       state,
-      action: PayloadAction<{ field: string; value: string[] }>
+      action: PayloadAction<{
+        field: string;
+        value: string[] | string | number;
+      }>
     ) => {
       const { payload } = action;
       state.filters[payload.field] = payload.value;
