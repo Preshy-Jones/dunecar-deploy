@@ -115,6 +115,7 @@ const deleteFunctions = {
   specialCasesFunctions: {
     make: makeHandleDelete,
     year: handleYearPriceDelete,
+    price: handleYearPriceDelete,
   },
   specialCases: ["make"],
   general: generalHandleDelete,
