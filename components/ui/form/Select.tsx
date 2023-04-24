@@ -22,21 +22,26 @@ interface SelectProps {
   placeHolder?: string;
   options?: Option[] | undefined;
   label?: string;
+  onChange?: (value: any) => void;
+  value?: string | number| null;
 }
 export const CustomSelect: React.FC<SelectProps> = ({
   placeHolder,
   options,
+  onChange,
+  value,
   ...rest
 }) => {
   const [isToggled, setIsToggled] = useState(false);
 
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null| number>(value || null);
   const handleToggled = () => {
     setIsToggled(!isToggled);
   };
   const handleSelect = (value) => {
-    console.log(value);
+    // console.log(value);
 
+    onChange && onChange(value);
     setSelected(value);
     setIsToggled(false);
   };
@@ -75,7 +80,9 @@ export const CustomSelect: React.FC<SelectProps> = ({
       >
         {selected !== null ? (
           <h2 className="leading-[19px] text-black ">
-            {capitalizeFirstLetter(selected)}
+            {typeof selected === "string"
+              ? capitalizeFirstLetter(selected)
+              : selected}
           </h2>
         ) : (
           <h2 className={`leading-[19px]  text-black`}>{placeHolder}</h2>
@@ -90,18 +97,21 @@ export const FilterCustomSelect: React.FC<SelectProps> = ({
   placeHolder,
   label,
   options,
+  onChange,
+  value,
   ...rest
 }) => {
   const [isToggled, setIsToggled] = useState(false);
 
-  const [selected, setSelected] = useState<string | null>(null);
+  // const [selected, setSelected] = useState<string | null|number>(value || null);
   const handleToggled = () => {
     setIsToggled(!isToggled);
   };
   const handleSelect = (value) => {
-    console.log(value);
+    // console.log(value);
 
-    setSelected(value);
+    onChange && onChange(value);
+    // setSelected(value);
     setIsToggled(false);
   };
 
@@ -118,9 +128,11 @@ export const FilterCustomSelect: React.FC<SelectProps> = ({
             !isToggled ? " justify-between" : "justify-between "
           }`}
         >
-          {selected !== null ? (
+          {value !== null ? (
             <h2 className="leading-[19px] text-black ">
-              {capitalizeFirstLetter(selected)}
+              {typeof value === "string"
+                ? capitalizeFirstLetter(value)
+                : value}
             </h2>
           ) : (
             <h2 className={`leading-[19px]  text-black`}>{placeHolder}</h2>

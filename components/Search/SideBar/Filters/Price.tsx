@@ -28,23 +28,6 @@ const Price = () => {
     // );
   };
 
-
-  const priceOptions = [
-    { value: "5000", label: "5000" },
-    { value: "7500", label: "7500" },
-    { value: "10000", label: "10000" },
-    { value: "12500", label: "12500" },
-    { value: "15000", label: "15000" },
-    { value: "17500", label: "17500" },
-    { value: "20000", label: "20000" },
-    { value: "25000", label: "25000" },
-    { value: "30000", label: "30000" },
-    { value: "35000", label: "35000" },
-    { value: "40000", label: "40000" },
-    { value: "45000", label: "45000" },
-    { value: "50000", label: "50000" },
-  ];
-
   return (
     <div className="">
       <div
@@ -78,3 +61,21 @@ const Price = () => {
 };
 
 export default Price;
+
+//type out new priceOptions array but make the arrangement reversed
+
+export const priceOptions = [
+  { value: "50000", label: "50000" },
+  { value: "45000", label: "45000" },
+  { value: "40000", label: "40000" },
+  { value: "35000", label: "35000" },
+  { value: "30000", label: "30000" },
+  { value: "25000", label: "25000" },
+  { value: "20000", label: "20000" },
+  { value: "17500", label: "17500" },
+  { value: "15000", label: "15000" },
+  { value: "12500", label: "12500" },
+  { value: "10000", label: "10000" },
+  { value: "7500", label: "7500" },
+  { value: "5000", label: "5000" },
+];

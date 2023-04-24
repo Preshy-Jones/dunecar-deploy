@@ -6,9 +6,6 @@ import SearchBar from "../components/Search/SearchBar";
 import SideBar from "../components/Search/SideBar";
 import { getCars, setOptionDeleted } from "../features/car/carSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { Spinner } from "../components/ui/others";
-import { setSelectedMakes } from "../features/make/makeSlice";
-import { setModelsSelected } from "../features/model/modelSlice";
 import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
 import Sticky from "react-stickynode";
 import {
@@ -26,9 +23,6 @@ const Search = () => {
   const { mobileFilterSortOpen, filters } = useAppSelector(
     (state) => state.search
   );
-
-  let selectedMakes = filters.make;
-  let modelsSelected = filters.model;
 
   const router = useRouter();
 
@@ -65,13 +59,19 @@ const Search = () => {
     //     : query.model
     //   : [];
 
+    const numericQueries = ["year_from", "year_to", "price_from", "price_to"];
+
     const limit = (query.limit as string) ? (query.limit as string) : "20";
     console.log(query);
 
     // convert every field's value in the query to an array
     const newQueryObject = presentQueryKeys.reduce((acc, key) => {
       if (typeof query[key] === "string") {
-        acc[key] = [query[key]];
+        if (numericQueries.includes(key)) {
+          acc[key] = Number(query[key]);
+        } else {
+          acc[key] = [query[key]];
+        }
       } else {
         acc[key] = query[key];
       }
@@ -93,33 +93,13 @@ const Search = () => {
       );
 
       dispatch(setAllFilters(newQueryObject));
-      // // for (let key of presentQueryKeys) {
-      // //   dispatch(
-      // //     setSelectedFilters({
-      // //       field: key,
-      // //       value: query[key],
-      // //     })
-      // //   );
-      // // }
-      // dispatch(
-      //   setSelectedFilters({
-      //     field: "make",
-      //     value: makes,
-      //   })
-      // );
-      // dispatch(
-      //   setSelectedFilters({
-      //     field: "model",
-      //     value: models,
-      //   })
-      // );
     }
   }, [router, dispatch]);
 
   useEffect(() => {
     //    console.log("hello there");
     if (optionDeleted) {
-      console.log({ selectedMakes, modelsSelected });
+      // console.log({ selectedMakes, modelsSelected });
 
       dispatch(
         getCars({

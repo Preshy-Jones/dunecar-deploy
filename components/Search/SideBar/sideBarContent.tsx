@@ -86,7 +86,8 @@ export const SideBarContent: SideBarContent[] = [
   },
   {
     title: "Year",
-    slug: "year",
+    slug: "years",
+    groupByKey: "year",
     filterComponentKey: "year",
   },
   {
