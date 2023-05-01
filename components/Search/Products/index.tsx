@@ -14,22 +14,31 @@ const ProductCatalogue = ({ cars, count }) => {
   const router = useRouter();
 
   const dispatch = useAppDispatch();
-  const { moreCarsLoading } = useAppSelector((state) => state.car);
+  const { moreCarsLoading, pageInfo } = useAppSelector((state) => state.car);
+  const { filters } = useAppSelector((state) => state.search);
 
   const getMoreCars = () => {
     const path = router.pathname;
     const { query } = router;
-    const makes = query.make
-      ? typeof query.make === "string"
-        ? [query.make]
-        : query.make
-      : [""];
-    const models = query.model
-      ? typeof query.model === "string"
-        ? [query.model]
-        : query.model
-      : [""];
-    console.log({ path, query });
+
+    dispatch(
+      getMoreCarsPagination({
+        perPage: (Number(pageInfo.limit) + 20).toString(),
+        page: "1",
+        filters,
+      })
+    );
+    // const makes = query.make
+    //   ? typeof query.make === "string"
+    //     ? [query.make]
+    //     : query.make
+    //   : [""];
+    // const models = query.model
+    //   ? typeof query.model === "string"
+    //     ? [query.model]
+    //     : query.model
+    //   : [""];
+    // console.log({ path, query });
 
     // dispatch(
     //   getMoreCarsPagination({

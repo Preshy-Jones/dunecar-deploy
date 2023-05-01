@@ -9,14 +9,13 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import FilterComponent from "../components/Search/Products/MobileFilter/FilterComponent";
 import Sticky from "react-stickynode";
 import {
-  setAllFilters,
-  setSelectedFilters,
+  setAllFilters
 } from "../features/search/searchSlice";
 
 const Search = () => {
   const dispatch = useAppDispatch();
 
-  const { cars, isLoading, optionDeleted, moreCarsLoading, count } =
+  const { cars, isLoading, optionDeleted, moreCarsLoading, pageInfo } =
     useAppSelector((state) => state.car);
 
   // const { modelsSelected } = useAppSelector((state) => state.model);
@@ -152,7 +151,7 @@ const Search = () => {
               <div className="spinner w-8 h-8 border-4 border-specialRed border-t-white"></div>
             </div>
           ) : (
-            <ProductCatalogue cars={cars} count={count} />
+            <ProductCatalogue cars={cars} count={pageInfo.count} />
           )}
         </div>
         <div
