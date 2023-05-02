@@ -145,7 +145,7 @@ const Search = () => {
           </div>
         </Sticky>
 
-        <div className="sm:col-start-2 col-end-3 col-start-1 z-70">
+        <div className="sm:col-start-2 col-end-3 col-start-1 z-30">
           {isLoading ? (
             <div className="flex justify-center items-center pt-[6rem]">
               <div className="spinner w-8 h-8 border-4 border-specialRed border-t-white"></div>

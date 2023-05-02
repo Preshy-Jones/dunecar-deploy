@@ -5,7 +5,7 @@ import Logo from "../../../public/assets/logo.svg";
 import { BuyDropDown } from "./BuyDropDown";
 import FinanceDropDown from "./FinanceDropDown";
 import SellDropDown from "./SellDropDown";
-import { motion } from "framer-motion";
+
 
 const NavBar = () => {
   const [dropDownOpen, setDropDownOpen] = React.useState({
@@ -106,7 +106,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="py-5 px-[7.5rem] font-roboto w-full z-40 bg-white  hidden md:block">
+    <div className="py-5 px-[7.5rem] font-roboto w-full z-40 bg-white top-0 sticky hidden md:block">
       <div className="relative justify-center">
         <div className="flex justify-between relative items-center ">
           <div className="flex-3">
