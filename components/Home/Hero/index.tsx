@@ -134,6 +134,7 @@ const Hero = () => {
           group_by: "model_id",
           filters: {
             make: makes,
+            ...filters,
           },
         })
       );
@@ -168,6 +169,7 @@ const Hero = () => {
         perPage: "20",
         filters: {
           model: models,
+          ...filters,
         },
       })
     );
@@ -188,6 +190,7 @@ const Hero = () => {
         perPage: "20",
         filters: {
           location: locations,
+          ...filters,
         },
       })
     );

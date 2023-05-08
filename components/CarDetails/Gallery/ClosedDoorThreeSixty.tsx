@@ -3,19 +3,22 @@ import dynamic from "next/dynamic";
 import { ReactImageTurntable } from "react-image-turntable";
 import { WhiteCancelIcon } from "../../ui/icons";
 import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
-const ExteriorThreeSixty = () => {
+const ExteriorThreeSixty =  ()  => {
   const dispatch = useAppDispatch();
   const basePath = "/assets/360";
   // const basePath = "https://fastly-production.24c.in/webin/360";
   let count = 75;
 
   //make array from 1 to count
-
+  const { car } = useAppSelector((state) => state.car);
   const arr = Array.from(Array(count).keys());
 
-  const images = arr.map((image) => `${basePath}/output_${image}.jpeg`);
+  const images = arr.map(
+    (image) => `${car?.media?.interior360}/output_${image}.jpeg`
+  );
+
 
   return (
     <div className="font-roboto">

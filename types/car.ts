@@ -21,6 +21,33 @@ export interface Car {
     installedUpgrade: boolean;
   }[];
   vehicle_condition: string;
+  media: {
+    gallery: {
+      frontPassenger: string;
+      front: string;
+      frontDriver: string;
+      driverProfile: string;
+      rearDriver: string;
+      rear: string;
+      rearPassenger: string;
+      passengerProfile: string;
+      dashBoard: string;
+      frontDriverCompartment: string;
+      steeringWheelAndInstrumentCluster: string;
+      keys: string;
+      trunkCargo: string;
+      radio: string;
+      driverRearCompartment: string;
+      shifter: string;
+      climateControls: string;
+      driverAccessControls: string;
+      driverDoorPanel: string;
+      usbAuxPorts: string;
+    };
+    exterior360: string;
+    interior360: string;
+    openDoor360: string;
+  };
 }
 
 export type FieldData = {
