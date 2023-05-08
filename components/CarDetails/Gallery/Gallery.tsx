@@ -1,34 +1,80 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import sampleCarBig from "../../../public/assets/giant-car.svg";
-import samplecarSmall from "../../../public/assets/sample-car-small.svg";
 import { motion } from "framer-motion";
 import {
-  CancelIcon,
-  CaretLeftIcon,
-  CaretRightIcon,
   SlideCaretLeftIcon,
   SlideCaretRightIcon,
   WhiteCancelIcon,
 } from "../../ui/icons";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
 
 const Gallery = () => {
   const repeater = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const [active, setActive] = React.useState(0);
-
+  const { car } = useAppSelector((state) => state.car);
   const dispatch = useAppDispatch();
-  const images = [
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc1_zlhzgg.jpg",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/seatMII_qwy9va.webp",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797037/carzoo/skodacitigo_xuc6u3.webp",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797038/carzoo/toyotaAYGO_xhj5b4.webp",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671812540/carzoo/toyotaAYGOblue_v0cp38.webp",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797037/carzoo/volswagen1_d7vt1b.webp",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/kiapicanto_qjbt1v.webp",
-    "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc3piccaso_qudfpa.webp",
+  // const images = [
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc1_zlhzgg.jpg",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/seatMII_qwy9va.webp",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797037/carzoo/skodacitigo_xuc6u3.webp",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797038/carzoo/toyotaAYGO_xhj5b4.webp",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671812540/carzoo/toyotaAYGOblue_v0cp38.webp",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797037/carzoo/volswagen1_d7vt1b.webp",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/kiapicanto_qjbt1v.webp",
+  //   "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc3piccaso_qudfpa.webp",
+  // ];
+
+  //get an imageKeys array from the commented gallery object above
+
+  const imageKeys = [
+    "frontPassenger",
+    "front",
+    "frontDriver",
+    "driverProfile",
+    "rearDriver",
+    "rear",
+    "rearPassenger",
+    "passengerProfile",
+    "dashBoard",
+    "frontDriverCompartment",
+    "steeringWheelAndInstrumentCluster",
+    "keys",
+    "trunkCargo",
+    "radio",
+    "driverRearCompartment",
+    "shifter",
+    "climateControls",
+    "driverAccessoryControls",
+    "driverDoorPanel",
+    "usbAuxPorts",
+    "engine",
   ];
+
+  const imageKeyTitles = {
+    frontPassenger: "Front Passenger",
+    front: "Front",
+    frontDriver: "Front Driver",
+    driverProfile: "Driver Profile",
+    rearDriver: "Rear Driver",
+    rear: "Rear",
+    rearPassenger: "Rear Passenger",
+    passengerProfile: "Passenger Profile",
+    dashBoard: "Dash Board",
+    frontDriverCompartment: "Front Driver Compartment",
+    steeringWheelAndInstrumentCluster: "Steering Wheel And Instrument Cluster",
+    keys: "Keys",
+    trunkCargo: "Trunk Cargo",
+    radio: "Radio",
+    driverRearCompartment: "Driver Rear Compartment",
+    shifter: "Shifter",
+    climateControls: "Climate Controls",
+    driverAccessoryControls: "Driver Accessory Controls",
+    driverDoorPanel: "Driver Door Panel",
+    usbAuxPorts: "USB Aux Ports",
+    engine: "Engine",
+  };
+
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [direction, setDirection] = useState("left");
   const handleSlide = (direction: string) => {
@@ -39,8 +85,8 @@ const Gallery = () => {
         setCurrentIndex(currentIndex - 1);
       }
     } else if (direction === "right") {
-      if (currentIndex === images.length - 1) {
-        setCurrentIndex(images.length - 1);
+      if (currentIndex === imageKeys.length - 1) {
+        setCurrentIndex(imageKeys.length - 1);
       } else {
         setCurrentIndex(currentIndex + 1);
       }
@@ -95,7 +141,7 @@ const Gallery = () => {
                 )}
               </div>
             </div>
-            {images.map((item, index) => (
+            {imageKeys.map((item, index) => (
               <div
                 key={index}
                 className={`${
@@ -105,7 +151,7 @@ const Gallery = () => {
               >
                 {/* className="  sm:min-h-[14rem] w-[7.8775rem] h-[5.866875rem] border-4 border-t border-r border-specialRed" */}
                 <img
-                  src={images[index]}
+                  src={car?.media?.gallery[item]}
                   width={366}
                   height={224}
                   alt={`car-${index}`}
@@ -118,12 +164,12 @@ const Gallery = () => {
             <div className="h-full w-full flex items-center ">
               <motion.img
                 key={currentIndex}
-                alt={images[currentIndex]}
+                alt={car?.media?.gallery[imageKeys[currentIndex]]}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                src={images[currentIndex]}
+                src={car?.media?.gallery[imageKeys[currentIndex]]}
                 width={1200}
                 height={600}
               />
@@ -143,7 +189,7 @@ const Gallery = () => {
                   )}
                 </div>
                 <div>
-                  {currentIndex !== images.length - 1 && (
+                  {currentIndex !== imageKeys.length - 1 && (
                     <div
                       className="bg-white h-[8rem] w-[4rem] flex justify-center items-center rounded-l-lg"
                       onClick={() => handleSlide("right")}
@@ -159,8 +205,13 @@ const Gallery = () => {
             <div className="absolute bg-black text-white top-0 w-full py-6">
               <div className="flex justify-between">
                 <div className=""></div>
-                <div className=" ">
-                  {currentIndex + 1}/{images.length}
+                <div className="flex  flex-col items-center justify-center ">
+                  <h3>
+                    {currentIndex + 1}/{imageKeys.length}
+                  </h3>
+                  <h3>
+                    {imageKeyTitles[imageKeys[currentIndex]]}
+                  </h3>
                 </div>
                 <div
                   className="pr-6 cursor-pointer"

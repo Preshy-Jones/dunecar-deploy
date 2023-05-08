@@ -13,6 +13,10 @@ export interface CarState {
     makes: string[];
   };
   count: number;
+  pageInfo: {
+    count: number;
+    limit: number;
+  };
   limit: number | null;
   isLoading: boolean;
   moreCarsLoading: boolean;
@@ -25,6 +29,10 @@ const initialState: CarState = {
   car: null,
   cars: [],
   count: 0,
+  pageInfo: {
+    count: 0,
+    limit: 0,
+  },
   limit: null,
   moreCarsLoading: false,
   carFilter: {
@@ -103,7 +111,7 @@ const carSlice = createSlice({
         state.isLoading = false;
         state.cars = action.payload.data.cars[0].results;
         // state.carFilter = action.payload.data.filter;
-        state.count = action.payload.data.cars[0].pageInfo[0].count;
+        state.pageInfo = action.payload.data.cars[0].pageInfo[0];
       })
       .addCase(getCars.rejected, (state: CarState, action) => {
         // console.log(action);
@@ -113,15 +121,14 @@ const carSlice = createSlice({
         state.moreCarsLoading = true;
       })
       .addCase(getMoreCarsPagination.fulfilled, (state: CarState, action) => {
-        
         state.moreCarsLoading = false;
-        state.cars = action.payload.data.cars.results;
-        state.carFilter = action.payload.data.filter;
-        // state.count = action.payload.data.cars.pageInfo[0].count;
+        state.cars = action.payload.data.cars[0].results;
+        // state.carFilter = action.payload.data.filter;
+        state.pageInfo = action.payload.data.cars[0].pageInfo[0];
       })
       .addCase(getMoreCarsPagination.rejected, (state: CarState, action) => {
         // console.log(action);
-        state.isLoading = false;
+        state.moreCarsLoading = false;
       })
       .addCase(getCar.pending, (state) => {
         state.isLoading = true;

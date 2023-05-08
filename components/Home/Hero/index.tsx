@@ -25,7 +25,7 @@ import {
 const Hero = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  let { cars, isLoading, count } = useAppSelector((state) => state.car);
+  let { cars, isLoading, pageInfo } = useAppSelector((state) => state.car);
 
   //  const isLoading = true;
 
@@ -134,6 +134,7 @@ const Hero = () => {
           group_by: "model_id",
           filters: {
             make: makes,
+            ...filters,
           },
         })
       );
@@ -168,6 +169,7 @@ const Hero = () => {
         perPage: "20",
         filters: {
           model: models,
+          ...filters,
         },
       })
     );
@@ -188,6 +190,7 @@ const Hero = () => {
         perPage: "20",
         filters: {
           location: locations,
+          ...filters,
         },
       })
     );
@@ -365,7 +368,7 @@ const Hero = () => {
           locationOptionsPayload={locationOptionsPayload}
           locationToggled={locationToggled}
           cars={cars}
-          count={count}
+          count={pageInfo.count}
         />
         <div className="absolute top-[21rem]  lg:flex justify-center w-full hidden h-[13.25rem] ">
           <div className="  md:flex justify-center w-[70.97%] ">
@@ -417,7 +420,7 @@ const Hero = () => {
                   {!isLoading ? (
                     <div className="flex items-center justify-center">
                       <AiOutlineSearch className="mr-3 text-[1.5rem]" />
-                      View all {count} cars
+                      View all {pageInfo.count} cars
                     </div>
                   ) : (
                     <Player

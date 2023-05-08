@@ -1,12 +1,19 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
 import { WhiteCancelIcon } from "../../ui/icons";
+import ReactPannellum, { getConfig } from "react-pannellum";
 
 const ExteriorThreeSixty = () => {
   const dispatch = useAppDispatch();
-
+  const { car } = useAppSelector((state) => state.car);
+  const [yaw, setYaw] = React.useState(0);
+  const [pitch, setPitch] = React.useState(0);
+  const panImage: any = React.useRef(null);
+  const config = {
+    autoLoad: true,
+  };
   return (
     <div className="font-roboto">
       <div className=" fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-60 bg-black  flex flex-col justify-center items-center">
@@ -25,11 +32,18 @@ const ExteriorThreeSixty = () => {
           </div>
         </div>
         <ReactPhotoSphereViewer
-          src="https://res.cloudinary.com/xxolcare/image/upload/v1679435104/photo_2023-03-21_22-43-23_uhrmhm.jpg"
+          src={car?.media?.interior360 || ""}
           height={"80vh"}
           width={"80vw"}
           container={"customcontainer"}
         ></ReactPhotoSphereViewer>
+        {/* <ReactPannellum
+          id="1"
+          sceneId="firstScene"
+          imageSource="https://dunecar.s3.eu-west-2.amazonaws.com/samplecar/interior360/interior.jpg"
+          config={config}
+        /> */}
+
         <div className=" absolute flex justify-center w-full bottom-[0.5rem] z-40 ">
           <div className="flex text-white leading-primary">
             <div
@@ -44,10 +58,7 @@ const ExteriorThreeSixty = () => {
             >
               <h2>Opened doors</h2>
             </div>
-            <div
-              className="bg-[#282842] h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer"
-           
-            >
+            <div className="bg-[#282842] h-[3.6875rem] px-[2rem]  flex justify-center items-center cursor-pointer">
               <h2>Interior</h2>
             </div>
           </div>

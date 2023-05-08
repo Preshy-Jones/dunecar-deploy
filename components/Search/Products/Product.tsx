@@ -55,7 +55,6 @@ const Product = ({ car }) => {
                   <Image src={dot} alt="dot" />
 
                   <h3 className="ml-3">
-                    {" "}
                     {car?.mileage && formatAmount(car?.mileage)} mi
                   </h3>
                 </div>

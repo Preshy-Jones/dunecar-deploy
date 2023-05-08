@@ -120,7 +120,7 @@ body.hide-overflow {
   }
 }
 
-.hello {
+.gradientBg {
   background: linear-gradient(
       270deg,
       rgba(0, 0, 0, 0.2) 11.44%,
