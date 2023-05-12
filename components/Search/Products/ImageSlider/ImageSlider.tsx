@@ -4,13 +4,13 @@ import {
   SlideCaretLeftIcon,
   SlideCaretRightIcon,
   ToggleButtonIcon,
-} from "../../ui/icons";
-import ToggleLike from "./ToggleLike";
+} from "../../../ui/icons/";
+import ToggleLike from "../ToggleLike";
 import sampleImage from "../../../public/assets/sample-car.svg";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId }) => {
+const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId, car }) => {
   const images = [
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797034/carzoo/citroenc1_zlhzgg.jpg",
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797036/carzoo/seatMII_qwy9va.webp",
@@ -18,7 +18,40 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId }) => {
     "https://res.cloudinary.com/xxolcare/image/upload/v1671797038/carzoo/toyotaAYGO_xhj5b4.webp",
     "https://res.cloudinary.com/xxolcare/image/upload/v1671812540/carzoo/toyotaAYGOblue_v0cp38.webp",
   ];
-
+  const imageKeys = [
+    {
+      title: "frontPassenger",
+      type: "exterior",
+    },
+    {
+      title: "front",
+      type: "exterior",
+    },
+    {
+      title: "frontDriver",
+      type: "exterior",
+    },
+    {
+      title: "driverProfile",
+      type: "exterior",
+    },
+    {
+      title: "rearDriver",
+      type: "exterior",
+    },
+    {
+      title: "rear",
+      type: "exterior",
+    },
+    {
+      title: "rearPassenger",
+      type: "exterior",
+    },
+    {
+      title: "passengerProfile",
+      type: "exterior",
+    },
+  ];
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const handleSlide = (direction: string) => {
@@ -44,7 +77,9 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId }) => {
       <div
         className=" h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col justify-between"
         style={{
-          backgroundImage: `url(${images[currentIndex]})`,
+          backgroundImage: `url(${
+            car.media.gallery[imageKeys[currentIndex].title]
+          })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

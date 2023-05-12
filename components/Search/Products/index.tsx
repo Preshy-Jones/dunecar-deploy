@@ -8,6 +8,7 @@ import FilterIcon from "../../ui/icons/FilterIcon";
 import FilterComponent from "./MobileFilter/FilterComponent";
 import { setMobileFilterSortOpen } from "../../../features/search/searchSlice";
 import { motion } from "framer-motion";
+import MobileProduct from "./MobileProduct";
 
 const ProductCatalogue = ({ cars, count }) => {
   const repeater = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -88,7 +89,7 @@ const ProductCatalogue = ({ cars, count }) => {
           {count} Matches
         </h2>
       </div>
-      <div className="grid lg:grid-cols-4 tablet:grid-cols-3 sm:grid-cols-2 iphone:grid-cols-2 grid-cols-1 gap-x-[1rem] gap-y-[1rem] sm:px-[1.6rem]">
+      <div className="hidden iphone:grid lg:grid-cols-4 tablet:grid-cols-3 sm:grid-cols-2 iphone:grid-cols-2 grid-cols-1 gap-x-[1rem] gap-y-[1rem] sm:px-[1.6rem]">
         {cars.map((item, index) => {
           return (
             <motion.div
@@ -98,6 +99,20 @@ const ProductCatalogue = ({ cars, count }) => {
               transition={{ delay: index * 0.1 }}
             >
               <Product key={index} car={item} />
+            </motion.div>
+          );
+        })}
+      </div>
+      <div className="grid iphone:hidden grid-cols-1 gap-x-[1rem] gap-y-[1rem]">
+        {cars.map((item, index) => {
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <MobileProduct key={index} car={item} />
             </motion.div>
           );
         })}

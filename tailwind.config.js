@@ -30,7 +30,8 @@ module.exports = {
         btnGallery: "rgba(255, 255, 255, 0.68)",
         greyText: "rgba(255, 255, 255, 0.7)",
         lightBlack: "rgba(0, 0, 0, 0.9)",
-        greyBg:"#F4F4F4"
+        greyBg: "#F4F4F4",
+        carouselBg: "#CFCFCF",
       },
       fontFamily: {
         body: ["Montserrat"],
@@ -50,7 +51,7 @@ module.exports = {
         seventh: "1.25rem",
         eighth: "1.75rem",
         ninth: "1.8125rem",
-        tenth:"1.5625rem"
+        tenth: "1.5625rem",
       },
       letterSpacing: {
         primary: "0.04em",
@@ -62,7 +63,7 @@ module.exports = {
         primary: "1.375rem",
         secondary: "1.125rem",
         tertiary: "1.5rem",
-        xlg:"0.75rem",
+        xlg: "0.75rem",
         fourth: "1.5625rem",
         xxxs: ["0.5rem", { lineHeight: "0.7rem" }],
         xxs: ["0.625rem", { lineHeight: "0.9375rem" }],
@@ -151,7 +152,7 @@ module.exports = {
         primary: "28% 0",
       },
       gridTemplateColumns: {
-        primary: "repeat(6, 20.9375rem)",
+        primary: "repeat(11, 20.9375rem)",
         secondary: "repeat(6, 7.877rem)",
         store: "24.6744345% 75.3255655%",
         store_sm: "35% 65%",

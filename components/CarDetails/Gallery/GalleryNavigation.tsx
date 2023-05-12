@@ -5,18 +5,113 @@ import { TbAlertCircle } from "react-icons/tb";
 import { GalleryIcon } from "../../ui/icons";
 import sampleCarBig from "../../../public/assets/sample-car-big.svg";
 import samplecarSmall from "../../../public/assets/sample-car-small.svg";
-import { useAppDispatch } from "../../../store/hooks";
-import { setCarDetailsActiveTab } from "../../../features/ui/uiSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import {
+  setCarDetailsActiveTab,
+  setCurrentGalleryIndex,
+} from "../../../features/ui/uiSlice";
 
 const GalleryNavigation = () => {
   const repeater = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const dispatch = useAppDispatch();
+  const { car } = useAppSelector((state) => state.car);
+  const imageKeys = [
+    {
+      title: "dashboard",
+      type: "interior",
+    },
+    {
+      title: "frontDriverCompartment",
+      type: "interior",
+    },
+    {
+      title: "steeringWheelAndInstrumentCluster",
+      type: "interior",
+    },
+    {
+      title: "keys",
+      type: "interior",
+    },
+    {
+      title: "trunkCargo",
+      type: "interior",
+    },
+    {
+      title: "radio",
+      type: "interior",
+    },
+    {
+      title: "driverRearCompartment",
+      type: "interior",
+    },
+    {
+      title: "shifter",
+      type: "interior",
+    },
+    {
+      title: "climateControls",
+      type: "interior",
+    },
+    {
+      title: "driverAccessoryControls",
+      type: "interior",
+    },
+    {
+      title: "driverDoorPanel",
+      type: "interior",
+    },
+    {
+      title: "usbAuxPorts",
+      type: "interior",
+    },
+    {
+      title: "engine",
+      type: "interior",
+    },
+    {
+      title: "frontPassenger",
+      type: "exterior",
+    },
+    {
+      title: "front",
+      type: "exterior",
+    },
+    {
+      title: "frontDriver",
+      type: "exterior",
+    },
+    {
+      title: "driverProfile",
+      type: "exterior",
+    },
+    {
+      title: "rearDriver",
+      type: "exterior",
+    },
+    {
+      title: "rear",
+      type: "exterior",
+    },
+    {
+      title: "rearPassenger",
+      type: "exterior",
+    },
+    {
+      title: "passengerProfile",
+      type: "exterior",
+    },
+  ];
   return (
     <div className="">
       <div className="flex overflow-x-scroll">
         <div className="relative">
           <div className="sm:min-w-[41.375rem] sm:min-h-[31.5625rem] min-w-[15.566875rem] min-h-[11.875rem] z-20">
-            <Image src={sampleCarBig} alt="big-car" />
+            <Image
+              src={car?.media?.gallery["frontPassenger"] as string}
+              alt="big-car"
+              width={662}
+              height={505}
+            />
           </div>
           <div
             className="absolute w-full z-30 left-[5rem] bottom-[1rem] sm:bottom-[2rem] sm:left-[15rem] rounded-[5px] cursor-pointer"
@@ -31,13 +126,25 @@ const GalleryNavigation = () => {
           </div>
         </div>
         <div className="grid sm:grid-cols-primary grid-cols-secondary grid-rows-2">
-          {repeater.map((item, index) => (
-            <div key={index} className="relative">
+          {imageKeys.map((item, index) => (
+            <div
+              key={index}
+              className="relative cursor-pointer"
+              onClick={() => {
+                dispatch(setCurrentGalleryIndex(index));
+                dispatch(setCarDetailsActiveTab(1));
+              }}
+            >
               <div
                 key={index}
                 className="z-20 sm:min-w-[20.9375rem] sm:min-h-[15.59375rem] w-[7.8775rem] h-[5.866875rem]"
               >
-                <Image src={samplecarSmall} alt={`car-${index}`} />
+                <Image
+                  src={car?.media?.gallery[item.title]}
+                  alt={`car-${index}`}
+                  width={335}
+                  height={249.5}
+                />
               </div>
               {index === 0 && (
                 <div

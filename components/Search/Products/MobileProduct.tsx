@@ -3,10 +3,11 @@ import Link from "next/link";
 import React from "react";
 import dot from "../../../public/assets/dot-smaller.svg";
 import { formatAmount, priceSplitter } from "../../../utils/utilityFunctions";
-import ImageSlider from "./ImageSlider/ImageSlider";
+import ImageSlider from "./ImageSlider/MobileImageSlider";
 import { motion } from "framer-motion";
+import MobileImageSlider from "./ImageSlider/MobileImageSlider";
 
-const Product = ({ car }) => {
+const MobileProduct = ({ car }) => {
   const [navigatorOpen, setnavigatorOpen] = React.useState(false);
   const keys = {
     local_used: "Local Used",
@@ -17,18 +18,11 @@ const Product = ({ car }) => {
   return (
     <div className="cursor-pointer flex justify-center w-full">
       <motion.div
-        onMouseEnter={() => setnavigatorOpen(true)}
-        onMouseLeave={() => setnavigatorOpen(false)}
         whileHover={{ borderColor: "#9CA3AF" }}
         transition={{ duration: 0.5 }}
         className=" w-[20.933125rem] sm:w-full flex flex-col items-center border-b border-r border-l border-dividerGray rounded-md "
       >
-        <ImageSlider
-          navigatorOpen={navigatorOpen}
-          setnavigatorOpen={setnavigatorOpen}
-          carId={car._id}
-          car={car}
-        />
+        <MobileImageSlider car={car} />
         <Link href={`car-details/${car._id}`} passHref className="w-full">
           <a target="_blank" className="w-full">
             <div className="px-3 w-full  -mt-2">
@@ -76,4 +70,4 @@ const Product = ({ car }) => {
   );
 };
 
-export default Product;
+export default MobileProduct;
