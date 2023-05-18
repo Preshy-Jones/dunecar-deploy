@@ -64,8 +64,8 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId, car }) => {
         setCurrentIndex(currentIndex - 1);
       }
     } else if (direction === "right") {
-      if (currentIndex === images.length - 1) {
-        setCurrentIndex(images.length - 1);
+      if (currentIndex === imageKeys.length - 1) {
+        setCurrentIndex(imageKeys.length - 1);
       } else {
         setCurrentIndex(currentIndex + 1);
       }
@@ -78,7 +78,7 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId, car }) => {
         className=" h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col justify-between"
         style={{
           backgroundImage: `url(${
-            car.media.gallery[imageKeys[currentIndex].title]
+            car?.media?.gallery[imageKeys[currentIndex].title]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",

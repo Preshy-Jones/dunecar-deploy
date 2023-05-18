@@ -56,7 +56,7 @@ const MobileImageSlider = ({ car }) => {
         className=" h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col items-center justify-between"
         style={{
           backgroundImage: `url(${
-            car.media.gallery[imageKeys[currentIndex].title]
+            car?.media?.gallery[imageKeys[currentIndex].title]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
