@@ -43,7 +43,7 @@ export const imageKeys = [
     type: "exterior",
   },
   {
-    title: "dashboard",
+    title: "dashBoard",
     type: "interior",
   },
   {
