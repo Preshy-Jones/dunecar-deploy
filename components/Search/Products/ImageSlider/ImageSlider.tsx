@@ -77,9 +77,10 @@ const ImageSlider = ({ setnavigatorOpen, navigatorOpen, carId, car }) => {
       <div
         className=" h-[12.450625rem] w-full sm:w-full  sm:h-[9.18rem] flex flex-col justify-between"
         style={{
-          backgroundImage: `url(${
-            car?.media?.gallery[imageKeys[currentIndex].title]
-          })`,
+          // backgroundImage: `url(${
+          //   car?.media?.gallery[imageKeys[currentIndex].title]
+          // })`,
+          backgroundImage: `url(${images[currentIndex]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
