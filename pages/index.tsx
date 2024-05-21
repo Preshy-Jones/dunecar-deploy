@@ -38,7 +38,9 @@ const Home = () => {
               dataLayer.push(arguments);
             }
             gtag("js", new Date());
-            gtag("config", "G-HF0STWH3JZ");
+            gtag("config", "G-HF0STWH3JZ", {
+              page_path: window.location.pathname,
+            });
           `,
           }}
         />
