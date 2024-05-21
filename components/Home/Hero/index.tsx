@@ -370,7 +370,7 @@ const Hero = () => {
           cars={cars}
           count={pageInfo.count}
         />
-        <div className="absolute top-[21rem]  lg:flex justify-center w-full hidden h-[13.25rem] ">
+        <div className="absolute top-[21rem]  lg:flex justify-center w-full hidden h-[13.25rem]">
           <div className="  md:flex justify-center w-[70.97%] ">
             <div className="flex bg-white p-6 rounded-[3px] shadow-bigCard w-full">
               <div className="flex-4 mr-8 flex flex-col justify-between">
