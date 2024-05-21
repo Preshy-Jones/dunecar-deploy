@@ -24,7 +24,7 @@ const Home = () => {
         {/* <link rel="icon" href="/favicon.ico" /> */}
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-NWKN60DN2D"
+          src="https://www.googletagmanager.com/gtag/js?id=G-HF0STWH3JZ"
         ></script>
 
         <script
@@ -35,7 +35,7 @@ const Home = () => {
               dataLayer.push(arguments);
             }
             gtag("js", new Date());
-            gtag("config", "G-NWKN60DN2D");
+            gtag("config", "G-HF0STWH3JZ");
           `,
           }}
         />
