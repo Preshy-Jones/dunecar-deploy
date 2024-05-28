@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pm2:start": "pm2 start npm --name 'dunecar-deploy' -- start",
+    "pm2:stop": "pm2 stop dunecar-deploy"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.2",
